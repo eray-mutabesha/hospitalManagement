@@ -1,0 +1,58 @@
+.all_flex{
+    display: flex;
+    height: 100vh;
+    
+}
+
+
+.table_div{
+    width: 100%;
+    background-color: rgb(209, 209, 209);
+}
+
+table{
+    border: 1px solid rgb(197, 197, 197); 
+    width: 100%;
+    border-collapse:collapse;
+    text-align: left;
+   
+    
+}
+
+table th {
+    background-color: rgba(255, 255, 255, 0.514);
+    border-bottom: 1px solid rgb(197, 197, 197);
+    padding: 10px;
+}
+table td{
+    background-color: rgba(255, 255, 255, 0.514);
+    border-bottom: 1px solid rgb(197, 197, 197);
+    padding: 10px;
+}
+h1{
+    text-align: center;
+    margin: 10px;
+}
+.form_div{
+    border: 1px solid red;
+    width: 50%;
+}
+
+/* ..........................................tresoreries css........................................................ */
+/* ..........................................tresoreries css........................................................ */
+
+.action{
+    display: flex;
+    justify-content: space-between;
+}
+.corbeil_image{
+    width:30px;
+    height: 30px;
+    border: 1px solid rgb(211, 210, 210);
+    border-radius: 5px;
+    transition: 0.5s;
+}
+.corbeil_image:hover{
+    cursor: pointer;
+    box-shadow: 0px 0px 10px 0px rgb(163, 163, 163);
+}

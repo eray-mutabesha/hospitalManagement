@@ -1,0 +1,22 @@
+.medecin_fom {
+   
+    display: grid;
+    gap:10px;
+    width: 300px;
+    padding: 5px;
+    color: black;
+}
+.medecin_fom,.inpt_material{
+    
+    margin:auto;
+}
+.medecin_fom button{
+    margin: 10px auto;
+    width: 200px;
+    border: 1px solid black;
+    box-shadow: 0px 0px 5px 0px rgba(38, 233, 233, 0.644);
+
+}
+.medecin_fom button:hover{
+    box-shadow: 0px 0px 5px 0px rgb(102, 101, 101);
+}

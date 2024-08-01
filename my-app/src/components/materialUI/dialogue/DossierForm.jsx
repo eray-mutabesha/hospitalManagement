@@ -1,0 +1,161 @@
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import { styled } from '@mui/material/styles';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';  
+import { Box ,TextField, Typography,InputLabel,Select,MenuItem,FormControl} from '@mui/material';
+import { useForm} from "react-hook-form"
+import './index.css';
+import toast from 'react-hot-toast';
+
+
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  '& .MuiDialogContent-root': {
+    padding: theme.spacing(2),
+  },
+  '& .MuiDialogActions-root': {
+    padding: theme.spacing(1),
+  },
+}));
+
+
+export default function DossieForm() {
+    const { register, handleSubmit,formState:{errors} } = useForm();
+
+    const onSubmit=(data)=>{
+        if(data.password !== data.password_confirm){
+          toast.error("les mots de passes ne correspondent pas")
+        }
+        else{
+          console.log(data)
+          toast.success("connexion reussie")
+        }
+       
+      }
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <React.Fragment>
+      <Typography onClick={handleClickOpen}>
+        Creer un dossier
+      </Typography>
+      <BootstrapDialog
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+      >
+        <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
+          Nouveau dossier
+        </DialogTitle>
+        <IconButton
+          aria-label="close"
+          onClick={handleClose}
+          sx={{
+            position: 'absolute',
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+        <DialogContent dividers>
+<div>
+<form className='medecin_fom'>
+
+
+<FormControl variant="filled"   >
+<InputLabel id="demo-simple-select-filled-label">Medecin ID</InputLabel>
+        <Select
+           labelId="demo-simple-select-filled-label"
+          id="demo-simple-select-standard"
+          size="small"
+          {...register("medecin_id", { required: true })}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={10}>1</MenuItem>
+          <MenuItem value={20}>2</MenuItem>
+          <MenuItem value={30}>3</MenuItem>
+        </Select>
+</FormControl>
+
+<FormControl variant="filled"   >
+<InputLabel id="demo-simple-select-filled-label">Patient ID</InputLabel>
+        <Select
+           labelId="demo-simple-select-filled-label"
+          id="demo-simple-select-standard"
+          size="small"
+          {...register("patient_id", { required: true })}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={10}>1</MenuItem>
+          <MenuItem value={20}>2</MenuItem>
+          <MenuItem value={30}>3</MenuItem>
+        </Select>
+</FormControl>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="" 
+ variant="filled" 
+ type='date'
+ size="small"
+ {...register("date_dossier", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Diagnostic" 
+ variant="filled" 
+ size="small"
+ type='text'
+ {...register("diagnostic", { required: false })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Adresse traitement" 
+ variant="filled" 
+ size="small"
+ type='text'
+ {...register("traitement", { required: false })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Note" 
+ variant="filled" 
+ size="small"
+ type='text'
+ {...register("note", { required: true })}/>
+
+
+</form>
+
+</div>
+        </DialogContent>
+        <DialogActions>
+          <Button  type='submit' onClick={handleSubmit(onSubmit)} >
+            Enregistrer
+          </Button>
+        </DialogActions>
+      </BootstrapDialog>
+    </React.Fragment>
+  );
+}
