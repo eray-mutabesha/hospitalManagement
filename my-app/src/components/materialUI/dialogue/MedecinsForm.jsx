@@ -23,6 +23,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function MedecinsForm() {
   const { register, handleSubmit,formState:{errors} } = useForm();
+ 
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -35,9 +36,9 @@ export default function MedecinsForm() {
 
   return (
     <React.Fragment>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Open full-screen dialog
-      </Button>
+      <Typography onClick={handleClickOpen}>
+        Ajouter un medecin
+      </Typography>
       <Dialog
         fullScreen
         open={open}
@@ -55,7 +56,7 @@ export default function MedecinsForm() {
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              Ajouter un nouveau medecin
+              Nouveau medecin
             </Typography>
             <Button autoFocus color="inherit" onClick={handleClose}>
               Enregistrer
