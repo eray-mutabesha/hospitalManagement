@@ -1,15 +1,18 @@
+#appBar{
+    background-image: url("moderate-aquamarine-dark-gradient-background_608506-1382.avif");
+}
+
 .medecin_fom {
    
     display: grid;
     gap:10px;
-    width: 300px;
-    padding: 5px;
+    width: 400px;
+    margin:25vh auto;
+    padding: 15px;
     color: black;
+    background: white;
 }
-.medecin_fom,.inpt_material{
-    
-    margin:auto;
-}
+
 .medecin_fom button{
     margin: 10px auto;
     width: 200px;

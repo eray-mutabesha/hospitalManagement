@@ -35,7 +35,7 @@ function App() {
         </div>
         <div className='div_two'> 
           <div className='h1_dash'>
-          <h1>Dashboard</h1>
+          <h1 style={{color:'white'}}>Dashboard</h1>
           
           </div>
           
