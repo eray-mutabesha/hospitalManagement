@@ -4,9 +4,19 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGear } from '@fortawesome/free-solid-svg-icons'
+import { faGear} from '@fortawesome/free-solid-svg-icons'
+import PersonelForm from './dialogue/PersonelForm';
+import { useNavigate } from 'react-router-dom';
 
 export default function Parametre() {
+const navigate=useNavigate()
+const handleclick=()=>{
+  navigate("/profil")
+}
+
+const handledeconnexion=()=>{
+  navigate("/deconnexion")
+}
   return (
     <PopupState variant="popover" popupId="demo-popup-menu">
       {(popupState) => (
@@ -26,9 +36,8 @@ export default function Parametre() {
            Parametre
           </Button>
           <Menu {...bindMenu(popupState)}>
-            <MenuItem onClick={popupState.close}>Profile</MenuItem>
-            <MenuItem onClick={popupState.close}>My account</MenuItem>
-            <MenuItem onClick={popupState.close}>Logout</MenuItem>
+            <MenuItem onClick={handleclick}>Profil</MenuItem>
+            <MenuItem onClick={handledeconnexion}>Deconnexion</MenuItem>
           </Menu>
         </React.Fragment>
       )}

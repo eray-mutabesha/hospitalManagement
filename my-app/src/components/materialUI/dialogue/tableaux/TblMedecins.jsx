@@ -37,26 +37,26 @@ function TblMedecins() {
     </div>
 </div>
     <div className='table_div'>
-      <table>
+    <table>
         <thead>
           <tr>
-          <th>Date de transaction</th>
-            <th>Provenence</th>
-            <th>Montant</th>
+          <th>Date </th>
+            <th>Nom</th>
+            <th>post nom</th>
             <th>Action</th>
-            <th>Numero du compte</th>
-            <th>Action</th>
+            <th>Numero </th>
+            <th>email</th>
           </tr>
             
         </thead>
         <tbody >
         
               <tr >
-                <td>date_transaction</td>
-                <td>date_transaction</td>
-                <td>date_transaction</td>
-                <td>date_transaction</td>
-                <td>date_transaction</td>
+                <td>lorom lorem</td>
+                <td>lorom</td>
+                <td>lorom</td>
+                <td>lorom</td>
+                <td>lorom</td>
                 <td className='action'>
                   <img src='public/editPhoto-removebg-preview.png' className='corbeil_image' />
                   <img src='public/up_2.png' className='corbeil_image' />

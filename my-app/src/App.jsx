@@ -12,6 +12,7 @@ import Chambres from './components/materialUI/Chambre.jsx'
 import Facturation from './components/materialUI/Facturation.jsx'
 import Personnel from './components/materialUI/Personnel.jsx'
 import Parametre from './components/materialUI/Parametre.jsx'
+import Dashboard from './components/materialUI/Dashboard.jsx'
 
 function App() {
  
@@ -20,24 +21,22 @@ function App() {
       <section id='all_section'>
         <div className='div_one'>
             <div>
-              <nav> <FontAwesomeIcon icon={faEnvelope} /><p>Dashboard</p></nav>
+              <Dashboard/>
+              <Dossier/>
               <Medecins/>
               <Patients/>
-              <Dossier/>
-              <Medicament/>
-              <Departement/>
               <Chambres/>
-              <Facturation/>
               <Personnel/>
+              <Medicament/>
+              <Facturation/>
+              <Departement/>
               <Parametre/>
             </div>
         </div>
         <div className='div_two'> 
           <div className='h1_dash'>
           <h1>Dashboard</h1>
-          <p>Comminique</p>
-          <p>Recrutement</p>
-          <p>Blog</p>
+          
           </div>
           
           <div className='flex'>

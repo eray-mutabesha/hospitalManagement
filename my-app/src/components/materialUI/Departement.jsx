@@ -6,8 +6,15 @@ import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouseChimneyMedical} from '@fortawesome/free-solid-svg-icons'
 import { Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import DepartementForm from './dialogue/DepartementForm';
+
 
 export default function Departement() {
+  const navigate=useNavigate()
+  const handleclick =()=>{
+   navigate("/departements")
+  }
   return (
     <PopupState variant="popover" popupId="demo-popup-menu">
       {(popupState) => (
@@ -30,9 +37,9 @@ export default function Departement() {
            
           </Button>
           <Menu {...bindMenu(popupState)}>
-            <MenuItem onClick={popupState.close}>Profile</MenuItem>
-            <MenuItem onClick={popupState.close}>My account</MenuItem>
-            <MenuItem onClick={popupState.close}>Logout</MenuItem>
+            <MenuItem ><DepartementForm/></MenuItem>
+            <MenuItem onClick={handleclick}>Tout les departements</MenuItem>
+            
           </Menu>
         </React.Fragment>
       )}

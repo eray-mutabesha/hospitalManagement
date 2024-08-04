@@ -4,16 +4,16 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHospital } from '@fortawesome/free-solid-svg-icons'
-import PersonelForm from './dialogue/PersonelForm';
+import { faTableColumns } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom';
 
-export default function Personnel() {
-const navigate=useNavigate()
-const handleclick=()=>{
-  navigate("/personel")
-}
 
+
+export default function Dashboard() {
+const navigate=useNavigate()
+  const handleclick=()=>{
+   navigate("/")
+  }
   return (
     <PopupState variant="popover" popupId="demo-popup-menu">
       {(popupState) => (
@@ -29,12 +29,11 @@ const handleclick=()=>{
              gap:"10px",
              color:"white"
           }}>
-           <FontAwesomeIcon icon={faHospital} /> 
-           Personnel
+           <FontAwesomeIcon icon={faTableColumns} /> 
+           Dashboard
           </Button>
           <Menu {...bindMenu(popupState)}>
-            <MenuItem ><PersonelForm/></MenuItem>
-            <MenuItem onClick={handleclick}>Personnel</MenuItem>
+            <MenuItem onClick={handleclick}>Dashboard</MenuItem>
           </Menu>
         </React.Fragment>
       )}

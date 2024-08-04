@@ -5,8 +5,14 @@ import MenuItem from '@mui/material/MenuItem';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faReceipt } from '@fortawesome/free-solid-svg-icons'
+import FacturationForm from './dialogue/FacturationForm';
+import { useNavigate } from 'react-router-dom';
 
 export default function Facturation() {
+  const navigate=useNavigate()
+  const handleclick=()=>{
+    navigate("/facturation")
+  }
   return (
     <PopupState variant="popover" popupId="demo-popup-menu">
       {(popupState) => (
@@ -26,9 +32,8 @@ export default function Facturation() {
            Facturation
           </Button>
           <Menu {...bindMenu(popupState)}>
-            <MenuItem onClick={popupState.close}>Profile</MenuItem>
-            <MenuItem onClick={popupState.close}>My account</MenuItem>
-            <MenuItem onClick={popupState.close}>Logout</MenuItem>
+            <MenuItem><FacturationForm/></MenuItem>
+            <MenuItem onClick={handleclick}>Toutes les factures</MenuItem>
           </Menu>
         </React.Fragment>
       )}

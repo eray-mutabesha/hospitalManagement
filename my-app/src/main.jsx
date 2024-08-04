@@ -15,6 +15,8 @@ import TblDossier from './components/materialUI/dialogue/tableaux/TblDossier.jsx
 import TblFacturation from './components/materialUI/dialogue/tableaux/TblFacturation.jsx';
 import TblMedicament from './components/materialUI/dialogue/tableaux/TblMedicament.jsx';
 import TblPersonel from './components/materialUI/dialogue/tableaux/TblPersonel.jsx';
+import Profil from './components/Profil.jsx';
+import Deconnexion from './components/Deconnexion.jsx';
 
 
 
@@ -30,8 +32,16 @@ const routes=createBrowserRouter([
    element:<ConnexionPage />
   },
   {
+    path:"/deconnexion",
+    element:<Deconnexion/>
+   },
+  {
     path:"/inscription",
     element:<Inscription />
+  },
+  {
+    path:"/profil",
+    element:<Profil />
   },
   {
     path:"/tableaumedecins",
