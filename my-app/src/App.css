@@ -1,3 +1,13 @@
+body {
+    font-family: "Arsenal", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+  }
+
+
+
+
+
 #all_section{
  display: flex;
  height: 100vh;

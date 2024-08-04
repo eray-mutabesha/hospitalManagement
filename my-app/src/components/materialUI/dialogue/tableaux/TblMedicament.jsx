@@ -4,39 +4,45 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
 import Medecins from '../../Medecins.jsx'
-import Patients from '../../Medecins.jsx'
-import Dossier from '../../Medecins.jsx'
-import Medicament from '../../Medecins.jsx'
-import Departement from '../../Medecins.jsx'
-import Chambres from '../../Medecins.jsx'
-import Facturation from '../../Medecins.jsx'
-import Personnel from '../../Medecins.jsx'
-import Parametre from '../../Medecins.jsx'
-
-
-
+import Chambres from '../../Chambre.jsx'
+import Dashboard from '../../Dashboard.jsx'
+import Departement from '../../Departement.jsx'
+import Dossier from '../../Dossier.jsx'
+import Facturation from '../../Facturation.jsx'
+import Medicament from '../../Medicament.jsx'
+import Parametre from '../../Parametre.jsx'
+import Patients from '../../Patients.jsx'
+import Personnel from '../../Personnel.jsx'
 
 
 
 
 function TblMedicament() {
+ 
   return (
-    <div className='all_flex'>
-    <div className='div_one'>
-    <div>
-      <nav> <FontAwesomeIcon icon={faEnvelope} /><p>Dashboard</p></nav>
-      <Medecins/>
-      <Patients/>
-      <Dossier/>
-      <Medicament/>
-      <Departement/>
-      <Chambres/>
-      <Facturation/>
-      <Personnel/>
-      <Parametre/>
-    </div>
-</div>
-    <div className='table_div'>
+    <>
+      <section id='all_section'>
+        <div className='div_one'>
+            <div>
+              <Dashboard/>
+              <Dossier/>
+              <Medecins/>
+              <Patients/>
+              <Chambres/>
+              <Personnel/>
+              <Medicament/>
+              <Facturation/>
+              <Departement/>
+              <Parametre/>
+            </div>
+        </div>
+        <div className='div_two'> 
+          <div className='h1_dash'>
+          <h1 style={{color:'white'}}>Stock de Medicament</h1>
+          
+          </div>
+          
+          <div className='table_div'>
     <table>
         <thead>
           <tr>
@@ -68,8 +74,11 @@ function TblMedicament() {
    </tbody>
 </table>
     </div>
-    </div>
+          
+        </div>
+      </section>
+    </>
   )
 }
-
 export default TblMedicament
+

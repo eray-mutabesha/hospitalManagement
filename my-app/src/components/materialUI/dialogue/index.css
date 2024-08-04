@@ -1,3 +1,30 @@
+.arsenal-bold-italic {
+    font-family: "Arsenal", sans-serif;
+    font-weight: 700;
+    font-style: italic;
+  }
+  
+  .arsenal-bold {
+    font-family: "Arsenal", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+  .arsenal-regular-italic {
+    font-family: "Arsenal", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+  }
+  
+  .arsenal-regular {
+    font-family: "Arsenal", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+
+
+
 #appBar{
     background-image: url("moderate-aquamarine-dark-gradient-background_608506-1382.avif");
 }
@@ -11,6 +38,8 @@
     padding: 15px;
     color: black;
     background: white;
+    box-shadow: 0px 0px 10px 0px rgb(95, 95, 95);
+    border-radius: 10px;
 }
 
 .medecin_fom button{
