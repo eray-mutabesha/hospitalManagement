@@ -1,47 +1,34 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
-import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import DialogActions from '@mui/material/DialogActions';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemButton from '@mui/material/ListItemButton';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';  
-import { Box ,TextField, Typography,InputLabel,Select,MenuItem,FormControl} from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
+import Slide from '@mui/material/Slide';
+import { Box ,TextField, Typography,InputLabel,Select,MenuItem,FormControl}  from '@mui/material';
 import { useForm} from "react-hook-form"
 import './index.css';
-import toast from 'react-hot-toast';
 
 
-const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-  '& .MuiDialogContent-root': {
-    padding: theme.spacing(2),
-  },
-  '& .MuiDialogActions-root': {
-    padding: theme.spacing(1),
-  },
-}));
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export default function MedicamentForm() {
-    const { register, handleSubmit,formState:{errors} } = useForm();
-
-    const onSubmit=(data)=>{
-        if(data.password !== data.password_confirm){
-          toast.error("les mots de passes ne correspondent pas")
-        }
-        else{
-          console.log(data)
-          toast.success("connexion reussie")
-        }
-       
-       
-      }
+  const { register, handleSubmit,formState:{errors} } = useForm();
+ 
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
   };
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -49,75 +36,118 @@ export default function MedicamentForm() {
   return (
     <React.Fragment>
       <Typography onClick={handleClickOpen}>
-        Ajoutez un medicament
+        Ajouter au stock
       </Typography>
-      <BootstrapDialog
-        onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
+      <Dialog
+        fullScreen
         open={open}
+        onClose={handleClose}
+        TransitionComponent={Transition}
       >
-        <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-          Nouveau medicament
-        </DialogTitle>
-        <IconButton
-          aria-label="close"
-          onClick={handleClose}
-          sx={{
-            position: 'absolute',
-            right: 8,
-            top: 8,
-            color: (theme) => theme.palette.grey[500],
-          }}
-        >
-          <CloseIcon />
-        </IconButton>
-        <DialogContent dividers>
-<div>
-<form className='medecin_fom'>
+        <AppBar sx={{ position: 'relative' }} id='appBar'>
+          <Toolbar>
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={handleClose}
+              aria-label="close"
+            >
+              <CloseIcon />
+            </IconButton>
+            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+              Nouveau produit
+            </Typography>
+            <Button autoFocus color="inherit" onClick={handleClose}>
+              Enregistrer
+            </Button>
+          </Toolbar>
+        </AppBar>
+       <Box sx={{
+        height:"100vh",
+        background:"rgba(38, 233, 233, 0.5)",
+       }}>
 
+       <form className='medecin_fom'>       
 
 <TextField
 className='inpt_material'
  id="filled-basic" 
- label="Nom" 
+ label="Designation" 
+ variant="filled" 
+ type="number"
+ size="small"
+ {...register("Designation", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Forme" 
  variant="filled" 
  type="text"
  size="small"
- {...register("nom", { required: true })}/>
+ {...register("Forme", { required: true })}/>
 
-       <TextField
-          id="filled-multiline-static"
-          label="Prescription"
-          multiline
-          rows={4}
-          variant="filled"
-          {...register("prescription", { required: true })}/>
-        
 <TextField
 className='inpt_material'
  id="filled-basic" 
  label="Dosage" 
  variant="filled" 
  size="small"
- type='email'
- {...register("dosage", { required: true })}/>
+ type='text'
+ {...register("date", { required: true })}/>
+
+           
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Date" 
+ variant="filled" 
+ size="small"
+ type='date'
+ {...register("date", { required: true })}/>
+
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Entree" 
+ variant="filled" 
+ size="small"
+ type='text'
+ {...register("Entree", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Sortie" 
+ variant="filled" 
+ size="small"
+ type='text'
+ {...register("sortie", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Solde" 
+ variant="filled" 
+ size="small"
+ type='text'
+ {...register("Solde", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Date d'expiration" 
+ variant="filled" 
+ size="small"
+ type='date'
+ {...register("Solde", { required: true })}/>
 
 
 
 </form>
-
-
-
-
-
-</div>
-        </DialogContent>
-        <DialogActions>
-          <Button  type='submit' onClick={handleSubmit(onSubmit)} >
-            Enregistrer
-          </Button>
-        </DialogActions>
-      </BootstrapDialog>
+       </Box>
+      </Dialog>
     </React.Fragment>
   );
 }

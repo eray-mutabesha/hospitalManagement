@@ -29,11 +29,11 @@ export default function Medicament() {
              color:"white"
           }}>
            <FontAwesomeIcon icon={faPrescriptionBottleMedical} /> 
-           Medicaments
+           Stock
           </Button>
           <Menu {...bindMenu(popupState)}>
           <MenuItem><MedicamentForm/></MenuItem>
-            <MenuItem onClick={handleclick}>Medicament disponible</MenuItem>
+            <MenuItem onClick={handleclick}>Tout le stock</MenuItem>
           </Menu>
         </React.Fragment>
       )}

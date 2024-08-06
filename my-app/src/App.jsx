@@ -20,14 +20,14 @@ function App() {
     <>
       <section id='all_section'>
         <div className='div_one'>
-            <div>
+        <div>
               <Dashboard/>
+              <Medicament/>
               <Dossier/>
               <Medecins/>
               <Patients/>
               <Chambres/>
               <Personnel/>
-              <Medicament/>
               <Facturation/>
               <Departement/>
               <Parametre/>

@@ -25,12 +25,12 @@ function TblChambres() {
         <div className='div_one'>
             <div>
               <Dashboard/>
+              <Medicament/>
               <Dossier/>
               <Medecins/>
               <Patients/>
               <Chambres/>
               <Personnel/>
-              <Medicament/>
               <Facturation/>
               <Departement/>
               <Parametre/>
