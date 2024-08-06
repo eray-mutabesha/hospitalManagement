@@ -65,6 +65,7 @@ export default function MedecinsForm() {
         </AppBar>
        <Box sx={{
         background:"rgba(38, 233, 233, 0.5)",
+        height:"100vh",
        }}>
 
        <form className='medecin_fom'>
@@ -78,22 +79,42 @@ className='inpt_material'
  size="small"
  {...register("nom", { required: true })}/>
 
-       <TextField
-          id="filled-multiline-static"
-          label="Prescription"
-          multiline
-          rows={4}
-          variant="filled"
-          {...register("prescription", { required: true })}/>
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Nom de famille" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("nom", { required: true })}/>
+
         
 <TextField
 className='inpt_material'
  id="filled-basic" 
- label="Dosage" 
+ label="Specialisation" 
  variant="filled" 
  size="small"
  type='email'
  {...register("dosage", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Telephone" 
+ variant="filled" 
+ size="small"
+ type='email'
+ {...register("telephone", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Gmail" 
+ variant="filled" 
+ size="small"
+ type='email'
+ {...register("email", { required: true })}/>
 
 
 
