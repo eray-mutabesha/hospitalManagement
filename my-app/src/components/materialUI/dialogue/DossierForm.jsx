@@ -36,7 +36,7 @@ export default function DossierForm() {
   return (
     <React.Fragment>
       <Typography onClick={handleClickOpen}>
-        Ajouter un departement
+        Ajouter un dossiers
       </Typography>
       <Dialog
         fullScreen
@@ -55,7 +55,7 @@ export default function DossierForm() {
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              Nouveau departements
+              Nouveau dossier
             </Typography>
             <Button autoFocus color="inherit" onClick={handleClose}>
               Enregistrer
@@ -93,8 +93,7 @@ export default function DossierForm() {
            labelId="demo-simple-select-filled-label"
           id="demo-simple-select-standard"
           size="small"
-          {...register("patient_id", { required: true })}
-        >
+          {...register("patient_id", { required: true })}>
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
