@@ -46,25 +46,48 @@ function TblDossier() {
     <table>
         <thead>
           <tr>
-          <th>Date </th>
-            <th>Nom</th>
-            <th>post nom</th>
+          <th>Numero du dossier</th>
+            <th>Patient</th>
+            <th>Service</th>
+            <th>Statut</th>
             <th>Action</th>
-            <th>Numero </th>
-            <th>email</th>
+           
           </tr>
             
         </thead>
         <tbody >
         
               <tr >
-                <td>lorom lorem</td>
-                <td>lorom</td>
-                <td>lorom</td>
-                <td>lorom</td>
-                <td>lorom</td>
+                <td>01</td>
+                <td>katembo mwami</td>
+                <td>consultation</td>
+                <td>Attente</td>
                 <td className='action'>
-                  <img src='public/editPhoto-removebg-preview.png' className='corbeil_image' />
+                  <button className='detail_btn'>Details</button>
+                  <img src='public/up_2.png' className='corbeil_image' />
+                  <img src='/public/delete_corbrille.png' className='corbeil_image'/>
+                </td>
+                
+              </tr>
+              <tr >
+                <td>01</td>
+                <td>katembo mwami</td>
+                <td>consultation</td>
+                <td>Attente</td>
+                <td className='action'>
+                  <button className='detail_btn'>Details</button>
+                  <img src='public/up_2.png' className='corbeil_image' />
+                  <img src='/public/delete_corbrille.png' className='corbeil_image'/>
+                </td>
+                
+              </tr>
+              <tr >
+                <td>01</td>
+                <td>katembo mwami</td>
+                <td>consultation</td>
+                <td>Attente</td>
+                <td className='action'>
+                  <button className='detail_btn'>Details</button>
                   <img src='public/up_2.png' className='corbeil_image' />
                   <img src='/public/delete_corbrille.png' className='corbeil_image'/>
                 </td>

@@ -34,6 +34,8 @@ navigate('/tableaupatient')
           </Button>
           <Menu {...bindMenu(popupState)}>
             <MenuItem ><PatientForm/></MenuItem>
+            <MenuItem onClick={handleclick}>urgences</MenuItem>
+            <MenuItem onClick={handleclick}>internés</MenuItem>
             <MenuItem onClick={handleclick}>Tout les patients</MenuItem>
           </Menu>
         </React.Fragment>

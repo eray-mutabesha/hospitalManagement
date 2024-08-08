@@ -68,25 +68,6 @@ export default function DossierForm() {
        }}>
 
 <form className='medecin_fom'>
-
-
-<FormControl variant="filled"   >
-<InputLabel id="demo-simple-select-filled-label">Medecin ID</InputLabel>
-        <Select
-           labelId="demo-simple-select-filled-label"
-          id="demo-simple-select-standard"
-          size="small"
-          {...register("medecin_id", { required: true })}
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>1</MenuItem>
-          <MenuItem value={20}>2</MenuItem>
-          <MenuItem value={30}>3</MenuItem>
-        </Select>
-</FormControl>
-
 <FormControl variant="filled"   >
 <InputLabel id="demo-simple-select-filled-label">Patient ID</InputLabel>
         <Select
@@ -111,33 +92,6 @@ className='inpt_material'
  type='date'
  size="small"
  {...register("date_dossier", { required: true })}/>
-
-<TextField
-className='inpt_material'
- id="filled-basic" 
- label="Diagnostic" 
- variant="filled" 
- size="small"
- type='text'
- {...register("diagnostic", { required: false })}/>
-
-<TextField
-className='inpt_material'
- id="filled-basic" 
- label="Adresse traitement" 
- variant="filled" 
- size="small"
- type='text'
- {...register("traitement", { required: false })}/>
-
-<TextField
-className='inpt_material'
- id="filled-basic" 
- label="Note" 
- variant="filled" 
- size="small"
- type='text'
- {...register("note", { required: true })}/>
 
 
 </form>
