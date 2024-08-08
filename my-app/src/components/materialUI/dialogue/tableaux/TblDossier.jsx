@@ -1,7 +1,7 @@
 import React from 'react'
 import './tbl.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { faTrash ,faEye} from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
 import Medecins from '../../Medecins.jsx'
 import Chambres from '../../Chambre.jsx'
@@ -63,9 +63,8 @@ function TblDossier() {
                 <td>consultation</td>
                 <td>Attente</td>
                 <td className='action'>
-                  <button className='detail_btn'>Details</button>
-                  <img src='public/up_2.png' className='corbeil_image' />
-                  <img src='/public/delete_corbrille.png' className='corbeil_image'/>
+                  <button className='detail_btn'><FontAwesomeIcon icon={faEye} /> Details</button>
+                  <button className='detail_btn'><FontAwesomeIcon icon={faTrash} /> Suprimer</button>
                 </td>
                 
               </tr>
@@ -75,9 +74,8 @@ function TblDossier() {
                 <td>consultation</td>
                 <td>Attente</td>
                 <td className='action'>
-                  <button className='detail_btn'>Details</button>
-                  <img src='public/up_2.png' className='corbeil_image' />
-                  <img src='/public/delete_corbrille.png' className='corbeil_image'/>
+                <button className='detail_btn'><FontAwesomeIcon icon={faEye} /> Details</button>
+                <button className='detail_btn'><FontAwesomeIcon icon={faTrash} /> Suprimer</button>
                 </td>
                 
               </tr>
@@ -87,9 +85,8 @@ function TblDossier() {
                 <td>consultation</td>
                 <td>Attente</td>
                 <td className='action'>
-                  <button className='detail_btn'>Details</button>
-                  <img src='public/up_2.png' className='corbeil_image' />
-                  <img src='/public/delete_corbrille.png' className='corbeil_image'/>
+                <button className='detail_btn'><FontAwesomeIcon icon={faEye} /> Details</button>
+                <button className='detail_btn'><FontAwesomeIcon icon={faTrash} /> Suprimer</button>
                 </td>
                 
               </tr>
