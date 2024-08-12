@@ -17,6 +17,8 @@ import TblMedicament from './components/materialUI/dialogue/tableaux/TblMedicame
 import TblPersonel from './components/materialUI/dialogue/tableaux/TblPersonel.jsx';
 import Profil from './components/Profil.jsx';
 import Deconnexion from './components/Deconnexion.jsx';
+import TblConsultation from './components/materialUI/dialogue/tableaux/TblConsultation.jsx';
+
 
 
 
@@ -74,7 +76,11 @@ const routes=createBrowserRouter([
   {
     path:"/personel",
     element:<TblPersonel/>
-  }
+  },
+  {
+    path:"/consultation",
+    element:<TblConsultation />
+   },
   
 ])
 

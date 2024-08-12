@@ -4,10 +4,6 @@ body {
     font-style: italic;
   }
 
-
-
-
-
 #all_section{
  display: flex;
  height: 100vh;
@@ -16,10 +12,11 @@ body {
     box-shadow: 0px 0px 5px 0px rgba(38, 233, 233, 0.644);
     background-image: url("moderate-aquamarine-dark-gradient-background_608506-1382.avif"); 
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover; 
     width: 250px;
+    height: 100vh;
     color: white;
-
+    position: fixed;
 }
 .div_one nav{
     border-radius: 10px;
@@ -36,47 +33,154 @@ body {
     background-color: rgba(38, 233, 233, 0.644);
     color: black;
   }
-
-.div_two{
-    background-color: rgba(38, 233, 233, 0.5);
+.section_two{
     width: 100%;
+    margin-left: 250px;
+    background: rgb(253, 244, 244);
+  }
+.header{
+  background: white;
+  box-shadow: 0px 0px 5px 0px rgb(156, 156, 156);
+  width: 100%;
+  height: 50px;
+  margin-top: -3px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
 }
-.h1_dash{
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    color:black;
-    box-shadow: 0px 0px 10px 0px  rgb(182, 181, 181);
-    background-image: url("moderate-aquamarine-dark-gradient-background_608506-1382.avif"); 
+.header .recherch{
+  border-radius: 10px;
+  background: rgb(253, 244, 244);
+  width: 200px;
+  border: 1px solid rgba(0, 0, 0, 0.103);
+  
 }
-.h1_dash p{
-    border-bottom: 1px solid black;
+.header div{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5px;
+  margin: 10px;
 }
-.div_two .flex{
-    display: flex;
-    /* border: 1px solid red; */
-    margin-top: 100px;
-    color: rgb(46, 45, 45);
+.header div input{
+  background: rgb(253, 244, 244);
+  outline: none;
+  border: none;
 }
-.div_two .flex .one{
-    /* border: 1px solid red; */
-    height: fit-content;
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-left: 80px;
+.admin_photo{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
 }
-.div_two .flex .one div{
-    margin-top: 20px;
-    display: flex;
-    gap: 20px;
+.administrateur{
+  width: 250px;
+  display: flex;
+  justify-content: space-between;
 }
-.btn_fex{
-    margin: 0;
-    padding: 0;
-    width: 200px;
-    border: 1px solid black;
-    box-shadow: 0px 0px 5px 0px rgba(38, 233, 233, 0.644);
+.administrateur nav{
+  display: flex;
+  align-items: center;
+  
 }
-.btn_fex:hover{
-    box-shadow: 0px 0px 5px 0px rgb(102, 101, 101);
+
+.statistic_flex{
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid rgb(223, 221, 221);
+  border-radius: 10px;
+  width: 200px;
+  padding: 10px;
+  background: white;
+  
+  
+}
+
+.statistic_flex div{
+  
+  /* width: 100px; */
+}
+.icone_stat{
+  width: 70px;
+  height: 80px;
+  background-image: url("moderate-aquamarine-dark-gradient-background_608506-1382.avif"); 
+  background-repeat: no-repeat;
+  background-size: cover; 
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+.icon_ui{
+  font-size:40px;
+  
+}
+.all_stat_flex{
+  
+  margin-top: 65px;
+  display: flex;
+  justify-content: space-around;
+}
+.all_graphic_div{
+  display:grid;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid rgb(223, 221, 221);
+  border-radius: 10px;
+  width: 700px;
+  height: 250px;
+  padding: 10px;
+  background: white;
+  
+}
+.all_doctor_div{
+  border: 1px solid rgb(201, 199, 199);
+  border-radius: 10px;
+  width: 300px;
+  height: 270px;
+  background-image: url("moderate-aquamarine-dark-gradient-background_608506-1382.avif"); 
+  background-repeat: no-repeat;
+  background-size: cover; 
+}
+.admin_photos{
+  border: 1px solid rgb(223, 221, 221);
+  box-shadow: 0px 0px 10px 0px rgb(63, 63, 63);
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+}
+.all_doctor_div_header{
+  color: white;
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  margin: 10px;
+}
+.all_graphic_and_doctor_div{
+  margin: 20px;
+  display:flex;
+  justify-content:space-between;
+  text-align: center;
+}
+.buttons{
+  display: flex;
+  justify-content: space-around;
+  margin: 10px;
+  color:white;
+}
+.buttons nav{
+  border-radius: 5px;
+  
+  padding: 5px;
+  width: 60px;
+  text-align: center;
+  box-shadow: 0px 0px 5px 0px rgba(38, 233, 233, 0.644);
+  background-color: white;
+  display: flex;
+  color: black;
+  gap: 10px;
+ 
 }

@@ -1,8 +1,7 @@
 
 import './App.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
-import { useNavigate } from 'react-router-dom'
+import { faBell,faTrash,faEye,faMagnifyingGlass,faListCheck,faUserDoctor,faStethoscope,faCommentsDollar,faChevronDown} from '@fortawesome/free-solid-svg-icons'
 import Medecins from './components/materialUI/Medecins.jsx'
 import Patients from './components/materialUI/Patients.jsx'
 import Dossier from './components/materialUI/Dossier.jsx'
@@ -13,8 +12,42 @@ import Facturation from './components/materialUI/Facturation.jsx'
 import Personnel from './components/materialUI/Personnel.jsx'
 import Parametre from './components/materialUI/Parametre.jsx'
 import Dashboard from './components/materialUI/Dashboard.jsx'
+import { useNavigate } from 'react-router-dom'
+import { useRef } from 'react'
+import { useEffect } from 'react'
+import { Button, Typography,Box } from '@mui/material'
+import { Chart as chartjs } from 'chart.js/auto'
+import {Bar,Line} from 'react-chartjs-2'
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
+
+
+
+function createData(name, calories, fat, carbs, protein) {
+  return { name, calories, fat, carbs, protein };
+}
+
+const rows = [
+  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+  createData('Eclair', 262, 16.0, 24, 6.0),
+];
 
 function App() {
+  const navigate= useNavigate()
+ const handleConsultation=()=>{
+  navigate("/consultation")
+ }
+
+
+
+ 
  
   return (
     <>
@@ -32,36 +65,196 @@ function App() {
               <Departement/>
               <Parametre/>
             </div>
+
         </div>
-        <div className='div_two'> 
-          <div className='h1_dash'>
-          <h1 style={{color:'white'}}>Dashboard</h1>
-          
-          </div>
-          
-          <div className='flex'>
-             <div className='one'>
-              <div>
-              <h1>HOPITAL GENERALE DE GOMA</h1>
+        <div className='section_two'>
+           <div className='header'>
+              <div className='recherch'>
+               <FontAwesomeIcon icon={faMagnifyingGlass} /> 
+               <input type="text" placeholder='recherch'/>
               </div>
+
+              <div className='administrateur'>
+               <FontAwesomeIcon icon={faBell} />
+               <nav>
+               <img src='public/Dr. MUAMBA.jpg' className='admin_photo' alt='administrateur'/>
+               <p>Dr jonathan kasongo</p>
+               </nav> 
+              </div>
+           </div>
+           <div className='statistic'>
+           <div className='all_stat_flex'>
+
+            <div className='statistic_flex'>
               <div>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis, asperiores? Laudantium autem eos quaerat ratione molestiae commodi aliquam illo suscipit perspiciatis, sint laboriosam, id optio fugiat mollitia enim. Soluta, a?
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus iste voluptate quam id, molestiae blanditiis illum obcaecati amet earum ducimus libero voluptatibus magni rem excepturi adipisci at. Expedita, quidem veritatis!</p>
+               <nav>
+                <Typography variant='h4'>45</Typography>
+                </nav>
+               <nav>
+                <Typography>Patients</Typography>
+               </nav>
+              </div>
+              <div className='icone_stat'>
+               <FontAwesomeIcon icon={faListCheck} className='icon_ui'/>
+              </div>
+              
+            </div>
+
+            <div className='statistic_flex'>
+              <div>
+               <nav>
+                <Typography variant='h4'>23</Typography>
+                </nav>
+               <nav>
+                <Typography>Nos docteurs</Typography>
+               </nav>
+              </div>
+              <div className='icone_stat'>
+               <FontAwesomeIcon icon={faUserDoctor} className='icon_ui'/>
+              </div>
+              
+            </div>
+           
+
+            <div className='statistic_flex'>
+              <div>
+               <nav>
+                <Typography variant='h4'>14</Typography>
+                </nav>
+               <nav>
+                <Typography>Operations</Typography>
+               </nav>
+              </div>
+              <div className='icone_stat'>
+               <FontAwesomeIcon icon={faStethoscope} className='icon_ui'/>
+              </div>
+              
+            </div>
+
+            <div className='statistic_flex'>
+              <div>
+               <nav>
+                <Typography variant='h4'>$3445</Typography>
+                </nav>
+               <nav>
+                <Typography>Income</Typography>
+               </nav>
+              </div>
+              <div className='icone_stat'>
+               <FontAwesomeIcon icon={faCommentsDollar} className='icon_ui'/>
+              </div>
+              
+            </div>
+            </div>
+           </div>
+
+           <div className='all_graphic_and_doctor_div'>
+              <div className='all_graphic_div'>
+              <Typography variant='h6'>Statut du patient</Typography>
+                <Line
+                data={{
+                  labels:["jav","fev","mar","avl","mai","jun","jlt","aut","sep","oct","nov","dec"],
+                  datasets:[
+                    {
+                      label:"Revenue",
+                      data:[200,30,400,10,500,100,10,500],
+                      borderColor: 'rgba(75, 192, 192, 1)',  // Couleur de la ligne
+                      backgroundColor: 'rgba(75, 192, 192, 0.2)',  // Couleur de remplissage sous la ligne (optionnel)
+                      fill: false,  // Désactiver le remplissage sous la ligne
+                      tension: 0.1,  // Pour créer une courbe lisse, ajuste ce paramètre
+                    },
+                    {
+                      label: "Profit",
+                      data:[40,300,40,600,340,10,600,0],
+                      borderColor: 'rgba(134, 134, 177, 0.541)',  // Couleur de la deuxième ligne
+                      backgroundColor: 'rgba(255, 99, 132, 0.2)',  // Couleur de remplissage sous la deuxième ligne (optionnel)
+                      fill: false,  // Désactiver le remplissage sous la deuxième ligne
+                      tension: 0.1,  // Courbure de la deuxième ligne
+                    }
+                  ]
+
+                }}
                 
-              </div>
+                />
+
                
-                <div>
-                  <button className='btn_fex'>Rendez-vous</button>
-                  <button className='btn_fex'>Prescription</button>
+              </div>
+              <div className='all_doctor_div'>
+                <div className='all_doctor_div_header'>
+                    <nav>
+                       <h4>Meilleur docteur</h4>
+                    </nav>
+                    <nav style={{
+                      display:"flex",
+                      gap:"10px",
+                      alignItems:"center"
+                  }}>
+                      <FontAwesomeIcon icon={faChevronDown} style={{fontSize:"13px"}}/>
+                      <p><strong>Cette annee</strong></p>
+                      
+                     
+                    </nav>
                 </div>
-             </div>
-             <div>
-               <img src='/public/doctor_img-removebg-preview.png'/>
-             </div>
-          </div>
-          
+                
+               <img src='public/Dr. MUAMBA.jpg' className='admin_photos' alt='administrateur'/>
+               <Typography variant='h5'sx={{color:"white"}}>Dr jonathan kasongo</Typography>
+               <p style={{color:"rgb(223, 221, 221)"}}>Gynecologue et ophtamologue</p>
+
+               <div className='buttons'>
+                <div>
+                  <h4>Experience</h4>
+                  <nav>8 annees</nav>
+                </div>
+                <div>
+                  <h4>Patients</h4>
+                  <nav>2.400</nav>
+                  </div>
+                <div>
+                <h4>Operations</h4>
+                  <nav>1.504</nav>
+                </div>
+              
+               </div>
+               </div>
+             
+           </div>
+
+
+
+       <Box  sx={{
+
+        margin:"20px"
+       }}>
+           <TableContainer sx={{
+           
+           
+           }} component={Paper}>
+            <Typography sx={{margin:"20px"}} variant='h6'>Demande d'un rendez-vous </Typography>
+      <Table  aria-label="caption table">
+        
+        <TableHead>
+          <TableRow>
+            <TableCell>PHOTO IDENTITER</TableCell>
+            <TableCell align="right">12/07/2024</TableCell>
+            <TableCell align="right">ACCEPTER</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>PHOTO IDENTITER</TableCell>
+            <TableCell align="right">12/07/2024</TableCell>
+            <TableCell align="right">ACCEPTER</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>PHOTO IDENTITER</TableCell>
+            <TableCell align="right">12/07/2024</TableCell>
+            <TableCell align="right">ACCEPTER</TableCell>
+          </TableRow>
+        </TableHead>
+       
+      </Table>
+    </TableContainer>
+    </Box>
         </div>
+     
       </section>
     </>
   )
