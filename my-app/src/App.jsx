@@ -1,7 +1,7 @@
 
 import './App.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBell,faTrash,faEye,faMagnifyingGlass,faListCheck,faUserDoctor,faStethoscope,faCommentsDollar,faChevronDown} from '@fortawesome/free-solid-svg-icons'
+import { faBell,faCaretDown,faCheck,faXmark,faMagnifyingGlass,faListCheck,faUserDoctor,faStethoscope,faCommentsDollar,faChevronDown} from '@fortawesome/free-solid-svg-icons'
 import Medecins from './components/materialUI/Medecins.jsx'
 import Patients from './components/materialUI/Patients.jsx'
 import Dossier from './components/materialUI/Dossier.jsx'
@@ -64,7 +64,7 @@ function App() {
               <Facturation/>
               <Departement/>
               <Parametre/>
-            </div>
+          </div>
 
         </div>
         <div className='section_two'>
@@ -75,11 +75,14 @@ function App() {
               </div>
 
               <div className='administrateur'>
-               <FontAwesomeIcon icon={faBell} />
+                <nav className='notification_icon'>
+                <FontAwesomeIcon icon={faBell} />
+                </nav>
                <nav>
                <img src='public/Dr. MUAMBA.jpg' className='admin_photo' alt='administrateur'/>
-               <p>Dr jonathan kasongo</p>
                </nav> 
+               <nav> <p> Dr jonathan kasongo </p></nav>
+               <nav><FontAwesomeIcon icon={faCaretDown} /></nav>
               </div>
            </div>
            <div className='statistic'>
@@ -203,15 +206,15 @@ function App() {
                <div className='buttons'>
                 <div>
                   <h4>Experience</h4>
-                  <nav>8 annees</nav>
+                  <nav><h4>18 ans</h4></nav>
                 </div>
                 <div>
                   <h4>Patients</h4>
-                  <nav>2.400</nav>
+                  <nav><h4>2.400</h4></nav>
                   </div>
                 <div>
                 <h4>Operations</h4>
-                  <nav>1.504</nav>
+                  <nav><h4>1.500</h4></nav>
                 </div>
               
                </div>
@@ -222,31 +225,219 @@ function App() {
 
 
        <Box  sx={{
-
-        margin:"20px"
+        border:"1px solid rgb(223, 221, 221)",
+        borderRadius:"10px",
+        margin:"20px",
+       
        }}>
            <TableContainer sx={{
-           
-           
+           borderRadius:"10px",
+           height:"400px",
+           overflowY:"scroll"
            }} component={Paper}>
             <Typography sx={{margin:"20px"}} variant='h6'>Demande d'un rendez-vous </Typography>
       <Table  aria-label="caption table">
         
         <TableHead>
           <TableRow>
-            <TableCell>PHOTO IDENTITER</TableCell>
+            <TableCell>Kakule kitsha jean </TableCell>
             <TableCell align="right">12/07/2024</TableCell>
-            <TableCell align="right">ACCEPTER</TableCell>
+            <TableCell align="right">12/07/2024</TableCell>
+            <TableCell align="right" >
+              <Box sx={{
+                display:"flex",
+                justifyContent:"flex-end",
+                gap:"10px"
+              }}>
+              <Box sx={{
+                border:"2px solid green",
+                width:"20px",
+                height:"20px",
+                borderRadius:"50%",
+                display:"flex",
+                alignItems:"center",
+                justifyContent:"center",
+                color:"green"
+                
+              }}>
+                <FontAwesomeIcon icon={faCheck} style={{fontSize:"13px"}}/>
+              </Box>
+              <Box sx={{
+                border:"2px solid red",
+                width:"20px",
+                height:"20px",
+                borderRadius:"50%",
+                display:"flex",
+                alignItems:"center",
+                justifyContent:"center",
+                color:"red"
+              }}>
+                <FontAwesomeIcon icon={faXmark} style={{fontSize:"13px"}}/>
+              </Box>
+              </Box>
+              </TableCell>
           </TableRow>
+          
+
+
           <TableRow>
-            <TableCell>PHOTO IDENTITER</TableCell>
+            <TableCell>Kakule kitsha jean </TableCell>
             <TableCell align="right">12/07/2024</TableCell>
-            <TableCell align="right">ACCEPTER</TableCell>
+            <TableCell align="right">12/07/2024</TableCell>
+            <TableCell align="right" >
+              <Box sx={{
+                display:"flex",
+                justifyContent:"flex-end",
+                gap:"10px"
+              }}>
+              <Box sx={{
+                border:"2px solid green",
+                width:"20px",
+                height:"20px",
+                borderRadius:"50%",
+                display:"flex",
+                alignItems:"center",
+                justifyContent:"center",
+                color:"green"
+                
+              }}>
+                <FontAwesomeIcon icon={faCheck} style={{fontSize:"13px"}}/>
+              </Box>
+              <Box sx={{
+                border:"2px solid red",
+                width:"20px",
+                height:"20px",
+                borderRadius:"50%",
+                display:"flex",
+                alignItems:"center",
+                justifyContent:"center",
+                color:"red"
+              }}>
+                <FontAwesomeIcon icon={faXmark} style={{fontSize:"13px"}}/>
+              </Box>
+              </Box>
+              </TableCell>
           </TableRow>
-          <TableRow>
-            <TableCell>PHOTO IDENTITER</TableCell>
+
+
+
+        <TableRow>
+            <TableCell>Kakule kitsha jean </TableCell>
             <TableCell align="right">12/07/2024</TableCell>
-            <TableCell align="right">ACCEPTER</TableCell>
+            <TableCell align="right">12/07/2024</TableCell>
+            <TableCell align="right" >
+              <Box sx={{
+                display:"flex",
+                justifyContent:"flex-end",
+                gap:"10px"
+              }}>
+              <Box sx={{
+                border:"2px solid green",
+                width:"20px",
+                height:"20px",
+                borderRadius:"50%",
+                display:"flex",
+                alignItems:"center",
+                justifyContent:"center",
+                color:"green"
+                
+              }}>
+                <FontAwesomeIcon icon={faCheck} style={{fontSize:"13px"}}/>
+              </Box>
+              <Box sx={{
+                border:"2px solid red",
+                width:"20px",
+                height:"20px",
+                borderRadius:"50%",
+                display:"flex",
+                alignItems:"center",
+                justifyContent:"center",
+                color:"red"
+              }}>
+                <FontAwesomeIcon icon={faXmark} style={{fontSize:"13px"}}/>
+              </Box>
+              </Box>
+              </TableCell>
+          </TableRow>
+          
+
+          <TableRow>
+            <TableCell>Kakule kitsha jean </TableCell>
+            <TableCell align="right">12/07/2024</TableCell>
+            <TableCell align="right">12/07/2024</TableCell>
+            <TableCell align="right" >
+              <Box sx={{
+                display:"flex",
+                justifyContent:"flex-end",
+                gap:"10px"
+              }}>
+              <Box sx={{
+                border:"2px solid green",
+                width:"20px",
+                height:"20px",
+                borderRadius:"50%",
+                display:"flex",
+                alignItems:"center",
+                justifyContent:"center",
+                color:"green"
+                
+              }}>
+                <FontAwesomeIcon icon={faCheck} style={{fontSize:"13px"}}/>
+              </Box>
+              <Box sx={{
+                border:"2px solid red",
+                width:"20px",
+                height:"20px",
+                borderRadius:"50%",
+                display:"flex",
+                alignItems:"center",
+                justifyContent:"center",
+                color:"red"
+              }}>
+                <FontAwesomeIcon icon={faXmark} style={{fontSize:"13px"}}/>
+              </Box>
+              </Box>
+              </TableCell>
+          </TableRow>
+          
+
+          <TableRow>
+            <TableCell>Kakule kitsha jean </TableCell>
+            <TableCell align="right">12/07/2024</TableCell>
+            <TableCell align="right">12/07/2024</TableCell>
+            <TableCell align="right" >
+              <Box sx={{
+                display:"flex",
+                justifyContent:"flex-end",
+                gap:"10px"
+              }}>
+              <Box sx={{
+                border:"2px solid green",
+                width:"20px",
+                height:"20px",
+                borderRadius:"50%",
+                display:"flex",
+                alignItems:"center",
+                justifyContent:"center",
+                color:"green"
+                
+              }}>
+                <FontAwesomeIcon icon={faCheck} style={{fontSize:"13px"}}/>
+              </Box>
+              <Box sx={{
+                border:"2px solid red",
+                width:"20px",
+                height:"20px",
+                borderRadius:"50%",
+                display:"flex",
+                alignItems:"center",
+                justifyContent:"center",
+                color:"red"
+              }}>
+                <FontAwesomeIcon icon={faXmark} style={{fontSize:"13px"}}/>
+              </Box>
+              </Box>
+              </TableCell>
           </TableRow>
         </TableHead>
        

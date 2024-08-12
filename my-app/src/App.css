@@ -35,23 +35,24 @@ body {
   }
 .section_two{
     width: 100%;
+    height: fit-content;
     margin-left: 250px;
-    background: rgb(253, 244, 244);
+    background: rgba(231, 230, 230, 0.301);
   }
 .header{
   background: white;
   box-shadow: 0px 0px 5px 0px rgb(156, 156, 156);
   width: 100%;
   height: 50px;
-  margin-top: -3px;
+  margin-top: 0px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content:space-between;
   position: fixed;
 }
 .header .recherch{
   border-radius: 10px;
-  background: rgb(253, 244, 244);
+  background: rgba(231, 230, 230, 0.301);
   width: 200px;
   border: 1px solid rgba(0, 0, 0, 0.103);
   
@@ -64,24 +65,40 @@ body {
   margin: 10px;
 }
 .header div input{
-  background: rgb(253, 244, 244);
+  background: rgba(231, 230, 230, 0);
   outline: none;
   border: none;
 }
-.admin_photo{
+.admin_photo,.notification_icon{
+  border: 1px solid rgb(201, 199, 199);
   width: 30px;
   height: 30px;
   border-radius: 50%;
+}
+.notification_icon{
+  border: 1px solid rgb(201, 199, 199);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(231, 230, 230, 0.301);
+  color: rgba(0, 0, 0, 0.76);
 }
 .administrateur{
   width: 250px;
   display: flex;
   justify-content: space-between;
+  position: relative;
+  right: 250px;
+  color: rgba(0, 0, 0, 0.76);
+  
 }
+
 .administrateur nav{
   display: flex;
   align-items: center;
-  
 }
 
 .statistic_flex{
@@ -97,10 +114,6 @@ body {
   
 }
 
-.statistic_flex div{
-  
-  /* width: 100px; */
-}
 .icone_stat{
   width: 70px;
   height: 80px;
@@ -115,12 +128,12 @@ body {
   
 }
 .icon_ui{
-  font-size:40px;
+  font-size:30px;
   
 }
 .all_stat_flex{
   
-  margin-top: 65px;
+  margin-top: 75px;
   display: flex;
   justify-content: space-around;
 }
@@ -148,9 +161,10 @@ body {
 .admin_photos{
   border: 1px solid rgb(223, 221, 221);
   box-shadow: 0px 0px 10px 0px rgb(63, 63, 63);
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   border-radius: 10px;
+  /* margin: -10px; */
 }
 .all_doctor_div_header{
   color: white;
@@ -160,7 +174,7 @@ body {
   margin: 10px;
 }
 .all_graphic_and_doctor_div{
-  margin: 20px;
+  margin: 25px;
   display:flex;
   justify-content:space-between;
   text-align: center;
@@ -181,6 +195,7 @@ body {
   background-color: white;
   display: flex;
   color: black;
+  font-size: larger;
   gap: 10px;
  
 }

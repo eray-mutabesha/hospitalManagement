@@ -26,10 +26,12 @@
 
 
 #appBar{
-    background-image: url("moderate-aquamarine-dark-gradient-background_608506-1382.avif");
+    background: white;
+    color: black;
 }
 
 .medecin_fom {
+    border:1px solid rgb(201, 199, 199);
     display: grid;
     gap:10px;
     width: 400px;

@@ -64,7 +64,8 @@ export default function DossierForm() {
         </AppBar>
        <Box sx={{
         height:"100vh",
-        background:"rgba(38, 233, 233, 0.5)",
+        background:"rgba(231, 230, 230, 0.301)",
+        
        }}>
 
 <form className='medecin_fom'>
@@ -92,7 +93,6 @@ className='inpt_material'
  type='date'
  size="small"
  {...register("date_dossier", { required: true })}/>
-
 
 </form>
        </Box>
