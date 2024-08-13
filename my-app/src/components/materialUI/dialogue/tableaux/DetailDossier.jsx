@@ -37,7 +37,7 @@ const rows = [
 ];
 
 
-function TblDossier() {
+function DetailDossier() {
  
   return (
     <>
@@ -74,23 +74,106 @@ function TblDossier() {
                <nav><FontAwesomeIcon icon={faCaretDown} /></nav>
               </div>
            </div>
-
-        
+           
         <Box sx={{
           display:"grid",
+          gap:"30px",
           alignItems:"center",
           width:"950px",
           marginLeft:"auto",
           marginRight:"auto",
-          marginTop:"200px"
+          marginTop:"80px"
         }}>
-          <Typography variant='h5'>Tout les dossiers des patients</Typography>
+          <Box  sx={{
+            display:"flex",
+            justifyContent:"space-between"
+          }}>
+          
+          <Box sx={{
+             width:"600px",
+             height:"200px",
+             border:"1px solid rgb(201, 199, 199)",
+             borderRadius:"10px",
+             
+            
+           }}>
+
+            <Box sx={{
+              display:"grid",
+              gridTemplateColumns:"auto auto auto",
+              gap:"20px",
+              margin:"20px "
+              
+            }}>
+
+              <Box >
+              <p><strong>Nom : </strong> Katembo mwamijean</p>
+              <p><strong>Nom : </strong> lore</p>
+              <p><strong>Poig : </strong> 80(kg)</p>
+              
+              </Box>
+              <Box >
+              <p><strong>Nom : </strong> Katembo </p>
+              <p><strong>Nom : </strong> lorem</p>
+              <p><strong>Poig : </strong> 80(kg)</p>
+              
+              </Box>
+              <Box >
+              <p><strong>Nom : </strong> Katembo mwamis</p>
+              <p><strong>Nom : </strong> lorem</p>
+              <p><strong>Poig : </strong> 80(kg)</p>
+              
+              </Box>
+              <Box >
+              <p><strong>Nom : </strong> Katembo mwamis </p>
+              <p><strong>Nom : </strong> lorem</p>
+              <p><strong>Poig : </strong> 80(kg)</p>
+              
+              </Box>
+              <Box >
+              <p><strong>Nom : </strong> Katembo mwamis jean</p>
+              <p><strong>Nom : </strong> lorem</p>
+              
+              
+              </Box>
+              <Box >
+              <p><strong>Nom : </strong> Katembo mwamis jean</p>
+              <p><strong>Nom : </strong> lorem</p>
+              
+              
+              </Box>
+              
+            </Box>
+            </Box>
+            <Box sx={{
+              
+              border:"1px solid rgb(201, 199, 199)",
+               backgroundImage:"url('moderate-aquamarine-dark-gradient-background_608506-1382.avif')",
+              backgroundRepeat:"no-repeat",
+              backgroundSize: "cover",
+             backgroundPosition:"center",
+             width:"300px",
+             height:"200px",
+             borderRadius:"10px",
+             display:"flex",
+             alignItems:"center",
+             justifyContent:"center"
+            }}>
+             
+              <img src="/public/profilphoto.png" alt="" style={{
+                width:"150px",
+                height:"150px",
+                borderRadius:"50%"
+              }}/>
+            
+            </Box>
+           </Box>
         <TableContainer component={Paper}>
       <Table sx={{ minWidth: 950 ,textAlign:"left"}} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow >
             <TableCell>#</TableCell>
-            <TableCell >PATIENT</TableCell>
+            <TableCell >CLIENTS</TableCell>
             <TableCell >DATE D'ARRIVER</TableCell>
             <TableCell >STATUT</TableCell>
             <TableCell align="right">ACTION</TableCell>
@@ -124,10 +207,6 @@ function TblDossier() {
     </>
   )
 }
-export default TblDossier
-
-
-
-
+export default DetailDossier
 
 
