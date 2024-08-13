@@ -22,6 +22,8 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Checkbox from '@mui/material/Checkbox';
 import Avatar from '@mui/material/Avatar';
+import IconButton from '@mui/material/IconButton';
+import CommentIcon from '@mui/icons-material/Comment';
 
 
 
@@ -79,7 +81,13 @@ function TblChambre() {
       <Box sx={
         {
           border:"1px solid red",
-          marginTop:"80px"
+          marginTop:"80px",
+          width:"400px",
+          border: "1px solid rgb(201, 199, 199)",
+          display:"flex",
+          justifyContent:"center",
+          borderRadius:"10px"
+
         }
       }>
       <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
@@ -87,15 +95,12 @@ function TblChambre() {
         const labelId = `checkbox-list-secondary-label-${value}`;
         return (
           <ListItem
-            key={value}
-            secondaryAction={
-              <Checkbox
-                edge="end"
-                onChange={handleToggle(value)}
-                checked={checked.indexOf(value) !== -1}
-                inputProps={{ 'aria-labelledby': labelId }}
-              />
-            }
+          key={value}
+          secondaryAction={
+            <IconButton edge="end" aria-label="comments">
+              <CommentIcon />
+            </IconButton>
+          }
             disablePadding
           >
             <ListItemButton>
