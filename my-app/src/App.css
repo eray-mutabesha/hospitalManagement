@@ -49,6 +49,7 @@ body {
   align-items: center;
   justify-content:space-between;
   position: fixed;
+  z-index: 5;
 }
 .header .recherch{
   border-radius: 10px;

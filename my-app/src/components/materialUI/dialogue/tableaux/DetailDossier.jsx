@@ -82,14 +82,21 @@ function DetailDossier() {
           width:"950px",
           marginLeft:"auto",
           marginRight:"auto",
-          marginTop:"80px"
+          marginTop:"80px",
+        
         }}>
+          <Box>
+          <Button variant="contained" color="error">
+            Retour
+           </Button>
+      </Box>
           <Box  sx={{
             display:"flex",
             justifyContent:"space-between"
           }}>
           
           <Box sx={{
+     
              width:"600px",
              height:"200px",
              border:"1px solid rgb(201, 199, 199)",
@@ -168,35 +175,74 @@ function DetailDossier() {
             
             </Box>
            </Box>
-        <TableContainer component={Paper}>
+      
+      <TableContainer component={Paper}>
+      <Typography variant='h5'>Services parcourus par le patient</Typography>
       <Table sx={{ minWidth: 950 ,textAlign:"left"}} size="small" aria-label="a dense table">
         <TableHead>
-          <TableRow >
+          <TableRow sx={{background:"rgba(231, 230, 230, 0.301)",}}>
             <TableCell>#</TableCell>
-            <TableCell >CLIENTS</TableCell>
-            <TableCell >DATE D'ARRIVER</TableCell>
+            <TableCell >SERVICES</TableCell>
             <TableCell >STATUT</TableCell>
-            <TableCell align="right">ACTION</TableCell>
+            <TableCell >ACTION</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
+         
+            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell component="th" scope="row">
                 002
               </TableCell>
-              <TableCell >Katembo mwami jean</TableCell>
-              <TableCell >12/04/2024</TableCell>
-              <TableCell sx={{color:"red"}}>En attente...</TableCell>
-              <TableCell align="right"><Button sx={{
-                border:"1px solid rgb(201, 199, 199)",
-                color:"black"
-              }}>Details</Button></TableCell>
+              <TableCell >Consultation</TableCell>
+              <TableCell sx={{color:"green"}}>Terminer</TableCell>
+              <TableCell > <Button variant="contained" color="success">
+               Details
+             </Button></TableCell>
             </TableRow>
-          ))}
+
+            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+              <TableCell component="th" scope="row">
+                002
+              </TableCell>
+              <TableCell >Laboratoire</TableCell>
+              <TableCell sx={{color:"blue"}}>En cours...</TableCell>
+              <TableCell > <Button variant="contained" color="success">
+               Details
+             </Button></TableCell>
+            </TableRow>
+
+            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+              <TableCell component="th" scope="row">
+                002
+              </TableCell>
+              <TableCell >Hospitalisation</TableCell>
+              <TableCell sx={{color:"red"}}>En attente</TableCell>
+              <TableCell > <Button variant="contained" color="success">
+               Details
+             </Button></TableCell>
+            </TableRow>
+
+            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+              <TableCell component="th" scope="row">
+                002
+              </TableCell>
+              <TableCell >Embulatoire</TableCell>
+              <TableCell sx={{color:"red"}}>En attente</TableCell>
+              <TableCell > <Button variant="contained" color="success">
+               Details
+             </Button></TableCell>
+            </TableRow>
+         
+            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+              <TableCell component="th" scope="row">
+                002
+              </TableCell>
+              <TableCell >Consultation</TableCell>
+              <TableCell sx={{color:"red"}}>En attente</TableCell>
+              <TableCell > <Button variant="contained" color="success">
+               Details
+             </Button></TableCell>
+            </TableRow>
         </TableBody>
       </Table>
     </TableContainer>

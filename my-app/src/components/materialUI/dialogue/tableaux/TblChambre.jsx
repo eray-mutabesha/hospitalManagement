@@ -1,7 +1,7 @@
 import React from 'react'
 import './tbl.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { faTrash ,faEye} from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
 import Medecins from '../../Medecins.jsx'
 import Chambres from '../../Chambre.jsx'
@@ -13,17 +13,39 @@ import Medicament from '../../Medicament.jsx'
 import Parametre from '../../Parametre.jsx'
 import Patients from '../../Patients.jsx'
 import Personnel from '../../Personnel.jsx'
+import { Box, Button, Typography } from '@mui/material'
+import { faBell,faCaretDown,faCheck,faXmark,faMagnifyingGlass,faListCheck,faUserDoctor,faStethoscope,faCommentsDollar,faChevronDown} from '@fortawesome/free-solid-svg-icons'
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Checkbox from '@mui/material/Checkbox';
+import Avatar from '@mui/material/Avatar';
 
 
 
 
-function TblChambres() {
- 
+function TblChambre() {
+  const [checked, setChecked] = React.useState([1]);
+
+  const handleToggle = (value) => () => {
+    const currentIndex = checked.indexOf(value);
+    const newChecked = [...checked];
+
+    if (currentIndex === -1) {
+      newChecked.push(value);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+
+    setChecked(newChecked);
+  };
   return (
     <>
-      <section id='all_section'>
+      <section  id='all_section'>
         <div className='div_one'>
-            <div>
+        <div>
               <Dashboard/>
               <Medicament/>
               <Dossier/>
@@ -37,47 +59,66 @@ function TblChambres() {
             </div>
         </div>
         <div className='div_two'> 
-          <div className='h1_dash'>
-          <h1 style={{color:'white'}}>Chambres</h1>
-          
-          </div>
-          
-          <div className='table_div'>
-    <table>
-        <thead>
-          <tr>
-          <th>Date </th>
-            <th>Nom</th>
-            <th>post nom</th>
-            <th>Action</th>
-            <th>Numero </th>
-            <th>email</th>
-          </tr>
-            
-        </thead>
-        <tbody >
-        
-              <tr >
-                <td>lorom lorem</td>
-                <td>lorom</td>
-                <td>lorom</td>
-                <td>lorom</td>
-                <td>lorom</td>
-                <td className='action'>
-                  <img src='public/editPhoto-removebg-preview.png' className='corbeil_image' />
-                  <img src='public/up_2.png' className='corbeil_image' />
-                  <img src='/public/delete_corbrille.png' className='corbeil_image'/>
-                </td>
-                
-              </tr>
-           
-   </tbody>
-</table>
-    </div>
-          
+        <div className='header'>
+              <div className='recherch'>
+               <FontAwesomeIcon icon={faMagnifyingGlass} /> 
+               <input type="text" placeholder='recherch'/>
+              </div>
+
+              <div className='administrateur'>
+                <nav className='notification_icon'>
+                <FontAwesomeIcon icon={faBell} />
+                </nav>
+               <nav>
+               <img src='public/Dr. MUAMBA.jpg' className='admin_photo' alt='administrateur'/>
+               </nav> 
+               <nav> <p> Dr jonathan kasongo </p></nav>
+               <nav><FontAwesomeIcon icon={faCaretDown} /></nav>
+              </div>
+           </div>
+      <Box sx={
+        {
+          border:"1px solid red",
+          marginTop:"80px"
+        }
+      }>
+      <List dense sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+      {[0, 1, 2, 3].map((value) => {
+        const labelId = `checkbox-list-secondary-label-${value}`;
+        return (
+          <ListItem
+            key={value}
+            secondaryAction={
+              <Checkbox
+                edge="end"
+                onChange={handleToggle(value)}
+                checked={checked.indexOf(value) !== -1}
+                inputProps={{ 'aria-labelledby': labelId }}
+              />
+            }
+            disablePadding
+          >
+            <ListItemButton>
+              <ListItemAvatar>
+                <Avatar
+                  alt={`Avatar n°${value + 1}`}
+                  src={`/static/images/avatar/${value + 1}.jpg`}
+                />
+              </ListItemAvatar>
+              <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
+            </ListItemButton>
+          </ListItem>
+        );
+      })}
+    </List>
+    </Box>
         </div>
       </section>
     </>
   )
 }
-export default TblChambres
+
+
+
+
+export default TblChambre

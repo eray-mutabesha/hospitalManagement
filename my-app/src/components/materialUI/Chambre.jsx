@@ -6,17 +6,17 @@ import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBed } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom';
-import ChambreForm from './dialogue/ChambreForm';
+
+
+
 export default function Chambres() {
 const navigate=useNavigate()
   const handleclick=()=>{
    navigate("/chambres")
   }
   return (
-    <PopupState variant="popover" popupId="demo-popup-menu">
-      {(popupState) => (
-        <React.Fragment>
-          <Button  {...bindTrigger(popupState)} sx={{
+       <>
+          <Button onClick={handleclick}  sx={{
              borderRadius:"10px",
              margin:"20px auto",
              
@@ -28,15 +28,10 @@ const navigate=useNavigate()
              color:"white"
           }}>
            <FontAwesomeIcon icon={faBed} /> 
-           chambres
+            Consultation
           </Button>
-          <Menu {...bindMenu(popupState)}>
-            <MenuItem ><ChambreForm/></MenuItem>
-            <MenuItem onClick={handleclick}>Toutes les chambres</MenuItem>
-            
-          </Menu>
-        </React.Fragment>
-      )}
-    </PopupState>
+        </>
+        
+      
   );
 }
