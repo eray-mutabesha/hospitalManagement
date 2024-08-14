@@ -38,7 +38,12 @@ const rows = [
 
 
 function DetailDossier() {
- 
+  
+
+ const navigate = useNavigate()
+ const handledossier=()=>{
+   navigate("/dossier")
+ }
   return (
     <>
       <section  id='all_section'>
@@ -56,7 +61,7 @@ function DetailDossier() {
               <Parametre/>
             </div>
         </div>
-        <div className='div_two'> 
+        <div className='div_two' style={{ background:"rgba(231, 230, 230, 0.301)",}}> 
         <div className='header'>
               <div className='recherch'>
                <FontAwesomeIcon icon={faMagnifyingGlass} /> 
@@ -86,9 +91,10 @@ function DetailDossier() {
         
         }}>
           <Box>
-          <Button variant="contained" color="error">
+          <Button variant="contained" color="error" onClick={handledossier}>
             Retour
            </Button>
+           {/* ......................................................... */}
       </Box>
           <Box  sx={{
             display:"flex",
@@ -100,6 +106,7 @@ function DetailDossier() {
              width:"600px",
              height:"200px",
              border:"1px solid rgb(201, 199, 199)",
+             background:"white",
              borderRadius:"10px",
              
             
@@ -152,6 +159,7 @@ function DetailDossier() {
               
             </Box>
             </Box>
+            
             <Box sx={{
               
               border:"1px solid rgb(201, 199, 199)",
@@ -175,12 +183,12 @@ function DetailDossier() {
             
             </Box>
            </Box>
-      
+      {/* .............................................. */}
       <TableContainer component={Paper}>
       <Typography variant='h5'>Services parcourus par le patient</Typography>
       <Table sx={{ minWidth: 950 ,textAlign:"left"}} size="small" aria-label="a dense table">
         <TableHead>
-          <TableRow sx={{background:"rgba(231, 230, 230, 0.301)",}}>
+          <TableRow>
             <TableCell>#</TableCell>
             <TableCell >SERVICES</TableCell>
             <TableCell >STATUT</TableCell>

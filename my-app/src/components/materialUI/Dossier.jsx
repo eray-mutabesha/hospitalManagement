@@ -14,10 +14,8 @@ export default function Dossier() {
     navigate("/dossier")
   }
   return (
-    <PopupState variant="popover" popupId="demo-popup-menu">
-      {(popupState) => (
-        <React.Fragment>
-          <Button  {...bindTrigger(popupState)} sx={{
+    
+          <Button   onClick={handleclick} sx={{
              borderRadius:"10px",
              margin:"20px auto",
              
@@ -31,12 +29,6 @@ export default function Dossier() {
            <FontAwesomeIcon icon={faFolder} /> 
            dossier
           </Button>
-          <Menu {...bindMenu(popupState)}>
-            <MenuItem ><DossieForm/></MenuItem>
-            <MenuItem onClick={handleclick}>Tout les dossier</MenuItem>
-          </Menu>
-        </React.Fragment>
-      )}
-    </PopupState>
+          
   );
 }

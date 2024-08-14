@@ -15,10 +15,8 @@ const handleclick=()=>{
 }
 
   return (
-    <PopupState variant="popover" popupId="demo-popup-menu">
-      {(popupState) => (
-        <React.Fragment>
-          <Button  {...bindTrigger(popupState)} sx={{
+    
+          <Button onClick={handleclick}  sx={{
              borderRadius:"10px",
              margin:"20px auto",
              
@@ -32,12 +30,7 @@ const handleclick=()=>{
            <FontAwesomeIcon icon={faHospital} /> 
            Personnel
           </Button>
-          <Menu {...bindMenu(popupState)}>
-            <MenuItem ><PersonelForm/></MenuItem>
-            <MenuItem onClick={handleclick}>Personnel</MenuItem>
-          </Menu>
-        </React.Fragment>
-      )}
-    </PopupState>
+         
+     
   );
 }

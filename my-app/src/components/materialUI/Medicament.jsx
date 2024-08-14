@@ -1,12 +1,10 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faPrescriptionBottleMedical} from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom';
-import MedicamentForm from './dialogue/MedicamentForm';
+
 
 export default function Medicament() {
   const navigate=useNavigate()
@@ -14,10 +12,8 @@ export default function Medicament() {
     navigate("/medicament")
   }
   return (
-    <PopupState variant="popover" popupId="demo-popup-menu">
-      {(popupState) => (
-        <React.Fragment>
-          <Button  {...bindTrigger(popupState)} sx={{
+    
+          <Button  onClick={handleclick} sx={{
              borderRadius:"10px",
              margin:"20px auto",
              
@@ -31,12 +27,6 @@ export default function Medicament() {
            <FontAwesomeIcon icon={faPrescriptionBottleMedical} /> 
            Stock
           </Button>
-          <Menu {...bindMenu(popupState)}>
-          <MenuItem><MedicamentForm/></MenuItem>
-            <MenuItem onClick={handleclick}>Tout le stock</MenuItem>
-          </Menu>
-        </React.Fragment>
-      )}
-    </PopupState>
+          
   );
 }

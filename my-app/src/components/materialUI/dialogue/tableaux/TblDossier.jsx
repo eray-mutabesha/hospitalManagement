@@ -2,7 +2,7 @@ import React from 'react'
 import './tbl.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash ,faEye} from '@fortawesome/free-solid-svg-icons'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import Medecins from '../../Medecins.jsx'
 import Chambres from '../../Chambre.jsx'
 import Dashboard from '../../Dashboard.jsx'
@@ -23,6 +23,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import DossierForm from '../DossierForm.jsx'
+
+
+
+
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -38,7 +43,10 @@ const rows = [
 
 
 function TblDossier() {
- 
+  const navigate = useNavigate()
+  const handledetail=()=>{
+    navigate("/detaildossier")
+  }
   return (
     <>
       <section  id='all_section'>
@@ -56,7 +64,7 @@ function TblDossier() {
               <Parametre/>
             </div>
         </div>
-        <div className='div_two'> 
+        <div className='div_two' style={{ background:"rgba(231, 230, 230, 0.301)",}}> 
         <div className='header'>
               <div className='recherch'>
                <FontAwesomeIcon icon={faMagnifyingGlass} /> 
@@ -75,14 +83,19 @@ function TblDossier() {
               </div>
            </div>
 
-        
+        <Box sx={{
+          marginTop:"100px",
+          display:"grid",
+          gap:"50px"
+          }}>
+          <DossierForm/>
         <Box sx={{
           display:"grid",
           alignItems:"center",
           width:"950px",
           marginLeft:"auto",
           marginRight:"auto",
-          marginTop:"200px"
+          
         }}>
           <Typography variant='h5'>Tout les dossiers des patients</Typography>
         <TableContainer component={Paper}>
@@ -111,14 +124,14 @@ function TblDossier() {
               <TableCell align="right"><Button sx={{
                 border:"1px solid rgb(201, 199, 199)",
                 color:"black"
-              }}>Details</Button></TableCell>
+              }}   onClick={handledetail}>Details</Button></TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
     </Box>
-        
+    </Box>  
         </div>
       </section>
     </>
