@@ -16,7 +16,7 @@ navigate('/tableaupatient')
 
   return (
     
-          <nav  >
+          <nav  onClick={handleclick}>
            <FontAwesomeIcon icon={faHospitalUser} /> 
            Patients
           </nav>

@@ -186,6 +186,12 @@ className='inpt_material'
  {...register("Globule_rouge", { required: true })}/>
 
 
+
+
+
+
+
+
  <Typography variant='h6'>FL(%) :</Typography>
  <TextField
 className='inpt_material'
@@ -276,6 +282,13 @@ className='inpt_material'
  type="text"
  size="small"
  {...register("Test_Emmel", { required: true })}/>
+
+
+
+
+
+
+
 <Typography variant='h6'>Parasitologie/ Cytologie :</Typography>
 
 <TextField
@@ -367,6 +380,19 @@ className='inpt_material'
  type="text"
  size="small"
  {...register("FI", { required: true })}/>
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 <Typography variant='h6'>Bacteriologie :</Typography>
 
 <TextField

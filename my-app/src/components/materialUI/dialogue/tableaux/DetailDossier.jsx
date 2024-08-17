@@ -4,10 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash ,faEye} from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
 import Medecins from '../../Medecins.jsx'
-import Chambres from '../../Chambre.jsx'
+import Chambres from '../../Consultation.jsx'
 import Dashboard from '../../Dashboard.jsx'
 import Departement from '../../Departement.jsx'
-import Dossier from '../../Dossier.jsx'
+import Dossier from '../../Reception.jsx'
 import Facturation from '../../Facturation.jsx'
 import Medicament from '../../Medicament.jsx'
 import Parametre from '../../Parametre.jsx'
@@ -110,7 +110,7 @@ function DetailDossier() {
      
              width:"600px",
              height:"200px",
-             border:"1px solid rgb(201, 199, 199)",
+             border:"1px solid rgba(0, 0, 0, 0.103)",
              background:"white",
              borderRadius:"10px",
              

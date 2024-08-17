@@ -7,10 +7,10 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-export default function Chambres() {
+export default function Consultation() {
 const navigate=useNavigate()
   const handleclick=()=>{
-   navigate("/chambres")
+   navigate("/Consultation")
   }
   return (
        <>

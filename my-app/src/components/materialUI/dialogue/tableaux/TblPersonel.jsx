@@ -4,10 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash ,faEye} from '@fortawesome/free-solid-svg-icons'
 import { Navigate, useNavigate } from 'react-router-dom'
 import Medecins from '../../Medecins.jsx'
-import Chambres from '../../Chambre.jsx'
 import Dashboard from '../../Dashboard.jsx'
 import Departement from '../../Departement.jsx'
-import Dossier from '../../Dossier.jsx'
 import Facturation from '../../Facturation.jsx'
 import Medicament from '../../Medicament.jsx'
 import Parametre from '../../Parametre.jsx'
@@ -15,7 +13,6 @@ import Patients from '../../Patients.jsx'
 import Personnel from '../../Personnel.jsx'
 import { Box, Button, Typography } from '@mui/material'
 import { faBell,faCaretDown,faCheck,faXmark,faMagnifyingGlass,faListCheck,faUserDoctor,faStethoscope,faCommentsDollar,faChevronDown} from '@fortawesome/free-solid-svg-icons'
-
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -25,6 +22,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PersonelForm from '../PersonelForm.jsx'
+import Reception from '../../Reception.jsx'
 
 
 
@@ -42,7 +40,6 @@ const rows = [
   createData('Gingerbread', 356, 16.0, 49, 3.9),
   createData('Gingerbread', 356, 16.0, 49, 3.9),
   createData('Gingerbread', 356, 16.0, 49, 3.9),
-  
 ];
 
 
@@ -58,10 +55,10 @@ function TblPersonel() {
         <div>
               <Dashboard/>
               <Medicament/>
-              <Dossier/>
+              <Reception/>
               <Medecins/>
               <Patients/>
-              <Chambres/>
+              <Consultation/>
               <Personnel/>
               <Facturation/>
               <Departement/>

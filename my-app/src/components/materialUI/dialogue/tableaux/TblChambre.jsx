@@ -1,13 +1,9 @@
 import React from 'react'
 import './tbl.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash ,faEye} from '@fortawesome/free-solid-svg-icons'
-import { useNavigate } from 'react-router-dom'
 import Medecins from '../../Medecins.jsx'
-import Chambres from '../../Chambre.jsx'
 import Dashboard from '../../Dashboard.jsx'
 import Departement from '../../Departement.jsx'
-import Dossier from '../../Dossier.jsx'
 import Facturation from '../../Facturation.jsx'
 import Medicament from '../../Medicament.jsx'
 import Parametre from '../../Parametre.jsx'
@@ -20,13 +16,13 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Checkbox from '@mui/material/Checkbox';
-import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import CommentIcon from '@mui/icons-material/Comment';
 
 import SaveIcon from '@mui/icons-material/Save';
 import ChoixTransferClt from '../../ChoixTransferClt.jsx'
+import Reception from '../../Reception.jsx'
+import Consultation from '../../Consultation.jsx'
 
 
 
@@ -53,10 +49,10 @@ function TblChambre() {
         <div>
               <Dashboard/>
               <Medicament/>
-              <Dossier/>
+              <Reception/>
               <Medecins/>
               <Patients/>
-              <Chambres/>
+              <Consultation/>
               <Personnel/>
               <Facturation/>
               <Departement/>
@@ -99,7 +95,7 @@ function TblChambre() {
           
           
           width:"250px",
-           border: "1px solid rgb(201, 199, 199)",
+           border: "1px solid rgba(0, 0, 0, 0.103)",
           display:"flex",
           justifyContent:"center",
           borderRadius:"10px",
@@ -157,7 +153,7 @@ function TblChambre() {
      
              width:"500px",
              height:"150px",
-             border:"1px solid rgb(201, 199, 199)",
+             border:"1px solid rgba(0, 0, 0, 0.103)",
             background:"white",
              borderRadius:"10px",
              display:"grid",
@@ -220,7 +216,7 @@ function TblChambre() {
     <Box sx={{
       
       display:"flex",
-       border: "1px solid rgb(201, 199, 199)",
+       border: "1px solid rgba(0, 0, 0, 0.103)",
       background:"white",
       justifyContent:"center",
       borderRadius:"10px",
@@ -272,7 +268,6 @@ function TblChambre() {
         Enregister
         </Button>
        
-         
          <ChoixTransferClt/>
       
        </Box>

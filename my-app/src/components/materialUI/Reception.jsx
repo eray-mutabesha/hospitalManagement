@@ -8,7 +8,7 @@ import { faFolder } from '@fortawesome/free-solid-svg-icons'
 import DossieForm from './dialogue/DossierForm';
 import { useNavigate } from 'react-router-dom';
 
-export default function Dossier() {
+export default function Reception() {
   const navigate=useNavigate()
   const handleclick=()=>{
     navigate("/dossier")
@@ -17,7 +17,7 @@ export default function Dossier() {
     
           <nav   onClick={handleclick}>
            <FontAwesomeIcon icon={faFolder} /> 
-           dossier
+           Reception
           </nav>
           
   );

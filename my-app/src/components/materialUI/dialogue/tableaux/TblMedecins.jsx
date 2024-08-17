@@ -4,10 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash ,faEye} from '@fortawesome/free-solid-svg-icons'
 import { Navigate, useNavigate } from 'react-router-dom'
 import Medecins from '../../Medecins.jsx'
-import Chambres from '../../Chambre.jsx'
 import Dashboard from '../../Dashboard.jsx'
 import Departement from '../../Departement.jsx'
-import Dossier from '../../Dossier.jsx'
 import Facturation from '../../Facturation.jsx'
 import Medicament from '../../Medicament.jsx'
 import Parametre from '../../Parametre.jsx'
@@ -25,6 +23,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MedecinsForm from '../MedecinsForm.jsx'
+import Reception from '../../Reception.jsx'
+import Consultation from '../../Consultation.jsx'
 
 
 
@@ -58,10 +58,10 @@ function TblMedecins() {
         <div>
               <Dashboard/>
               <Medicament/>
-              <Dossier/>
+              <Reception/>
               <Medecins/>
               <Patients/>
-              <Chambres/>
+              <Consultation/>
               <Personnel/>
               <Facturation/>
               <Departement/>

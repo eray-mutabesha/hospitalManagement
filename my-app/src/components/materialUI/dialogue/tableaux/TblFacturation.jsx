@@ -4,10 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash ,faEye} from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
 import Medecins from '../../Medecins.jsx'
-import Chambres from '../../Chambre.jsx'
 import Dashboard from '../../Dashboard.jsx'
 import Departement from '../../Departement.jsx'
-import Dossier from '../../Dossier.jsx'
 import Facturation from '../../Facturation.jsx'
 import Medicament from '../../Medicament.jsx'
 import Parametre from '../../Parametre.jsx'
@@ -26,6 +24,8 @@ import SaveIcon from '@mui/icons-material/Save';
 import { InputLabel,Select,MenuItem,FormControl}  from '@mui/material';
 import { useForm} from "react-hook-form"
 import ChoixTransferClt from '../../ChoixTransferClt.jsx'
+import Consultation from '../../Consultation.jsx'
+import Reception from '../../Reception.jsx'
 
 
 
@@ -53,10 +53,10 @@ function TblChambre() {
         <div>
               <Dashboard/>
               <Medicament/>
-              <Dossier/>
+              <Reception/>
               <Medecins/>
               <Patients/>
-              <Chambres/>
+              <Consultation/>
               <Personnel/>
               <Facturation/>
               <Departement/>

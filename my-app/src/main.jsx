@@ -6,7 +6,6 @@ import './index.css';
 import { createBrowserRouter,RouterProvider} from 'react-router-dom';
 import ConnexionPage from './components/ConnexionPage.jsx';
 import Inscription from './components/Inscription.jsx'
-
 import TblMedecins from './components/materialUI/dialogue/tableaux/TblMedecins.jsx';
 import TblPatient from './components/materialUI/dialogue/tableaux/TblPatient.jsx';
 import TblChambre from './components/materialUI/dialogue/tableaux/TblChambre.jsx';
@@ -20,6 +19,7 @@ import Deconnexion from './components/Deconnexion.jsx';
 import TblConsultation from './components/materialUI/dialogue/tableaux/TblConsultation.jsx';
 import DetailDossier from './components/materialUI/dialogue/tableaux/DetailDossier.jsx';
 import DetailpatientInfos from './components/materialUI/dialogue/DetailpatientInfos.jsx';
+import TblReception from './components/materialUI/dialogue/tableaux/TblReception.jsx';
 
 
 
@@ -55,7 +55,7 @@ const routes=createBrowserRouter([
     element:<TblPatient />
   },
   {
-    path:"/chambres",
+    path:"/Consultation",
     element:<TblChambre/>
   },
   {
@@ -89,6 +89,10 @@ const routes=createBrowserRouter([
    {
     path:"/detailPatient",
     element:<DetailpatientInfos/>
+   },
+   {
+    path:"/reception",
+    element:<TblReception/>
    },
   
 ])
