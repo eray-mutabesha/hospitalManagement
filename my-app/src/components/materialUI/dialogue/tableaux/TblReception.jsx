@@ -26,6 +26,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import IconButton from '@mui/material/IconButton';
 import CommentIcon from '@mui/icons-material/Comment';
 import DossierForm from '../DossierForm.jsx'
+import DossierListe from '../../DossierListe.jsx'
 
 
 
@@ -99,10 +100,11 @@ function TblReception() {
     top:"80px",
     margin:"10px",
     display:"flex",
-    justifyContent:"left"
+    justifyContent:"left",
+    gap:"20px"
 }}>
      
-    <DossierForm/>
+    <DossierListe/>
     <ChoixTransferClt/>
    
 

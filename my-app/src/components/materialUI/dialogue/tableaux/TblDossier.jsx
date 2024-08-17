@@ -47,6 +47,10 @@ function TblDossier() {
   const handledetail=()=>{
     navigate("/detaildossier")
   }
+
+  const handledossier=()=>{
+    navigate("/reception")
+  }
   return (
     <>
       <section  id='all_section'>
@@ -86,15 +90,25 @@ function TblDossier() {
         <Box sx={{
           marginTop:"100px",
           display:"grid",
-          gap:"50px"
+          gap:"50px",
+          width:"950px",
+          marginLeft:"auto",
+          marginRight:"auto",
           }}>
-          <DossierForm/>
+          
+
+          <Button variant="contained" color="error"  sx={{
+            width:"fit-content",
+            
+          }}   onClick={handledossier}>
+            Retour
+           </Button>
+         
         <Box sx={{
           display:"grid",
           alignItems:"center",
           width:"950px",
-          marginLeft:"auto",
-          marginRight:"auto",
+          
           
         }}>
           <Typography variant='h5'>Tout les dossiers des patients</Typography>
