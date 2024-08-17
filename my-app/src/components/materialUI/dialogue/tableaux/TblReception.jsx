@@ -25,6 +25,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import IconButton from '@mui/material/IconButton';
 import CommentIcon from '@mui/icons-material/Comment';
+import DossierForm from '../DossierForm.jsx'
 
 
 
@@ -93,15 +94,26 @@ function TblReception() {
 
 
 
+<Box sx={{
+    position:"relative",
+    top:"80px",
+    margin:"10px",
+    display:"flex",
+    justifyContent:"left"
+}}>
+     
+    <DossierForm/>
+    <ChoixTransferClt/>
+   
 
-
+</Box>
 
 
 <Box sx={{
     display:"flex",
     justifyContent:"space-between",
     position:"relative",
-    top:"50px",
+    top:"100px",
     margin:"10px"
 }}>
     <Box sx={{
@@ -266,7 +278,7 @@ className='inpt_material'
         Enregister
         </Button>
        
-         <ChoixTransferClt/>
+       
       </Box>
       </Box> 
       </Box> 

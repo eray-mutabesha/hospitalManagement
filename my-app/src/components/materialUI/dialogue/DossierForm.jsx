@@ -25,13 +25,13 @@ export default function DossierForm() {
   return (
     <React.Fragment > 
       <Box sx={{
-        width:"950px",
+        width:"100%",
         marginLeft:"auto",
         marginRight:"auto",
         
       }}>
       <Button onClick={handleClickOpen} variant="contained" color="success" >
-        Ajouter
+        creer un dossier
        </Button>
        </Box>
       <Dialog

@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Reception() {
   const navigate=useNavigate()
   const handleclick=()=>{
-    navigate("/dossier")
+    navigate("/reception")
   }
   return (
     
