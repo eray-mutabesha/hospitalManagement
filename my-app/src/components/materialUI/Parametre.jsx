@@ -21,7 +21,7 @@ const handledeconnexion=()=>{
     <PopupState variant="popover" popupId="demo-popup-menu">
       {(popupState) => (
         <React.Fragment>
-          <Button  {...bindTrigger(popupState)} sx={{
+          <nav  {...bindTrigger(popupState)} sx={{
              borderRadius:"10px",
              margin:"20px auto",
              
@@ -34,7 +34,7 @@ const handledeconnexion=()=>{
           }}>
            <FontAwesomeIcon icon={faGear} /> 
            Parametre
-          </Button>
+          </nav>
           <Menu {...bindMenu(popupState)}>
             <MenuItem onClick={handleclick}>Profil</MenuItem>
             <MenuItem onClick={handledeconnexion}>Deconnexion</MenuItem>

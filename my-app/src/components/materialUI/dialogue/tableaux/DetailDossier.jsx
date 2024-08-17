@@ -44,6 +44,11 @@ function DetailDossier() {
  const handledossier=()=>{
    navigate("/dossier")
  }
+ const Detailpatient=()=>{
+  navigate("/detailPatient")
+}
+
+ 
   return (
     <>
       <section  id='all_section'>
@@ -115,47 +120,23 @@ function DetailDossier() {
             <Box sx={{
               display:"grid",
               gridTemplateColumns:"auto auto auto",
-              gap:"20px",
-              margin:"20px "
               
+              justifyContent:"space-around",
+              margin:"40px ",
+              gap:"40px"
             }}>
 
-              <Box >
+             
               <p><strong>Nom : </strong> Katembo mwamijean</p>
-              <p><strong>Nom : </strong> lore</p>
-              <p><strong>Poig : </strong> 80(kg)</p>
-              
-              </Box>
-              <Box >
-              <p><strong>Nom : </strong> Katembo </p>
-              <p><strong>Nom : </strong> lorem</p>
-              <p><strong>Poig : </strong> 80(kg)</p>
-              
-              </Box>
-              <Box >
-              <p><strong>Nom : </strong> Katembo mwamis</p>
-              <p><strong>Nom : </strong> lorem</p>
-              <p><strong>Poig : </strong> 80(kg)</p>
-              
-              </Box>
-              <Box >
-              <p><strong>Nom : </strong> Katembo mwamis </p>
-              <p><strong>Nom : </strong> lorem</p>
-              <p><strong>Poig : </strong> 80(kg)</p>
-              
-              </Box>
-              <Box >
-              <p><strong>Nom : </strong> Katembo mwamis jean</p>
-              <p><strong>Nom : </strong> lorem</p>
+              <p><strong>Adresse : </strong> ndosho/Av.ngungu</p>
+              <p><strong>Age : </strong> 23 ans</p>
               
               
-              </Box>
-              <Box >
-              <p><strong>Nom : </strong> Katembo mwamis jean</p>
-              <p><strong>Nom : </strong> lorem</p>
+              <p><strong>Sexe : </strong>Masculim</p>
+              <p><strong>Poids : </strong> 60 kg </p>
+              <p><strong>Tel: </strong> 0791234442</p>
+            
               
-              
-              </Box>
               
             </Box>
             </Box>
@@ -203,7 +184,7 @@ function DetailDossier() {
               </TableCell>
               <TableCell >Consultation</TableCell>
               <TableCell sx={{color:"green"}}>Terminer</TableCell>
-              <TableCell > <Button variant="contained" color="success">
+              <TableCell > <Button onClick={Detailpatient} variant="contained" color="success">
                Details
              </Button></TableCell>
             </TableRow>
@@ -214,7 +195,7 @@ function DetailDossier() {
               </TableCell>
               <TableCell >Laboratoire</TableCell>
               <TableCell sx={{color:"blue"}}>En cours...</TableCell>
-              <TableCell > <Button variant="contained" color="success">
+              <TableCell > <Button onClick={Detailpatient} variant="contained" color="success">
                Details
              </Button></TableCell>
             </TableRow>
@@ -225,7 +206,7 @@ function DetailDossier() {
               </TableCell>
               <TableCell >Hospitalisation</TableCell>
               <TableCell sx={{color:"red"}}>En attente</TableCell>
-              <TableCell > <Button variant="contained" color="success">
+              <TableCell > <Button onClick={Detailpatient} variant="contained" color="success">
                Details
              </Button></TableCell>
             </TableRow>
@@ -236,7 +217,7 @@ function DetailDossier() {
               </TableCell>
               <TableCell >Embulatoire</TableCell>
               <TableCell sx={{color:"red"}}>En attente</TableCell>
-              <TableCell > <Button variant="contained" color="success">
+              <TableCell > <Button onClick={Detailpatient} variant="contained" color="success">
                Details
              </Button></TableCell>
             </TableRow>
@@ -247,7 +228,8 @@ function DetailDossier() {
               </TableCell>
               <TableCell >Consultation</TableCell>
               <TableCell sx={{color:"red"}}>En attente</TableCell>
-              <TableCell > <Button variant="contained" color="success">
+              <TableCell > 
+                <Button onClick={Detailpatient} variant="contained" color="success" >
                Details
              </Button></TableCell>
             </TableRow>

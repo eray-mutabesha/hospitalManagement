@@ -14,20 +14,10 @@ const navigate=useNavigate()
   }
   return (
        <>
-          <Button onClick={handleclick}  sx={{
-             borderRadius:"10px",
-             margin:"20px auto",
-             
-             width:"160px",
-             boxShadow:"0px 0px 5px 0px rgba(38, 233, 233, 0.644)",
-             backgroundColor:"black",
-             display:"flex",
-             gap:"10px",
-             color:"white"
-          }}>
+          <nav onClick={handleclick} >
            <FontAwesomeIcon icon={faBed} /> 
             Consultation
-          </Button>
+          </nav>
         </>
         
       

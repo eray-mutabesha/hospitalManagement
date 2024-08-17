@@ -18,20 +18,10 @@ const navigate=useNavigate()
     <PopupState variant="popover" popupId="demo-popup-menu">
       {(popupState) => (
         <React.Fragment>
-          <Button  {...bindTrigger(popupState)} sx={{
-             borderRadius:"10px",
-             margin:"20px auto",
-             
-             width:"160px",
-             boxShadow:"0px 0px 5px 0px rgba(38, 233, 233, 0.644)",
-             backgroundColor:"black",
-             display:"flex",
-             gap:"10px",
-             color:"white"
-          }}>
+          <nav  {...bindTrigger(popupState)}>
            <FontAwesomeIcon icon={faTableColumns} /> 
            Dashboard
-          </Button>
+          </nav>
           <Menu {...bindMenu(popupState)}>
             <MenuItem onClick={handleclick}>Dashboard</MenuItem>
           </Menu>

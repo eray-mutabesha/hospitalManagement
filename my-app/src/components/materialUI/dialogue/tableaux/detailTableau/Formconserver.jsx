@@ -144,6 +144,9 @@ export default function DetailConsultation() {
           <MenuItem value={20}>Ambilatoire</MenuItem>
         </Select>
 </FormControl>
+
+
+
 <Typography variant='h6'>Hermatologie :</Typography>
 
 <TextField

@@ -19,6 +19,7 @@ import Profil from './components/Profil.jsx';
 import Deconnexion from './components/Deconnexion.jsx';
 import TblConsultation from './components/materialUI/dialogue/tableaux/TblConsultation.jsx';
 import DetailDossier from './components/materialUI/dialogue/tableaux/DetailDossier.jsx';
+import DetailpatientInfos from './components/materialUI/dialogue/DetailpatientInfos.jsx';
 
 
 
@@ -84,6 +85,10 @@ const routes=createBrowserRouter([
    {
     path:"/detaildossier",
     element:<DetailDossier/>
+   },
+   {
+    path:"/detailPatient",
+    element:<DetailpatientInfos/>
    },
   
 ])

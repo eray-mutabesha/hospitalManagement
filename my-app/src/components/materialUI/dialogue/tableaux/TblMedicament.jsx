@@ -44,7 +44,7 @@ const rows = [
 ];
 
 
-function TblPersonel() {
+function TblMedicament() {
   const navigate = useNavigate()
   const handledetail=()=>{
     navigate("/detaildossier")
@@ -156,7 +156,7 @@ function TblPersonel() {
     </>
   )
 }
-export default TblPersonel
+export default TblMedicament
 
 
 

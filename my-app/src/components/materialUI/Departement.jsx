@@ -19,23 +19,12 @@ export default function Departement() {
     <PopupState variant="popover" popupId="demo-popup-menu">
       {(popupState) => (
         <React.Fragment>
-          <Button  {...bindTrigger(popupState)} sx={{
-             borderRadius:"10px",
-             margin:"20px auto",
-             width:"160px",
-             boxShadow:"0px 0px 5px 0px rgba(38, 233, 233, 0.644)",
-             backgroundColor:"black",
-             display:"flex",
-             gap:"10px",
-             padding:"10px",
-             color:"white",
-             display:"flex",
-          }}>
+          <nav  {...bindTrigger(popupState)}>
            
             <FontAwesomeIcon icon={faHouseChimneyMedical} /> 
              Departements
            
-          </Button>
+          </nav>
           <Menu {...bindMenu(popupState)}>
             <MenuItem ><DepartementForm/></MenuItem>
             <MenuItem onClick={handleclick}>Tout les departements</MenuItem>

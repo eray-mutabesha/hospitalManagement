@@ -166,52 +166,26 @@ function TblChambre() {
              
             
            }}>
-
-            <Box sx={{
+             <Box sx={{
               display:"grid",
               gridTemplateColumns:"auto auto auto",
-              margin:"5px"
-
-             
               
+              justifyContent:"space-around",
+              margin:"20px ",
+              gap:"40px"
             }}>
 
-              <Box >
+             
               <p><strong>Nom : </strong> Katembo mwamijean</p>
-              <p><strong>Nom : </strong> lore</p>
-              <p><strong>Poig : </strong> 80(kg)</p>
-              
-              </Box>
-              <Box >
-              <p><strong>Nom : </strong> Katembo </p>
-              <p><strong>Nom : </strong> lorem</p>
-              <p><strong>Poig : </strong> 80(kg)</p>
-              
-              </Box>
-              <Box >
-              <p><strong>Nom : </strong> Katembo mwamis</p>
-              <p><strong>Nom : </strong> lorem</p>
-              <p><strong>Poig : </strong> 80(kg)</p>
-              
-              </Box>
-              <Box >
-              <p><strong>Nom : </strong> Katembo mwamis </p>
-              <p><strong>Nom : </strong> lorem</p>
-              <p><strong>Poig : </strong> 80(kg)</p>
-              
-              </Box>
-              <Box >
-              <p><strong>Nom : </strong> Katembo mwamis jean</p>
-              <p><strong>Nom : </strong> lorem</p>
+              <p><strong>Adresse : </strong> ndosho/Av.ngungu</p>
+              <p><strong>Age : </strong> 23 ans</p>
               
               
-              </Box>
-              <Box >
-              <p><strong>Nom : </strong> Katembo mwamis jean</p>
-              <p><strong>Nom : </strong> lorem</p>
+              <p><strong>Sexe : </strong>Masculim</p>
+              <p><strong>Poids : </strong> 60 kg </p>
+              <p><strong>Tel: </strong> 0791234442</p>
+            
               
-              
-              </Box>
               
             </Box>
             </Box>
