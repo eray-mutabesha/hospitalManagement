@@ -21,7 +21,7 @@ const handledeconnexion=()=>{
     <PopupState variant="popover" popupId="demo-popup-menu">
       {(popupState) => (
         <React.Fragment>
-          <nav  {...bindTrigger(popupState)} sx={{
+          <nav className='navone' {...bindTrigger(popupState)} sx={{
              borderRadius:"10px",
              margin:"20px auto",
              

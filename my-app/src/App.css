@@ -35,7 +35,7 @@ body {
   
   
 }
-.div_one nav{
+.div_one .navone{
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     border: 1px solid rgba(245, 245, 245, 0.171);
@@ -47,11 +47,23 @@ body {
     display: flex;
     gap: 10px;
 }
-.div_one nav:hover{
+.div_one .navone:hover{
     cursor: pointer;
     background-color: rgba(38, 233, 233, 0.644);
     color: black;
   }
+
+
+
+
+
+  #personaliser{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border: 1px solid rgba(245, 245, 245, 0.171);
+    background-color: rgba(38, 233, 233, 0.644);
+  }
+  
 .section_two{
     width: 100%;
     height: fit-content;

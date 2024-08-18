@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-export default function Ressources() {
+export default function OrganisationClinique() {
 const navigate=useNavigate()
   const medecins=()=>{
    navigate("/tableaumedecins")
@@ -32,14 +32,13 @@ const navigate=useNavigate()
         <React.Fragment>
           <nav  {...bindTrigger(popupState)} className='navone'>
            <FontAwesomeIcon icon={faTableColumns} /> 
-           Ressources
+           Organisations clinique
           </nav>
           <Menu {...bindMenu(popupState)}>
-            <MenuItem onClick={medecins}>Medecins</MenuItem>
-            <MenuItem onClick={Patients}>Patients</MenuItem>
+            <MenuItem onClick={medecins}>Hospitalisation</MenuItem>
+            <MenuItem onClick={Patients}>Ambulatoire</MenuItem>
             <MenuItem onClick={Personnels}>Personnels</MenuItem>
-            <MenuItem onClick={Departement}>Departement</MenuItem>
-            <MenuItem onClick={Stock}>Stock</MenuItem>
+            <MenuItem onClick={Departement}>Urgences</MenuItem>
             
           </Menu>
         </React.Fragment>

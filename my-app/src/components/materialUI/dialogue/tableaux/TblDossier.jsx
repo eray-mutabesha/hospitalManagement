@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Navigate, useNavigate } from 'react-router-dom'
 import Dashboard from '../../Dashboard.jsx'
 import Reception from '../../Reception.jsx'
-import Facturation from '../../Facturation.jsx'
 import Parametre from '../../Parametre.jsx'
 import { Box, Button, Typography } from '@mui/material'
 import { faBell,faCaretDown,faCheck,faXmark,faMagnifyingGlass,faListCheck,faUserDoctor,faStethoscope,faCommentsDollar,faChevronDown} from '@fortawesome/free-solid-svg-icons'
@@ -18,7 +17,9 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Consultation from '../../Consultation.jsx'
 import Ressources from '../../Resources.jsx'
-
+import Laboratoire from '../../Laboratoire.jsx'
+import OrganisationClinique from '../../OrganisationClinique.jsx'
+import Factutation from '../../Facturation.jsx'
 
 
 
@@ -48,12 +49,17 @@ function TblDossier() {
   return (
     <>
       <section  id='all_section'>
-        <div className='div_one'>
+      <div className='div_one'>
+        <div className='logo'>
+            <img src='public/logo-removebg-preview.png' alt='logo hopital'/>
+          </div>
         <div>
-              <Dashboard/>
-              <Reception/>
+              <Dashboard />
+              <nav id='personaliser'> <Reception/></nav>
               <Consultation/>
-              <Facturation/>
+              <Laboratoire/>
+              <OrganisationClinique/>
+              <Factutation/>
               <Ressources/>
               <Parametre/>
           </div>

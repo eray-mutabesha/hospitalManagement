@@ -8,16 +8,16 @@ import { faReceipt } from '@fortawesome/free-solid-svg-icons'
 import FacturationForm from './dialogue/FacturationForm';
 import { useNavigate } from 'react-router-dom';
 
-export default function Facturation() {
+export default function Factutation() {
   const navigate=useNavigate()
   const handleclick=()=>{
-    navigate("/facturation")
+    navigate("/")
   }
   return (
     
-          <nav  onClick={handleclick}>
+          <nav  onClick={handleclick} className='navone'>
            <FontAwesomeIcon icon={faReceipt} /> 
-           Laboratoire
+           Factutation
           </nav>
           
     

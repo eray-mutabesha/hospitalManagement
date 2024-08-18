@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash ,faEye} from '@fortawesome/free-solid-svg-icons'
 import { Navigate, useNavigate } from 'react-router-dom'
 import Dashboard from '../../Dashboard.jsx'
-import Facturation from '../../Facturation.jsx'
 import Parametre from '../../Parametre.jsx'
 import { Box, Button, Typography } from '@mui/material'
 import { faBell,faCaretDown,faCheck,faXmark,faMagnifyingGlass,faListCheck,faUserDoctor,faStethoscope,faCommentsDollar,faChevronDown} from '@fortawesome/free-solid-svg-icons'
@@ -20,7 +19,9 @@ import PersonelForm from '../PersonelForm.jsx'
 import Reception from '../../Reception.jsx'
 import Ressources from '../../Resources.jsx'
 import Consultation from '../../Consultation.jsx'
-
+import Laboratoire from '../../Laboratoire.jsx'
+import OrganisationClinique from '../../OrganisationClinique.jsx'
+import Factutation from '../../Facturation.jsx'
 
 
 
@@ -48,13 +49,18 @@ function TblPersonel() {
   return (
     <>
       <section  id='all_section'>
-        <div className='div_one'>
+      <div className='div_one'>
+        <div className='logo'>
+            <img src='public/logo-removebg-preview.png' alt='logo hopital'/>
+          </div>
         <div>
-              <Dashboard/>
+              <Dashboard />
               <Reception/>
               <Consultation/>
-              <Facturation/>
-              <Ressources/>
+              <Laboratoire/>
+              <OrganisationClinique/>
+              <Factutation/>
+              <nav id='personaliser'> <Ressources/></nav>
               <Parametre/>
           </div>
         </div>

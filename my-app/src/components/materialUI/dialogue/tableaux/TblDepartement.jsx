@@ -4,11 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
 import Dashboard from '../../Dashboard.jsx'
-import Facturation from '../../Facturation.jsx'
 import Parametre from '../../Parametre.jsx'
 import Reception from '../../Reception.jsx'
 import Consultation from '../../Consultation.jsx'
 import Ressources from '../../Resources.jsx'
+import Laboratoire from '../../Laboratoire.jsx'
+
+import OrganisationClinique from '../../OrganisationClinique.jsx'
+import Factutation from '../../Facturation.jsx'
 
 
 
@@ -18,13 +21,18 @@ function TblDepartement() {
   return (
     <>
       <section id='all_section'>
-        <div className='div_one'>
+      <div className='div_one'>
+        <div className='logo'>
+            <img src='public/logo-removebg-preview.png' alt='logo hopital'/>
+          </div>
         <div>
-              <Dashboard/>
+              <Dashboard />
               <Reception/>
               <Consultation/>
-              <Facturation/>
-              <Ressources/>
+              <Laboratoire/>
+              <OrganisationClinique/>
+              <Factutation/>
+              <nav id='personaliser'> <Ressources/></nav>
               <Parametre/>
           </div>
         </div>

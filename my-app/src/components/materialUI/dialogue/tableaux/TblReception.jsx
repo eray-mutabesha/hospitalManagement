@@ -5,7 +5,6 @@ import { faTrash ,faEye} from '@fortawesome/free-solid-svg-icons'
 import { Navigate, useNavigate } from 'react-router-dom'
 import Dashboard from '../../Dashboard.jsx'
 import Reception from '../../Reception.jsx'
-import Facturation from '../../Facturation.jsx'
 import Parametre from '../../Parametre.jsx'
 import { faBell,faCaretDown,faCheck,faXmark,faMagnifyingGlass,faListCheck,faUserDoctor,faStethoscope,faCommentsDollar,faChevronDown} from '@fortawesome/free-solid-svg-icons'
 import { Box ,TextField, Typography,InputLabel,Select,MenuItem,FormControl,Button}  from '@mui/material';
@@ -23,8 +22,10 @@ import CommentIcon from '@mui/icons-material/Comment';
 import DossierForm from '../DossierForm.jsx'
 import DossierListe from '../../DossierListe.jsx'
 import Ressources from '../../Resources.jsx'
+import Laboratoire from '../../Laboratoire.jsx'
 
-
+import OrganisationClinique from '../../OrganisationClinique.jsx'
+import Factutation from '../../Facturation.jsx'
 
 
 
@@ -55,11 +56,16 @@ function TblReception() {
     <>
       <section  id='all_section'>
         <div className='div_one'>
+        <div className='logo'>
+            <img src='public/logo-removebg-preview.png' alt='logo hopital'/>
+          </div>
         <div>
-              <Dashboard/>
-              <Reception/>
+              <Dashboard />
+              <nav id='personaliser'> <Reception/></nav>
               <Consultation/>
-              <Facturation/>
+              <Laboratoire/>
+              <OrganisationClinique/>
+              <Factutation/>
               <Ressources/>
               <Parametre/>
           </div>

@@ -14,7 +14,7 @@ const navigate=useNavigate()
   }
   return (
        <>
-          <nav onClick={handleclick} >
+          <nav onClick={handleclick} className='navone'>
            <FontAwesomeIcon icon={faBed} /> 
             Consultation
           </nav>

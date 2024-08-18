@@ -15,18 +15,10 @@ const navigate=useNavigate()
    navigate("/")
   }
   return (
-    <PopupState variant="popover" popupId="demo-popup-menu">
-      {(popupState) => (
-        <React.Fragment>
-          <nav  {...bindTrigger(popupState)}>
+          <nav onClick={handleclick} className='navone'>
            <FontAwesomeIcon icon={faTableColumns} /> 
            Dashboard
           </nav>
-          <Menu {...bindMenu(popupState)}>
-            <MenuItem onClick={handleclick}>Dashboard</MenuItem>
-          </Menu>
-        </React.Fragment>
-      )}
-    </PopupState>
+  
   );
 }

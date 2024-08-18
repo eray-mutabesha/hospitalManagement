@@ -3,7 +3,6 @@ import './App.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell,faCaretDown,faCheck,faXmark,faMagnifyingGlass,faListCheck,faUserDoctor,faStethoscope,faCommentsDollar,faChevronDown} from '@fortawesome/free-solid-svg-icons'
 
-import Facturation from './components/materialUI/Facturation.jsx'
 import Parametre from './components/materialUI/Parametre.jsx'
 import Dashboard from './components/materialUI/Dashboard.jsx'
 import { useNavigate } from 'react-router-dom'
@@ -22,6 +21,9 @@ import Paper from '@mui/material/Paper';
 import Ressources from './components/materialUI/Resources.jsx'
 import Reception from './components/materialUI/Reception.jsx'
 import Consultation from './components/materialUI/Consultation.jsx'
+import Laboratoire from './components/materialUI/Laboratoire.jsx'
+import OrganisationClinique from './components/materialUI/OrganisationClinique.jsx'
+import Factutation from './components/materialUI/Facturation.jsx'
 
 
 
@@ -54,10 +56,12 @@ function App() {
             <img src='public/logo-removebg-preview.png' alt='logo hopital'/>
           </div>
         <div>
-              <Dashboard/>
+              <nav id='personaliser'><Dashboard /></nav>
               <Reception/>
               <Consultation/>
-              <Facturation/>
+              <Laboratoire/>
+              <OrganisationClinique/>
+              <Factutation/>
               <Ressources/>
               <Parametre/>
           </div>

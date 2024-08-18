@@ -2,7 +2,6 @@ import React from 'react'
 import './tbl.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Dashboard from '../../Dashboard.jsx'
-import Facturation from '../../Facturation.jsx'
 import Parametre from '../../Parametre.jsx'
 import { Box, Button, Typography,TextField, Stack } from '@mui/material'
 import { faBell,faCaretDown,faCheck,faXmark,faMagnifyingGlass,faListCheck,faUserDoctor,faStethoscope,faCommentsDollar,faChevronDown} from '@fortawesome/free-solid-svg-icons'
@@ -19,11 +18,13 @@ import { useForm} from "react-hook-form"
 import Consultation from '../../Consultation.jsx'
 import Reception from '../../Reception.jsx'
 import Ressources from '../../Resources.jsx'
+import Laboratoire from '../../Laboratoire.jsx'
+import OrganisationClinique from '../../OrganisationClinique.jsx'
+import Factutation from '../../Facturation.jsx'
 
 
 
-
-function TblChambre() {
+function TblLaboratoire() {
   const { register, handleSubmit,formState:{errors} } = useForm();
   const [checked, setChecked] = React.useState([1]);
 
@@ -42,12 +43,17 @@ function TblChambre() {
   return (
     <>
       <section  id='all_section'>
-        <div className='div_one'>
+      <div className='div_one'>
+        <div className='logo'>
+            <img src='public/logo-removebg-preview.png' alt='logo hopital'/>
+          </div>
         <div>
-              <Dashboard/>
-              <Reception/>
+              <Dashboard />
+             <Reception/>
               <Consultation/>
-              <Facturation/>
+              <nav id='personaliser'><Laboratoire/></nav>
+              <OrganisationClinique/>
+              <Factutation/>
               <Ressources/>
               <Parametre/>
           </div>
@@ -558,4 +564,4 @@ className='inpt_material'
 
 
 
-export default TblChambre
+export default TblLaboratoire

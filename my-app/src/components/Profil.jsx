@@ -1,9 +1,11 @@
 import React from 'react'
 import './css_files/profil.css'
-import Facturation from './materialUI/Facturation'
 import Parametre from './materialUI/Parametre'
 import Dashboard from './materialUI/Dashboard'
 import Ressources from './materialUI/Resources'
+import Laboratoire from './materialUI/Laboratoire'
+import OrganisationClinique from './materialUI/OrganisationClinique'
+import Factutation from './materialUI/Facturation'
 
 
 function Profil() {
@@ -11,11 +13,13 @@ function Profil() {
     <>
     <div className='profil_flex'>
     <div className='div_one'>
-    <div>
-              <Dashboard/>
+         <div>
+              <nav id='personaliser'><Dashboard /></nav>
               <Reception/>
               <Consultation/>
-              <Facturation/>
+              <Laboratoire/>
+              <OrganisationClinique/>
+              <Factutation/>
               <Ressources/>
               <Parametre/>
           </div>
