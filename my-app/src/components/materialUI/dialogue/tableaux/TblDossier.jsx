@@ -1,17 +1,11 @@
 import React from 'react'
 import './tbl.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash ,faEye} from '@fortawesome/free-solid-svg-icons'
 import { Navigate, useNavigate } from 'react-router-dom'
-import Medecins from '../../Medecins.jsx'
 import Dashboard from '../../Dashboard.jsx'
-import Departement from '../../Departement.jsx'
 import Reception from '../../Reception.jsx'
 import Facturation from '../../Facturation.jsx'
-import Medicament from '../../Medicament.jsx'
 import Parametre from '../../Parametre.jsx'
-import Patients from '../../Patients.jsx'
-import Personnel from '../../Personnel.jsx'
 import { Box, Button, Typography } from '@mui/material'
 import { faBell,faCaretDown,faCheck,faXmark,faMagnifyingGlass,faListCheck,faUserDoctor,faStethoscope,faCommentsDollar,faChevronDown} from '@fortawesome/free-solid-svg-icons'
 
@@ -22,8 +16,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import DossierForm from '../DossierForm.jsx'
 import Consultation from '../../Consultation.jsx'
+import Ressources from '../../Resources.jsx'
 
 
 
@@ -57,16 +51,12 @@ function TblDossier() {
         <div className='div_one'>
         <div>
               <Dashboard/>
-              <Medicament/>
               <Reception/>
-              <Medecins/>
-              <Patients/>
               <Consultation/>
-              <Personnel/>
               <Facturation/>
-              <Departement/>
+              <Ressources/>
               <Parametre/>
-            </div>
+          </div>
         </div>
         <div className='div_two' style={{ background:"rgba(231, 230, 230, 0.301)",}}> 
         <div className='header'>

@@ -3,16 +3,12 @@ import './tbl.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
-import Medecins from '../../Medecins.jsx'
 import Dashboard from '../../Dashboard.jsx'
-import Departement from '../../Departement.jsx'
 import Facturation from '../../Facturation.jsx'
-import Medicament from '../../Medicament.jsx'
 import Parametre from '../../Parametre.jsx'
-import Patients from '../../Patients.jsx'
-import Personnel from '../../Personnel.jsx'
 import Reception from '../../Reception.jsx'
 import Consultation from '../../Consultation.jsx'
+import Ressources from '../../Resources.jsx'
 
 
 
@@ -25,16 +21,12 @@ function TblDepartement() {
         <div className='div_one'>
         <div>
               <Dashboard/>
-              <Medicament/>
               <Reception/>
-              <Medecins/>
-              <Patients/>
               <Consultation/>
-              <Personnel/>
               <Facturation/>
-              <Departement/>
+              <Ressources/>
               <Parametre/>
-            </div>
+          </div>
         </div>
         <div className='div_two'> 
           <div className='h1_dash'>

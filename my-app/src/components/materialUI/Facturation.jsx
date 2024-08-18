@@ -17,7 +17,7 @@ export default function Facturation() {
     
           <nav  onClick={handleclick}>
            <FontAwesomeIcon icon={faReceipt} /> 
-           Facturation
+           Laboratoire
           </nav>
           
     

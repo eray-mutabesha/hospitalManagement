@@ -3,16 +3,9 @@ import './tbl.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash ,faEye} from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
-import Medecins from '../../Medecins.jsx'
-import Chambres from '../../Consultation.jsx'
 import Dashboard from '../../Dashboard.jsx'
-import Departement from '../../Departement.jsx'
-import Dossier from '../../Reception.jsx'
 import Facturation from '../../Facturation.jsx'
-import Medicament from '../../Medicament.jsx'
 import Parametre from '../../Parametre.jsx'
-import Patients from '../../Patients.jsx'
-import Personnel from '../../Personnel.jsx'
 import { Box, Button, Typography } from '@mui/material'
 import { faBell,faCaretDown,faCheck,faXmark,faMagnifyingGlass,faListCheck,faUserDoctor,faStethoscope,faCommentsDollar,faChevronDown} from '@fortawesome/free-solid-svg-icons'
 
@@ -23,6 +16,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Ressources from '../../Resources.jsx'
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -55,16 +49,12 @@ function DetailDossier() {
         <div className='div_one'>
         <div>
               <Dashboard/>
-              <Medicament/>
-              <Dossier/>
-              <Medecins/>
-              <Patients/>
-              <Chambres/>
-              <Personnel/>
+              <Reception/>
+              <Consultation/>
               <Facturation/>
-              <Departement/>
+              <Ressources/>
               <Parametre/>
-            </div>
+          </div>
         </div>
         <div className='div_two' style={{ background:"rgba(231, 230, 230, 0.301)",}}> 
         <div className='header'>

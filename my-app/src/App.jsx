@@ -2,14 +2,8 @@
 import './App.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell,faCaretDown,faCheck,faXmark,faMagnifyingGlass,faListCheck,faUserDoctor,faStethoscope,faCommentsDollar,faChevronDown} from '@fortawesome/free-solid-svg-icons'
-import Medecins from './components/materialUI/Medecins.jsx'
-import Patients from './components/materialUI/Patients.jsx'
-import Dossier from './components/materialUI/Reception.jsx'
-import Medicament from './components/materialUI/Medicament.jsx'
-import Departement from './components/materialUI/Departement.jsx'
-import Chambres from './components/materialUI/Consultation.jsx'
+
 import Facturation from './components/materialUI/Facturation.jsx'
-import Personnel from './components/materialUI/Personnel.jsx'
 import Parametre from './components/materialUI/Parametre.jsx'
 import Dashboard from './components/materialUI/Dashboard.jsx'
 import { useNavigate } from 'react-router-dom'
@@ -25,6 +19,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Ressources from './components/materialUI/Resources.jsx'
+import Reception from './components/materialUI/Reception.jsx'
+import Consultation from './components/materialUI/Consultation.jsx'
 
 
 
@@ -53,16 +50,15 @@ function App() {
     <>
       <section id='all_section'>
         <div className='div_one'>
+          <div className='logo'>
+            <img src='public/logo-removebg-preview.png' alt='logo hopital'/>
+          </div>
         <div>
               <Dashboard/>
-              <Medicament/>
-              <Dossier/>
-              <Medecins/>
-              <Patients/>
-              <Chambres/>
-              <Personnel/>
+              <Reception/>
+              <Consultation/>
               <Facturation/>
-              <Departement/>
+              <Ressources/>
               <Parametre/>
           </div>
 

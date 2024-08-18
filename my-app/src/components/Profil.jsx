@@ -1,15 +1,9 @@
 import React from 'react'
 import './css_files/profil.css'
-import Medecins from './materialUI/Medecins'
-import Patients from './materialUI/Patients'
-import Dossier from './materialUI/Reception'
-import Medicament from './materialUI/Medicament'
-import Departement from './materialUI/Departement'
-import Chambres from './materialUI/Consultation'
 import Facturation from './materialUI/Facturation'
-import Personnel from './materialUI/Personnel'
 import Parametre from './materialUI/Parametre'
 import Dashboard from './materialUI/Dashboard'
+import Ressources from './materialUI/Resources'
 
 
 function Profil() {
@@ -17,18 +11,14 @@ function Profil() {
     <>
     <div className='profil_flex'>
     <div className='div_one'>
-            <div>
+    <div>
               <Dashboard/>
-              <Dossier/>
-              <Medecins/>
-              <Patients/>
-              <Chambres/>
-              <Personnel/>
-              <Medicament/>
+              <Reception/>
+              <Consultation/>
               <Facturation/>
-              <Departement/>
+              <Ressources/>
               <Parametre/>
-            </div>
+          </div>
         </div>
     <div id='section_profil'>
       <div>
