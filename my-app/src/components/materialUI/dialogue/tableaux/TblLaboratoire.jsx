@@ -89,7 +89,7 @@ function TblLaboratoire() {
       <Box sx={{
       display:"flex",
       marginTop:"80px",
-      justifyContent:"space-around",
+      justifyContent:"space-evenly",
       
 
     }}>    
@@ -150,7 +150,8 @@ function TblLaboratoire() {
  
           <Box  sx={{
             display:"flex",
-            justifyContent:"space-between"
+            justifyContent:"space-between",
+            gap:"20px"
           }}>
           
           <Box sx={{
@@ -549,6 +550,371 @@ className='inpt_material'
  {...register("FI", { required: true })}/>
 
 </Box>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<Typography variant='h6'>Bacteriologie :</Typography>
+<Box sx={{
+  display:"grid",
+  gridTemplateColumns:"auto  auto",
+  gap:"10px"
+}}>
+
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="FV Gram" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("FV_Gram", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="FU Gram" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("FU_Gram", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="LCR Gram" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("Lcr_gram", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Sediment urinaire Gram" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("Sediment_urinaire_Gram", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Spermogramme" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("spermogramme", { required: true })}/>
+
+</Box>
+
+
+
+
+<Typography variant='h6'>Biochimie :</Typography>
+<Box sx={{
+  display:"grid",
+  gridTemplateColumns:"auto  auto",
+  gap:"10px"
+}}>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Glycemie" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("Glycemie", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Uree sanguine" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("Uree_sanguine", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Creatine sanguine" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("Creatine_sanguine", { required: true })}/>
+
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Creatine sanguine" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("Creatine_sanguine", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="SGOT(AST)" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("SGOT", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="SGPT(ALT)" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("SGPT(ALT)", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Bil Tot" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("Bil_Tot", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Bil Dir" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("Bil_dir", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Bil Dir" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("Bil_dir", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Bil ind" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("Bil_ind", { required: true })}/>
+
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Phosphatase alcaline" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("Phosphatase_alcaline", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Phosphatase acide" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("Phosphatase_acide", { required: true })}/>
+
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Glucosurie" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("Glucosurie", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Albuminirie" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("Albuminirie", { required: true })}/>
+
+</Box>
+
+
+
+
+
+
+
+
+
+
+<Typography variant='h6'>Sero-immunologie :</Typography>
+<Box sx={{
+  display:"grid",
+  gridTemplateColumns:"auto  auto",
+  gap:"10px"
+}}>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Test WIDAL TO" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("Test_WIDAL_TO", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="TH" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("TH", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Facteurs Rhumatoides" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("Facteurs_Rhumatoides", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="ASLO" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("ASLO", { required: true })}/>
+
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Hbs Ag" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("Hbs_Ag", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Hbs Ag ALSO" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("Hbs_Ag_ALSO", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Test VDRL ou RPR" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("Test_VDRL_ou_RPR", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Test VIH" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("Test_VIH", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Test de Grossesse" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("Test_de_Grossesse", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="CRP" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("CRP", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Hapatite virale B" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("Hapatite_virale_B", { required: true })}/>
+
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="H.Pylori" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("H.Pylori", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Autre" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("Autre", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Date" 
+ variant="filled" 
+ type="date"
+ size="small"
+ {...register("date", { required: true })}/>
+
+</Box>
+
+
+
+<Button   sx={{
+  width:"fit-content",
+  marginTop:"10px",
+}}variant="contained" color="success" >
+           Enregistrer
+</Button>
+
+
 
 
      </form>

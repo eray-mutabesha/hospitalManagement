@@ -128,7 +128,7 @@ className='inpt_material'
           <Button variant="contained" color="error" onClick={handleClose}>Annuler</Button>
           <Button  variant="contained" color="success" >
            Enregistrer
-       </Button>
+          </Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>

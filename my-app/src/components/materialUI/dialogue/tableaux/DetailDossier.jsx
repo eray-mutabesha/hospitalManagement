@@ -7,7 +7,6 @@ import Dashboard from '../../Dashboard.jsx'
 import Parametre from '../../Parametre.jsx'
 import { Box, Button, Typography } from '@mui/material'
 import { faBell,faCaretDown,faCheck,faXmark,faMagnifyingGlass,faListCheck,faUserDoctor,faStethoscope,faCommentsDollar,faChevronDown} from '@fortawesome/free-solid-svg-icons'
-
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -15,12 +14,12 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Ressources from '../../Resources.jsx'
-import Reception from '../../Reception.jsx'
-import Consultation from '../../Consultation.jsx'
-import Laboratoire from '../../Laboratoire.jsx'
-import OrganisationClinique from '../../OrganisationClinique.jsx'
-import Factutation from '../../Facturation.jsx'
+import Ressources from '../../Resources.jsx';
+import Reception from '../../Reception.jsx';
+import Consultation from '../../Consultation.jsx';
+import Laboratoire from '../../Laboratoire.jsx';
+import OrganisationClinique from '../../OrganisationClinique.jsx';
+import Factutation from '../../Facturation.jsx';
 
 
 function createData(name, calories, fat, carbs, protein) {
