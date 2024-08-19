@@ -12,19 +12,21 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import IconButton from '@mui/material/IconButton';
 import CommentIcon from '@mui/icons-material/Comment';
-
 import SaveIcon from '@mui/icons-material/Save';
-import ChoixTransferClt from '../../ChoixTransferClt.jsx'
-import Reception from '../../Reception.jsx'
+import { InputLabel,Select,MenuItem,FormControl}  from '@mui/material';
+import { useForm} from "react-hook-form"
 import Consultation from '../../Consultation.jsx'
+import Reception from '../../Reception.jsx'
 import Ressources from '../../Resources.jsx'
 import Laboratoire from '../../Laboratoire.jsx'
 import OrganisationClinique from '../../OrganisationClinique.jsx'
 import Factutation from '../../Facturation.jsx'
+import ChoixTransferClt from '../../ChoixTransferClt.jsx'
 
 
 
-function TblChambre() {
+function TblAmbulatoire() {
+  const { register, handleSubmit,formState:{errors} } = useForm();
   const [checked, setChecked] = React.useState([1]);
 
   const handleToggle = (value) => () => {
@@ -49,15 +51,19 @@ function TblChambre() {
         <div>
               <Dashboard />
              <Reception/>
-             <nav id='personaliser'> <Consultation/></nav>
+              <Consultation/>
               <Laboratoire/>
-              <OrganisationClinique/>
+              <nav id='personaliser'><OrganisationClinique/></nav>
               <Factutation/>
               <Ressources/>
               <Parametre/>
           </div>
         </div>
-        <div className='div_two' style={{ background:"rgba(231, 230, 230, 0.301)",}}> 
+        <div className='div_two' style={{
+           background:"rgba(231, 230, 230, 0.301)",
+           height:"fit-content",
+      
+      }}> 
         <div className='header'>
               <div className='recherch'>
                <FontAwesomeIcon icon={faMagnifyingGlass} /> 
@@ -98,7 +104,7 @@ function TblChambre() {
       <Box sx={{
       display:"flex",
       marginTop:"100px",
-      justifyContent:"space-around",
+      justifyContent:"space-evenly",
       
 
     }}>    
@@ -107,7 +113,8 @@ function TblChambre() {
           
           
           width:"250px",
-           border: "1px solid rgba(0, 0, 0, 0.103)",
+          height:"fit-content",
+           border: "1px solid rgb(201, 199, 199)",
           display:"flex",
           justifyContent:"center",
           borderRadius:"10px",
@@ -158,14 +165,15 @@ function TblChambre() {
  
           <Box  sx={{
             display:"flex",
-            justifyContent:"space-between"
+            justifyContent:"space-between",
+            gap:"20px"
           }}>
           
           <Box sx={{
      
              width:"500px",
              height:"150px",
-             border:"1px solid rgba(0, 0, 0, 0.103)",
+             border:"1px solid rgb(201, 199, 199)",
             background:"white",
              borderRadius:"10px",
              display:"grid",
@@ -225,69 +233,145 @@ function TblChambre() {
 
 
 
-    <Box sx={{
-      
-      display:"flex",
-       border: "1px solid rgba(0, 0, 0, 0.103)",
-      background:"white",
-      justifyContent:"center",
-      borderRadius:"10px",
-      width:"700px",
-      height:"35 0px",
-      marginTop:"20px"
-    }}>
 
 
-      
-     <form action="" style={{width:"100%"}}>
-      <Box sx={{
-      display:"flex",
-      gap:"20px",
-      margin:"10px",
-      justifyContent:"space-between"
-      
-     }}>
-     <Box>
-     <Typography variant='h6'>  TRAITEMENT</Typography>
+
+
+
+   
+
+<form className='medecin_fom'  style={{
+    display:"flex",
+    width:"700px"
+}}>
+
+ <Box sx={{
+    display:"grid",
+    width:"50%"
+ }}>   
+<Typography>Fiche d'Evolution</Typography>
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Nom" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("nom", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Adresse" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("Adresse", { required: true })}/>
+
+        
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Age" 
+ variant="filled" 
+ size="small"
+ type='number'
+ {...register("age", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Sexe" 
+ variant="filled" 
+ size="small"
+ type='email'
+ {...register("Sexe", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Poigs" 
+ variant="filled" 
+ size="small"
+ type='email'
+ {...register("Diagnostic_de_presomption", { required: true })}/>
+
+
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Telephone" 
+ variant="filled" 
+ size="small"
+ type='email'
+ {...register("Telephone", { required: true })}/>
+
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="To" 
+ variant="filled" 
+ size="small"
+ type='email'
+ {...register("Tot", { required: true })}/>
+
+
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="TA" 
+ variant="filled" 
+ size="small"
+ type='email'
+ {...register("TA", { required: true })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Date" 
+ variant="filled" 
+ size="small"
+ type='email'
+ {...register("Date ", { required: true })}/>
+  
+</Box>
+
+ <Box sx={{
+    display:"grid",
+    width:"50%"
+ }}>
+
+<Typography variant='h6'>  TRAITEMENT</Typography>
      <TextField
-          sx={{width:"330px"
-               }}
+         
           id="filled-multiline-static"
           label="Traitement"
           multiline
           rows={10}
           variant="filled"
         />
-      </Box>  
-        <Box>
+      
         <Typography variant='h6'>OBSERVATION</Typography>
      <TextField
-          sx={{width:"330px"
-               }}
+          
           id="filled-multiline-static"
           label="Observation"
           multiline
           rows={10}
           variant="filled"
         />
-        <Box sx={{
-          display:"flex",
-          marginTop:"10px",
-          justifyContent:"end"
-          
-        }}>
-        <Button  variant="contained" color="success" endIcon={<SaveIcon />}>
-        Enregister
-        </Button>
-       
-       
-      
-       </Box>
-      </Box>  
-        </Box>
-        
-     </form>
-    </Box>
+<Button variant='contained' color="success">
+  Enregistrer
+ </Button>
+
+</Box>
+ 
+</form>
+
+
     </Box>
     </Box> 
         </div>
@@ -299,4 +383,4 @@ function TblChambre() {
 
 
 
-export default TblChambre
+export default TblAmbulatoire

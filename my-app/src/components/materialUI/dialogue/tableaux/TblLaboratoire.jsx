@@ -21,6 +21,7 @@ import Ressources from '../../Resources.jsx'
 import Laboratoire from '../../Laboratoire.jsx'
 import OrganisationClinique from '../../OrganisationClinique.jsx'
 import Factutation from '../../Facturation.jsx'
+import ChoixTransferClt from '../../ChoixTransferClt.jsx'
 
 
 
@@ -84,11 +85,25 @@ function TblLaboratoire() {
 
 
 
+           <Box sx={{
+    position:"relative",
+    top:"80px",
+    margin:"10px",
+    display:"grid",
+    justifyContent:"left",
+    gap:"20px",
+    left:"40px",
+    width:"fit-content"
+}}>
+     <Typography variant='h5'>Laboratoire</Typography>
+    <ChoixTransferClt/>
+   
 
+</Box>
       
       <Box sx={{
       display:"flex",
-      marginTop:"80px",
+      marginTop:"100px",
       justifyContent:"space-evenly",
       
 

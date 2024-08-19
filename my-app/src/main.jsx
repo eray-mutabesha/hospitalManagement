@@ -20,6 +20,7 @@ import DetailpatientInfos from './components/materialUI/dialogue/DetailpatientIn
 import TblReception from './components/materialUI/dialogue/tableaux/TblReception.jsx';
 import TblLaboratoire from './components/materialUI/dialogue/tableaux/TblLaboratoire.jsx';
 import TblHospitalisation from './components/materialUI/dialogue/tableaux/TblHospitalisation.jsx';
+import TblAmbulatoire from './components/materialUI/dialogue/tableaux/TblAmbulatoire.jsx';
 
 
 
@@ -93,6 +94,10 @@ const routes=createBrowserRouter([
    {
     path:"/hospitalisation",
     element:<TblHospitalisation/>
+   },
+   {
+    path:"/ambulatoire",
+    element:<TblAmbulatoire/>
    },
 ])
 

@@ -99,13 +99,13 @@ function TblReception() {
     position:"relative",
     top:"80px",
     margin:"10px",
-    display:"flex",
+    display:"grid",
     justifyContent:"left",
     gap:"20px",
     left:"40px",
     width:"fit-content"
 }}>
-     
+     <Typography variant='h5'>Hospitalisation</Typography>
     <ChoixTransferClt/>
    
 

@@ -11,21 +11,14 @@ import { useNavigate } from 'react-router-dom';
 
 export default function OrganisationClinique() {
 const navigate=useNavigate()
-  const medecins=()=>{
-   navigate("/tableaumedecins")
+  const hospitalisation=()=>{
+   navigate("/hospitalisation")
   }
-  const Patients=()=>{
-    navigate("/tableaupatient")
+ 
+   const ambulatoire=()=>{
+    navigate("/ambulatoire")
    }
-   const Personnels=()=>{
-    navigate("/personel")
-   }
-   const Departement=()=>{
-    navigate("/departements")
-   }
-   const Stock=()=>{
-    navigate("/medicament")
-   }
+   
   return (
     <PopupState variant="popover" popupId="demo-popup-menu">
       {(popupState) => (
@@ -35,10 +28,9 @@ const navigate=useNavigate()
            Organisations clinique
           </nav>
           <Menu {...bindMenu(popupState)}>
-            <MenuItem onClick={medecins}>Hospitalisation</MenuItem>
-            <MenuItem onClick={Patients}>Ambulatoire</MenuItem>
-            <MenuItem onClick={Personnels}>Personnels</MenuItem>
-            <MenuItem onClick={Departement}>Urgences</MenuItem>
+            <MenuItem onClick={hospitalisation}>Hospitalisation</MenuItem>
+            <MenuItem onClick={ambulatoire}>Ambulatoire</MenuItem>
+            <MenuItem onClick={hospitalisation}>Urgences</MenuItem>
             
           </Menu>
         </React.Fragment>
