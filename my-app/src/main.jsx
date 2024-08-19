@@ -19,6 +19,7 @@ import DetailDossier from './components/materialUI/dialogue/tableaux/DetailDossi
 import DetailpatientInfos from './components/materialUI/dialogue/DetailpatientInfos.jsx';
 import TblReception from './components/materialUI/dialogue/tableaux/TblReception.jsx';
 import TblLaboratoire from './components/materialUI/dialogue/tableaux/TblLaboratoire.jsx';
+import TblHospitalisation from './components/materialUI/dialogue/tableaux/TblHospitalisation.jsx';
 
 
 
@@ -89,7 +90,10 @@ const routes=createBrowserRouter([
     path:"/reception",
     element:<TblReception/>
    },
-  
+   {
+    path:"/hospitalisation",
+    element:<TblHospitalisation/>
+   },
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
