@@ -92,20 +92,20 @@ function TblReception() {
 
 
 
-
+<Typography mt={10} variant='h5'>Reception</Typography>
 <Box sx={{
     position:"relative",
-    top:"80px",
+    top:"10px",
     margin:"10px",
     display:"flex",
     justifyContent:"left",
     gap:"20px"
 }}>
      
+
     <DossierListe/>
     <ChoixTransferClt/>
    
-
 </Box>
 
 
@@ -113,7 +113,7 @@ function TblReception() {
     display:"flex",
     justifyContent:"space-between",
     position:"relative",
-    top:"100px",
+    top:"10px",
     margin:"10px"
 }}>
     <Box sx={{

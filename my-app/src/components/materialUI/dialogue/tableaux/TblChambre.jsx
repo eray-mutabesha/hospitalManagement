@@ -89,7 +89,7 @@ function TblChambre() {
     width:"fit-content"
 }}>
     
-      <Typography variant='h5'> Patient Ambulatoire</Typography>
+      <Typography variant='h5'> Consultation</Typography>
       <ChoixTransferClt/>
    
 
