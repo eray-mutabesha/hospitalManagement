@@ -93,9 +93,10 @@ function Profil() {
 
             <Box  sx={{
               display:"flex",
-              gap:"20px",
+              justifyContent:"space-around",
+              
               border:"1px solid rgb(201, 199, 199)",
-              width:"500px",
+              width:"600px",
               padding:"10px",
               borderRadius:"10px",
               background:"white"
@@ -104,26 +105,32 @@ function Profil() {
 
              <Box sx={{
               width:"250px",
-              height:"300px",
+              height:"200px",
               backgroundImage:"url('moderate-aquamarine-dark-gradient-background_608506-1382.avif')",
               display:"flex",
               justifyContent:"center",
               alignItems:"center",
              }}>
               <img src='public/profilphoto.png' style={{
-                width:"180px",
-                height:"180px",
+                width:"150px",
+                height:"150px",
                 borderRadius:"50%"
               }}/>
               </Box> 
              <Box sx={{
-              display:"grid"
+              display:"grid",
+              gap:"20px",
+              height:"fit-content"
              }}>
 
 
               <Box sx={{
                 display:"flex",
-                 justifyContent:"space-between"
+                border:"1px solid rgb(201, 199, 199)",
+                 justifyContent:"space-between",
+                 heigth:"fit-content",
+                 padding:"5px",
+                 borderRadius:"5px"
               }}><p><strong>Nom : </strong>jonathan</p>
               <img src='public/editPhoto-removebg-preview.png' style={{
                 width:"20px",
@@ -134,7 +141,11 @@ function Profil() {
 
               <Box sx={{
                 display:"flex",
-                 justifyContent:"space-between"
+                border:"1px solid rgb(201, 199, 199)",
+                 justifyContent:"space-between",
+                 heigth:"fit-content",
+                 padding:"5px",
+                 borderRadius:"5px"
               }}><p><strong>Post-nom : </strong>kasongo</p>
               <img src='public/editPhoto-removebg-preview.png' style={{
                 width:"20px",
@@ -144,7 +155,11 @@ function Profil() {
 
               <Box sx={{
                 display:"flex",
-                 justifyContent:"space-between"
+                border:"1px solid rgb(201, 199, 199)",
+                 justifyContent:"space-between",
+                 heigth:"fit-content",
+                 padding:"5px",
+                 borderRadius:"5px"
               }}><p><strong>Fonction : </strong>docteur</p>
               <img src='public/editPhoto-removebg-preview.png' style={{
                 width:"20px",
@@ -155,7 +170,11 @@ function Profil() {
 
               <Box sx={{
                 display:"flex",
-                 justifyContent:"space-between"
+                border:"1px solid rgb(201, 199, 199)",
+                 justifyContent:"space-between",
+                 heigth:"fit-content",
+                 padding:"5px",
+                 borderRadius:"5px"
               }}><p><strong>Adresse : </strong>goma/Q.kyeshero/AV.mageni</p>
               <img src='public/editPhoto-removebg-preview.png' style={{
                 width:"20px",
@@ -165,7 +184,11 @@ function Profil() {
 
               <Box sx={{
                 display:"flex",
-                 justifyContent:"space-between"
+                border:"1px solid rgb(201, 199, 199)",
+                 justifyContent:"space-between",
+                 heigth:"fit-content",
+                 padding:"5px",
+                 borderRadius:"5px"
               }}><p><strong>Mot de passe : </strong>23331212121212111</p>
               <img src='public/editPhoto-removebg-preview.png' style={{
                 width:"20px",
@@ -175,7 +198,11 @@ function Profil() {
 
               <Box sx={{
                 display:"flex",
-                 justifyContent:"space-between"
+                border:"1px solid rgb(201, 199, 199)",
+                 justifyContent:"space-between",
+                 heigth:"fit-content",
+                 padding:"5px",
+                 borderRadius:"5px"
               }}><p><strong>Email : </strong>jonathan@gmail.com</p>
               <img src='public/editPhoto-removebg-preview.png' style={{
                 width:"20px",

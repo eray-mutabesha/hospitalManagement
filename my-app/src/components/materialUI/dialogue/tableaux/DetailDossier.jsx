@@ -45,7 +45,12 @@ function DetailDossier() {
  const Detailpatient=()=>{
   navigate("/detailPatient")
 }
-
+const reception=()=>{
+  navigate("/receptiondetail")
+}
+const laboratoire=()=>{
+  navigate("/laboratoiredetail")
+}
  
   return (
     <>
@@ -163,7 +168,9 @@ function DetailDossier() {
             
             </Box>
            </Box>
-      {/* .............................................. */}
+      
+
+
       <TableContainer component={Paper}>
       <Typography variant='h5'>Services parcourus par le patient</Typography>
       <Table sx={{ minWidth: 950 ,textAlign:"left"}} size="small" aria-label="a dense table">
@@ -172,21 +179,27 @@ function DetailDossier() {
             <TableCell>#</TableCell>
             <TableCell >SERVICES</TableCell>
             <TableCell >STATUT</TableCell>
-            <TableCell >ACTION</TableCell>
+            <TableCell  align='right'>ACTION</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
          
+
+
+
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell component="th" scope="row">
                 002
               </TableCell>
               <TableCell >Reception</TableCell>
               <TableCell sx={{color:"green"}}>Terminer</TableCell>
-              <TableCell > <Button onClick={Detailpatient} variant="contained" color="success">
+              <TableCell align='right'> <Button onClick={reception} variant="contained" color="success">
                Details
              </Button></TableCell>
             </TableRow>
+
+
+
 
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell component="th" scope="row">
@@ -194,10 +207,13 @@ function DetailDossier() {
               </TableCell>
               <TableCell >Laboratoire</TableCell>
               <TableCell sx={{color:"blue"}}>En cours...</TableCell>
-              <TableCell > <Button onClick={Detailpatient} variant="contained" color="success">
+              <TableCell align='right'> <Button onClick={laboratoire} variant="contained" color="success">
                Details
              </Button></TableCell>
             </TableRow>
+
+
+
 
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell component="th" scope="row">
@@ -205,10 +221,13 @@ function DetailDossier() {
               </TableCell>
               <TableCell >Hospitalisation</TableCell>
               <TableCell sx={{color:"red"}}>En attente</TableCell>
-              <TableCell > <Button onClick={Detailpatient} variant="contained" color="success">
+              <TableCell align='right'> <Button onClick={Detailpatient} variant="contained" color="success">
                Details
              </Button></TableCell>
             </TableRow>
+
+
+
 
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell component="th" scope="row">
@@ -216,23 +235,28 @@ function DetailDossier() {
               </TableCell>
               <TableCell >Embulatoire</TableCell>
               <TableCell sx={{color:"red"}}>En attente</TableCell>
-              <TableCell > <Button onClick={Detailpatient} variant="contained" color="success">
+              <TableCell align='right'> <Button onClick={Detailpatient} variant="contained" color="success">
                Details
              </Button></TableCell>
             </TableRow>
          
+
+
+
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell component="th" scope="row">
                 002
               </TableCell>
               <TableCell >Consultation</TableCell>
               <TableCell sx={{color:"red"}}>En attente</TableCell>
-              <TableCell > 
+              <TableCell align='right'> 
                 <Button onClick={Detailpatient} variant="contained" color="success" >
                Details
              </Button></TableCell>
             </TableRow>
         </TableBody>
+
+
       </Table>
     </TableContainer>
     </Box>

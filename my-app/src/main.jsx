@@ -19,6 +19,9 @@ import TblReception from './components/materialUI/dialogue/tableaux/TblReception
 import TblLaboratoire from './components/materialUI/dialogue/tableaux/TblLaboratoire.jsx';
 import TblHospitalisation from './components/materialUI/dialogue/tableaux/TblHospitalisation.jsx';
 import TblAmbulatoire from './components/materialUI/dialogue/tableaux/TblAmbulatoire.jsx';
+import Reception_detail from './components/materialUI/dialogue/tableaux/DetailServices/Reception_detail.jsx';
+import Laboratoire_detail from './components/materialUI/dialogue/tableaux/DetailServices/Laboratoire_detail.jsx';
+
 
 
 
@@ -89,6 +92,15 @@ const routes=createBrowserRouter([
    {
     path:"/ambulatoire",
     element:<TblAmbulatoire/>
+   },
+   {
+    path:"/receptiondetail",
+    element:<Reception_detail/>
+   },
+   ,
+   {
+    path:"/laboratoiredetail",
+    element:<Laboratoire_detail/>
    },
 ])
 
