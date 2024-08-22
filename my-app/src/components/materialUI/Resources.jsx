@@ -38,7 +38,6 @@ const navigate=useNavigate()
             <MenuItem onClick={medecins}>Medecins</MenuItem>
             <MenuItem onClick={Patients}>Patients</MenuItem>
             <MenuItem onClick={Personnels}>Personnels</MenuItem>
-            <MenuItem onClick={Departement}>Departement</MenuItem>
             <MenuItem onClick={Stock}>Stock</MenuItem>
             
           </Menu>

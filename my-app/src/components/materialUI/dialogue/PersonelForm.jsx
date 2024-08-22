@@ -64,11 +64,11 @@ size="small"
 <TextField
 className='inpt_material'
  id="filled-basic" 
- label="Departement" 
+ label="specialisation" 
  variant="filled" 
  type="text"
  size="small"
- {...register("departement", { required: true })}/>
+ {...register("specialisation", { required: true })}/>
 
 
         

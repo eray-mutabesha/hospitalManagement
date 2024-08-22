@@ -106,11 +106,11 @@ function TblPatient() {
           <TableRow >
             <TableCell>#</TableCell>
             <TableCell >NOM</TableCell>
-            <TableCell >DATE D'ARRIVER</TableCell>
-            <TableCell >DEPARTEMENT</TableCell>
-            <TableCell >SPECIALISATION</TableCell>
+            <TableCell >POST NOM</TableCell>
+            <TableCell >AGE</TableCell>
+            <TableCell >GENRE</TableCell>
             <TableCell >TELEPHONE</TableCell>
-            <TableCell >MEIL</TableCell>
+            <TableCell >ADRESSE</TableCell>
             <TableCell >ACTION</TableCell>
 
           </TableRow>
@@ -124,12 +124,12 @@ function TblPatient() {
               <TableCell component="th" scope="row">
                 001
               </TableCell>
-              <TableCell >Alice kitoko furaha</TableCell>
-              <TableCell >12/04/2024</TableCell>
-              <TableCell >pharmacie</TableCell>
-              <TableCell >pharmacienne</TableCell>
+              <TableCell >Mussa </TableCell>
+              <TableCell >Kalala</TableCell>
+              <TableCell >22 ans</TableCell>
+              <TableCell >masculin</TableCell>
               <TableCell >07914343635</TableCell>
-              <TableCell >alicekitoko@gmail.com</TableCell>
+              <TableCell >Goma/Q.himbi/AV.du30juin</TableCell>
               <TableCell align="right">
               <Box sx={{
                 display:"flex",

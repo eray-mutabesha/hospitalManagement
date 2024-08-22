@@ -105,8 +105,8 @@ function TblPersonel() {
           <TableRow >
             <TableCell>#</TableCell>
             <TableCell >NOM</TableCell>
-            <TableCell >DATE D'ARRIVER</TableCell>
-            <TableCell >DEPARTEMENT</TableCell>
+            <TableCell >NOM DE FAMILLE</TableCell>
+            <TableCell >FONCTION</TableCell>
             <TableCell >SPECIALISATION</TableCell>
             <TableCell >TELEPHONE</TableCell>
             <TableCell >MEIL</TableCell>
@@ -123,10 +123,10 @@ function TblPersonel() {
               <TableCell component="th" scope="row">
                 001
               </TableCell>
-              <TableCell >Alice kitoko furaha</TableCell>
-              <TableCell >12/04/2024</TableCell>
-              <TableCell >pharmacie</TableCell>
+              <TableCell >Alice kitoko</TableCell>
+              <TableCell >kitoko</TableCell>
               <TableCell >pharmacienne</TableCell>
+              <TableCell >pharmacologie</TableCell>
               <TableCell >07914343635</TableCell>
               <TableCell >alicekitoko@gmail.com</TableCell>
               <TableCell align="right">

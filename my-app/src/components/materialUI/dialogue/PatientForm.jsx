@@ -46,7 +46,6 @@ export default function PatientForm() {
           <DialogContentText id="alert-dialog-description">
           <Box>
 
-
           <form className='medecin_fom'>
 
 
@@ -59,6 +58,7 @@ className='inpt_material'
  size="small"
  {...register("nom", { required: true })}/>
 
+
 <TextField
 className='inpt_material'
  id="filled-basic" 
@@ -67,6 +67,7 @@ className='inpt_material'
  type="text"
  size="small"
  {...register("post_nom", { required: true })}/>
+
 
 <TextField
  className='inpt_material'
@@ -101,14 +102,7 @@ className='inpt_material'
  size="small"
  {...register("telephone", { required: true })}/>
 
-<TextField
-className='inpt_material'
- id="filled-basic" 
- label="Adresse mail" 
- variant="filled" 
- size="small"
- type='email'
- {...register("adresse_mail", { required: false })}/>
+
 
 <TextField
 className='inpt_material'
@@ -121,8 +115,8 @@ className='inpt_material'
 
 </form>
        
-          </Box>
-          </DialogContentText>
+        </Box>
+        </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button variant="contained" color="error" onClick={handleClose}>Annuler</Button>
