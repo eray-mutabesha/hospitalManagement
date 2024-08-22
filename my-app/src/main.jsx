@@ -9,14 +9,12 @@ import Inscription from './components/Inscription.jsx'
 import TblMedecins from './components/materialUI/dialogue/tableaux/TblMedecins.jsx';
 import TblPatient from './components/materialUI/dialogue/tableaux/TblPatient.jsx';
 import TblChambre from './components/materialUI/dialogue/tableaux/TblChambre.jsx';
-import TblDepartement from './components/materialUI/dialogue/tableaux/TblDepartement.jsx';
 import TblDossier from './components/materialUI/dialogue/tableaux/TblDossier.jsx';
 import TblMedicament from './components/materialUI/dialogue/tableaux/TblMedicament.jsx';
 import TblPersonel from './components/materialUI/dialogue/tableaux/TblPersonel.jsx';
 import Profil from './components/Profil.jsx';
 import Deconnexion from './components/Deconnexion.jsx';
 import DetailDossier from './components/materialUI/dialogue/tableaux/DetailDossier.jsx';
-import DetailpatientInfos from './components/materialUI/dialogue/DetailpatientInfos.jsx';
 import TblReception from './components/materialUI/dialogue/tableaux/TblReception.jsx';
 import TblLaboratoire from './components/materialUI/dialogue/tableaux/TblLaboratoire.jsx';
 import TblHospitalisation from './components/materialUI/dialogue/tableaux/TblHospitalisation.jsx';
@@ -59,10 +57,7 @@ const routes=createBrowserRouter([
     path:"/Consultation",
     element:<TblChambre/>
   },
-  {
-    path:"/departements",
-    element:<TblDepartement/>
-  },
+  
   {
     path:"/dossier",
     element:<TblDossier/>
@@ -82,10 +77,6 @@ const routes=createBrowserRouter([
    {
     path:"/detaildossier",
     element:<DetailDossier/>
-   },
-   {
-    path:"/detailPatient",
-    element:<DetailpatientInfos/>
    },
    {
     path:"/reception",

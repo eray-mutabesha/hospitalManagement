@@ -181,7 +181,7 @@ function DetailDossier() {
               <TableCell component="th" scope="row">
                 002
               </TableCell>
-              <TableCell >Consultation</TableCell>
+              <TableCell >Reception</TableCell>
               <TableCell sx={{color:"green"}}>Terminer</TableCell>
               <TableCell > <Button onClick={Detailpatient} variant="contained" color="success">
                Details
