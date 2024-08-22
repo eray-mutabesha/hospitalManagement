@@ -31,23 +31,25 @@ function Deconnexion() {
     }}> 
    <img src='public\logoutimage-removebg-preview.png' alt='logoutimage' className='logoutimage'/>
         <Typography sx={{color:"red"}} variant="h5">Oh !! voulez-vous vraiment vous deconnectez??</Typography>
-        <Button sx={{
-            
-            color:"white",
-            borderRadius:"10px",
-            boxShadow: "0px 0px 5px 0px rgba(38, 233, 233, 0.644)"
-            }}  onClick={handleAcceuil}>
+        
+        
+        <Button  onClick={handleAcceuil} variant='outlined' sx={{
+          // width:"fit-content",
+          // marginLeft:"auto",
+          // marginRight:"auto"
+        }}>
             Retour a l'Acceuil
         </Button>
-        <Button variant="contained"  onClick={handleout} sx={{
-            background:"black",
-            boxShadow: "0px 0px 5px 0px rgba(38, 233, 233, 0.644)",
-            "&:hover":{
-              background:"0px 0px 5px 0px rgba(38, 233, 233, 0.644)",
-            }
+
+
+        <Button variant="outlined" color='error'  onClick={handleout} sx={{
+          // width:"fit-content",
+          // marginLeft:"auto",
+          // marginRight:"auto"
         }}>
             Se deconnecter
         </Button>
+
     </Box>
     </Box>
     </div>

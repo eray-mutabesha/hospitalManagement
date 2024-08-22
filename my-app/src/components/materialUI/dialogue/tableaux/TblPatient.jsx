@@ -14,15 +14,14 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
-import PatientForm from '../PatientForm.jsx'
-import Reception from '../../Reception.jsx'
-import Consultation from '../../Consultation.jsx'
-import Ressources from '../../Resources.jsx'
-import Dashboard from '../../Dashboard.jsx'
-import Laboratoire from '../../Laboratoire.jsx'
-
-import OrganisationClinique from '../../OrganisationClinique.jsx'
-import Factutation from '../../Facturation.jsx'
+import PatientForm from '../PatientForm.jsx';
+import Reception from '../../Reception.jsx';
+import Consultation from '../../Consultation.jsx';
+import Ressources from '../../Resources.jsx';
+import Dashboard from '../../Dashboard.jsx';
+import Laboratoire from '../../Laboratoire.jsx';
+import OrganisationClinique from '../../OrganisationClinique.jsx';
+import Factutation from '../../Facturation.jsx';
 
 
 

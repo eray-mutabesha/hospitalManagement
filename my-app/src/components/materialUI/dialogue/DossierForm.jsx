@@ -50,7 +50,7 @@ export default function DossierForm() {
 
           <form className='medecin_fom'>
 <FormControl variant="filled"   >
-<InputLabel id="demo-simple-select-filled-label">Patient ID</InputLabel>
+<InputLabel id="demo-simple-select-filled-label">Nom complet du patient</InputLabel>
         <Select
            labelId="demo-simple-select-filled-label"
           id="demo-simple-select-standard"
@@ -59,9 +59,9 @@ export default function DossierForm() {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value={10}>1</MenuItem>
-          <MenuItem value={20}>2</MenuItem>
-          <MenuItem value={30}>3</MenuItem>
+          <MenuItem value={10}>mussa kasereka </MenuItem>
+          <MenuItem value={20}>sadiki mulamba</MenuItem>
+          <MenuItem value={30}>amani sakuragire</MenuItem>
         </Select>
 </FormControl>
 
