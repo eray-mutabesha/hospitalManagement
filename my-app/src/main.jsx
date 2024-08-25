@@ -21,6 +21,9 @@ import TblHospitalisation from './components/materialUI/dialogue/tableaux/TblHos
 import TblAmbulatoire from './components/materialUI/dialogue/tableaux/TblAmbulatoire.jsx';
 import Reception_detail from './components/materialUI/dialogue/tableaux/DetailServices/Reception_detail.jsx';
 import Laboratoire_detail from './components/materialUI/dialogue/tableaux/DetailServices/Laboratoire_detail.jsx';
+import Consultation_detail from './components/materialUI/dialogue/tableaux/DetailServices/Consultation_detail.jsx';
+import Hospitalisation_detail from './components/materialUI/dialogue/tableaux/DetailServices/Hospitalisation_detail.jsx';
+import Fiched_evolution from './components/materialUI/dialogue/tableaux/DetailServices/Fiched_evolution.jsx';
 
 
 
@@ -101,6 +104,18 @@ const routes=createBrowserRouter([
    {
     path:"/laboratoiredetail",
     element:<Laboratoire_detail/>
+   },
+   {
+    path:"/consultationdetail",
+    element:<Consultation_detail/>
+   },
+   {
+    path:"/hospitalisationdetail1",
+    element:<Hospitalisation_detail/>
+   },
+   {
+    path:"/hospitalisationdetail2",
+    element:<Fiched_evolution/>
    },
 ])
 
