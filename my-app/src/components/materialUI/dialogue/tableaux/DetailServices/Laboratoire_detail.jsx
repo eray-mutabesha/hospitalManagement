@@ -56,12 +56,12 @@ const reception=()=>{
         <div className='logo'>
             <img src='public/logo-removebg-preview.png' alt='logo hopital'/>
           </div>
-        <div>
+          <div>
               <Dashboard />
-              <nav id='personaliser'> <Reception/></nav>
+              <Reception/>
               <Consultation/>
               <Laboratoire/>
-              <OrganisationClinique/>
+              <nav id='personaliser'> <OrganisationClinique/></nav>
               <Factutation/>
               <Ressources/>
               <Parametre/>

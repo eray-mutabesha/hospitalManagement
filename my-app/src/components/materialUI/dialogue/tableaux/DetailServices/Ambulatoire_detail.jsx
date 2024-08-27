@@ -53,7 +53,7 @@ const rows = [
 ];
 
 
-function Hospitalisation_detail() {
+function Ambulatoire_detail() {
   
 
  const navigate = useNavigate()
@@ -76,12 +76,12 @@ const reception=()=>{
         <div className='logo'>
             <img src='public/logo-removebg-preview.png' alt='logo hopital'/>
           </div>
-          <div>
+        <div>
               <Dashboard />
               <Reception/>
               <Consultation/>
               <Laboratoire/>
-              <nav id='personaliser'> <OrganisationClinique/></nav>
+              <nav id='personaliser'><OrganisationClinique/></nav>
               <Factutation/>
               <Ressources/>
               <Parametre/>
@@ -122,16 +122,14 @@ const reception=()=>{
            </Button>
            {/* ......................................................... */}
 
-           <Stack mt={5} spacing={2}>
-           <Pagination count={2} color="primary" onChange={fiche_de_nursing}/>
-           </Stack>
+          
       </Box>
          <Box sx={{
           background:"white",
            padding:"20px"
          }}>
 
-          <h1>FICHE DE NURSING</h1>
+          <h1>FICHE D'EVOLUTION AMBULATOIRE</h1>
           <Box sx={{
             display:"grid",
             gridTemplateColumns:"auto auto auto",
@@ -163,16 +161,11 @@ const reception=()=>{
         }} size="small" aria-label="a dense table">
         <TableHead  >
           <TableRow >
-            <TableCell sx={{ width: "100px"}}>Diagnostic de prosomption</TableCell>
-            <TableCell sx={{ width: "100px"}}>Operation prevue</TableCell>
-            <TableCell sx={{ width: "100px"}}>POULS</TableCell>
-            <TableCell sx={{ width: "100px"}}>RESPIRATION</TableCell>
+            <TableCell sx={{ width: "100px"}}>TO</TableCell>
             <TableCell sx={{ width: "100px"}}>TA</TableCell>
-            <TableCell sx={{ width: "100px"}}>POIDS</TableCell>
-            <TableCell sx={{ width: "100px"}}>Medicament per OS</TableCell>
-            <TableCell sx={{ width: "100px"}}>Injectable</TableCell>
-            <TableCell sx={{ width: "100px"}}>Perfusion</TableCell>
-            <TableCell sx={{ width: "100px"}}>Autre</TableCell>
+            <TableCell sx={{ width: "100px"}}>DATE</TableCell>
+            <TableCell sx={{ width: "100px"}}>TRAITEMENT</TableCell>
+            <TableCell sx={{ width: "100px"}}>OBSERVATION</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -185,13 +178,16 @@ const reception=()=>{
               <TableCell > lorem lorem lorem</TableCell>
               <TableCell > lorem lorem lorem</TableCell>
               <TableCell > lorem lorem lorem</TableCell>
-              <TableCell > lorem lorem lorem</TableCell>
-              <TableCell > lorem lorem lorem</TableCell>
-              <TableCell > lorem lorem lorem</TableCell>
-              <TableCell > lorem lorem lorem</TableCell>
-              <TableCell > lorem lorem lorem</TableCell>
-              <TableCell > lorem lorem lorem</TableCell>
-              <TableCell > lorem lorem lorem</TableCell>
+              <TableCell > lorem lorem  lorem lorem lorem
+              lorem lorem lorem
+              lorem lorem lorem
+              lorem lorem lorem
+              </TableCell>
+              <TableCell > lorem lorem  lorem lorem lorem
+              lorem lorem lorem
+              lorem lorem lorem
+              lorem lorem lorem
+              </TableCell>
 
               
             </TableRow>
@@ -211,6 +207,4 @@ const reception=()=>{
     </>
   )
 }
-export default Hospitalisation_detail
-
-
+export default  Ambulatoire_detail

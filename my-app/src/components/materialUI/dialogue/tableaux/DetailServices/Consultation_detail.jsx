@@ -58,10 +58,10 @@ const reception=()=>{
           </div>
         <div>
               <Dashboard />
-              <nav id='personaliser'> <Reception/></nav>
+              <Reception/>
               <Consultation/>
               <Laboratoire/>
-              <OrganisationClinique/>
+              <nav id='personaliser'> <OrganisationClinique/></nav>
               <Factutation/>
               <Ressources/>
               <Parametre/>

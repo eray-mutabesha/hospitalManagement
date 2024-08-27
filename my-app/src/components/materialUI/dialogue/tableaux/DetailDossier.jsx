@@ -54,6 +54,14 @@ const laboratoire=()=>{
 const Detailconsultation=()=>{
   navigate("/consultationdetail")
 }
+
+const hospitalisation =()=>{
+  navigate("/hospitalisationdetail1")
+}
+
+const ambulatoiredetail= ()=>{
+  navigate("/ambulatoiredetail")
+}
   return (
     <>
       <section  id='all_section'>
@@ -235,9 +243,9 @@ const Detailconsultation=()=>{
               <TableCell component="th" scope="row">
                 002
               </TableCell>
-              <TableCell >Embulatoire</TableCell>
+              <TableCell >Hospitalisation</TableCell>
               <TableCell sx={{color:"red"}}>En attente</TableCell>
-              <TableCell align='right'> <Button onClick={Detailpatient} variant="contained" color="success">
+              <TableCell align='right'> <Button onClick={hospitalisation} variant="contained" color="success">
                Details
              </Button></TableCell>
             </TableRow>
@@ -249,10 +257,10 @@ const Detailconsultation=()=>{
               <TableCell component="th" scope="row">
                 002
               </TableCell>
-              <TableCell >Consultation</TableCell>
+              <TableCell >Ambulatoire</TableCell>
               <TableCell sx={{color:"red"}}>En attente</TableCell>
               <TableCell align='right'> 
-                <Button onClick={Detailpatient} variant="contained" color="success" >
+                <Button onClick={ambulatoiredetail} variant="contained" color="success" >
                Details
              </Button></TableCell>
             </TableRow>

@@ -4,28 +4,56 @@ import { Link } from 'react-router-dom';
 import { useForm} from "react-hook-form"
 import toast from 'react-hot-toast';
 import axios from 'axios';
-
+import { useEffect } from 'react';
 
 function Inscription() {
- 
+
+
+const BASE_URL = import.meta.env.VITE_API_URL;
+
 const { register, handleSubmit,formState:{errors} } = useForm();
+// const { onChange} = register('select');
  const navigate=useNavigate()
-const onSubmit=(data)=>{
+ useEffect(()=>{
+  if(localStorage.getItem("Admin")){
+     navigate("/");
+    }
+  })
+
+
+ const [formData, setFormData] = useState({
+  nom: "",
+  age: "",
+  select: "",
+  email: "",
+  password: "",
+  password_confirm:""
+});
+
+
+
+ const onSubmit=(data)=>{
   if(data.password !== data.password_confirm){
-    toast.error("les mots de passes ne correspondent pas")
+    toast.error("verifiez votre mot de passe")
+  }else{
+
+    // API pour insérer les données
+    axios.post(`${BASE_URL}/insert_admin`, data)
+      .then(({ data }) => {
+        if (data.status == 500) {
+          toast.error("Il y a une erreur");
+        } else {
+        localStorage.setItem("Admin", JSON.stringify(data))
+        toast.success("inscription réussi");
+      
+        
+      }
+      })
+       .catch((err) => {
+         console.log(err);
+         toast.error("Il y a une erreur");
+       });
   }
-  else{
-    console.log(data)
-    toast.success("connexion reussie")
-    navigate('/')
-    axios.post(``)
-    .then(res => {
-      const persons = res.data;
-      this.setState({ persons });
-    })
-  }
- 
- 
 }
 
   return (
@@ -45,40 +73,58 @@ const onSubmit=(data)=>{
         <h1>Connectez-vous</h1>
         
         <input type='text' 
-        placeholder='Nom'
-        {...register("nom", { required: true })} />
+        placeholder='Nom complet'
+        {...register("nom", { required: "Veuillez entrer l'action" })}
+      value={formData.nom}
+      onChange={(e) => setFormData({ ...formData, nom: e.target.value })} />
          
-        <input type='text' 
-        placeholder='Post-nom'
-        {...register("post_nom", { required: true })} />
-
-        <input type='number' 
+         <input type='number' 
         placeholder='Age'
-        {...register("age", { required: true })} />
+        {...register("age", { required: "Veuillez entrer l'action" })}
+        value={formData.age}
+        onChange={(e) => setFormData({ ...formData, age: e.target.value })}/>
+        
 
-        <select name="" id="">
+        <select
+            className='select'
+            {...register("select", { required: "Veuillez entrer l'action" })}
+            value={formData.select}
+            onChange={(e) => setFormData({ ...formData, select: e.target.value })}
+          >
+
           <option value="">Genre</option>
-          <option value="">Masculin</option>
-          <option value="">Feminin</option>
+          <option value="Masculin">Masculin</option>
+          <option value="Feminin">Feminin</option>
+
         </select>
+      
 
+       
+
+        
         <input type='text' 
-        placeholder='Telephone'
-        {...register("Telephone", { required: true })} />
+        placeholder='Email'
+        {...register("email", { required: "Veuillez entrer le nom" })}
+        value={formData.email}
+        onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
 
-{/* 99999999999999999999999999999999999999999999999999 */}
 
         <input type='password' 
         placeholder='Mot de passe'
-        {...register("password", { required: true })} />
+        {...register("password", { required: "Veuillez entrer le nom" })}
+        value={formData.password}
+        onChange={(e) => setFormData({ ...formData, password: e.target.value })} />
+
 
         <input type='password'
         placeholder='Confirmer le mot de passe' 
-        {...register("password_confirm", { required: true })} />
-        
+        {...register("password_confirm", { required: "Veuillez entrer le nom" })}
+        value={formData.password_confirm}
+        onChange={(e) => setFormData({ ...formData, password_confirm: e.target.value })}/>
+         
 
         <nav>
-        <button type='submit'>connexion</button>
+        <button type="submit">connexion</button>
         </nav>
         
         </form>
