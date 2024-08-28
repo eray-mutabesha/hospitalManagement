@@ -7,7 +7,6 @@ import Reception from '../../Reception.jsx'
 import Parametre from '../../Parametre.jsx'
 import { Box, Button, Typography } from '@mui/material'
 import { faBell,faCaretDown,faCheck,faXmark,faMagnifyingGlass,faListCheck,faUserDoctor,faStethoscope,faCommentsDollar,faChevronDown} from '@fortawesome/free-solid-svg-icons'
-
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -20,7 +19,7 @@ import Ressources from '../../Resources.jsx'
 import Laboratoire from '../../Laboratoire.jsx'
 import OrganisationClinique from '../../OrganisationClinique.jsx'
 import Factutation from '../../Facturation.jsx'
-
+import DossierForm from '../DossierForm.jsx'
 
 
 
@@ -84,39 +83,39 @@ function TblDossier() {
            </div>
 
         <Box sx={{
-          marginTop:"100px",
+          
           display:"grid",
           gap:"50px",
-          width:"950px",
-          marginLeft:"auto",
-          marginRight:"auto",
+          margin:"20px",
           }}>
           
-
-          <Button variant="contained" color="error"  sx={{
-            width:"fit-content",
-            
-          }}   onClick={handledossier}>
-            Retour
-           </Button>
+       <Box mt={5}>
+       <DossierForm/>
+       </Box>
+          
          
         <Box sx={{
           display:"grid",
           alignItems:"center",
-          width:"950px",
+         
           
           
         }}>
           <Typography variant='h5'>Tout les dossiers des patients</Typography>
         <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 950 ,textAlign:"left"}} size="small" aria-label="a dense table">
-        <TableHead>
+      <Table sx={{ textAlign:"left"}} size="small" aria-label="a dense table">
+        <TableHead  
+              sx={{ backgroundImage:"url('moderate-aquamarine-dark-gradient-background_608506-1382.avif')",
+               backgroundRepeat:"no-repeat",
+               backgroundSize: "cover",
+               backgroundPosition:"center",
+               color:"white"}}>
           <TableRow >
-            <TableCell>#</TableCell>
-            <TableCell >PATIENT</TableCell>
-            <TableCell >DATE D'ARRIVER</TableCell>
-            <TableCell >STATUT</TableCell>
-            <TableCell align="right">ACTION</TableCell>
+            <TableCell sx={{color:"white"}}>#</TableCell>
+            <TableCell sx={{color:"white"}}>PATIENT</TableCell>
+            <TableCell sx={{color:"white"}}>DATE D'ARRIVER</TableCell>
+            <TableCell sx={{color:"white"}}>STATUT</TableCell>
+            <TableCell align="right" sx={{color:"white"}}>ACTION</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

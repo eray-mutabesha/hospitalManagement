@@ -19,8 +19,6 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import IconButton from '@mui/material/IconButton';
 import CommentIcon from '@mui/icons-material/Comment';
-import DossierForm from '../DossierForm.jsx'
-import DossierListe from '../../DossierListe.jsx'
 import Ressources from '../../Resources.jsx'
 import Laboratoire from '../../Laboratoire.jsx'
 
@@ -49,8 +47,12 @@ const rows = [
 function TblReception() {
     const { register, handleSubmit,formState:{errors} } = useForm();
   const navigate = useNavigate()
-  const handledetail=()=>{
+  const handledossier=()=>{
     navigate("/detaildossier")
+  }
+
+  const detail =()=>{
+    navigate("/receptiondetail")
   }
   return (
     <>
@@ -92,180 +94,101 @@ function TblReception() {
 
 
 
-<Typography mt={10} variant='h5'>Reception</Typography>
-<Box sx={{
-    position:"relative",
-    top:"10px",
-    margin:"10px",
-    display:"flex",
-    justifyContent:"left",
-    gap:"20px"
-}}>
-     
 
-    <DossierListe/>
-    <ChoixTransferClt/>
-   
-</Box>
+
 
 
 <Box sx={{
-    display:"flex",
-    justifyContent:"space-between",
-    position:"relative",
+    display:"grid",
+    
     top:"10px",
-    margin:"10px"
+    margin:"30px",
+    //  border:"1px solid green"
 }}>
-    <Box sx={{
-         width:"250px",
-         border: "1px solid rgba(0, 0, 0, 0.103)",
-        display:"flex",
-        justifyContent:"center",
-        borderRadius:"10px",
-        background:"white"
-    }}>
-           <List dense sx={{ width: '100%', maxWidth: 230, bgcolor: 'background.paper' }}>
-      {[0, 1, 2, 3,4,5,7,8].map((value) => {
-        const labelId = `checkbox-list-secondary-label-${value}`;
-        return (
-          <ListItem
-          sx={{
-            background:"whitesmoke",
-            margin:"2px auto"
-          }}
-          key={value}
-          secondaryAction={
-            <IconButton edge="end" aria-label="comments">
-              <CommentIcon />
-            </IconButton>
-          }
-            disablePadding
-          >
-            <ListItemButton>
-              <ListItemAvatar>
-                <img src='/public/profilphoto.png' style={{
-                  width:"40px",
-                  height:"40px",
-                  borderRadius:"50%",
-                  objectFit:"cover"
-                }}/>
-              </ListItemAvatar>
-              <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
-            </ListItemButton>
-          </ListItem>
-        );
-      })}
-    </List>
-    </Box>
+   <Button  variant="contained" color="error" sx={{
+    width:"fit-content",
+    marginTop:"40px"}}onClick={handledossier}>
+            Retour
+           </Button>
 
 
-
-
-
-
-
+      
       <Box>
+      
         <form action="" style={{
-            width:"fit-content",
             padding:"20px",
-            border:"1px solid rgba(0, 0, 0, 0.103)",
-        
             borderRadius:"10px",
+            border:"1px solid rgba(0, 0, 0, 0.103)",
+             marginTop:"10px",
             background:"white"
         }}>
-            <Typography variant='h6'>Identite</Typography>
+     
 <Box sx={
     {
         display:"grid",
-        gap:"20px"
+        gap:"20px",
+       
     }
 }>
-            <Box  sx={{
-                display:"grid",
-                gap:"10px",
-                gridTemplateColumns:"auto auto",
-                width:"100%"
+           
+
+            <Box >
+              <Box sx={{
+                display:"flex",
+                justifyContent:"space-between"
+              }}>
+              <Box sx={{
+            display:"grid",
+            gridTemplateColumns:"auto auto auto auto",
+            gap:"30px",
+            background:"white",
+            padding:"0px"
+          }}>
+            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>kasongo</span></h3>
+            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>22 ans</span></h3>
+            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>masculin</span></h3>
+            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
+            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
+            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
+            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>Goma/Q.ndosho/AV.ngungu</span></h3>
+            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>078374848</span></h3>
+          </Box>
+     
+
+          <Box sx={{
+              
+              border:"1px solid rgb(201, 199, 199)",
+               backgroundImage:"url('moderate-aquamarine-dark-gradient-background_608506-1382.avif')",
+              backgroundRepeat:"no-repeat",
+              backgroundSize: "cover",
+             backgroundPosition:"center",
+             width:"150px",
+             height:"150px",
+             borderRadius:"10px",
+             display:"flex",
+             alignItems:"center",
+             justifyContent:"center"
             }}>
+             
+              <img src="/public/profilphoto.png" alt="" style={{
+                width:"100px",
+                height:"100px",
+                borderRadius:"50%"
+              }}/>
             
-
-
-<FormControl variant="filled"   >
-<InputLabel id="demo-simple-select-filled-label">Patient</InputLabel>
-        <Select
-           labelId="demo-simple-select-filled-label"
-          id="demo-simple-select-standard"
-          size="small"
-          {...register("patient_id", { required: true })}>
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>kambale</MenuItem>
-          <MenuItem value={20}>mussa</MenuItem>
-          <MenuItem value={20}>alain</MenuItem>
-          <MenuItem value={20}>john</MenuItem>
-        </Select>
-</FormControl>
-
-<TextField
-className='inpt_material'
- id="filled-basic" 
- label="Adresse" 
- variant="filled" 
- type="text"
- size="small"
- {...register("adress", { required: true })}/>
-
-<TextField
-className='inpt_material'
- id="filled-basic" 
- label="Age" 
- variant="filled" 
- type="number"
- size="small"
- {...register("age", { required: true })}/>
-
-<TextField
-className='inpt_material'
- id="filled-basic" 
- label="Sexe" 
- variant="filled" 
- type="text"
- size="small"
- {...register("sexe", { required: true })}/>
-
-<TextField
-className='inpt_material'
- id="filled-basic" 
- label="Poids" 
- variant="filled" 
- type="text"
- size="small"
- {...register("sexe", { required: true })}/>
-
-
-<TextField
-className='inpt_material'
- id="filled-basic" 
- label="Telephone" 
- variant="filled" 
- type="text"
- size="small"
- {...register("Telephone", { required: true })}/>
+            </Box>
             </Box>
 
-            <Box sx={
-                {
-                    width:"780px"
-                }
-            }>
-     <Typography variant='h6'>  Premiers diagnostics</Typography>
+     
+     
+     <Typography mt={8}variant='h6'>  Premiers diagnostics</Typography>
      <TextField
           sx={{width:"100%"
                }}
           id="filled-multiline-static"
           label="Premier diagnostic"
           multiline
-          rows={10}
+          rows={6}
           variant="filled"
         />
      <Box sx={{
@@ -274,9 +197,9 @@ className='inpt_material'
         gap:"20px",
         marginTop:"10px"
      }}>
-      <Button variant="contained" color="success" endIcon={<SaveIcon />}>
-        Enregister
-        </Button>
+
+      <Button variant='outlined' onClick={detail}>DETAILS</Button>
+       <ChoixTransferClt/>
        
        
       </Box>

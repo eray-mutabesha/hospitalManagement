@@ -30,9 +30,13 @@ export default function DossierForm() {
         marginRight:"auto",
         
       }}>
-      <p onClick={handleClickOpen} >
-        Creer un nouveau dossier
-       </p>
+       <Button    onClick={handleClickOpen} sx={{
+            width:"fit-content",
+            border:"1px solid rgb(201, 199, 199)",
+                color:"black"
+          }}>
+           Nouveau Dossier
+          </Button>
        </Box>
       <Dialog
         open={open}

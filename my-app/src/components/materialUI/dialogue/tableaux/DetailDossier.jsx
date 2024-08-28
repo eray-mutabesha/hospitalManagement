@@ -46,7 +46,7 @@ function DetailDossier() {
   navigate("/detailPatient")
 }
 const reception=()=>{
-  navigate("/receptiondetail")
+  navigate("/reception")
 }
 const laboratoire=()=>{
   navigate("/laboratoiredetail")
@@ -103,58 +103,54 @@ const ambulatoiredetail= ()=>{
           display:"grid",
           gap:"30px",
           alignItems:"center",
-          width:"950px",
-          marginLeft:"auto",
-          marginRight:"auto",
-          marginTop:"80px",
+          margin:"20px"
         
         }}>
-          <Box>
+          <Box mt={5}>
           <Button variant="contained" color="error" onClick={handledossier}>
             Retour
            </Button>
-           {/* ......................................................... */}
       </Box>
+
+
+
           <Box  sx={{
             display:"flex",
             justifyContent:"space-between"
           }}>
           
+
           <Box sx={{
-     
-             width:"600px",
-             height:"200px",
              border:"1px solid rgba(0, 0, 0, 0.103)",
              background:"white",
              borderRadius:"10px",
-             
-            
+             padding:"20px"
            }}>
 
-            <Box sx={{
-              display:"grid",
-              gridTemplateColumns:"auto auto auto",
-              
-              justifyContent:"space-around",
-              margin:"40px ",
-              gap:"40px"
-            }}>
 
-             
-              <p><strong>Nom : </strong> Katembo mwamijean</p>
-              <p><strong>Adresse : </strong> ndosho/Av.ngungu</p>
-              <p><strong>Age : </strong> 23 ans</p>
-              
-              
-              <p><strong>Sexe : </strong>Masculim</p>
-              <p><strong>Poids : </strong> 60 kg </p>
-              <p><strong>Tel: </strong> 0791234442</p>
-            
-              
-              
+
+
+          <Box sx={{
+            display:"grid",
+            gridTemplateColumns:"auto auto auto auto",
+            gap:"30px",
+            background:"white",
+            padding:"0px"
+          }}>
+            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>kasongo</span></h3>
+            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>22 ans</span></h3>
+            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>masculin</span></h3>
+            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
+            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
+            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
+            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>Goma/Q.ndosho/AV.ngungu</span></h3>
+            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>078374848</span></h3>
+          </Box>
             </Box>
-            </Box>
             
+
+
+
             <Box sx={{
               
               border:"1px solid rgb(201, 199, 199)",
@@ -162,8 +158,8 @@ const ambulatoiredetail= ()=>{
               backgroundRepeat:"no-repeat",
               backgroundSize: "cover",
              backgroundPosition:"center",
-             width:"300px",
-             height:"200px",
+             width:"150px",
+             height:"150px",
              borderRadius:"10px",
              display:"flex",
              alignItems:"center",
@@ -171,8 +167,8 @@ const ambulatoiredetail= ()=>{
             }}>
              
               <img src="/public/profilphoto.png" alt="" style={{
-                width:"150px",
-                height:"150px",
+                width:"100px",
+                height:"100px",
                 borderRadius:"50%"
               }}/>
             
@@ -184,12 +180,16 @@ const ambulatoiredetail= ()=>{
       <TableContainer component={Paper}>
       <Typography variant='h5'>Services parcourus par le patient</Typography>
       <Table sx={{ minWidth: 950 ,textAlign:"left"}} size="small" aria-label="a dense table">
-        <TableHead>
+        <TableHead   sx={{ backgroundImage:"url('moderate-aquamarine-dark-gradient-background_608506-1382.avif')",
+               backgroundRepeat:"no-repeat",
+               backgroundSize: "cover",
+               backgroundPosition:"center",
+               color:"white"}}>
           <TableRow>
-            <TableCell>#</TableCell>
-            <TableCell >SERVICES</TableCell>
-            <TableCell >STATUT</TableCell>
-            <TableCell  align='right'>ACTION</TableCell>
+            <TableCell sx={{color:"white"}}>#</TableCell>
+            <TableCell sx={{color:"white"}}>SERVICES</TableCell>
+            <TableCell sx={{color:"white"}}>STATUT</TableCell>
+            <TableCell  align='right' sx={{color:"white"}}>ACTION</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -203,7 +203,7 @@ const ambulatoiredetail= ()=>{
               </TableCell>
               <TableCell >Reception</TableCell>
               <TableCell sx={{color:"green"}}>Terminer</TableCell>
-              <TableCell align='right'> <Button onClick={reception} variant="contained" color="success">
+              <TableCell align='right'> <Button onClick={reception} variant="outlined" color="success">
                Details
              </Button></TableCell>
             </TableRow>
@@ -217,7 +217,7 @@ const ambulatoiredetail= ()=>{
               </TableCell>
               <TableCell >Laboratoire</TableCell>
               <TableCell sx={{color:"blue"}}>En cours...</TableCell>
-              <TableCell align='right'> <Button onClick={laboratoire} variant="contained" color="success">
+              <TableCell align='right'> <Button onClick={laboratoire} variant="outlined"  color="success">
                Details
              </Button></TableCell>
             </TableRow>
@@ -231,7 +231,7 @@ const ambulatoiredetail= ()=>{
               </TableCell>
               <TableCell >Consultation</TableCell>
               <TableCell sx={{color:"red"}}>En attente</TableCell>
-              <TableCell align='right'> <Button onClick={Detailconsultation} variant="contained" color="success">
+              <TableCell align='right'> <Button onClick={Detailconsultation} variant="outlined"  color="success">
                Details
              </Button></TableCell>
             </TableRow>
@@ -245,7 +245,7 @@ const ambulatoiredetail= ()=>{
               </TableCell>
               <TableCell >Hospitalisation</TableCell>
               <TableCell sx={{color:"red"}}>En attente</TableCell>
-              <TableCell align='right'> <Button onClick={hospitalisation} variant="contained" color="success">
+              <TableCell align='right'> <Button onClick={hospitalisation} variant="outlined"  color="success">
                Details
              </Button></TableCell>
             </TableRow>
@@ -260,7 +260,7 @@ const ambulatoiredetail= ()=>{
               <TableCell >Ambulatoire</TableCell>
               <TableCell sx={{color:"red"}}>En attente</TableCell>
               <TableCell align='right'> 
-                <Button onClick={ambulatoiredetail} variant="contained" color="success" >
+                <Button onClick={ambulatoiredetail} variant="outlined"  color="success" >
                Details
              </Button></TableCell>
             </TableRow>

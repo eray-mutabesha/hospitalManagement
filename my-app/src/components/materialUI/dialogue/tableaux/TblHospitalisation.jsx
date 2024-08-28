@@ -19,8 +19,6 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import IconButton from '@mui/material/IconButton';
 import CommentIcon from '@mui/icons-material/Comment';
-import DossierForm from '../DossierForm.jsx'
-import DossierListe from '../../DossierListe.jsx'
 import Ressources from '../../Resources.jsx'
 import Laboratoire from '../../Laboratoire.jsx'
 

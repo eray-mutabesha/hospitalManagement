@@ -90,13 +90,11 @@ const reception=()=>{
           display:"grid",
           gap:"30px",
           alignItems:"center",
-          width:"950px",
-          marginLeft:"auto",
-          marginRight:"auto",
-          marginTop:"80px",
+          margin:"20px"
+          
         
         }}>
-          <Box>
+          <Box mt={5}>
           <Button variant="contained" color="error" onClick={handledossier}>
             Retour
            </Button>
@@ -104,29 +102,86 @@ const reception=()=>{
       </Box>
          <Box sx={{
           background:"white",
+          borderRadius:"10px",
+          border:"1px solid rgba(0, 0, 0, 0.103)",
+          padding:"20px",
          }}>
+          
+
+
+
+
+
           <Box sx={{
+                display:"flex",
+                justifyContent:"space-between"
+              }}>
+              <Box sx={{
             display:"grid",
-            gridTemplateColumns:"auto auto auto",
+            gridTemplateColumns:"auto auto auto auto",
             gap:"30px",
             background:"white",
-            padding:"20px"
+            padding:"0px"
           }}>
             <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>kasongo</span></h3>
             <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>22 ans</span></h3>
             <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>masculin</span></h3>
             <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
+            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
+            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
             <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>Goma/Q.ndosho/AV.ngungu</span></h3>
             <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>078374848</span></h3>
           </Box>
+     
+
+          <Box sx={{
+              
+              border:"1px solid rgb(201, 199, 199)",
+               backgroundImage:"url('moderate-aquamarine-dark-gradient-background_608506-1382.avif')",
+              backgroundRepeat:"no-repeat",
+              backgroundSize: "cover",
+             backgroundPosition:"center",
+             width:"150px",
+             height:"150px",
+             borderRadius:"10px",
+             display:"flex",
+             alignItems:"center",
+             justifyContent:"center"
+            }}>
+             
+              <img src="/public/profilphoto.png" alt="" style={{
+                width:"100px",
+                height:"100px",
+                borderRadius:"50%"
+              }}/>
+            
+            </Box>
+            </Box>
+
+
+
+
+
+
+
+
+
+
+
           <Box sx={{
             background:"white",
-            padding:"20px",
+           
             marginTop:"150px",
             display:"grid",
             gridTemplateColumns:"auto auto auto",
             gap:"40px"
           }}>
+
+
+
+
+
+            
             <Box>
            <h2  style={{color:"rgba(0, 0, 0, 0.322)"}}>Hermatologie :</h2>
            <p><strong>Hemoglobine:</strong> lorem lorem</p>
@@ -215,7 +270,18 @@ const reception=()=>{
            </Box>
 
         </Box>
+        <Box sx={{
+        display:"flex",
+        justifyContent:"end",
+        gap:"20px",
+        marginTop:"10px"
+     }}>
 
+      <Button variant='outlined' >Modifier</Button>
+      
+       
+       
+      </Box>
          </Box>
       
       

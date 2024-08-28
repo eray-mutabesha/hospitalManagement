@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { useForm} from "react-hook-form"
 import toast from 'react-hot-toast';
 import axios from 'axios';
-import { useEffect } from 'react';
 
 function Inscription() {
 
