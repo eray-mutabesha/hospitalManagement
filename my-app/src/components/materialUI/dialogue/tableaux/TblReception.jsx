@@ -185,11 +185,11 @@ function TblReception() {
      <TextField
           sx={{width:"100%"
                }}
-          id="filled-multiline-static"
-          label="Premier diagnostic"
-          multiline
-          rows={6}
-          variant="filled"
+               id="standard-multiline-static"
+               label="Diagnostics"
+               multiline
+               rows={4}
+               variant="standard"
         />
      <Box sx={{
         display:"flex",

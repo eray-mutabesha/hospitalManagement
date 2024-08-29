@@ -108,11 +108,12 @@ const reception=()=>{
          }}>
           
 
-
+          <h1>FICHE LABORATOIRE</h1>
 
 
 
           <Box sx={{
+                marginTop:"10px",
                 display:"flex",
                 justifyContent:"space-between"
               }}>

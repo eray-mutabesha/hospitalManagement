@@ -49,14 +49,14 @@ const reception=()=>{
   navigate("/reception")
 }
 const laboratoire=()=>{
-  navigate("/laboratoiredetail")
+  navigate("/Laboratoire")
 }
 const Detailconsultation=()=>{
-  navigate("/consultationdetail")
+  navigate("/consultation")
 }
 
 const hospitalisation =()=>{
-  navigate("/hospitalisationdetail1")
+  navigate("/hospitalisation")
 }
 
 const ambulatoiredetail= ()=>{

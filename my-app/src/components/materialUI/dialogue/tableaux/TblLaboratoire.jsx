@@ -22,6 +22,7 @@ import Laboratoire from '../../Laboratoire.jsx'
 import OrganisationClinique from '../../OrganisationClinique.jsx'
 import Factutation from '../../Facturation.jsx'
 import ChoixTransferClt from '../../ChoixTransferClt.jsx'
+import { useNavigate } from 'react-router-dom'
 
 
 
@@ -41,6 +42,10 @@ function TblLaboratoire() {
 
     setChecked(newChecked);
   };
+  const navigate = useNavigate()
+  const detailLabo =()=>{
+    navigate("/laboratoiredetail")
+  }
   return (
     <>
       <section  id='all_section'>
@@ -82,98 +87,23 @@ function TblLaboratoire() {
               </div>
            </div>
       
-
-
-
-           <Box sx={{
-    position:"relative",
-    top:"80px",
-    margin:"10px",
-    display:"grid",
-    justifyContent:"left",
-    gap:"20px",
-    left:"40px",
-    width:"fit-content"
-}}>
-     <Typography variant='h5'>Laboratoire</Typography>
-    <ChoixTransferClt/>
-   
-
-</Box>
-      
       <Box sx={{
-      display:"flex",
       marginTop:"100px",
       justifyContent:"space-evenly",
-      
-
+      margin:"20px",
     }}>    
-      <Box sx={
-        {
-          
-          
-          width:"250px",
-          height:"fit-content",
-           border: "1px solid rgb(201, 199, 199)",
-          display:"flex",
-          justifyContent:"center",
-          borderRadius:"10px",
-          background:"white"
-
-        }
-      }>
-
-
-      <List dense sx={{ width: '100%', maxWidth: 230, bgcolor: 'background.paper' }}>
-      {[0, 1, 2, 3,4,5,7,8].map((value) => {
-        const labelId = `checkbox-list-secondary-label-${value}`;
-        return (
-          <ListItem
-          sx={{
-            background:"whitesmoke",
-            margin:"2px auto"
-          }}
-          key={value}
-          secondaryAction={
-            <IconButton edge="end" aria-label="comments">
-              <CommentIcon />
-            </IconButton>
-          }
-            disablePadding
-          >
-            <ListItemButton>
-              <ListItemAvatar>
-                <img src='/public/profilphoto.png' style={{
-                  width:"40px",
-                  height:"40px",
-                  borderRadius:"50%",
-                  objectFit:"cover"
-                }}/>
-              </ListItemAvatar>
-              <ListItemText id={labelId} primary={`Line item ${value + 1}`} />
-            </ListItemButton>
-          </ListItem>
-        );
-      })}
-    </List>
-
-    </Box>
+      
     <Box>
     
-
- {/* ......................................................... */}
- 
           <Box  sx={{
             display:"flex",
             justifyContent:"space-between",
-            gap:"20px"
+            gap:"20px",
+            marginTop:"80px"
           }}>
           
           <Box sx={{
      
-             width:"500px",
-             height:"150px",
-             border:"1px solid rgb(201, 199, 199)",
             background:"white",
              borderRadius:"10px",
              display:"grid",
@@ -183,27 +113,21 @@ function TblLaboratoire() {
             
            }}>
              <Box sx={{
-              display:"grid",
-              gridTemplateColumns:"auto auto auto",
-              
-              justifyContent:"space-around",
-              margin:"20px ",
-              gap:"40px"
-            }}>
-
-             
-              <p><strong>Nom : </strong> Katembo mwamijean</p>
-              <p><strong>Adresse : </strong> ndosho/Av.ngungu</p>
-              <p><strong>Age : </strong> 23 ans</p>
-              
-              
-              <p><strong>Sexe : </strong>Masculim</p>
-              <p><strong>Poids : </strong> 60 kg </p>
-              <p><strong>Tel: </strong> 0791234442</p>
-            
-              
-              
-            </Box>
+            display:"grid",
+            gridTemplateColumns:"auto auto auto auto",
+            gap:"30px",
+            background:"white",
+            padding:"0px"
+          }}>
+            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>kasongo</span></h3>
+            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>22 ans</span></h3>
+            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>masculin</span></h3>
+            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
+            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
+            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
+            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>Goma/Q.ndosho/AV.ngungu</span></h3>
+            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>078374848</span></h3>
+          </Box>
             </Box>
             
             <Box sx={{
@@ -248,19 +172,18 @@ function TblLaboratoire() {
     }}>
 
      <form action="" style={{
-      width:"100%",
+     
       display:"grid"
     }}
      >
 <Box  sx={{
-width:"100%",
-display:"grid"
-
-}}> 
-<FormControl variant="filled"   >
-<InputLabel id="demo-simple-select-filled-label">Patient ID</InputLabel>
+display:"grid",
+gridTemplateColumns:"auto  auto",
+gap:"10px",}}> 
+<FormControl variant="standard"   >
+<InputLabel id="demo-simple-select-standard-label">Nom du patient</InputLabel>
         <Select
-           labelId="demo-simple-select-filled-label"
+           labelId="demo-simple-select-standard-label"
           id="demo-simple-select-standard"
           size="small"
           {...register("patient_id", { required: true })}>
@@ -271,10 +194,10 @@ display:"grid"
           <MenuItem value={20}>2</MenuItem>
         </Select>
 </FormControl>
-<FormControl variant="filled"   >
-<InputLabel id="demo-simple-select-filled-label">Service</InputLabel>
+<FormControl variant="standard"   >
+<InputLabel id="demo-simple-select-standard-label">Service</InputLabel>
         <Select
-           labelId="demo-simple-select-filled-label"
+           labelId="demo-simple-select-standard-label"
           id="demo-simple-select-standard"
           size="small"
           {...register("patient_id", { required: true })}>
@@ -310,36 +233,34 @@ display:"grid"
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
- label="Hemoglobine" 
- variant="filled" 
+id="standard-basic" label="Hemoglobine" variant="standard"
  type="text"
  size="small"
  {...register("Hemoglobine", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic"
  label="Hematocrite" 
- variant="filled" 
+ variant="standard"
  type="text"
  size="small"
  {...register("Hematocrite", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic"
  label="Globule blanc" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Globule_blanc", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Globule rouge" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Globule_rouge", { required: true })}/>
@@ -365,90 +286,90 @@ className='inpt_material'
 
  <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="N" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("fl_n", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="L" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("fl_l", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="E" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("fl_E", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="M" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("fl_m", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="B" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("fl_B", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Vitesse de sedimentation" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Vitesse_de_sedimentation", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="TS" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("ts", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="TC" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("tc", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Plaquette sanguines" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Plaquette_sanguines", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Test d'Emmel" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Test_Emmel", { required: true })}/>
@@ -476,90 +397,90 @@ className='inpt_material'
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Goutte epaisse" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Goutte_epaisse", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="TDR" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("TDR", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Goutte fraiche" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Goutte_fraiche", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Salle enrichies" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("salle_enrichie", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Salle directes" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("salle_directes", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Frottis uretral a frais" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Frottis_uretral", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Frottis vaginale a frais" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Frottis_vaginal", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Sediment urinaire" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Sediment_urinaire", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="LCR-Element" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("LCR_Element", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="FI" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("FI", { required: true })}/>
@@ -588,45 +509,45 @@ className='inpt_material'
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="FV Gram" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("FV_Gram", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="FU Gram" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("FU_Gram", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="LCR Gram" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Lcr_gram", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Sediment urinaire Gram" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Sediment_urinaire_Gram", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Spermogramme" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("spermogramme", { required: true })}/>
@@ -645,27 +566,27 @@ className='inpt_material'
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Glycemie" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Glycemie", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Uree sanguine" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Uree_sanguine", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Creatine sanguine" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Creatine_sanguine", { required: true })}/>
@@ -673,63 +594,63 @@ className='inpt_material'
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Creatine sanguine" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Creatine_sanguine", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="SGOT(AST)" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("SGOT", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="SGPT(ALT)" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("SGPT(ALT)", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Bil Tot" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Bil_Tot", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Bil Dir" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Bil_dir", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Bil Dir" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Bil_dir", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Bil ind" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Bil_ind", { required: true })}/>
@@ -737,9 +658,9 @@ className='inpt_material'
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Phosphatase alcaline" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Phosphatase_alcaline", { required: true })}/>
@@ -748,7 +669,7 @@ className='inpt_material'
 className='inpt_material'
  id="filled-basic" 
  label="Phosphatase acide" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Phosphatase_acide", { required: true })}/>
@@ -756,18 +677,18 @@ className='inpt_material'
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Glucosurie" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Glucosurie", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Albuminirie" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Albuminirie", { required: true })}/>
@@ -792,36 +713,36 @@ className='inpt_material'
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Test WIDAL TO" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Test_WIDAL_TO", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="TH" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("TH", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Facteurs Rhumatoides" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Facteurs_Rhumatoides", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="ASLO" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("ASLO", { required: true })}/>
@@ -829,63 +750,63 @@ className='inpt_material'
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Hbs Ag" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Hbs_Ag", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Hbs Ag ALSO" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Hbs_Ag_ALSO", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Test VDRL ou RPR" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Test_VDRL_ou_RPR", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Test VIH" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Test_VIH", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Test de Grossesse" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Test_de_Grossesse", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="CRP" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("CRP", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Hapatite virale B" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Hapatite_virale_B", { required: true })}/>
@@ -893,27 +814,27 @@ className='inpt_material'
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="H.Pylori" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("H.Pylori", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Autre" 
- variant="filled" 
+ variant="standard" 
  type="text"
  size="small"
  {...register("Autre", { required: true })}/>
 
 <TextField
 className='inpt_material'
- id="filled-basic" 
+ id="standard-basic" 
  label="Date" 
- variant="filled" 
+ variant="standard" 
  type="date"
  size="small"
  {...register("date", { required: true })}/>
@@ -921,7 +842,7 @@ className='inpt_material'
 </Box>
 
 
-
+<Box sx={{display:"flex",justifyContent:"space-between"}}>
 <Button   sx={{
   width:"fit-content",
   marginTop:"10px",
@@ -929,6 +850,13 @@ className='inpt_material'
            Enregistrer
 </Button>
 
+<Button   sx={{
+  width:"fit-content",
+  marginTop:"10px",
+}}variant="outlined" color="success" onClick={detailLabo}>
+          Detail
+</Button>
+</Box>
 
 
 

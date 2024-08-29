@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 export default function OrganisationClinique() {
 const navigate=useNavigate()
   const hospitalisation=()=>{
-   navigate("/hospitalisation")
+   navigate("/acceuilHospitalisation")
   }
  
    const ambulatoire=()=>{

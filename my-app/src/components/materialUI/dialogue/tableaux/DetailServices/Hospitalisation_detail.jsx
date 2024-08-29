@@ -110,69 +110,106 @@ const reception=()=>{
           display:"grid",
           gap:"30px",
           alignItems:"center",
-          width:"950px",
-          marginLeft:"auto",
-          marginRight:"auto",
-          marginTop:"80px",
+          margin:"20px"
         
         }}>
-          <Box>
+
+
+          <Box mt={5} >
           <Button variant="contained" color="error" onClick={handledossier}>
             Retour
            </Button>
-           {/* ......................................................... */}
 
            <Stack mt={5} spacing={2}>
            <Pagination count={2} color="primary" onChange={fiche_de_nursing}/>
            </Stack>
-      </Box>
+
+          </Box>
+
+
+
          <Box sx={{
           background:"white",
-           padding:"20px"
+           padding:"20px",
+           borderRadius:"10px",
+           border:"1px solid rgba(0, 0, 0, 0.103)",
          }}>
 
           <h1>FICHE DE NURSING</h1>
+         
+
           <Box sx={{
+                marginTop:"10px",
+                display:"flex",
+                justifyContent:"space-between"
+              }}>
+              <Box sx={{
             display:"grid",
-            gridTemplateColumns:"auto auto auto",
+            gridTemplateColumns:"auto auto auto auto",
             gap:"30px",
             background:"white",
-            marginTop:"50px"
-           
+            
           }}>
             <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>kasongo</span></h3>
             <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>22 ans</span></h3>
             <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>masculin</span></h3>
             <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
+            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
+            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
             <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>Goma/Q.ndosho/AV.ngungu</span></h3>
             <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>078374848</span></h3>
           </Box>
+     
+
+          <Box sx={{
+              
+              border:"1px solid rgb(201, 199, 199)",
+               backgroundImage:"url('moderate-aquamarine-dark-gradient-background_608506-1382.avif')",
+              backgroundRepeat:"no-repeat",
+              backgroundSize: "cover",
+             backgroundPosition:"center",
+             width:"150px",
+             height:"150px",
+             borderRadius:"10px",
+             display:"flex",
+             alignItems:"center",
+             justifyContent:"center"
+            }}>
+             
+              <img src="/public/profilphoto.png" alt="" style={{
+                width:"100px",
+                height:"100px",
+                borderRadius:"50%"
+              }}/>
+            
+            </Box>
+            </Box>
         
          
 <Box  sx={{
  overflowX:"auto",
- width:"950px",
  marginTop:"80px"
 }}>
           <TableContainer component={Paper}>
       <Table sx={{ 
-        minWidth: 1200 ,
         textAlign:"left",
        
 
         }} size="small" aria-label="a dense table">
-        <TableHead  >
+        <TableHead  sx={{ backgroundImage:"url('moderate-aquamarine-dark-gradient-background_608506-1382.avif')",
+               backgroundRepeat:"no-repeat",
+               backgroundSize: "cover",
+               backgroundPosition:"center",
+               color:"white"}}>
           <TableRow >
-            <TableCell sx={{ width: "100px"}}>Diagnostic de prosomption</TableCell>
-            <TableCell sx={{ width: "100px"}}>Operation prevue</TableCell>
-            <TableCell sx={{ width: "100px"}}>POULS</TableCell>
-            <TableCell sx={{ width: "100px"}}>RESPIRATION</TableCell>
-            <TableCell sx={{ width: "100px"}}>TA</TableCell>
-            <TableCell sx={{ width: "100px"}}>POIDS</TableCell>
-            <TableCell sx={{ width: "100px"}}>Medicament per OS</TableCell>
-            <TableCell sx={{ width: "100px"}}>Injectable</TableCell>
-            <TableCell sx={{ width: "100px"}}>Perfusion</TableCell>
-            <TableCell sx={{ width: "100px"}}>Autre</TableCell>
+            <TableCell sx={{ width: "100px",color:"white"}}>Diagnostic de prosomption</TableCell>
+            <TableCell sx={{ width: "100px",color:"white"}}>Operation prevue</TableCell>
+            <TableCell sx={{ width: "100px",color:"white"}}>Pouls</TableCell>
+            <TableCell sx={{ width: "100px",color:"white"}}>Respiration</TableCell>
+            <TableCell sx={{ width: "100px",color:"white"}}>Medicament per OS</TableCell>
+            <TableCell sx={{ width: "100px",color:"white"}}>Injectable</TableCell>
+            <TableCell sx={{ width: "100px",color:"white"}}>Perfusion</TableCell>
+            <TableCell sx={{ width: "100px",color:"white"}}>Autre</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -182,8 +219,6 @@ const reception=()=>{
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
              
-              <TableCell > lorem lorem lorem</TableCell>
-              <TableCell > lorem lorem lorem</TableCell>
               <TableCell > lorem lorem lorem</TableCell>
               <TableCell > lorem lorem lorem</TableCell>
               <TableCell > lorem lorem lorem</TableCell>

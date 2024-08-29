@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Laboratoire() {
   const navigate=useNavigate()
   const handleclick=()=>{
-    navigate("/Laboratoire")
+    navigate("/acceuillaboratoire")
   }
   return (
     
