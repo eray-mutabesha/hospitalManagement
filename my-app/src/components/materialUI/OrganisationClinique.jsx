@@ -27,8 +27,8 @@ const navigate=useNavigate()
            <FontAwesomeIcon icon={faTableColumns} /> 
            Organisations clinique
           </nav>
-          <Menu {...bindMenu(popupState)}>
-            <MenuItem onClick={hospitalisation}>Hospitalisation</MenuItem>
+          <Menu {...bindMenu(popupState)} >
+            <MenuItem onClick={hospitalisation} >Hospitalisation</MenuItem>
             <MenuItem onClick={ambulatoire}>Ambulatoire</MenuItem>
             <MenuItem onClick={hospitalisation}>Urgences</MenuItem>
             

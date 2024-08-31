@@ -60,7 +60,7 @@ const hospitalisation =()=>{
 }
 
 const ambulatoiredetail= ()=>{
-  navigate("/ambulatoiredetail")
+  navigate("/ambulatoire")
 }
   return (
     <>

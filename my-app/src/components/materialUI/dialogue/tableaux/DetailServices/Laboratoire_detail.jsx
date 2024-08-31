@@ -39,7 +39,7 @@ function Laboratoire_detail() {
 
  const navigate = useNavigate()
  const handledossier=()=>{
-   navigate("/detaildossier")
+   navigate("/Laboratoire")
  }
  const Detailpatient=()=>{
   navigate("/detailPatient")

@@ -58,7 +58,7 @@ function Hospitalisation_detail() {
 
  const navigate = useNavigate()
  const handledossier=()=>{
-   navigate("/detaildossier")
+   navigate("/hospitalisation")
  }
  const fiche_de_nursing=(event, value) =>{
   navigate(`/hospitalisationdetail${value}`)

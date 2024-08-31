@@ -46,6 +46,9 @@ function TblLaboratoire() {
   const detailLabo =()=>{
     navigate("/laboratoiredetail")
   }
+  const handledossier=()=>{
+    navigate("/detaildossier")
+  }
   return (
     <>
       <section  id='all_section'>
@@ -91,15 +94,47 @@ function TblLaboratoire() {
       marginTop:"100px",
       justifyContent:"space-evenly",
       margin:"20px",
+      // border:"1px solid red"
     }}>    
       
+
+      
+      <Button  variant="contained" color="error" sx={{
+    width:"fit-content",
+    marginTop:"40px"}}onClick={handledossier}>
+            Retour
+           </Button>
+
+
     <Box>
     
-          <Box  sx={{
+   
+
+
+
+    
+    <Box sx={{
+      
+      padding:"10px",
+       border: "1px solid rgb(201, 199, 199)",
+      background:"white",
+      borderRadius:"10px",
+      marginTop:"20px"
+    }}>
+
+
+
+<h1>FICHE LABORATOIRE</h1>
+
+
+
+
+
+
+<Box  sx={{
             display:"flex",
             justifyContent:"space-between",
             gap:"20px",
-            marginTop:"80px"
           }}>
           
           <Box sx={{
@@ -161,15 +196,11 @@ function TblLaboratoire() {
 
 
 
-    <Typography variant='h5' mt={5}>Fiche Laboratoire</Typography>
-    <Box sx={{
-      
-      padding:"10px",
-       border: "1px solid rgb(201, 199, 199)",
-      background:"white",
-      borderRadius:"10px",
-      marginTop:"20px"
-    }}>
+
+
+
+
+
 
      <form action="" style={{
      
@@ -842,17 +873,11 @@ className='inpt_material'
 </Box>
 
 
-<Box sx={{display:"flex",justifyContent:"space-between"}}>
-<Button   sx={{
-  width:"fit-content",
-  marginTop:"10px",
-}}variant="contained" color="success" >
-           Enregistrer
-</Button>
+<Box mt={2} sx={{display:"flex",justifyContent:"space-between"}}>
+<ChoixTransferClt/>
 
 <Button   sx={{
   width:"fit-content",
-  marginTop:"10px",
 }}variant="outlined" color="success" onClick={detailLabo}>
           Detail
 </Button>
