@@ -13,12 +13,13 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 const { register, handleSubmit,formState:{errors} } = useForm();
 // const { onChange} = register('select');
  const navigate=useNavigate()
- useEffect(()=>{
-  if(localStorage.getItem("Admin")){
+ 
+//protection de route
+useEffect(()=>{
+  if(localStorage.getItem("Utilisateur")){
      navigate("/");
     }
   })
-
 
  const [formData, setFormData] = useState({
   nom: "",
@@ -32,28 +33,65 @@ const { register, handleSubmit,formState:{errors} } = useForm();
 
 
  const onSubmit=(data)=>{
+ 
   if(data.password !== data.password_confirm){
     toast.error("verifiez votre mot de passe")
   }else{
+    
 
-    // API pour insérer les données
-    axios.post(`${BASE_URL}/insert_admin`, data)
-      .then(({ data }) => {
-        if (data.status == 500) {
-          toast.error("Il y a une erreur");
-        } else {
-        localStorage.setItem("Admin", JSON.stringify(data))
-        toast.success("inscription réussi");
-      
+
+    axios.post(`${BASE_URL}/getadminData_admin`, {
+      email: data.email,
+      password:data.password
+  })
+
+  .then((res) => {
+      if (res.data.exists) {
         
+          toast.error("le compte existe");
+      } 
+      else {
+        axios.post(`${BASE_URL}/insert_admin`, data)
+        .then(({ data }) => {
+          if (data.status == 500) {
+            toast.error("Il y a une erreur");
+          } else {
+            localStorage.setItem("Utilisateur", JSON.stringify(res.data.user));
+            navigate("/")
+            toast.success("inscription réussi");
+        
+          
+        }
+        })
+         .catch((err) => {
+           console.log(err);
+           toast.error("Il y a une erreur");
+         });
       }
-      })
-       .catch((err) => {
-         console.log(err);
-         toast.error("Il y a une erreur");
-       });
+  })
+
+  .catch((err) => {
+    
+      toast.error("erreur technique essayer plus tard");
+  });
+
+
+
+
+
+
+
+
+
+
+       
+     
+
+     
+    }
+   
   }
-}
+
 
   return (
     <div className='login_all_div'>

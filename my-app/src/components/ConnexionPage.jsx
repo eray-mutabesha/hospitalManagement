@@ -7,21 +7,51 @@ import axios from 'axios';
 
 
 function ConnexionPage() {
- 
-const { register, handleSubmit,formState:{errors} } = useForm();
-   
-// const navigate=useNavigate()
-const onSubmit=(data)=>{
-  if(data.password !== data.password_confirm){
-    toast.error("les mots de passes ne correspondent pas")
-  }
-  else{
-    console.log(data)
-    toast.success("connexion reussie")
-  }
- 
- 
+  const BASE_URL = import.meta.env.VITE_API_URL;
+  const { register, handleSubmit,formState:{errors} } = useForm();
+  const navigate=useNavigate()
+
+
+ //protection de route
+ useEffect(()=>{
+   if(localStorage.getItem("Utilisateur")){
+      navigate("/");
+     }
+   })
+
+
+
+
+
+const onSubmit = (data) => {
+
+  axios.post(`${BASE_URL}/getadminData_admin`, {
+      email: data.email,
+      password:data.password
+  })
+
+  .then((res) => {
+      if (res.data.exists) {
+          // Stocker les données utilisateur dans le localStorage (optionnel)
+          localStorage.setItem("Utilisateur", JSON.stringify(res.data.user));
+          navigate("/")
+          toast.success("Connexion réussie");
+      } 
+      else {
+          toast.error("Email ou mot de passe incorrecte");
+      }
+  })
+
+  .catch((err) => {
+
+      toast.error("erreur technique essayer plus tard");
+  });
 }
+
+
+
+
+
 
   return (
     <div className='login_all_div'>
@@ -40,21 +70,15 @@ const onSubmit=(data)=>{
         <h1>Connectez-vous</h1>
 
         <input type='text' 
-        placeholder='Nom'
-        {...register("nom", { required: true })} />
-        {errors.nom && <span style={{ color: 'red' }}>This field is required</span>}
+        placeholder='Email'
+        {...register("email", { required: "Veuillez entrer le nom" })} />
 
 
-        <input type='password' 
-        placeholder='Mot de passe'
-        {...register("password", { required: true })} />
-        {errors.password && <span style={{ color: 'red' }}>This field is required</span>}
+          <input type='password' 
+        placeholder='password'
+        {...register("password", { required: "Veuillez entrer le nom" })} />
 
-        <input type='password' 
-        placeholder='Confirmez le mot de passe'
-        {...register("password_confirm", { required: true })} />
-        {errors.password_confirm && <span style={{ color: 'red' }}>This field is required</span>}
-
+        
         <nav>
         <button type='submit'>connexion</button>
         </nav>
