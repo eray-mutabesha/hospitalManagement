@@ -37,11 +37,11 @@ const routes=createBrowserRouter([
  
   {
     path:"/",
-    element:<App/>
+    element:<ConnexionPage />
 },
   {
-   path:"/connexion",
-   element:<ConnexionPage />
+   path:"/home",
+   element:<App/>
   },
   {
     path:"/deconnexion",

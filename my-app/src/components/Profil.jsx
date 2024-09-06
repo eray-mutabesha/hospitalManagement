@@ -1,17 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Box, Button, Typography,TextField, Stack } from '@mui/material'
 import { faBell,faCaretDown,faCheck,faXmark,faMagnifyingGlass,faListCheck,faUserDoctor,faStethoscope,faCommentsDollar,faChevronDown} from '@fortawesome/free-solid-svg-icons'
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import IconButton from '@mui/material/IconButton';
-import CommentIcon from '@mui/icons-material/Comment';
-import SaveIcon from '@mui/icons-material/Save';
-import { InputLabel,Select,MenuItem,FormControl}  from '@mui/material';
-import { useForm} from "react-hook-form"
 import Dashboard from './materialUI/Dashboard.jsx'
 import Reception from './materialUI/Reception.jsx'
 import Consultation from './materialUI/Consultation.jsx'
@@ -20,25 +10,25 @@ import OrganisationClinique from './materialUI/OrganisationClinique.jsx'
 import Factutation from './materialUI/Facturation.jsx'
 import Ressources from './materialUI/Resources.jsx'
 import Parametre from './materialUI/Parametre.jsx'
-
-
+import { useState } from 'react'
+import axios from 'axios';
+import toast from 'react-hot-toast';
 
 function Profil() {
-  const { register, handleSubmit,formState:{errors} } = useForm();
-  const [checked, setChecked] = React.useState([1]);
+  const BASE_URL = import.meta.env.VITE_API_URL;
+  const [datas,setdatas]=useState([])
 
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
 
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
 
-    setChecked(newChecked);
-  };
+
+
+  useEffect(()=>{
+    
+    const INFO_Utilisateur_from_localStorage = JSON.parse(localStorage.getItem('Utilisateur'));
+
+    setdatas(INFO_Utilisateur_from_localStorage);
+    },[])
+ 
   return (
     <>
       <section  id='all_section'>
@@ -48,7 +38,7 @@ function Profil() {
           </div>
         <div>
               <Dashboard />
-             <Reception/>
+              <Reception/>
               <Consultation/>
               <Laboratoire/>
               <OrganisationClinique/>
@@ -131,7 +121,7 @@ function Profil() {
                  heigth:"fit-content",
                  padding:"5px",
                  borderRadius:"5px"
-              }}><p><strong>Nom : </strong>jonathan</p>
+              }}><p><strong>Nom et post-nom: </strong>{datas.nom}</p>
               <img src='public/editPhoto-removebg-preview.png' style={{
                 width:"20px",
                 height:"20px"
@@ -146,21 +136,7 @@ function Profil() {
                  heigth:"fit-content",
                  padding:"5px",
                  borderRadius:"5px"
-              }}><p><strong>Post-nom : </strong>kasongo</p>
-              <img src='public/editPhoto-removebg-preview.png' style={{
-                width:"20px",
-                height:"20px"
-              }}/></Box>
-
-
-              <Box sx={{
-                display:"flex",
-                border:"1px solid rgb(201, 199, 199)",
-                 justifyContent:"space-between",
-                 heigth:"fit-content",
-                 padding:"5px",
-                 borderRadius:"5px"
-              }}><p><strong>Fonction : </strong>docteur</p>
+              }}><p><strong>Fonction : </strong>{datas.fonction}</p>
               <img src='public/editPhoto-removebg-preview.png' style={{
                 width:"20px",
                 height:"20px"
@@ -175,11 +151,26 @@ function Profil() {
                  heigth:"fit-content",
                  padding:"5px",
                  borderRadius:"5px"
-              }}><p><strong>Adresse : </strong>goma/Q.kyeshero/AV.mageni</p>
+              }}><p><strong>Genre : </strong>{datas.sexe}</p>
               <img src='public/editPhoto-removebg-preview.png' style={{
                 width:"20px",
                 height:"20px"
               }}/></Box>
+
+<Box sx={{
+                display:"flex",
+                border:"1px solid rgb(201, 199, 199)",
+                 justifyContent:"space-between",
+                 heigth:"fit-content",
+                 padding:"5px",
+                 borderRadius:"5px"
+              }}><p><strong>Genre : </strong>{datas.sexe}</p>
+              <img src='public/editPhoto-removebg-preview.png' style={{
+                width:"20px",
+                height:"20px"
+              }}/></Box>
+
+
 
 
               <Box sx={{
@@ -189,21 +180,7 @@ function Profil() {
                  heigth:"fit-content",
                  padding:"5px",
                  borderRadius:"5px"
-              }}><p><strong>Mot de passe : </strong>23331212121212111</p>
-              <img src='public/editPhoto-removebg-preview.png' style={{
-                width:"20px",
-                height:"20px"
-              }}/></Box>
-
-
-              <Box sx={{
-                display:"flex",
-                border:"1px solid rgb(201, 199, 199)",
-                 justifyContent:"space-between",
-                 heigth:"fit-content",
-                 padding:"5px",
-                 borderRadius:"5px"
-              }}><p><strong>Email : </strong>jonathan@gmail.com</p>
+              }}><p><strong>Email : </strong>{datas.email}</p>
               <img src='public/editPhoto-removebg-preview.png' style={{
                 width:"20px",
                 height:"20px"

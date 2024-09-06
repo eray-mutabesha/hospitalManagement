@@ -15,7 +15,7 @@ function ConnexionPage() {
  //protection de route
  useEffect(()=>{
    if(localStorage.getItem("Utilisateur")){
-      navigate("/");
+      navigate("/home");
      }
    })
 
@@ -33,8 +33,9 @@ const onSubmit = (data) => {
   .then((res) => {
       if (res.data.exists) {
           // Stocker les données utilisateur dans le localStorage (optionnel)
-          localStorage.setItem("Utilisateur", JSON.stringify(res.data.user));
-          navigate("/")
+          
+          localStorage.setItem("Utilisateur", JSON.stringify(res.data.data));
+          navigate("/home")
           toast.success("Connexion réussie");
       } 
       else {

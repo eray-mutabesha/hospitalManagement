@@ -17,14 +17,15 @@ const { register, handleSubmit,formState:{errors} } = useForm();
 //protection de route
 useEffect(()=>{
   if(localStorage.getItem("Utilisateur")){
-     navigate("/");
-    }
+     navigate("/home");
+     }
   })
 
  const [formData, setFormData] = useState({
   nom: "",
-  age: "",
-  select: "",
+  fonction: "",
+  sexe: "",
+  Adresse:"",
   email: "",
   password: "",
   password_confirm:""
@@ -51,15 +52,19 @@ useEffect(()=>{
           toast.error("le compte existe");
       } 
       else {
+        
+        localStorage.setItem("Utilisateur", JSON.stringify(data));
+            
         axios.post(`${BASE_URL}/insert_admin`, data)
+        
         .then(({ data }) => {
           if (data.status == 500) {
             toast.error("Il y a une erreur");
           } else {
-            localStorage.setItem("Utilisateur", JSON.stringify(res.data.user));
-            navigate("/")
-            toast.success("inscription réussi");
-        
+          console.log(res.data)
+           navigate("/home")
+           toast.success("inscription réussi");
+           
           
         }
         })
@@ -74,18 +79,6 @@ useEffect(()=>{
     
       toast.error("erreur technique essayer plus tard");
   });
-
-
-
-
-
-
-
-
-
-
-       
-     
 
      
     }
@@ -115,18 +108,20 @@ useEffect(()=>{
       value={formData.nom}
       onChange={(e) => setFormData({ ...formData, nom: e.target.value })} />
          
-         <input type='number' 
-        placeholder='Age'
-        {...register("age", { required: "Veuillez entrer l'action" })}
-        value={formData.age}
-        onChange={(e) => setFormData({ ...formData, age: e.target.value })}/>
+
+
+         <input type='text' 
+        placeholder='Fonction'
+        {...register("fonction", { required: "Veuillez entrer l'action" })}
+        value={formData.fonction}
+        onChange={(e) => setFormData({ ...formData, fonction: e.target.value })}/>
         
 
         <select
             className='select'
-            {...register("select", { required: "Veuillez entrer l'action" })}
-            value={formData.select}
-            onChange={(e) => setFormData({ ...formData, select: e.target.value })}
+            {...register("sexe", { required: "Veuillez entrer l'action" })}
+            value={formData.sexe}
+            onChange={(e) => setFormData({ ...formData, sexe: e.target.value })}
           >
 
           <option value="">Genre</option>
@@ -137,7 +132,11 @@ useEffect(()=>{
       
 
        
-
+        <input type='text' 
+        placeholder='Adresse'
+        {...register("Adresse", { required: "Veuillez entrer le nom" })}
+        value={formData.Adresse}
+        onChange={(e) => setFormData({ ...formData, Adresse: e.target.value })} />
         
         <input type='text' 
         placeholder='Email'

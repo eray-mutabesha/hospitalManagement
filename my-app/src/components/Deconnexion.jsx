@@ -7,11 +7,11 @@ function Deconnexion() {
     
     const navigate=useNavigate();
     const handleAcceuil=()=>{
-     navigate("/")
+     navigate("/home")
     }
     const handleout=()=>{
         localStorage.clear();
-        navigate("/connexion")
+        navigate("/")
     }
   return (
     <div className="all" sx={{

@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Dashboard() {
 const navigate=useNavigate()
   const handleclick=()=>{
-   navigate("/")
+   navigate("/home")
   }
   return (
           <nav onClick={handleclick} className='navone'>
