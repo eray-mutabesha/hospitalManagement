@@ -57,13 +57,13 @@ function App() {
           </div>
         <div className='menus'>
               <nav id='personaliser'><Dashboard /></nav>
-              <Reception/>
-              <Consultation/>
-              <Laboratoire/>
-              <OrganisationClinique/>
-              <Factutation/>
-              <Ressources/>
-              <Parametre/>
+              <nav><Reception/></nav>
+              <nav><Consultation/></nav>
+              <nav><Laboratoire/></nav>
+              <nav><OrganisationClinique/></nav>
+              <nav><Factutation/></nav>
+              <nav><Ressources/></nav>
+              <nav><Parametre/></nav>
           </div>
 
         </div>

@@ -22,34 +22,41 @@ import Reception from '../../Reception.jsx'
 import Consultation from '../../Consultation.jsx'
 import Ressources from '../../Resources.jsx'
 import Laboratoire from '../../Laboratoire.jsx'
-
 import OrganisationClinique from '../../OrganisationClinique.jsx'
-import Factutation from '../../Facturation.jsx'
+import { useState,useEffect } from 'react'
+import toast from 'react-hot-toast';
+import axios from 'axios';
 
 
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData(1,'Katembo mwami john', '12/03/2024','En attente',),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  
-];
 
 
 function TblMedecins() {
+  const BASE_URL = import.meta.env.VITE_API_URL;
+  const [datas, setDatas] = useState([]);
+  
   const navigate = useNavigate()
   const handledetail=()=>{
     navigate("/detaildossier")
   }
+
+  const getMedecins = () => {
+    axios.get(`${BASE_URL}/get_medecins_data`)
+      .then(({ data }) => {
+        console.log(data);
+        setDatas(data.data || []); 
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Il y a une erreur");
+      });
+  };
+
+  useEffect(() => {
+    getMedecins();
+  }, []);
+
+
   return (
     <>
       <section  id='all_section'>
@@ -112,7 +119,7 @@ function TblMedecins() {
             <TableCell>#</TableCell>
             <TableCell >NOM</TableCell>
             <TableCell >DATE D'ARRIVER</TableCell>
-            <TableCell >DEPARTEMENT</TableCell>
+            <TableCell >SEXE</TableCell>
             <TableCell >SPECIALISATION</TableCell>
             <TableCell >TELEPHONE</TableCell>
             <TableCell >MEIL</TableCell>
@@ -121,20 +128,20 @@ function TblMedecins() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {datas.map((dat,index) => (
             <TableRow
-              key={row.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              key={index}
             >
               <TableCell component="th" scope="row">
-                001
+                {dat.id}
               </TableCell>
-              <TableCell >Alice kitoko furaha</TableCell>
-              <TableCell >12/04/2024</TableCell>
-              <TableCell >pharmacie</TableCell>
-              <TableCell >pharmacienne</TableCell>
-              <TableCell >07914343635</TableCell>
-              <TableCell >alicekitoko@gmail.com</TableCell>
+              <TableCell >{dat.nom}</TableCell>
+              <TableCell >{dat.date_arrive}</TableCell>
+              <TableCell >{dat.sexe}</TableCell>
+              <TableCell >{dat.specialisation}</TableCell>
+              <TableCell >{dat.telephone}</TableCell>
+              <TableCell >{dat.email}</TableCell>
               <TableCell align="right">
               <Box sx={{
                 display:"flex",

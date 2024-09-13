@@ -43,13 +43,13 @@
     border-radius: 10px;
 }
 
-.medecin_fom button{
+/* .medecin_fom button{
     margin: 10px auto;
-    width: 200px;
+   
     border: 1px solid black;
     box-shadow: 0px 0px 5px 0px rgba(38, 233, 233, 0.644);
 
 }
 .medecin_fom button:hover{
     box-shadow: 0px 0px 5px 0px rgb(102, 101, 101);
-}
+} */
