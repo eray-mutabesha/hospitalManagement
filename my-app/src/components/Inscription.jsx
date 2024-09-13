@@ -32,58 +32,58 @@ useEffect(()=>{
 });
 
 
-
  const onSubmit=(data)=>{
  
-  if(data.password !== data.password_confirm){
-    toast.error("verifiez votre mot de passe")
-  }else{
-    
-
-
-    axios.post(`${BASE_URL}/getadminData_admin`, {
-      email: data.email,
-      password:data.password
-  })
-
-  .then((res) => {
-      if (res.data.exists) {
-        
-          toast.error("le compte existe");
-      } 
-      else {
-        
-        localStorage.setItem("Utilisateur", JSON.stringify(data));
-            
-        axios.post(`${BASE_URL}/insert_admin`, data)
-        
-        .then(({ data }) => {
-          if (data.status == 500) {
-            toast.error("Il y a une erreur");
-          } else {
-          console.log(res.data)
-           navigate("/home")
-           toast.success("inscription réussi");
-           
+    if(data.password !== data.password_confirm){
+      toast.error("verifiez votre mot de passe")
+    }else{
+      
+      
+      axios.post(`${BASE_URL}/getadminData_admin`, {
+        email: data.email,
+        password:data.password
+    }).then((res) => {
+        if (res.data.exists) {
           
+            toast.error("le compte existe");
+        } 
+        else {
+          
+          localStorage.setItem("Utilisateur", JSON.stringify(data));
+              
+          axios.post(`${BASE_URL}/insert_admin`, data)
+          
+          .then(({ data }) => {
+            if (data.status == 500) {
+              toast.error("Il y a une erreur");
+            } else {
+            console.log(res.data)
+             navigate("/home")
+             toast.success("inscription réussi");
+             
+            
+          }
+          })
+           .catch((err) => {
+             console.log(err);
+             toast.error("Il y a une erreur");
+           });
         }
-        })
-         .catch((err) => {
-           console.log(err);
-           toast.error("Il y a une erreur");
-         });
+    })
+  
+    .catch((err) => {
+          console.log(err)
+        toast.error("erreur technique essayer plus tard");
+    });
+  
+       
       }
-  })
 
-  .catch((err) => {
-    
-      toast.error("erreur technique essayer plus tard");
-  });
 
-     
-    }
-   
   }
+
+   
+  
 
 
   return (

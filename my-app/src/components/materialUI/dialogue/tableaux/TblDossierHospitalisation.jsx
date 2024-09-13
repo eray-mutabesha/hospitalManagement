@@ -52,7 +52,7 @@ function TblDossierHospitalisation() {
         <div className='logo'>
             <img src='public/logo-removebg-preview.png' alt='logo hopital'/>
           </div>
-        <div>
+          <div className='menus'>
               <Dashboard />
               <Reception/>
                <Consultation/>

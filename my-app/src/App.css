@@ -19,6 +19,7 @@ body {
     height: 100vh;
     color: white;
     position: fixed;
+
 }
 .logo{
   height: 100px;
@@ -29,22 +30,15 @@ body {
   height: 200px;
   object-fit: cover;
 }
-.div_one div{
+.div_one .menus{
   /* border: 1px solid red; */
   margin: 10px;
   display: grid;
-  gap: 10px;
-  
+  height: 80vh;
+  gap: 20px;
   
 }
 .div_one .navone{
-    /* border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border: 1px solid rgba(245, 245, 245, 0.171);
-   
-    background-color: rgba(190, 190, 190, 0.212);
-    
-    */
    
     display: flex;
     gap: 10px;

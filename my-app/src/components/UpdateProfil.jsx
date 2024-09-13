@@ -10,44 +10,69 @@ import OrganisationClinique from './materialUI/OrganisationClinique.jsx'
 import Factutation from './materialUI/Facturation.jsx'
 import Ressources from './materialUI/Resources.jsx'
 import Parametre from './materialUI/Parametre.jsx'
-import Inscription from './Inscription.jsx'
-import UpdateProfil from './UpdateProfil.jsx'
+import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-function Profil() {
+function UpdateProfil(singleData,onUpdate) {
   const BASE_URL = import.meta.env.VITE_API_URL;
-  const [datas,setdatas]=useState([])
-  const [singleData,setSingleData] = useState([])
-  const [FormVisible,setFormVisible] =useState(false)
+  const { register, handleSubmit,formState:{errors} } = useForm();
 
-  const getUserData = () => {
-    const INFO_Utilisateur_from_localStorage = JSON.parse(localStorage.getItem('Utilisateur'));
-    setdatas(INFO_Utilisateur_from_localStorage);
-  }
+  const [formData, setFormData] = useState({
+    nom: "",
+    fonction: "",
+    sexe: "",
+    Adresse:"",
+    email: "",
+  });
+  
 
-  useEffect(()=>{
-    getUserData()
-    },[])
-
-    const handleUpdate = () => {
-      setFormVisible(false);
-      getUserData()
-    };
-    
-    const Edit_nom=(model)=>{
-      setSingleData(model)
-      setFormVisible(true)
+  useEffect(() => {
+    if (singleData) {
+      setFormData({
+        nom: singleData.nom || "",
+        fonction: singleData.fonction || "",
+        sexe: singleData.sexe || "",
+        Adresse: singleData.Adresse || "",
+        email: singleData.email || "",
+       
+      });
     }
- 
+  }, [singleData]);
 
-    if(FormVisible == false){
-      
+
+  const onSubmit=(data)=>{
+    
+   if (singleData.singleData && singleData.singleData.id) {
+     // API pour mettre à jour les données
+     axios.put(`${BASE_URL}/update_user/${singleData.singleData.id}`, data)
+       .then(({ data }) => {
+         if (data.status == 500) {
+           toast.error("Il y a une erreur");
+         } else {
+          console.log(formData)
+         
+           localStorage.setItem("Utilisateur", JSON.stringify(formData));
+           toast.success("Mise à jour réussie");
+           console.log(singleData)
+           if (singleData.onUpdate) {
+            singleData.onUpdate();
+          }
+         }
+       })
+       .catch((err) => {
+         console.log(err);
+         toast.error("pas de mise en jour ");
+       });
+   }
+}
+  
    
   return (
     <>
       <section  id='all_section'>
+       
       <div className='div_one'>
         <div className='logo'>
             <img src='public/logo-removebg-preview.png' alt='logo hopital'/>
@@ -80,7 +105,7 @@ function Profil() {
                <nav>
                <img src='public/Dr. MUAMBA.jpg' className='admin_photo' alt='administrateur'/>
                </nav> 
-               <nav> <p>{datas.nom}</p></nav>
+               <nav> <p>eratata</p></nav>
                <nav><FontAwesomeIcon icon={faCaretDown} /></nav>
               </div>
 
@@ -89,7 +114,7 @@ function Profil() {
 
 
            </div>
-
+         <form onSubmit={handleSubmit(onSubmit)}> 
           <div style={{
             marginTop:"150px",
             display:"flex",
@@ -100,6 +125,7 @@ function Profil() {
             <Box  sx={{
               display:"flex",
               justifyContent:"space-around",
+              
               border:"1px solid rgb(201, 199, 199)",
               width:"600px",
               padding:"10px",
@@ -136,13 +162,14 @@ function Profil() {
                  heigth:"fit-content",
                  padding:"5px",
                  borderRadius:"5px"
-              }}><p><strong>Nom et post-nom: </strong>{datas.nom}</p>
-              <img src='public/editPhoto-removebg-preview.png' style={{
-                width:"20px",
-                height:"20px",
-                cursor:"pointer"
-              }}
-              onClick={() => Edit_nom(datas)}/>
+              }}><p><strong>Nom et post-nom: </strong>
+              <input type='texte'  
+              placeholder='Nom complet'
+              {...register("nom", { required:false})}
+              value={formData.nom}
+              onChange={(e) => setFormData({ ...formData, nom: e.target.value })}/>
+              </p>
+             
               </Box>
 
 
@@ -153,13 +180,13 @@ function Profil() {
                  heigth:"fit-content",
                  padding:"5px",
                  borderRadius:"5px"
-              }}><p><strong>Fonction : </strong>{datas.fonction}</p>
-              <img src='public/editPhoto-removebg-preview.png' style={{
-                width:"20px",
-                height:"20px",
-                cursor:"pointer"
-              }}
-              onClick={() => Edit_nom(datas)}/></Box>
+              }}><p><strong>Fonction : </strong>
+              <input type='texte'
+                 {...register("fonction", { required:false})}
+                 value={formData.fonction}
+                 onChange={(e) => setFormData({ ...formData, fonction: e.target.value })}/>
+              </p>
+              </Box>
 
 
 
@@ -170,13 +197,14 @@ function Profil() {
                  heigth:"fit-content",
                  padding:"5px",
                  borderRadius:"5px"
-              }}><p><strong>Adresse : </strong>{datas.Adresse}</p>
-              <img src='public/editPhoto-removebg-preview.png' style={{
-                width:"20px",
-                height:"20px",
-                cursor:"pointer"
-              }}
-              onClick={() => Edit_nom(datas)}/></Box>
+              }}><p><strong>Adresse : </strong><input type='texte'
+              {...register("Adresse", { required:false})}
+               value={formData.Adresse}
+               onChange={(e) => setFormData({ ...formData, Adresse: e.target.value })}/></p>
+              </Box>
+
+
+
 
              <Box sx={{
                 display:"flex",
@@ -185,13 +213,21 @@ function Profil() {
                  heigth:"fit-content",
                  padding:"5px",
                  borderRadius:"5px"
-              }}><p><strong>Genre : </strong>{datas.sexe}</p>
-              <img src='public/editPhoto-removebg-preview.png' style={{
-                width:"20px",
-                height:"20px",
-                cursor:"pointer"
-              }}
-              onClick={() => Edit_nom(datas)}/></Box>
+              }}><p><strong>Genre : </strong>
+              <select
+            className='select'
+            {...register("sexe", { required:false})}
+            value={formData.sexe}
+            onChange={(e) => setFormData({ ...formData, sexe: e.target.value })}
+          >
+
+          <option value="">Genre</option>
+          <option value="Masculin">Masculin</option>
+          <option value="Feminin">Feminin</option>
+
+        </select>
+              </p>
+              </Box>
 
 
 
@@ -203,27 +239,24 @@ function Profil() {
                  heigth:"fit-content",
                  padding:"5px",
                  borderRadius:"5px"
-              }}><p><strong>Email : </strong>{datas.email}</p>
-              <img src='public/editPhoto-removebg-preview.png' style={{
-                width:"20px",
-                height:"20px",
-                cursor:"pointer"
-              }}
-              onClick={() => Edit_nom(datas)}/></Box>
+              }}><p><strong>Email : </strong>
+              <input type='texte' 
+              {...register("email", { required:false})}
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}/></p>
+              </Box>
+              <Button type='submit'>Enregistrer la modification</Button>
              </Box>
             </Box>
           </div>
+          </form>
         </div>
+        
       </section>
     </>
-  ) }
-  else{
-    return <UpdateProfil  singleData={singleData} onUpdate={handleUpdate}/>
-  }
+  ) 
+  
 }
 
 
-
-
-export default Profil
-
+export default UpdateProfil

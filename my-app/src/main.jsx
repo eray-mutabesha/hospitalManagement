@@ -28,6 +28,7 @@ import Ambulatoire_detail from './components/materialUI/dialogue/tableaux/Detail
 import TblDossierConsultation from './components/materialUI/dialogue/tableaux/TblDossierConsultation.jsx';
 import TblDossierLaboratoire from './components/materialUI/dialogue/tableaux/TblDossierLaboratoire.jsx';
 import TblDossierHospitalisation from './components/materialUI/dialogue/tableaux/TblDossierHospitalisation.jsx';
+import UpdateProfil from './components/UpdateProfil.jsx';
 
 
 
@@ -137,6 +138,10 @@ const routes=createBrowserRouter([
     path:"/acceuilHospitalisation",
     element:<TblDossierHospitalisation/>
    },
+   {
+    path:"/updateprofil",
+    element:<UpdateProfil/>
+   }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
