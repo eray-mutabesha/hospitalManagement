@@ -26,24 +26,32 @@ import OrganisationClinique from '../../OrganisationClinique.jsx'
 import { useState,useEffect } from 'react'
 import toast from 'react-hot-toast';
 import axios from 'axios';
-
+import MedecinsFormUpdt from '../MedecinsFormUpdt.jsx'
 
 
 
 
 function TblMedecins() {
+
   const BASE_URL = import.meta.env.VITE_API_URL;
   const [datas, setDatas] = useState([]);
+
+  const [singleData,setSingleData] = useState([])
+  const [FormVisible,setFormVisible] =useState(false)
   
   const navigate = useNavigate()
   const handledetail=()=>{
     navigate("/detaildossier")
   }
 
+
+
+
+
+  // post medecin route
   const getMedecins = () => {
     axios.get(`${BASE_URL}/get_medecins_data`)
       .then(({ data }) => {
-        console.log(data);
         setDatas(data.data || []); 
       })
       .catch((err) => {
@@ -57,6 +65,45 @@ function TblMedecins() {
   }, []);
 
 
+
+
+
+// delete medecin route
+  const deleteEntree = (model) => {
+    axios.delete(`${BASE_URL}/delete_medecin/${model.id}`)
+      .then(({ data }) => {
+        setDatas(data.data || []); // Assurer que data.data est un tableau
+        getMedecins();
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Il y a une erreur");
+      });
+  };
+
+
+
+
+  useEffect(()=>{
+    getMedecins();
+    },[])
+
+    const handleUpdate = () => {
+      setFormVisible(false);
+      getMedecins();
+    };
+    
+    const Edit_medecin=(model)=>{
+      setSingleData(model)
+      setFormVisible(true)
+    }
+
+
+    
+    
+
+
+ if(FormVisible == false){
   return (
     <>
       <section  id='all_section'>
@@ -148,8 +195,8 @@ function TblMedecins() {
                 gap:"10px",
               }}>
                
-                <Button size="small" variant="outlined">Modf</Button>
-                <Button size="small" variant="outlined" color="error" startIcon={<DeleteIcon />}>
+                <Button size="small" variant="outlined" onClick={() => Edit_medecin(dat)}>Modf</Button>
+                <Button size="small" variant="outlined" color="error" startIcon={<DeleteIcon />} onClick={() => deleteEntree(dat)}>
                 Sup
                 </Button>
                 </Box>
@@ -164,7 +211,11 @@ function TblMedecins() {
         </div>
       </section>
     </>
-  )
+  )}
+  else{
+    
+    return <MedecinsFormUpdt  singleData={singleData}  onUpdate={handleUpdate}/>
+  }
 }
 export default TblMedecins
 

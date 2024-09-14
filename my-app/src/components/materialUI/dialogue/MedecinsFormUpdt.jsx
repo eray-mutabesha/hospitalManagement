@@ -7,25 +7,27 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Box ,TextField} from '@mui/material';
 import { useForm} from "react-hook-form"
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 
-export default function MedecinsForm() {
 
+
+
+ function MedecinsFormUpdt(singleData,onUpdate) {
   const BASE_URL = import.meta.env.VITE_API_URL;
+
   const { register, handleSubmit,formState:{errors} } = useForm();
-  const [open, setOpen] = React.useState(false);
+   const [open, setOpen] = React.useState(true);
 
+   const handleClickOpen = () => {
+     setOpen(true);
+   };
 
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+   const handleClose = () => {
+     setOpen(false);
+     window.location.reload();
+   };
   const [formData, setFormData] = useState({
     nom: "",
     date_arrive: "",
@@ -36,55 +38,60 @@ export default function MedecinsForm() {
   });
 
 
-
-    const onsubmit=(data)=>{
-      axios.post(`${BASE_URL}/insert_medecins`, data)
-            
-            .then(({ data }) => {
-              if (data.status == 500) {
-                toast.error("Il y a une erreur");
-              } else {
-               
-               setFormData({
-                nom: "",
-                date_arrive: "",
-                sexe: "",
-                specialisation: "",
-                email: "",
-                telephone: "",
-              });
-              
-              toast.success("Enregistrement réussi");
-            }
-            })
-             .catch((err) => {
-               console.log(err);
-               toast.error("Il y a une erreur");
-             });
-  
+  useEffect(() => {
+    if (singleData) {
+      setFormData({
+        nom: singleData.nom || "",
+        date_arrive: singleData.date_arrive || "",
+        sexe: singleData.sexe || "",
+        specialisation: singleData.specialisation || "",
+        email: singleData.email || "",
+        telephone: singleData.telephone || ""
+      });
     }
-  
-  
-  
+  }, [singleData]);
+
+
+    const onSubmit=(data)=>{
+    
+   if (singleData.singleData && singleData.singleData.id) {
+     // API pour mettre à jour les données
+     axios.put(`${BASE_URL}/update_medecins/${singleData.singleData.id}`, data)
+       .then(({ data }) => {
+         if (data.status == 500) {
+           toast.error("Il y a une erreur");
+         } else {
+          
+           toast.success("Mise à jour réussie");
+           
+           if (singleData.onUpdate) {
+            singleData.onUpdate();
+          }
+         }
+       })
+       .catch((err) => {
+         console.log(err);
+         toast.error("pas de mise en jour ");
+       });
+   }
+}
   return (
-    <React.Fragment > 
-      <Button onClick={handleClickOpen} variant="contained" color="success" >
-        Ajouter
-       </Button>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title" >
-          {"Nouveau medecin"}
-        </DialogTitle>
+     <React.Fragment > 
+      
+       <Dialog
+         open={open}
+         onClose={handleClose}
+         aria-labelledby="alert-dialog-title"
+         aria-describedby="alert-dialog-description"
+       >
+         <DialogTitle id="alert-dialog-title" >
+           {`Modifier les informations de ${singleData.singleData.nom} `}
+         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
           <Box>
 
-          <form className='medecin_fom' onSubmit={handleSubmit(onsubmit)}>
+          <form className='medecin_fom' onSubmit={handleSubmit(onSubmit)}>
 
 <TextField
 className='inpt_material'
@@ -158,7 +165,7 @@ className='inpt_material'
  onChange={(e) => setFormData({ ...formData, email: e.target.value })}/>
      
        <DialogActions>
-          <Button variant="contained" color="error" onClick={handleClose}>Quiter</Button>
+          <Button variant="contained" color="error" onClick={handleClose}>Annuler</Button>
           <Button  variant="contained" color="success" type='onsubmit'>
            Enregistrer
           </Button>
@@ -168,9 +175,10 @@ className='inpt_material'
 
        </Box>
           </DialogContentText>
-        </DialogContent>
+         </DialogContent>
         
-      </Dialog>
-    </React.Fragment>
+       </Dialog>
+     </React.Fragment>
   );
 }
+export default MedecinsFormUpdt
