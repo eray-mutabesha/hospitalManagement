@@ -42,7 +42,7 @@ const rows = [
 ];
 
 
-function TblMedicament() {
+function TblMedicamentAutre() {
   const navigate = useNavigate()
   const handledetail=()=>{
     navigate("/detaildossier")
@@ -111,8 +111,8 @@ function TblMedicament() {
            <Pagination count={3} color="primary" onChange={fiche_de_nursing}/>
            </Stack>
 
-
-          <Typography variant='h5'>Medicament du type Injectable</Typography>
+           
+          <Typography variant='h5'>Autres Types des medicaments</Typography>
         <TableContainer component={Paper}>
       <Table sx={{ minWidth: 950 ,textAlign:"left"}} size="small" aria-label="a dense table">
         <TableHead>
@@ -170,7 +170,8 @@ function TblMedicament() {
     </>
   )
 }
-export default TblMedicament
+export default TblMedicamentAutre
+
 
 
 

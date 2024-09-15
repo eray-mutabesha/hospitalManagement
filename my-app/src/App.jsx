@@ -6,7 +6,7 @@ import { faBell,faCaretDown,faCheck,faXmark,faMagnifyingGlass,faListCheck,faUser
 import Parametre from './components/materialUI/Parametre.jsx'
 import Dashboard from './components/materialUI/Dashboard.jsx'
 import { useNavigate } from 'react-router-dom'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useEffect } from 'react'
 import { Button, Typography,Box } from '@mui/material'
 import { Chart as chartjs } from 'chart.js/auto'
@@ -31,13 +31,20 @@ import Factutation from './components/materialUI/Facturation.jsx'
 
 
 function App() {
-  const navigate= useNavigate()
+const navigate= useNavigate()
  const handleConsultation=()=>{
   navigate("/consultation")
  }
 
+const [datas,setdatas]= useState([])
+ const getUserData = () => {
+  const INFO_Utilisateur_from_localStorage = JSON.parse(localStorage.getItem('Utilisateur'));
+  setdatas(INFO_Utilisateur_from_localStorage);
+}
 
-
+useEffect(()=>{
+  getUserData()
+  },[])
  
  
   return (
@@ -73,7 +80,7 @@ function App() {
                <nav>
                <img src='public/Dr. MUAMBA.jpg' className='admin_photo' alt='administrateur'/>
                </nav> 
-               <nav> <p> Dr jonathan kasongo </p></nav>
+               <nav> <p>{datas.nom}</p></nav>
                <nav><FontAwesomeIcon icon={faCaretDown} /></nav>
               </div>
            </div>

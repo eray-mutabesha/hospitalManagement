@@ -14,22 +14,16 @@ import axios from 'axios';
 
 
 
-export default function PersonelForm() {
+ function PatientFormUpdt(singleData,onUpdate) {
   const BASE_URL = import.meta.env.VITE_API_URL;
+
   const { register, handleSubmit,formState:{errors} } = useForm();
-  const [open, setOpen] = React.useState(false);
+   const [open, setOpen] = React.useState(true);
 
-
-
-  const handleClickOpen = () => {
-    setOpen(true);
-    
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-    window.location.reload();
-  };
+   const handleClose = () => {
+     setOpen(false);
+     window.location.reload();
+   };
   const [formData, setFormData] = useState({
     nom: "",
     nom_famille: "",
@@ -41,55 +35,63 @@ export default function PersonelForm() {
   });
 
 
+  useEffect(() => {
+    if (singleData) {
+      setFormData({
+        nom: singleData.nom || "",
+        nom_famille: singleData.nom_famille || "",
+        sexe: singleData.sexe || "",
+        specialisation: singleData.specialisation || "",
+        fonction: singleData.fonction || "",
+        email: singleData.email || "",
+        telephone: singleData.telephone || "",
+
+
+      });
+    }
+  }, [singleData]);
+
 
     const onSubmit=(data)=>{
-      console.log(data)
-      axios.post(`${BASE_URL}/insert_personel`, data)
-            
-            .then(({ data }) => {
-              if (data.status == 500) {
-                toast.error("Il y a une erreur");
-              } else {
-               
-               setFormData({
-                nom: "",
-                nom_famille: "",
-                sexe: "",
-                specialisation:"",
-                fonction: "",
-                email: "",
-                telephone:"",
-              });
-              
-              toast.success("Enregistrement réussi");
-            }
-            })
-             .catch((err) => {
-               console.log(err);
-               toast.error("Il y a une erreur");
-             });
-  
-    }
-
+    
+   if (singleData.singleData && singleData.singleData.id) {
+     // API pour mettre à jour les données
+     axios.put(`${BASE_URL}/update_personel/${singleData.singleData.id}`, data)
+       .then(({ data }) => {
+         if (data.status == 500) {
+           toast.error("Il y a une erreur");
+         } else {
+          
+           toast.success("Mise à jour réussie");
+           
+           if (singleData.onUpdate) {
+            singleData.onUpdate();
+          }
+         }
+       })
+       .catch((err) => {
+         console.log(err);
+         toast.error("pas de mise en jour ");
+       });
+   }
+}
   return (
-    <React.Fragment > 
-      <Button onClick={handleClickOpen} variant="contained" color="success" >
-        Ajouter
-       </Button>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title" >
-          {"Nouveau personel"}
-        </DialogTitle>
+     <React.Fragment > 
+      
+       <Dialog
+         open={open}
+         onClose={handleClose}
+         aria-labelledby="alert-dialog-title"
+         aria-describedby="alert-dialog-description"
+       >
+         <DialogTitle id="alert-dialog-title" >
+           {`Modifier les informations de ${singleData.singleData.nom} `}
+         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
           <Box>
 
-<form className='medecin_fom' onSubmit={handleSubmit(onSubmit)}>
+          <form className='medecin_fom' onSubmit={handleSubmit(onSubmit)}>
 
 <TextField
 id="filled-basic" 
@@ -179,11 +181,13 @@ className='inpt_material'
        </Button>
 </DialogActions>
 </form>
+
        </Box>
           </DialogContentText>
-        </DialogContent>
+         </DialogContent>
         
-      </Dialog>
-    </React.Fragment>
+       </Dialog>
+     </React.Fragment>
   );
 }
+export default PatientFormUpdt

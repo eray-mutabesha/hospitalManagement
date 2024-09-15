@@ -23,7 +23,6 @@ import MedicamentForm from '../MedicamentForm.jsx'
 import Laboratoire from '../../Laboratoire.jsx'
 import OrganisationClinique from '../../OrganisationClinique.jsx'
 import Factutation from '../../Facturation.jsx'
-
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 
@@ -42,18 +41,17 @@ const rows = [
 ];
 
 
-function TblMedicament() {
+function TblMedicamentPerfusion() {
   const navigate = useNavigate()
   const handledetail=()=>{
     navigate("/detaildossier")
   }
 
-
-
-
   const fiche_de_nursing=(event, value) =>{
     navigate(`/medicament${value}`)
   }
+
+
   return (
     <>
       <section  id='all_section'>
@@ -107,12 +105,12 @@ function TblMedicament() {
           marginRight:"auto",
           marginTop:"50px"
         }}>
-           <Stack mt={5} spacing={2}>
+
+        <Stack mt={5} spacing={2}>
            <Pagination count={3} color="primary" onChange={fiche_de_nursing}/>
            </Stack>
 
-
-          <Typography variant='h5'>Medicament du type Injectable</Typography>
+          <Typography variant='h5'>Medicament du type Perfusion</Typography>
         <TableContainer component={Paper}>
       <Table sx={{ minWidth: 950 ,textAlign:"left"}} size="small" aria-label="a dense table">
         <TableHead>
@@ -170,7 +168,7 @@ function TblMedicament() {
     </>
   )
 }
-export default TblMedicament
+export default TblMedicamentPerfusion
 
 
 

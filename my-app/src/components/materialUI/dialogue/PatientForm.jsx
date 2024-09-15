@@ -25,6 +25,7 @@ export default function PatientForm() {
 
   const handleClose = () => {
     setOpen(false);
+    window.location.reload();
   };
   const [formData, setFormData] = useState({
     nom: "",

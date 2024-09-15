@@ -24,7 +24,7 @@ const navigate=useNavigate()
     navigate("/departements")
    }
    const Stock=()=>{
-    navigate("/medicament")
+    navigate("/medicament1")
    }
   return (
     <PopupState variant="popover" popupId="demo-popup-menu">

@@ -25,7 +25,7 @@ import Factutation from '../../Facturation.jsx'
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import {useEffect } from 'react'
-
+import PersonelFormUpdt from '../PersonelFormUpdt.jsx'
 
 
 
@@ -33,6 +33,11 @@ import {useEffect } from 'react'
 function TblPersonel() {
 const [datas,setDatas]=useState([])
 const BASE_URL = import.meta.env.VITE_API_URL;
+
+const [singleData,setSingleData] = useState([])
+const [FormVisible,setFormVisible] =useState(false)
+
+
 // get patient route
 const get_personel = () => {
   axios.get(`${BASE_URL}/get_personel`)
@@ -46,6 +51,18 @@ const get_personel = () => {
 };
 
 
+// delete patient route
+const deleteEntree = (model) => {
+  axios.delete(`${BASE_URL}/delete_personel/${model.id}`)
+    .then(({ data }) => {
+      setDatas(data.data || []); // Assurer que data.data est un tableau
+      get_personel();
+    })
+    .catch((err) => {
+      console.log(err);
+      toast.error("Il y a une erreur");
+    });
+};
 
 
 
@@ -56,10 +73,17 @@ get_personel();
 
 
 
-  const navigate = useNavigate()
-  const handledetail=()=>{
-    navigate("/detaildossier")
-  }
+const handleUpdate = () => {
+  setFormVisible(false);
+  get_personel();
+};
+
+const Edit_patient=(model)=>{
+  setSingleData(model)
+  setFormVisible(true)
+}
+
+if(FormVisible == false){
   return (
     <>
       <section  id='all_section'>
@@ -135,7 +159,7 @@ get_personel();
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                001
+                {dat.id}
               </TableCell>
               <TableCell >{dat.nom}</TableCell>
               <TableCell >{dat.nom_famille}</TableCell>
@@ -149,8 +173,8 @@ get_personel();
                 gap:"10px",
               }}>
                
-                <Button size="small" variant="outlined">Modf</Button>
-                <Button size="small" variant="outlined" color="error" startIcon={<DeleteIcon />}>
+                <Button size="small" variant="outlined" onClick={() => Edit_patient(dat)}>Modf</Button>
+                <Button size="small" variant="outlined" color="error" startIcon={<DeleteIcon />} onClick={() => deleteEntree(dat)}>
                 Sup
                 </Button>
                 </Box>
@@ -165,7 +189,10 @@ get_personel();
         </div>
       </section>
     </>
-  )
+  )}
+  else{
+    return <PersonelFormUpdt singleData={singleData}  onUpdate={handleUpdate}/>
+  }
 }
 export default TblPersonel
 

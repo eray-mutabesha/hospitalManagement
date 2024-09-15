@@ -8,10 +8,17 @@ import DialogTitle from '@mui/material/DialogTitle';
 import { useForm} from "react-hook-form";
 import { Box ,TextField, Typography,InputLabel,Select,MenuItem,FormControl}  from '@mui/material';
 import './index.css';
+import { useState,useEffect } from 'react';
+
+import toast from 'react-hot-toast';
+import axios from 'axios';
+
 
 export default function MedicamentForm()  {
+  const BASE_URL = import.meta.env.VITE_API_URL;
+
   const { register, handleSubmit,formState:{errors} } = useForm();
-  const [open, setOpen] = React.useState(false);
+   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -20,6 +27,77 @@ export default function MedicamentForm()  {
   const handleClose = () => {
     setOpen(false);
   };
+
+
+  const [formData, setFormData] = useState({
+    Type: "",
+    Designation: "",
+    Forme: "",
+    Dosage:"",
+    Date: "",
+    Entree: "",
+    Sortie: "",
+    Solde: "",
+    date_expiration: "",
+});
+
+const onSubmit=(data)=>{
+  if(data.Type == "Injectable"){
+    axios.post(`${BASE_URL}/insert_medicament_injectables`, data)
+            
+            .then(({ data }) => {
+              if (data.status == 500) {
+                toast.error("Il y a une erreur");
+              } else {
+               
+              
+              toast.success("Enregistrement réussi");
+            }
+            })
+             .catch((err) => {
+               console.log(err);
+               toast.error("Il y a une erreur");
+             });
+  }
+ else if(data.Type == "Perfusion"){
+  axios.post(`${BASE_URL}/medicament_perfusions`, data)
+            
+            .then(({ data }) => {
+              if (data.status == 500) {
+                toast.error("Il y a une erreur");
+              } else {
+               
+               
+              
+              toast.success("Enregistrement réussi");
+            }
+            })
+             .catch((err) => {
+               console.log(err);
+               toast.error("Il y a une erreur");
+             });
+ }
+else{
+  axios.post(`${BASE_URL}/autre_medicaments`, data)
+            
+            .then(({ data }) => {
+              if (data.status == 500) {
+                toast.error("Il y a une erreur");
+              } else {
+               
+              
+              toast.success("Enregistrement réussi");
+            }
+            })
+             .catch((err) => {
+               console.log(err);
+               toast.error("Il y a une erreur");
+             });
+}
+ 
+
+}
+
 
   return (
     <React.Fragment > 
@@ -45,16 +123,37 @@ export default function MedicamentForm()  {
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
           <Box>
-          <form className='medecin_fom'>       
+          <form className='medecin_fom' onSubmit={handleSubmit(onSubmit)}>       
+
+          <FormControl variant="filled"   >
+<InputLabel id="demo-simple-select-filled-label">Type de medicament</InputLabel>
+        <Select
+           labelId="demo-simple-select-filled-label"
+          id="demo-simple-select-standard"
+          size="small"
+          {...register("Type", { required: "Veuillez entrer le nom" })}
+          value={formData.Type}
+          onChange={(e) => setFormData({ ...formData, Type: e.target.value })}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value="Injectable">Injectable</MenuItem>
+          <MenuItem value="Perfusion">Perfusion</MenuItem>
+          <MenuItem value="Autres">Autres</MenuItem>
+        </Select>
+</FormControl>            
 
 <TextField
 className='inpt_material'
  id="filled-basic" 
  label="Designation" 
  variant="filled" 
- type="number"
+ type="text"
  size="small"
- {...register("Designation", { required: true })}/>
+ {...register("Designation", { required: "Veuillez entrer le nom" })}
+ value={formData.Designation}
+ onChange={(e) => setFormData({ ...formData, Designation: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -63,7 +162,9 @@ className='inpt_material'
  variant="filled" 
  type="text"
  size="small"
- {...register("Forme", { required: true })}/>
+ {...register("Forme", { required: "Veuillez entrer le nom" })}
+ value={formData.Forme}
+ onChange={(e) => setFormData({ ...formData, Forme: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -72,7 +173,9 @@ className='inpt_material'
  variant="filled" 
  size="small"
  type='text'
- {...register("date", { required: true })}/>
+ {...register("Dosage", { required: "Veuillez entrer le nom" })}
+ value={formData.Dosage}
+ onChange={(e) => setFormData({ ...formData, Dosage: e.target.value })}/>
 
            
 <TextField
@@ -82,7 +185,9 @@ className='inpt_material'
  variant="filled" 
  size="small"
  type='date'
- {...register("date", { required: true })}/>
+ {...register("Date", { required: "Veuillez entrer le nom" })}
+ value={formData.Date}
+ onChange={(e) => setFormData({ ...formData, Date: e.target.value })}/>
 
 
 <TextField
@@ -92,7 +197,9 @@ className='inpt_material'
  variant="filled" 
  size="small"
  type='text'
- {...register("Entree", { required: true })}/>
+ {...register("Entree", { required: "Veuillez entrer le nom" })}
+ value={formData.Entree}
+ onChange={(e) => setFormData({ ...formData, Entree: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -101,7 +208,9 @@ className='inpt_material'
  variant="filled" 
  size="small"
  type='text'
- {...register("sortie", { required: true })}/>
+ {...register("Sortie", { required: "Veuillez entrer le nom" })}
+ value={formData.Sortie}
+ onChange={(e) => setFormData({ ...formData, Sortie: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -110,7 +219,9 @@ className='inpt_material'
  variant="filled" 
  size="small"
  type='text'
- {...register("Solde", { required: true })}/>
+ {...register("Solde", { required: "Veuillez entrer le nom" })}
+ value={formData.Solde}
+ onChange={(e) => setFormData({ ...formData, Solde: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -119,21 +230,23 @@ className='inpt_material'
  variant="filled" 
  size="small"
  type='date'
- {...register("Solde", { required: true })}/>
+ {...register("date_expiration", { required: "Veuillez entrer le nom" })}
+ value={formData.date_expiration}
+ onChange={(e) => setFormData({ ...formData, date_expiration: e.target.value })}/>
 
 
-
+<DialogActions>
+          <Button variant="contained" color="error" onClick={handleClose}>Annuler</Button>
+          <Button  variant="contained" color="success" type='submit'>
+           Enregistrer
+       </Button>
+</DialogActions>
 </form>
 
           </Box>
           </DialogContentText>
         </DialogContent>
-        <DialogActions>
-          <Button variant="contained" color="error" onClick={handleClose}>Annuler</Button>
-          <Button  variant="contained" color="success" >
-           Enregistrer
-       </Button>
-        </DialogActions>
+
       </Dialog>
     </React.Fragment>
   );
