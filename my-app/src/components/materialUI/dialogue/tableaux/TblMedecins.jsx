@@ -39,10 +39,7 @@ function TblMedecins() {
   const [singleData,setSingleData] = useState([])
   const [FormVisible,setFormVisible] =useState(false)
   
-  const navigate = useNavigate()
-  const handledetail=()=>{
-    navigate("/detaildossier")
-  }
+
 
 
 

@@ -26,18 +26,19 @@ export default function MedicamentForm()  {
 
   const handleClose = () => {
     setOpen(false);
+    window.location.reload()
   };
 
 
   const [formData, setFormData] = useState({
     Type: "",
-    Designation: "",
-    Forme: "",
-    Dosage:"",
-    Date: "",
-    Entree: "",
-    Sortie: "",
-    Solde: "",
+    designation: "",
+    formDataorme: "",
+    dosage:"",
+    date: "",
+    entree: "",
+    sortie: "",
+    solde: "",
     date_expiration: "",
 });
 
@@ -151,9 +152,9 @@ className='inpt_material'
  variant="filled" 
  type="text"
  size="small"
- {...register("Designation", { required: "Veuillez entrer le nom" })}
- value={formData.Designation}
- onChange={(e) => setFormData({ ...formData, Designation: e.target.value })}/>
+ {...register("designation", { required: "Veuillez entrer le nom" })}
+ value={formData.designation}
+ onChange={(e) => setFormData({ ...formData, designation: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -162,9 +163,9 @@ className='inpt_material'
  variant="filled" 
  type="text"
  size="small"
- {...register("Forme", { required: "Veuillez entrer le nom" })}
- value={formData.Forme}
- onChange={(e) => setFormData({ ...formData, Forme: e.target.value })}/>
+ {...register("forme", { required: "Veuillez entrer le nom" })}
+ value={formData.forme}
+ onChange={(e) => setFormData({ ...formData, forme: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -173,9 +174,9 @@ className='inpt_material'
  variant="filled" 
  size="small"
  type='text'
- {...register("Dosage", { required: "Veuillez entrer le nom" })}
- value={formData.Dosage}
- onChange={(e) => setFormData({ ...formData, Dosage: e.target.value })}/>
+ {...register("dosage", { required: "Veuillez entrer le nom" })}
+ value={formData.dosage}
+ onChange={(e) => setFormData({ ...formData, dosage: e.target.value })}/>
 
            
 <TextField
@@ -185,9 +186,9 @@ className='inpt_material'
  variant="filled" 
  size="small"
  type='date'
- {...register("Date", { required: "Veuillez entrer le nom" })}
- value={formData.Date}
- onChange={(e) => setFormData({ ...formData, Date: e.target.value })}/>
+ {...register("date", { required: "Veuillez entrer le nom" })}
+ value={formData.date}
+ onChange={(e) => setFormData({ ...formData, date: e.target.value })}/>
 
 
 <TextField
@@ -197,9 +198,9 @@ className='inpt_material'
  variant="filled" 
  size="small"
  type='text'
- {...register("Entree", { required: "Veuillez entrer le nom" })}
- value={formData.Entree}
- onChange={(e) => setFormData({ ...formData, Entree: e.target.value })}/>
+ {...register("entree", { required: "Veuillez entrer le nom" })}
+ value={formData.entree}
+ onChange={(e) => setFormData({ ...formData, entree: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -208,9 +209,9 @@ className='inpt_material'
  variant="filled" 
  size="small"
  type='text'
- {...register("Sortie", { required: "Veuillez entrer le nom" })}
- value={formData.Sortie}
- onChange={(e) => setFormData({ ...formData, Sortie: e.target.value })}/>
+ {...register("sortie", { required: "Veuillez entrer le nom" })}
+ value={formData.sortie}
+ onChange={(e) => setFormData({ ...formData, sortie: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -219,9 +220,9 @@ className='inpt_material'
  variant="filled" 
  size="small"
  type='text'
- {...register("Solde", { required: "Veuillez entrer le nom" })}
- value={formData.Solde}
- onChange={(e) => setFormData({ ...formData, Solde: e.target.value })}/>
+ {...register("solde", { required: "Veuillez entrer le nom" })}
+ value={formData.solde}
+ onChange={(e) => setFormData({ ...formData, solde: e.target.value })}/>
 
 <TextField
 className='inpt_material'

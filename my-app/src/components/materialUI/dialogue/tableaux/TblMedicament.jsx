@@ -2,7 +2,7 @@ import React from 'react'
 import './tbl.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash ,faEye} from '@fortawesome/free-solid-svg-icons'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Dashboard from '../../Dashboard.jsx'
 import Parametre from '../../Parametre.jsx'
 import { Box, Button, Typography } from '@mui/material'
@@ -27,26 +27,35 @@ import Factutation from '../../Facturation.jsx'
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 
+import { useState,useEffect } from 'react'
+import toast from 'react-hot-toast';
+import axios from 'axios';
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
 
-const rows = [
-  createData(1,'Katembo mwami john', '12/03/2024','En attente',),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  
-  
-];
 
 
 function TblMedicament() {
+
+  const BASE_URL = import.meta.env.VITE_API_URL;
+  const [datas, setDatas] = useState([]);
   const navigate = useNavigate()
-  const handledetail=()=>{
-    navigate("/detaildossier")
-  }
+
+
+  // get medicament route
+  const get_medicament_injectables = () => {
+    axios.get(`${BASE_URL}/get_medicament_injectables`)
+      .then(({ data }) => {
+        setDatas(data.data || []); 
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Il y a une erreur");
+      });
+  };
+
+  useEffect(() => {
+    get_medicament_injectables();
+  }, []);
 
 
 
@@ -130,22 +139,22 @@ function TblMedicament() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {datas.map((dat,index) => (
             <TableRow
-              key={row.name}
+              key={index}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                001
+                {dat.id}
               </TableCell>
-              <TableCell >Amoxiline</TableCell>
-              <TableCell >bouteil</TableCell>
-              <TableCell >lorem</TableCell>
-              <TableCell >12/03/2019</TableCell>
-              <TableCell >lorem</TableCell>
-              <TableCell >lorem</TableCell>
-              <TableCell >lorem</TableCell>
-              <TableCell >12/03/2025</TableCell>
+              <TableCell >{dat.designation}</TableCell>
+              <TableCell >{dat.forme}</TableCell>
+              <TableCell >{dat.dosage}</TableCell>
+              <TableCell >{dat.date_entre}</TableCell>
+              <TableCell >{dat.entre}</TableCell>
+              <TableCell >{dat.sortie}</TableCell>
+              <TableCell >{dat.solde}</TableCell>
+              <TableCell >{dat.date_expiration}</TableCell>
               <TableCell align="right">
               <Box sx={{
                 display:"flex",
