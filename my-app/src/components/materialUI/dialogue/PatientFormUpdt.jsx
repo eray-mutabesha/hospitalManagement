@@ -12,84 +12,81 @@ import { useState,useEffect } from 'react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 
-export default function PatientForm() {
+
+
+ function PatientFormUpdt(singleData,onUpdate) {
   const BASE_URL = import.meta.env.VITE_API_URL;
+
   const { register, handleSubmit,formState:{errors} } = useForm();
-  const [open, setOpen] = React.useState(false);
+   const [open, setOpen] = React.useState(true);
 
+   const handleClickOpen = () => {
+     setOpen(true);
+   };
 
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+   const handleClose = () => {
+     setOpen(false);
+     window.location.reload();
+   };
   const [formData, setFormData] = useState({
-    nom: "",
-    post_nom: "",
-    age: "",
-    sexe:"",
-    telephone: "",
-    adresse: "",
-  });
-
-
-
-    const onSubmit=(data)=>{
-      console.log(data)
-      axios.post(`${BASE_URL}/insert_patient`, data)
-            
-            .then(({ data }) => {
-              if (data.status == 500) {
-                toast.error("Il y a une erreur");
-              } else {
-               
-               setFormData({
                 nom: "",
                 post_nom: "",
                 age: "",
                 sexe:"",
                 telephone: "",
                 adresse: "",
-              });
-              
-              toast.success("Enregistrement réussi");
-            }
-            })
-             .catch((err) => {
-               console.log(err);
-               toast.error("Il y a une erreur");
-             });
-  
+  });
+
+
+  useEffect(() => {
+    if (singleData) {
+      setFormData({
+        nom: singleData.nom || "",
+        post_nom: singleData.post_nom || "",
+        age: singleData.age || "",
+        sexe: singleData.sexe || "",
+        telephone: singleData.telephone || "",
+        adresse: singleData.adresse || ""
+      });
     }
+  }, [singleData]);
 
 
-
-
-
+    const onSubmit=(data)=>{
+    
+   if (singleData.singleData && singleData.singleData.id) {
+     // API pour mettre à jour les données
+     axios.put(`${BASE_URL}/update_patient/${singleData.singleData.id}`, data)
+       .then(({ data }) => {
+         if (data.status == 500) {
+           toast.error("Il y a une erreur");
+         } else {
+          
+           toast.success("Mise à jour réussie");
+           
+           if (singleData.onUpdate) {
+            singleData.onUpdate();
+          }
+         }
+       })
+       .catch((err) => {
+         console.log(err);
+         toast.error("pas de mise en jour ");
+       });
+   }
+}
   return (
-    <React.Fragment > 
-      <Box sx={{
-        width:"100%",
-        marginLeft:"auto",
-        marginRight:"auto",
-        
-      }}>
-      <Button onClick={handleClickOpen} variant="contained" color="success" >
-        Ajouter
-       </Button>
-       </Box>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title" >
-          {"Nouveau patient"}
-        </DialogTitle>
+     <React.Fragment > 
+      
+       <Dialog
+         open={open}
+         onClose={handleClose}
+         aria-labelledby="alert-dialog-title"
+         aria-describedby="alert-dialog-description"
+       >
+         <DialogTitle id="alert-dialog-title" >
+           {`Modifier les informations de ${singleData.singleData.nom} `}
+         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
           <Box>
@@ -134,7 +131,7 @@ className='inpt_material'
 
 
 <FormControl variant="filled"   >
-<InputLabel id="demo-simple-select-filled-label">Sexe</InputLabel>
+<InputLabel id="demo-simple-select-filled-label">Genre</InputLabel>
         <Select
            labelId="demo-simple-select-filled-label"
           id="demo-simple-select-standard"
@@ -182,11 +179,13 @@ className='inpt_material'
         </DialogActions>
 
 </form>
-       
-        </Box>
-        </DialogContentText>
-        </DialogContent>
-      </Dialog>
-    </React.Fragment>
+
+       </Box>
+          </DialogContentText>
+         </DialogContent>
+        
+       </Dialog>
+     </React.Fragment>
   );
 }
+export default PatientFormUpdt

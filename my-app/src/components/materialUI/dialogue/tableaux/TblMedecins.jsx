@@ -48,7 +48,7 @@ function TblMedecins() {
 
 
 
-  // post medecin route
+  // get medecin route
   const getMedecins = () => {
     axios.get(`${BASE_URL}/get_medecins_data`)
       .then(({ data }) => {

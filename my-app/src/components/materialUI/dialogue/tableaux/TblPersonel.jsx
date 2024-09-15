@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './tbl.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash ,faEye} from '@fortawesome/free-solid-svg-icons'
@@ -22,26 +22,40 @@ import Consultation from '../../Consultation.jsx'
 import Laboratoire from '../../Laboratoire.jsx'
 import OrganisationClinique from '../../OrganisationClinique.jsx'
 import Factutation from '../../Facturation.jsx'
+import toast from 'react-hot-toast';
+import axios from 'axios';
+import {useEffect } from 'react'
 
 
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData(1,'Katembo mwami john', '12/03/2024','En attente',),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
 
 function TblPersonel() {
+const [datas,setDatas]=useState([])
+const BASE_URL = import.meta.env.VITE_API_URL;
+// get patient route
+const get_personel = () => {
+  axios.get(`${BASE_URL}/get_personel`)
+    .then(({ data }) => {
+      setDatas(data.data || []); 
+    })
+    .catch((err) => {
+      console.log(err);
+      toast.error("Il y a une erreur");
+    });
+};
+
+
+
+
+
+useEffect(() => {
+get_personel();
+}, []);
+
+
+
+
   const navigate = useNavigate()
   const handledetail=()=>{
     navigate("/detaildossier")
@@ -115,20 +129,20 @@ function TblPersonel() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {datas.map((dat,index) => (
             <TableRow
-              key={row.name}
+              key={index}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
                 001
               </TableCell>
-              <TableCell >Alice kitoko</TableCell>
-              <TableCell >kitoko</TableCell>
-              <TableCell >pharmacienne</TableCell>
-              <TableCell >pharmacologie</TableCell>
-              <TableCell >07914343635</TableCell>
-              <TableCell >alicekitoko@gmail.com</TableCell>
+              <TableCell >{dat.nom}</TableCell>
+              <TableCell >{dat.nom_famille}</TableCell>
+              <TableCell >{dat.fonction}</TableCell>
+              <TableCell >{dat.specialisation}</TableCell>
+              <TableCell >{dat.telephone}</TableCell>
+              <TableCell >{dat.email}</TableCell>
               <TableCell align="right">
               <Box sx={{
                 display:"flex",
