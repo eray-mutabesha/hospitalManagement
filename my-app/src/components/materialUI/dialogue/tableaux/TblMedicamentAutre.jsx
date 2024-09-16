@@ -2,7 +2,7 @@ import React from 'react'
 import './tbl.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash ,faEye} from '@fortawesome/free-solid-svg-icons'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Dashboard from '../../Dashboard.jsx'
 import Parametre from '../../Parametre.jsx'
 import { Box, Button, Typography } from '@mui/material'
@@ -27,16 +27,54 @@ import Factutation from '../../Facturation.jsx'
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
+import { useState,useEffect } from 'react'
+import toast from 'react-hot-toast';
+import axios from 'axios';
+import MedicamentFormUpdt from './MedicamentFormUpdt.jsx'
 
 
 
 function TblMedicamentAutre() {
 
+  const [singleData,setSingleData] = useState([])
+  const [FormVisible,setFormVisible] =useState(false)
 
+  const BASE_URL = import.meta.env.VITE_API_URL;
+  const [datas, setDatas] = useState([]);
+  const navigate = useNavigate()
+
+
+  // get medicament route
+  const get_medicament_injectables = () => {
+    axios.get(`${BASE_URL}/get_autre_medicaments`)
+      .then(({ data }) => {
+        setDatas(data.data || []); 
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Il y a une erreur");
+      });
+  };
+
+
+
+  // delete medecin route
+  const deleteEntree = (model) => {
+    axios.delete(`${BASE_URL}/delete_autre_medicaments/${model.id}`)
+      .then(({ data }) => {
+        setDatas(data.data || []); // Assurer que data.data est un tableau
+        get_medicament_injectables();
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Il y a une erreur");
+      });
+  };
+
+
+  useEffect(() => {
+    get_medicament_injectables();
+  }, []);
 
 
 
@@ -44,6 +82,20 @@ function TblMedicamentAutre() {
   const fiche_de_nursing=(event, value) =>{
     navigate(`/medicament${value}`)
   }
+
+
+  const handleUpdate = () => {
+    setFormVisible(false);
+    get_medicament_injectables();
+  };
+  
+  const Edit_medecin=(model)=>{
+    setSingleData(model)
+    setFormVisible(true)
+  }
+
+
+  if(FormVisible == false){
   return (
     <>
       <section  id='all_section'>
@@ -101,8 +153,8 @@ function TblMedicamentAutre() {
            <Pagination count={3} color="primary" onChange={fiche_de_nursing}/>
            </Stack>
 
-           
-          <Typography variant='h5'>Autres Types des medicaments</Typography>
+
+          <Typography variant='h5'>Medicament du type Perfusion</Typography>
         <TableContainer component={Paper}>
       <Table sx={{ minWidth: 950 ,textAlign:"left"}} size="small" aria-label="a dense table">
         <TableHead>
@@ -120,30 +172,30 @@ function TblMedicamentAutre() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {datas.map((dat,index) => (
             <TableRow
-              key={row.name}
+              key={index}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                001
+                {dat.id}
               </TableCell>
-              <TableCell >Amoxiline</TableCell>
-              <TableCell >bouteil</TableCell>
-              <TableCell >lorem</TableCell>
-              <TableCell >12/03/2019</TableCell>
-              <TableCell >lorem</TableCell>
-              <TableCell >lorem</TableCell>
-              <TableCell >lorem</TableCell>
-              <TableCell >12/03/2025</TableCell>
+              <TableCell >{dat.designation}</TableCell>
+              <TableCell >{dat.forme}</TableCell>
+              <TableCell >{dat.dosage}</TableCell>
+              <TableCell >{dat.date_entre}</TableCell>
+              <TableCell >{dat.entre}</TableCell>
+              <TableCell >{dat.sortie}</TableCell>
+              <TableCell >{dat.solde}</TableCell>
+              <TableCell >{dat.date_expiration}</TableCell>
               <TableCell align="right">
               <Box sx={{
                 display:"flex",
                 gap:"10px",
               }}>
                
-                <Button size="small" variant="outlined">Modf</Button>
-                <Button size="small" variant="outlined" color="error" startIcon={<DeleteIcon />}>
+                <Button size="small" variant="outlined" onClick={() => Edit_medecin(dat)}>Modf</Button>
+                <Button size="small" variant="outlined" color="error" startIcon={<DeleteIcon />} onClick={() => deleteEntree(dat)}>
                 Sup
                 </Button>
                 </Box>
@@ -158,10 +210,12 @@ function TblMedicamentAutre() {
         </div>
       </section>
     </>
-  )
+  )}
+  else{
+ return <MedicamentFormUpdt singleData={singleData}  onUpdate={handleUpdate}/>
+  }
 }
 export default TblMedicamentAutre
-
 
 
 

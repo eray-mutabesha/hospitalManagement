@@ -30,11 +30,14 @@ import Stack from '@mui/material/Stack';
 import { useState,useEffect } from 'react'
 import toast from 'react-hot-toast';
 import axios from 'axios';
-
+import MedicamentFormUpdt from './MedicamentFormUpdt.jsx'
 
 
 
 function TblMedicament() {
+
+  const [singleData,setSingleData] = useState([])
+  const [FormVisible,setFormVisible] =useState(false)
 
   const BASE_URL = import.meta.env.VITE_API_URL;
   const [datas, setDatas] = useState([]);
@@ -53,6 +56,22 @@ function TblMedicament() {
       });
   };
 
+
+
+  // delete medecin route
+  const deleteEntree = (model) => {
+    axios.delete(`${BASE_URL}/delete_medicament_injectables/${model.id}`)
+      .then(({ data }) => {
+        setDatas(data.data || []); // Assurer que data.data est un tableau
+        get_medicament_injectables();
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Il y a une erreur");
+      });
+  };
+
+
   useEffect(() => {
     get_medicament_injectables();
   }, []);
@@ -63,6 +82,20 @@ function TblMedicament() {
   const fiche_de_nursing=(event, value) =>{
     navigate(`/medicament${value}`)
   }
+
+
+  const handleUpdate = () => {
+    setFormVisible(false);
+    get_medicament_injectables();
+  };
+  
+  const Edit_medecin=(model)=>{
+    setSingleData(model)
+    setFormVisible(true)
+  }
+
+
+  if(FormVisible == false){
   return (
     <>
       <section  id='all_section'>
@@ -161,8 +194,8 @@ function TblMedicament() {
                 gap:"10px",
               }}>
                
-                <Button size="small" variant="outlined">Modf</Button>
-                <Button size="small" variant="outlined" color="error" startIcon={<DeleteIcon />}>
+                <Button size="small" variant="outlined" onClick={() => Edit_medecin(dat)}>Modf</Button>
+                <Button size="small" variant="outlined" color="error" startIcon={<DeleteIcon />} onClick={() => deleteEntree(dat)}>
                 Sup
                 </Button>
                 </Box>
@@ -177,7 +210,10 @@ function TblMedicament() {
         </div>
       </section>
     </>
-  )
+  )}
+  else{
+ return <MedicamentFormUpdt singleData={singleData}  onUpdate={handleUpdate}/>
+  }
 }
 export default TblMedicament
 

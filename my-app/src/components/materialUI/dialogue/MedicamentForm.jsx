@@ -33,7 +33,7 @@ export default function MedicamentForm()  {
   const [formData, setFormData] = useState({
     Type: "",
     designation: "",
-    formDataorme: "",
+    forme: "",
     dosage:"",
     date: "",
     entree: "",
