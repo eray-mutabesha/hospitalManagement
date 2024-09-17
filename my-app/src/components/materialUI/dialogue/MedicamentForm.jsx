@@ -53,6 +53,17 @@ const onSubmit=(data)=>{
                
               
               toast.success("Enregistrement réussi");
+              setFormData({
+                Type: "",
+                designation: "",
+                forme: "",
+                dosage:"",
+                date: "",
+                entree: "",
+                sortie: "",
+                solde: "",
+                date_expiration: "",
+              })
             }
             })
              .catch((err) => {

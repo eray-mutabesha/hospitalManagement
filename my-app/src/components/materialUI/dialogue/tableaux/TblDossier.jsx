@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './tbl.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Navigate, useNavigate } from 'react-router-dom'
@@ -20,7 +20,9 @@ import Laboratoire from '../../Laboratoire.jsx'
 import OrganisationClinique from '../../OrganisationClinique.jsx'
 import Factutation from '../../Facturation.jsx'
 import DossierForm from '../DossierForm.jsx'
-
+import DeleteIcon from '@mui/icons-material/Delete';
+import  {toast} from 'react-hot-toast';
+import axios from 'axios';
 
 
 function createData(name, calories, fat, carbs, protein) {
@@ -36,7 +38,18 @@ const rows = [
 ];
 
 
+
+
+
 function TblDossier() {
+  
+ 
+ 
+ 
+ 
+
+
+
   const navigate = useNavigate()
   const handledetail=()=>{
     navigate("/detaildossier")
@@ -47,7 +60,9 @@ function TblDossier() {
   }
   return (
     <>
+    
       <section  id='all_section'>
+      
       <div className='div_one'>
         <div className='logo'>
             <img src='public/logo-removebg-preview.png' alt='logo hopital'/>
@@ -130,10 +145,11 @@ function TblDossier() {
               <TableCell >Katembo mwami jean</TableCell>
               <TableCell >12/04/2024</TableCell>
               <TableCell sx={{color:"red"}}>En attente...</TableCell>
-              <TableCell align="right"><Button sx={{
-                border:"1px solid rgb(201, 199, 199)",
-                color:"black"
-              }}   onClick={handledetail}>Details</Button></TableCell>
+              <TableCell align="right" sx={{display:"flex",gap:"10px"}}>
+                <Button size="small" variant="outlined" color="error" startIcon={<DeleteIcon />}>Sup</Button>
+                <Button sx={{border:"1px solid rgb(201, 199, 199)",color:"black"}}   onClick={handledetail}>Details</Button>
+                
+                </TableCell>
             </TableRow>
           ))}
         </TableBody>

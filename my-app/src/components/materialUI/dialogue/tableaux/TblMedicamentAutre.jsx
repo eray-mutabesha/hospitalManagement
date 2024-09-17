@@ -154,7 +154,7 @@ function TblMedicamentAutre() {
            </Stack>
 
 
-          <Typography variant='h5'>Medicament du type Perfusion</Typography>
+          <Typography variant='h5'>Autre type de medicaments</Typography>
         <TableContainer component={Paper}>
       <Table sx={{ minWidth: 950 ,textAlign:"left"}} size="small" aria-label="a dense table">
         <TableHead>
