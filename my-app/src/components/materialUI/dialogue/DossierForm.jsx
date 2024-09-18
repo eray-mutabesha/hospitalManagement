@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -26,13 +25,20 @@ export default function DossierForm() {
 
   const handleClose = () => {
     setOpen(false);
+    window.location.reload();
   };
 
   const BASE_URL = import.meta.env.VITE_API_URL;
   const [formData, setFormData] = useState({
     nom_patient: "",
-    date: ""
+    date: "",
+    poids: "",
+    to_to: "",
+    ta_ta: "",
+    adresse:"",
   });
+
+
 
   const onsubmit=(data)=>{
     axios.post(`${BASE_URL}/post_patient_dossier`, data)
@@ -44,10 +50,18 @@ export default function DossierForm() {
              
              setFormData({
               nom_patient: "",
-              date: ""
+              date: "",
+              poids: "",
+              to_to: "",
+              ta_ta: "",
+              adresse: "",
             });
-            
+            // ...............................all.....................................
+            // ....................................................................
+            localStorage.setItem("DossierUtilisateur", JSON.stringify(data));
             toast.success("Enregistrement réussi");
+            // ....................................................................
+            // ....................................................................
           }
           })
            .catch((err) => {
@@ -58,13 +72,13 @@ export default function DossierForm() {
   }
 
 
-
-  // get patient route
-  const [patient_list,set_patient_list]=useState([])
+// get patient route
+const [patient_list,set_patient_list]=useState([])
  
-  const get_patient_option = () => {
-   axios.get(`${BASE_URL}/get_patient_Option`)
-   
+
+const get_patient_option = () => {
+axios.get(`${BASE_URL}/get_patient_Option`)
+
      .then(({ data }) => {
       console.log(data.data)
        set_patient_list(data.data || []); 
@@ -75,11 +89,18 @@ export default function DossierForm() {
      });
  };
  
+
+
  
  useEffect(()=>{
  get_patient_option()
+
  },[])
  
+
+
+
+
   return (
     <React.Fragment > 
       <Box sx={{
@@ -110,10 +131,10 @@ export default function DossierForm() {
           <Box>
 
 
-          <form className='medecin_fom'  onSubmit={handleSubmit(onsubmit)}>
+<form className='medecin_fom'  onSubmit={handleSubmit(onsubmit)}>
 
    
-              <FormControl variant="filled">
+<FormControl variant="filled">
 <InputLabel id="demo-simple-select-filled-label">Nom complet du patient</InputLabel>
         <Select
            labelId="demo-simple-select-filled-label"
@@ -132,7 +153,54 @@ export default function DossierForm() {
           ))}
         </Select>
 </FormControl>
+
           
+
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Poids" 
+ variant="filled" 
+ type='text'
+ size="small"
+ {...register("poids", { required: "Veuillez entrer le point" })}
+ value={formData.poids}
+ onChange={(e) => setFormData({ ...formData, poids: e.target.value })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="TO" 
+ variant="filled" 
+ type='text'
+ size="small"
+ {...register("to_to", { required: "Veuillez entrer le point" })}
+ value={formData.to_to}
+ onChange={(e) => setFormData({ ...formData, to_to: e.target.value })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="TA" 
+ variant="filled" 
+ type='text'
+ size="small"
+ {...register("ta_ta", { required: "Veuillez entrer le point" })}
+ value={formData.ta_ta}
+ onChange={(e) => setFormData({ ...formData, ta_ta: e.target.value })}/>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Adresse" 
+ variant="filled" 
+ type='text'
+ size="small"
+ {...register("adresse", { required: "Veuillez entrer le point" })}
+ value={formData.adresse}
+ onChange={(e) => setFormData({ ...formData, adresse: e.target.value })}/>
+
 
 
 <TextField
