@@ -20,8 +20,9 @@ import Consultation from '../../Consultation.jsx';
 import Laboratoire from '../../Laboratoire.jsx';
 import OrganisationClinique from '../../OrganisationClinique.jsx';
 import Factutation from '../../Facturation.jsx';
-
-
+import { useState,useEffect } from 'react'
+import  {toast} from 'react-hot-toast';
+import axios from 'axios';
 
 
 
@@ -51,6 +52,7 @@ useEffect(() => {
 
  const navigate = useNavigate()
  const handledossier=()=>{
+  localStorage.removeItem("Dossier");
    navigate("/dossier")
  }
  const Detailpatient=()=>{
@@ -73,6 +75,16 @@ const hospitalisation =()=>{
 const ambulatoiredetail= ()=>{
   navigate("/ambulatoire")
 }
+
+const [data,setdatas]=useState([])
+const getDossierData = () => {
+  const INFO_Utilisateur_from_localStorage = JSON.parse(localStorage.getItem('Dossier'));
+  setdatas(INFO_Utilisateur_from_localStorage);
+}
+
+useEffect(()=>{
+  getDossierData()
+  },[])
   return (
     <>
       <section  id='all_section'>
@@ -148,14 +160,14 @@ const ambulatoiredetail= ()=>{
             background:"white",
             padding:"0px"
           }}>
-            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>murenge</span></h3>
-            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>22 ans</span></h3>
-            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>masculin</span></h3>
-            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
-            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
-            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
-            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>Goma/Q.ndosho/AV.ngungu</span></h3>
-            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>078374848</span></h3>
+            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.nom_patient}</span></h3>
+            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.age}</span></h3>
+            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.sexe}</span></h3>
+            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.poids}</span></h3>
+            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.to_to}</span></h3>
+            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.ta_ta}</span></h3>
+            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.adresse}</span></h3>
+            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.telephone}</span></h3>
           </Box>
             </Box>
             

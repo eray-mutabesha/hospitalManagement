@@ -56,7 +56,8 @@ useEffect(() => {
 
 
   const navigate = useNavigate()
-  const handledetail=()=>{
+  const handledetail=(dat)=>{
+    localStorage.setItem("Dossier", JSON.stringify(dat));
     navigate("/detaildossier")
   }
 
@@ -152,7 +153,7 @@ useEffect(() => {
               <TableCell sx={{color:"red"}}>En attente...</TableCell>
               <TableCell align="right" sx={{display:"flex",gap:"10px"}}>
                 <Button size="small" variant="outlined" color="error" startIcon={<DeleteIcon />}>Sup</Button>
-                <Button sx={{border:"1px solid rgb(201, 199, 199)",color:"black"}}   onClick={handledetail}>Details</Button>
+                <Button sx={{border:"1px solid rgb(201, 199, 199)",color:"black"}} onClick={()=>handledetail(dat)}>Details</Button>
                 
                 </TableCell>
             </TableRow>

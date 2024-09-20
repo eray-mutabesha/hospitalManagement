@@ -21,31 +21,23 @@ import IconButton from '@mui/material/IconButton';
 import CommentIcon from '@mui/icons-material/Comment';
 import Ressources from '../../Resources.jsx'
 import Laboratoire from '../../Laboratoire.jsx'
-
 import OrganisationClinique from '../../OrganisationClinique.jsx'
 import Factutation from '../../Facturation.jsx'
+import { useState,useEffect } from 'react'
+import  {toast} from 'react-hot-toast';
+import axios from 'axios';
+import DossierForm from '../DossierForm.jsx'
 
 
 
 
 
 
-
-function createData(name, calories, fat, carbs, protein) {
-return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData(1,'Katembo mwami john', '12/03/2024','En attente',),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
 
 function TblReception() {
-    const { register, handleSubmit,formState:{errors} } = useForm();
+  const BASE_URL = import.meta.env.VITE_API_URL;
+  const { register, handleSubmit,formState:{errors} } = useForm();
   const navigate = useNavigate()
   const handledossier=()=>{
     navigate("/detaildossier")
@@ -54,6 +46,65 @@ function TblReception() {
   const detail =()=>{
     navigate("/receptiondetail")
   }
+
+
+  const [data,setdatas]=useState([])
+  const getDossierData = () => {
+    const INFO_Utilisateur_from_localStorage = JSON.parse(localStorage.getItem('Dossier'));
+    setdatas(INFO_Utilisateur_from_localStorage);
+    diagnosticsID(INFO_Utilisateur_from_localStorage.id)
+  }
+  
+  useEffect(()=>{
+    getDossierData()
+    },[])
+
+    const [formData, setFormData] = useState({
+      diagnostics: "",
+
+    });
+
+ const [diagnostics,diagnosticsID]=useState([])  
+
+
+  
+
+
+
+    const onsubmit=(data)=>{
+    
+        // API pour mettre à jour les données
+        axios.put(`${BASE_URL}/patch_patient_dossier/${diagnostics}`,data)
+          .then(({ data }) => {
+            if (data.status == 500) {
+              toast.error("Il y a une erreur");
+            } else {
+             
+              toast.success("diagnostic à jour réussie");
+              setFormData({
+                diagnostics:""
+              })
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            toast.error("pas de diagnostic ");
+          });
+      
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
     <>
       <section  id='all_section'>
@@ -115,7 +166,7 @@ function TblReception() {
       
       <Box>
       
-        <form action="" style={{
+        <form action="" onSubmit={handleSubmit(onsubmit)}  style={{
             padding:"20px",
             borderRadius:"10px",
             border:"1px solid rgba(0, 0, 0, 0.103)",
@@ -144,14 +195,14 @@ function TblReception() {
             background:"white",
             padding:"0px"
           }}>
-            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>kasongo</span></h3>
-            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>22 ans</span></h3>
-            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>masculin</span></h3>
-            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
-            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
-            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
-            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>Goma/Q.ndosho/AV.ngungu</span></h3>
-            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>078374848</span></h3>
+            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.nom_patient}</span></h3>
+            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.age}</span></h3>
+            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.sexe}</span></h3>
+            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.poids}</span></h3>
+            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.to_to}</span></h3>
+            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.ta_ta}</span></h3>
+            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.adresse}</span></h3>
+            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.telephone}</span></h3>
           </Box>
      
 
@@ -182,15 +233,17 @@ function TblReception() {
      
      
      <Typography mt={8}variant='h6'>  Premiers diagnostics</Typography>
-     <TextField
-          sx={{width:"100%"
-               }}
+     
+     <TextField sx={{width:"100%"}}
                id="standard-multiline-static"
                label="Diagnostics"
                multiline
                rows={4}
                variant="standard"
-        />
+               {...register("diagnostics", { required: "Veuillez entrer le point" })}
+               value={formData.diagnostics}
+               onChange={(e) => setFormData({ ...formData, diagnostics: e.target.value })}/>
+     
      <Box sx={{
         display:"flex",
         justifyContent:"end",
@@ -212,6 +265,7 @@ function TblReception() {
       </section>
     </>
   )
+
 }
 export default TblReception
 

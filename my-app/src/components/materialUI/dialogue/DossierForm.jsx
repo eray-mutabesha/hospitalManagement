@@ -15,7 +15,7 @@ import axios from 'axios';
 
 
 
-export default function DossierForm() {
+export default function DossierForm(single) {
   const { register, handleSubmit,formState:{errors} } = useForm();
   const [open, setOpen] = React.useState(false);
 
@@ -27,51 +27,6 @@ export default function DossierForm() {
     setOpen(false);
     window.location.reload();
   };
-
-  const BASE_URL = import.meta.env.VITE_API_URL;
-  const [formData, setFormData] = useState({
-    nom_patient: "",
-    date: "",
-    poids: "",
-    to_to: "",
-    ta_ta: "",
-    adresse:"",
-  });
-
-
-
-  const onsubmit=(data)=>{
-    axios.post(`${BASE_URL}/post_patient_dossier`, data)
-          
-          .then(({ data }) => {
-            if (data.status == 500) {
-              toast.error("Il y a une erreur");
-            } else {
-             
-             setFormData({
-              nom_patient: "",
-              date: "",
-              poids: "",
-              to_to: "",
-              ta_ta: "",
-              adresse: "",
-            });
-            // ...............................all.....................................
-            // ....................................................................
-            localStorage.setItem("DossierUtilisateur", JSON.stringify(data));
-            toast.success("Enregistrement réussi");
-            // ....................................................................
-            // ....................................................................
-          }
-          })
-           .catch((err) => {
-             console.log(err);
-             toast.error("Il y a une erreur");
-           });
-
-  }
-
-
 // get patient route
 const [patient_list,set_patient_list]=useState([])
  
@@ -96,6 +51,61 @@ axios.get(`${BASE_URL}/get_patient_Option`)
  get_patient_option()
 
  },[])
+
+
+
+
+  const BASE_URL = import.meta.env.VITE_API_URL;
+  const [formData, setFormData] = useState({
+    nom_patient: "",
+    date: "",
+    poids: "",
+    to_to: "",
+    ta_ta: "",
+    adresse:"",
+    age:"",
+    sexe:"",
+    telephone:""
+  });
+
+
+
+  const onsubmit=(data)=>{
+    axios.post(`${BASE_URL}/post_patient_dossier`, data)
+          
+          .then(({ data }) => {
+            if (data.status == 500) {
+              toast.error("Il y a une erreur");
+            } else {
+             
+             setFormData({
+              nom_patient: "",
+              date: "",
+              poids: "",
+              to_to: "",
+              ta_ta: "",
+              adresse:"",
+              age:"",
+              sexe:"",
+              telephone:""
+            });
+            // ...............................all.....................................
+            // ....................................................................
+            localStorage.setItem("DossierUtilisateur", JSON.stringify(data));
+            toast.success("Enregistrement réussi");
+            // ....................................................................
+            // ....................................................................
+          }
+          })
+           .catch((err) => {
+             console.log(err);
+             toast.error("Il y a une erreur");
+           });
+
+  }
+
+
+
  
 
 
@@ -154,7 +164,52 @@ axios.get(`${BASE_URL}/get_patient_Option`)
         </Select>
 </FormControl>
 
+<FormControl variant="filled">
+<InputLabel id="demo-simple-select-filled-label">Sexe</InputLabel>
+        <Select
+           labelId="demo-simple-select-filled-label"
+          id="demo-simple-select-standard"
+          size="small"
+          {...register("sexe", { required: "Veuillez entrer le nom" })}
+          value={formData.sexe}
+          onChange={(e) => setFormData({ ...formData, sexe: e.target.value })}>
+
+            
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
           
+            <MenuItem   value="Masculin">Masculin</MenuItem>
+            <MenuItem   value="Feminin">Feminin</MenuItem>
+            <MenuItem   value="Autre">Autre</MenuItem>
+        </Select>
+</FormControl>          
+
+
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Age" 
+ variant="filled" 
+ type='text'
+ size="small"
+ {...register("age", { required: "Veuillez entrer le point" })}
+ value={formData.age}
+ onChange={(e) => setFormData({ ...formData, age: e.target.value })}/>
+
+
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Telephone" 
+ variant="filled" 
+ type='number'
+ size="small"
+ {...register("telephone", { required: "Veuillez entrer le point" })}
+ value={formData.telephone}
+ onChange={(e) => setFormData({ ...formData, telephone: e.target.value })}/>
 
 
 <TextField
@@ -213,6 +268,9 @@ className='inpt_material'
  {...register("date", { required: "Veuillez entrer le nom" })}
  value={formData.date}
  onChange={(e) => setFormData({ ...formData, date: e.target.value })}/>
+
+
+
 
 
 <DialogActions>

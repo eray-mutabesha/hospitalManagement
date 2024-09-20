@@ -22,7 +22,7 @@ const handledeconnexion=()=>{
     <PopupState variant="popover" popupId="demo-popup-menu">
       {(popupState) => (
         <React.Fragment>
-          <Button  {...bindTrigger(popupState)}  variant="contained" endIcon={<SaveIcon />} >
+          <Button  {...bindTrigger(popupState)}  variant="contained" endIcon={<SaveIcon />} type='submit'>
            Enregistrer
           </Button>
           <Menu {...bindMenu(popupState)}>
