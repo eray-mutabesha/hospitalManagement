@@ -75,11 +75,21 @@ function TblReception() {
     
         // API pour mettre à jour les données
         axios.put(`${BASE_URL}/patch_patient_dossier/${diagnostics}`,data)
+        
           .then(({ data }) => {
             if (data.status == 500) {
               toast.error("Il y a une erreur");
             } else {
-             
+              // Later, when you want to update it:
+             let dossier = JSON.parse(localStorage.getItem("Dossier"));
+
+            if (dossier) {
+            // Update fields
+            dossier.diagnostic =`${formData.diagnostics}`;
+    
+    // Save updated object back to localStorage
+    localStorage.setItem("Dossier", JSON.stringify(dossier));
+}
               toast.success("diagnostic à jour réussie");
               setFormData({
                 diagnostics:""

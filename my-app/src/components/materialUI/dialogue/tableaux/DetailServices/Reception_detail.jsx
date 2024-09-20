@@ -20,27 +20,16 @@ import IconButton from '@mui/material/IconButton';
 import CommentIcon from '@mui/icons-material/Comment';
 import Ressources from '../../../Resources.jsx'
 import Laboratoire from '../../../Laboratoire.jsx'
-
 import OrganisationClinique from '../../../OrganisationClinique.jsx'
 import Factutation from '../../../Facturation.jsx'
+import { useState,useEffect } from 'react'
+import  {toast} from 'react-hot-toast';
+import axios from 'axios';
 
 
 
 
 
-
-
-function createData(name, calories, fat, carbs, protein) {
-return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData(1,'Katembo mwami john', '12/03/2024','En attente',),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
 
 function Reception_detail() {
@@ -49,6 +38,22 @@ function Reception_detail() {
   const handledossier=()=>{
     navigate("/reception")
   }
+
+
+  const [data,setdatas]=useState([])
+  const getDossierData = () => {
+    const INFO_Utilisateur_from_localStorage = JSON.parse(localStorage.getItem('Dossier'));
+    setdatas(INFO_Utilisateur_from_localStorage);
+    diagnosticsID(INFO_Utilisateur_from_localStorage.id)
+  }
+  
+  useEffect(()=>{
+    getDossierData()
+    },[])
+
+
+
+ const [diagnostics,diagnosticsID]=useState([])  
   return (
     <>
       <section  id='all_section'>
@@ -139,14 +144,14 @@ function Reception_detail() {
             background:"white",
             padding:"0px"
           }}>
-            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>kasongo</span></h3>
-            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>22 ans</span></h3>
-            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>masculin</span></h3>
-            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
-            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
-            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
-            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>Goma/Q.ndosho/AV.ngungu</span></h3>
-            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>078374848</span></h3>
+            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.nom_patient}</span></h3>
+            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.age}</span></h3>
+            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.sexe}</span></h3>
+            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.poids}</span></h3>
+            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.to_to}</span></h3>
+            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.ta_ta}</span></h3>
+            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.adresse}</span></h3>
+            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.telephone}</span></h3>
           </Box>
      
 
@@ -177,10 +182,7 @@ function Reception_detail() {
      
      
      <Typography mt={8}variant='h6'>  Premiers diagnostics</Typography>
-     <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium consequatur perspiciatis, quae alias suscipit, ratione voluptatum quaerat magnam corporis reiciendis quos vero repudiandae atque non velit autem accusantium enim doloribus?
-     Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit amet repudiandae animi earum totam quibusdam doloribus sunt ab, iusto voluptates reprehenderit officiis quae nisi enim soluta obcaecati sapiente iste quisquam.
-     </p>
+     <p>{data.diagnostic}</p>
      <Box sx={{
         display:"flex",
         justifyContent:"end",
