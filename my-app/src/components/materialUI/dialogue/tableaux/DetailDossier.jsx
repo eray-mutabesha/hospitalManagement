@@ -31,6 +31,7 @@ function DetailDossier() {
   const BASE_URL = import.meta.env.VITE_API_URL;
 
 
+
  // get dossier route
 const get_dossiers = () => {
   axios.get(`${BASE_URL}/get_dossiers`)
@@ -85,6 +86,22 @@ const getDossierData = () => {
 useEffect(()=>{
   getDossierData()
   },[])
+
+
+
+
+//   const [statuts,setstatus]=useState("")
+
+
+// if(data.diagnostocs == null){
+//   setstatus("En attente....")
+// }
+// else if(data.diagnostocs){
+//   setstatus("Terminer")
+// }
+
+
+
   return (
     <>
       <section  id='all_section'>
@@ -225,7 +242,9 @@ useEffect(()=>{
                 002
               </TableCell>
               <TableCell >Reception</TableCell>
-              <TableCell sx={{color:"green"}}>Terminer</TableCell>
+              {data.diagnostic ? <TableCell sx={{color:"green"}}>Terminer</TableCell> :
+              <TableCell sx={{color:"red"}}>En attente...</TableCell>}
+              
               <TableCell align='right'> <Button onClick={reception} variant="outlined" color="success">
                Details
              </Button></TableCell>
