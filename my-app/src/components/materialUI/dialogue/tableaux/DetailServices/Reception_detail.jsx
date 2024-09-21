@@ -190,8 +190,7 @@ function Reception_detail() {
         marginTop:"10px"
      }}>
 
-      <Button variant='outlined' >Modifier</Button>
-      
+  
        
        
       </Box>

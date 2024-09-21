@@ -160,6 +160,7 @@ const routes=createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+
     <Toaster />
     <RouterProvider router={routes}></RouterProvider>
   </React.StrictMode>,

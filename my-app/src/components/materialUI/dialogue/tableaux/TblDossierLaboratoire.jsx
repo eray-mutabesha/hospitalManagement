@@ -20,31 +20,32 @@ import Laboratoire from '../../Laboratoire.jsx'
 import OrganisationClinique from '../../OrganisationClinique.jsx'
 import Factutation from '../../Facturation.jsx'
 import DossierForm from '../DossierForm.jsx'
+import { useState ,useEffect} from 'react'
 
-
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData(1,'Katembo mwami john', '12/03/2024','En attente',),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
 
 function TblDossierLaboratoire() {
   const navigate = useNavigate()
-  const handledetail=()=>{
+  const handledetail=(dat)=>{
+    localStorage.setItem("Dossier", JSON.stringify(dat));
     navigate("/detaildossier")
   }
 
   const handledossier=()=>{
     navigate("/reception")
   }
+
+const [data,setdatas]=useState([])
+const getLaboratoireData = () => {
+  const INFO_Utilisateur_from_localStorage = JSON.parse(localStorage.getItem('Laboratoire'));
+  setdatas(INFO_Utilisateur_from_localStorage);
+}
+
+useEffect(()=>{
+  getLaboratoireData()
+  },[])
+
+
   return (
     <>
       <section  id='all_section'>
@@ -118,23 +119,25 @@ function TblDossierLaboratoire() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+        {data.map((dat,index) => (
             <TableRow
-              key={row.name}
+              key={index}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                002
+                {dat.id}
               </TableCell>
-              <TableCell >Katembo mwami jean</TableCell>
-              <TableCell >12/04/2024</TableCell>
+              <TableCell >{dat.nom_patient}</TableCell>
+              <TableCell >{dat.date_entre}</TableCell>
               <TableCell sx={{color:"red"}}>En attente...</TableCell>
-              <TableCell align="right"><Button sx={{
-                border:"1px solid rgb(201, 199, 199)",
-                color:"black"
-              }}   onClick={handledetail}>Details</Button></TableCell>
+              <TableCell align="right" sx={{display:"flex",gap:"10px"}}>
+               
+                <Button sx={{border:"1px solid rgb(201, 199, 199)",color:"black"}} onClick={()=>handledetail(dat)}>Details</Button>
+                
+                </TableCell>
             </TableRow>
           ))}
+
         </TableBody>
       </Table>
     </TableContainer>

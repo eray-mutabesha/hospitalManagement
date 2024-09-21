@@ -29,7 +29,7 @@ import axios from 'axios';
 
 
 function TblDossier() {
-  const [datas,setDatas]=useState([])
+  const [datas,setDatas]= useState([])
   const BASE_URL = import.meta.env.VITE_API_URL;
 
 
@@ -49,16 +49,35 @@ useEffect(() => {
   get_dossiers();
   }, []);
   
- 
+ // delete dossier route
+const deleteEntree = (model) => {
+  axios.delete(`${BASE_URL}/delete_dossier/${model.id}`)
+    .then(({ data }) => {
+      setDatas(data.data || []); // Assurer que data.data est un tableau
+      get_dossiers();
+    })
+    .catch((err) => {
+      console.log(err);
+      toast.error("Il y a une erreur");
+    });
+};
+
+
+useEffect(() => {
+  get_dossiers();
+}, []);
  
  
 
 
-
+// pushing dossier's data in local storage
   const navigate = useNavigate()
+
+  const [dossierID,setDossierID] = useState([])
   const handledetail=(dat)=>{
-    localStorage.setItem("Dossier", JSON.stringify(dat));
-    navigate("/detaildossier")
+    console.log(dat.id);
+    setDossierID(dat.id);
+    navigate("/detaildossier", { state: { dossier: dat } });
   }
 
   const handledossier=()=>{
@@ -152,7 +171,7 @@ useEffect(() => {
               <TableCell >{dat.date_entre}</TableCell>
               <TableCell sx={{color:"red"}}>En attente...</TableCell>
               <TableCell align="right" sx={{display:"flex",gap:"10px"}}>
-                <Button size="small" variant="outlined" color="error" startIcon={<DeleteIcon />}>Sup</Button>
+                <Button size="small" variant="outlined" color="error" startIcon={<DeleteIcon />}  onClick={() => deleteEntree(dat)}>Sup</Button>
                 <Button sx={{border:"1px solid rgb(201, 199, 199)",color:"black"}} onClick={()=>handledetail(dat)}>Details</Button>
                 
                 </TableCell>
@@ -164,10 +183,15 @@ useEffect(() => {
     </Box>
     </Box>  
         </div>
+        
       </section>
+      
     </>
+    
   )
+  
 }
+
 export default TblDossier
 
 

@@ -159,7 +159,7 @@ if(FormVisible == false){
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                001
+                {dat.id}
               </TableCell>
               <TableCell >{dat.nom}</TableCell>
               <TableCell >{dat.post_nom}</TableCell>

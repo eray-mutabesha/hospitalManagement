@@ -30,18 +30,7 @@ function TblLaboratoire() {
   const { register, handleSubmit,formState:{errors} } = useForm();
   const [checked, setChecked] = React.useState([1]);
 
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
 
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-
-    setChecked(newChecked);
-  };
   const navigate = useNavigate()
   const detailLabo =()=>{
     navigate("/laboratoiredetail")
@@ -49,6 +38,10 @@ function TblLaboratoire() {
   const handledossier=()=>{
     navigate("/detaildossier")
   }
+
+
+
+
   return (
     <>
       <section  id='all_section'>
