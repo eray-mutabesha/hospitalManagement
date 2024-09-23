@@ -20,14 +20,18 @@ import Laboratoire from '../../Laboratoire.jsx'
 import OrganisationClinique from '../../OrganisationClinique.jsx'
 import Factutation from '../../Facturation.jsx'
 import DossierForm from '../DossierForm.jsx'
-import { useState ,useEffect} from 'react'
-
-
+import { useState ,useEffect,useContext} from 'react'
+import { DossierContext } from '../../../../DossierContext.jsx'
+import DeleteIcon from '@mui/icons-material/Delete';
+import axios from 'axios';
+import  {toast} from 'react-hot-toast';
 
 function TblDossierLaboratoire() {
+
+  const { setDossier } = useContext(DossierContext);
   const navigate = useNavigate()
   const handledetail=(dat)=>{
-    localStorage.setItem("Dossier", JSON.stringify(dat));
+    setDossier(dat)
     navigate("/detaildossier")
   }
 
@@ -35,15 +39,45 @@ function TblDossierLaboratoire() {
     navigate("/reception")
   }
 
-const [data,setdatas]=useState([])
-const getLaboratoireData = () => {
-  const INFO_Utilisateur_from_localStorage = JSON.parse(localStorage.getItem('Laboratoire'));
-  setdatas(INFO_Utilisateur_from_localStorage);
-}
+
+  const [datas,setDatas]= useState([])
+  const BASE_URL = import.meta.env.VITE_API_URL;
+
+
+ // get dossier_labo route
+const get_laboratoire_dossier = () => {
+  axios.get(`${BASE_URL}/get_laboratoire_dossier`)
+    .then(({ data }) => {
+      setDatas(data.data || []); 
+    })
+    .catch((err) => {
+      console.log(err);
+      toast.error("Il y a une erreur");
+    });
+};
 
 useEffect(()=>{
-  getLaboratoireData()
-  },[])
+  get_laboratoire_dossier()
+},[])
+
+
+ // delete dossier_labo route
+ const deleteEntree = (model) => {
+  axios.delete(`${BASE_URL}/delete_dossier_labo/${model.id}`)
+    .then(({ data }) => {
+      setDatas(data.data || []); // Assurer que data.data est un tableau
+      get_laboratoire_dossier()
+    })
+    .catch((err) => {
+      console.log(err);
+      toast.error("Il y a une erreur");
+    });
+};
+
+
+
+
+
 
 
   return (
@@ -119,7 +153,7 @@ useEffect(()=>{
           </TableRow>
         </TableHead>
         <TableBody>
-        {data.map((dat,index) => (
+        {datas?.map((dat,index) => (
             <TableRow
               key={index}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -131,7 +165,8 @@ useEffect(()=>{
               <TableCell >{dat.date_entre}</TableCell>
               <TableCell sx={{color:"red"}}>En attente...</TableCell>
               <TableCell align="right" sx={{display:"flex",gap:"10px"}}>
-               
+
+                <Button size="small" variant="outlined" color="error" startIcon={<DeleteIcon />}  onClick={() => deleteEntree(dat)}>Sup</Button>
                 <Button sx={{border:"1px solid rgb(201, 199, 199)",color:"black"}} onClick={()=>handledetail(dat)}>Details</Button>
                 
                 </TableCell>

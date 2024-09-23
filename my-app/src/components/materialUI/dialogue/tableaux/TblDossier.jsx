@@ -86,13 +86,6 @@ useEffect(() => {
 
 
 
-  // useEffect(() => {
-  //   if (dossier) {
-  //    ;  // Stocker les données dans le contexte
-  //   } else {
-  //     console.warn("Aucun dossier trouvé dans location.state");
-  //   }
-  // }, [dossier, setDossier]);
 
 
 

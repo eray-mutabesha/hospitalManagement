@@ -19,23 +19,16 @@ import OrganisationClinique from '../../../OrganisationClinique.jsx';
 import Factutation from '../../../Facturation.jsx';
 import Dashboard from '../../../Dashboard.jsx'
 import Parametre from '../../../Parametre.jsx'
+import { useContext } from 'react'
+import  {toast} from 'react-hot-toast';
+import axios from 'axios';
+import { DossierContext } from '../../../../../DossierContext.jsx'
 
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData(1,'Katembo mwami john', '12/03/2024','En attente',),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
 
 function Consultation_detail() {
-  
+   // get data from contex
+   const { dossier} = useContext(DossierContext);
 
  const navigate = useNavigate()
  const handledossier=()=>{
@@ -127,14 +120,14 @@ const reception=()=>{
             background:"white",
             padding:"0px"
           }}>
-            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>kasongo</span></h3>
-            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>22 ans</span></h3>
-            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>masculin</span></h3>
-            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
-            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
-            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
-            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>Goma/Q.ndosho/AV.ngungu</span></h3>
-            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>078374848</span></h3>
+            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.nom_patient}</span></h3>
+            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.age}</span></h3>
+            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.sexe}</span></h3>
+            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.poids}</span></h3>
+            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.to_to}</span></h3>
+            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.ta_ta}</span></h3>
+            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.adresse}</span></h3>
+            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.telephone}</span></h3>
           </Box>
      
 
@@ -171,16 +164,16 @@ const reception=()=>{
             marginTop:"30px"
           }}>
            <h3>Traitement :</h3>
-           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde culpa facilis adipisci, ipsum repellat reprehenderit quia ut error cum minima, ex quae quod saepe maxime est perspiciatis, rerum maiores? Necessitatibus eaque provident mollitia veritatis sed quia et cum at quisquam voluptatem. Facilis dicta cumque dolorem quibusdam voluptate similique ipsam consectetur quasi repellendus perferendis voluptatum rerum sed nostrum deserunt sapiente, ducimus architecto. Maxime illo nihil voluptates qui inventore distinctio corporis tempora. Animi, ab tempore? Nostrum distinctio quaerat atque deserunt eum eaque, quo repudiandae quos aperiam! Consequatur, voluptate? Adipisci quis reprehenderit, repellendus, saepe aut tempora sint, odit sequi similique et incidunt ipsa autem minima. Esse dolorem corporis facilis veniam excepturi similique magni nisi harum aperiam delectus labore rem magnam, accusantium consequatur, voluptatum ipsum laborum praesentium accusamus vitae odio dolor at. Natus culpa eaque, a alias quam quasi repudiandae blanditiis vitae nesciunt? Fugiat eos perspiciatis quod qui nobis, magnam repudiandae veniam autem doloribus?</p>
-          </Box>
+           <p>{dossier?.traitement}</p>
+           </Box>
 
           <Box sx={{
             background:"white",
             marginTop:"30px"
           }}>
            <h3>Observation :</h3>
-           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde culpa facilis adipisci, ipsum repellat reprehenderit quia ut error cum minima, ex quae quod saepe maxime est perspiciatis, rerum maiores? Necessitatibus eaque provident mollitia veritatis sed quia et cum at quisquam voluptatem. Facilis dicta cumque dolorem quibusdam voluptate similique ipsam consectetur quasi repellendus perferendis voluptatum rerum sed nostrum deserunt sapiente, ducimus architecto. Maxime illo nihil voluptates qui inventore distinctio corporis tempora. Animi, ab tempore? Nostrum distinctio quaerat atque deserunt eum eaque, quo repudiandae quos aperiam! Consequatur, voluptate? Adipisci quis reprehenderit, repellendus, saepe aut tempora sint, odit sequi similique et incidunt ipsa autem minima. Esse dolorem corporis facilis veniam excepturi similique magni nisi harum aperiam delectus labore rem magnam, accusantium consequatur, voluptatum ipsum laborum praesentium accusamus vitae odio dolor at. Natus culpa eaque, a alias quam quasi repudiandae blanditiis vitae nesciunt? Fugiat eos perspiciatis quod qui nobis, magnam repudiandae veniam autem doloribus?</p>
-          </Box>
+           <p>{dossier?.observation}</p>
+           </Box>
          </Box>
       
       

@@ -10,7 +10,21 @@ import { useNavigate } from 'react-router-dom';
 import SendIcon from '@mui/icons-material/Send';
 import SaveIcon from '@mui/icons-material/Save';
 import Laboratoire from './Laboratoire';
+import { DossierContext } from '../../DossierContext.jsx';
+import { useContext } from 'react';
+import toast from 'react-hot-toast';
+import axios from 'axios';
+
+
+
+
+
 export default function ChoixTransferClt() {
+
+ 
+ 
+
+  
 const navigate=useNavigate()
 const handleclick=()=>{
   navigate("/")
@@ -20,47 +34,49 @@ const handledeconnexion=()=>{
   navigate("/")
 }
 
+const BASE_URL = import.meta.env.VITE_API_URL;
+const { dossier } = useContext(DossierContext);
+
+// constttttttttttttttttttttttttttttttttttttttttttttt
+const Consultation =()=>{
 
 
-
-const LaboratoireData = () => {
-  // Récupérer les données de "Dossier"
-  let dossierData = localStorage.getItem("Dossier");
-
-  // Vérifier si des données existent dans "Dossier"
-  if (dossierData) {
-    // Parser les données de "Dossier" en objet ou tableau
-    const newDossierData = JSON.parse(dossierData);
-
-    // Récupérer les données existantes de "Laboratoire"
-    let laboratoireData = localStorage.getItem("Laboratoire");
-
-    // Si des données existent déjà dans "Laboratoire", les parser en tableau
-    if (laboratoireData) {
-      laboratoireData = JSON.parse(laboratoireData);
-      
-      // S'assurer que les données de "Laboratoire" sont un tableau
-      if (!Array.isArray(laboratoireData)) {
-        laboratoireData = [laboratoireData];
-      }
-    } else {
-      // Si aucune donnée dans "Laboratoire", initialiser comme tableau vide
-      laboratoireData = [];
-    }
-
-    // Ajouter les nouvelles données de "Dossier" au tableau existant
-    laboratoireData = laboratoireData.concat(newDossierData);
-
-    // Sauvegarder les données mises à jour dans "Laboratoire"
-    localStorage.setItem("Laboratoire", JSON.stringify(laboratoireData));
-
-    console.log("Les données ont été copiées avec succès dans 'Laboratoire' !");
-  } else {
-    console.log("Aucune donnée trouvée dans 'Dossier'.");
-  }
 }
 
+const LaboratoireData = () => {
+console.log(Laboratoire)
+   console.log(dossier)
 
+   axios.post(`${BASE_URL}/post_laboratoire_dossier`,{
+    nom_patient:dossier?.nom_patient,
+    date:dossier?.date_entre,
+    poids:dossier?.poids,
+    to_to:dossier?.to_to,
+    ta_ta:dossier?.ta_ta,
+    adresse:dossier?.adresse,
+    age:dossier?.age,
+    sexe:dossier?.sexe,
+    telephone:dossier?.telephone,
+    diagnostic:dossier?.diagnostic
+    
+   })
+          
+   .then(({ data }) => {
+     if (data.status == 500) {
+       toast.error("Il y a une erreur");
+     } else {
+     toast.success("PATIENT ENVOYER AU LABO")
+
+   }
+   })
+    .catch((err) => {
+      console.log(err);
+      toast.error("Il y a une erreur");
+    });
+
+
+
+}
 
 
 
@@ -82,6 +98,7 @@ const LaboratoireData = () => {
           </Button>
           <Menu {...bindMenu(popupState)}>
             <MenuItem onClick={handleclick} ><Button endIcon={<SendIcon />}>Reception</Button></MenuItem>
+            <MenuItem onClick={Consultation}><Button endIcon={<SendIcon />}>Consultation</Button></MenuItem>
             <MenuItem onClick={LaboratoireData}><Button endIcon={<SendIcon />}>Laboratoire</Button></MenuItem>
             <MenuItem onClick={handleclick}><Button endIcon={<SendIcon />}>Hospitalisation</Button></MenuItem>
             <MenuItem onClick={handledeconnexion}><Button endIcon={<SendIcon />}>Embilatoire</Button></MenuItem>

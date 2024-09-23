@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './tbl.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash ,faEye} from '@fortawesome/free-solid-svg-icons'
@@ -21,39 +21,89 @@ import IconButton from '@mui/material/IconButton';
 import CommentIcon from '@mui/icons-material/Comment';
 import Ressources from '../../Resources.jsx'
 import Laboratoire from '../../Laboratoire.jsx'
-
 import OrganisationClinique from '../../OrganisationClinique.jsx'
 import Factutation from '../../Facturation.jsx'
+import { DossierContext } from '../../../../DossierContext.jsx'
+import { useContext } from 'react'
+import  {toast} from 'react-hot-toast';
+import axios from 'axios';
 
 
 
 
-
-
-
-function createData(name, calories, fat, carbs, protein) {
-return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData(1,'Katembo mwami john', '12/03/2024','En attente',),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
 
 function TblChambre() {
-    const { register, handleSubmit,formState:{errors} } = useForm();
+  const BASE_URL = import.meta.env.VITE_API_URL;
+  // get data from contex
+    const { dossier,setDossier  } = useContext(DossierContext);
+
+
+
+
+  const { register, handleSubmit,formState:{errors} } = useForm();
+
+
   const navigate = useNavigate()
   const handledossier=()=>{
     navigate("/detaildossier")
   }
-
   const detail =()=>{
     navigate("/consultationdetail")
   }
+
+
+
+
+
+
+  const [formData,setFormData]= useState({
+    observation:"",
+    traitement:""
+  })
+
+  const onsubmit=(data)=>{
+    console.log(data)
+    axios.post(`${BASE_URL}/post_consultation_dossier`,{
+      nom_patient:dossier?.nom_patient,
+      date:dossier?.date_entre,
+      poids:dossier?.poids,
+      to_to:dossier?.to_to,
+      ta_ta:dossier?.ta_ta,
+      adresse:dossier?.adresse,
+      age:dossier?.age,
+      sexe:dossier?.sexe,
+      telephone:dossier?.telephone,
+      observation:formData.observation,
+      traitement:formData.traitement
+      
+     })
+          
+          .then(({ data }) => {
+            if (data.status == 500) {
+              toast.error("Il y a une erreur");
+            } else {
+            
+              const updatedDossier = { ...dossier, observation: formData.observation,traitement:formData.traitement };
+              setDossier(updatedDossier);
+              console.log(dossier)
+              setFormData({
+                    observation:"",
+                    traitement:""
+              })
+            toast.success("Enregistrement réussi");
+
+          }
+          })
+           .catch((err) => {
+             console.log(err);
+             toast.error("Il y a une erreur");
+           });
+
+  }
+
+
+
   return (
     <>
       <section  id='all_section'>
@@ -117,7 +167,7 @@ function TblChambre() {
       
       <Box>
       
-        <form action="" style={{
+        <form action=""   onSubmit={handleSubmit(onsubmit)}    style={{
             background:"white",
             padding:"20px",
             borderRadius:"10px",
@@ -149,14 +199,14 @@ function TblChambre() {
             background:"white",
             padding:"0px"
           }}>
-            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>kasongo</span></h3>
-            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>22 ans</span></h3>
-            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>masculin</span></h3>
-            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
-            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
-            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
-            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>Goma/Q.ndosho/AV.ngungu</span></h3>
-            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>078374848</span></h3>
+            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.nom_patient}</span></h3>
+            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.age}</span></h3>
+            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.sexe}</span></h3>
+            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.poids}</span></h3>
+            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.to_to}</span></h3>
+            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.ta_ta}</span></h3>
+            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.adresse}</span></h3>
+            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.telephone}</span></h3>
           </Box>
      
 
@@ -194,9 +244,10 @@ function TblChambre() {
                label="Traitement"
                multiline
                rows={3}
-               
                variant="standard"
-        />
+               {...register("traitement", { required: "Veuillez entrer le point" })}
+               value={formData.traitement}
+               onChange={(e) => setFormData({ ...formData, traitement: e.target.value })}/>
 
 <Typography variant='h6'>Observation</Typography>
      <TextField
@@ -207,7 +258,9 @@ function TblChambre() {
                multiline
                rows={3}
                variant="standard"
-        />
+               {...register("observation", { required: "Veuillez entrer le point" })}
+               value={formData.observation}
+               onChange={(e) => setFormData({ ...formData, observation: e.target.value })}/>
      <Box sx={{
         display:"flex",
         justifyContent:"end",

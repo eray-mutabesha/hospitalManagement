@@ -64,40 +64,59 @@ const { dossier,setDossier  } = useContext(DossierContext);
    const [formData,setFormData]=useState({
     diagnostics:""
    })
-    const onsubmit=(data)=>{
-    
-        // API pour mettre à jour les données
-        axios.put(`${BASE_URL}/patch_patient_dossier/${dossier?.id}`,data)
+  
+
+
+
+   const onsubmit = (formData) => {
+    // Mettre à jour le dossier du patient
+    const updatePatientDossier = axios.put(
+      `${BASE_URL}/patch_patient_dossier/${dossier?.id}`, 
+      formData
+    );
+  
+    // Mettre à jour le diagnostic au labo
+    const updateLaboDiagnostic = axios.put(
+      `${BASE_URL}/put_dossier_labo_diagnostic/${dossier?.id}`, 
+      formData
+    );
+  
+    // Gérer les deux requêtes simultanément
+    Promise.all([updatePatientDossier, updateLaboDiagnostic])
+      .then(([patientResponse, laboResponse]) => {
+        // Vérification de la réponse du patient dossier
+        const { data: patientData } = patientResponse;
+        if (patientData.status === 500) {
+          toast.error("Il y a une erreur lors de la mise à jour du dossier patient.");
+          return;
+        }
+  
+        // Mise à jour du dossier dans le contexte après la réussite
+        const updatedDossier = { ...dossier, diagnostic: formData.diagnostics };
+        setDossier(updatedDossier);
+  
+        // Vérification de la réponse du labo
+        const { data: laboData } = laboResponse;
+        if (laboData.status === 500) {
+          toast.error("Il y a une erreur lors de la mise à jour du labo.");
+          return;
+        }
+  
+        // Si les deux mises à jour sont réussies
+        toast.success("Mise à jour du diagnostic réussie !");
         
-          .then(({ data }) => {
-            if (data.status == 500) {
-              toast.error("Il y a une erreur");
-            } else {
-                
-    // Exemple de nouvelle donnée
-    const updatedDossier = { ...dossier,diagnostic:  formData.diagnostics  };
+        // Réinitialiser le formulaire
+        setFormData({
+          diagnostics: "",
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+        toast.error("Une erreur est survenue lors de la mise à jour du diagnostic.");
+      });
+  };
+  
 
-    // Mettre à jour le dossier dans le contexte
-    setDossier(updatedDossier);
-
-
-              toast.success("diagnostic à jour réussie");
-              setFormData({
-                diagnostics:""
-              })
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-            toast.error("pas de diagnostic ");
-          });
-      
-   }
-
-
-
-
-console.log(dossier)
 
 
 
