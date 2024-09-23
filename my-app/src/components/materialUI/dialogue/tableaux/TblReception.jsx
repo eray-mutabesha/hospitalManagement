@@ -23,12 +23,12 @@ import Ressources from '../../Resources.jsx'
 import Laboratoire from '../../Laboratoire.jsx'
 import OrganisationClinique from '../../OrganisationClinique.jsx'
 import Factutation from '../../Facturation.jsx'
-import { useState,useEffect } from 'react'
+import { useState,useEffect,useContext } from 'react'
 import  {toast} from 'react-hot-toast';
 import axios from 'axios';
 import DossierForm from '../DossierForm.jsx'
-
-
+import { useLocation } from 'react-router-dom'
+import { DossierContext } from '../../../../DossierContext.jsx'
 
 
 
@@ -36,60 +36,51 @@ import DossierForm from '../DossierForm.jsx'
 
 
 function TblReception() {
+  
+// get data from contex
+const { dossier,setDossier  } = useContext(DossierContext);
+
   const BASE_URL = import.meta.env.VITE_API_URL;
   const { register, handleSubmit,formState:{errors} } = useForm();
   const navigate = useNavigate()
+
   const handledossier=()=>{
     navigate("/detaildossier")
   }
 
+
+
+
+
+  // navigate("/detaildossier", { state: { dossier: dat } });
   const detail =()=>{
     navigate("/receptiondetail")
   }
 
 
-  const [data,setdatas]=useState([])
-  const getDossierData = () => {
-    const INFO_Utilisateur_from_localStorage = JSON.parse(localStorage.getItem('Dossier'));
-    setdatas(INFO_Utilisateur_from_localStorage);
-    diagnosticsID(INFO_Utilisateur_from_localStorage.id)
-  }
-  
-  useEffect(()=>{
-    getDossierData()
-    },[])
-
-    const [formData, setFormData] = useState({
-      diagnostics: "",
-
-    });
-
- const [diagnostics,diagnosticsID]=useState([])  
-
-
-  
 
 
 
+   const [formData,setFormData]=useState({
+    diagnostics:""
+   })
     const onsubmit=(data)=>{
     
         // API pour mettre à jour les données
-        axios.put(`${BASE_URL}/patch_patient_dossier/${diagnostics}`,data)
+        axios.put(`${BASE_URL}/patch_patient_dossier/${dossier?.id}`,data)
         
           .then(({ data }) => {
             if (data.status == 500) {
               toast.error("Il y a une erreur");
             } else {
-              // Later, when you want to update it:
-             let dossier = JSON.parse(localStorage.getItem("Dossier"));
+                
+    // Exemple de nouvelle donnée
+    const updatedDossier = { ...dossier,diagnostic:  formData.diagnostics  };
 
-            if (dossier) {
-            // Update fields
-            dossier.diagnostic =`${formData.diagnostics}`;
-    
-    // Save updated object back to localStorage
-    localStorage.setItem("Dossier", JSON.stringify(dossier));
-}
+    // Mettre à jour le dossier dans le contexte
+    setDossier(updatedDossier);
+
+
               toast.success("diagnostic à jour réussie");
               setFormData({
                 diagnostics:""
@@ -106,7 +97,7 @@ function TblReception() {
 
 
 
-
+console.log(dossier)
 
 
 
@@ -168,7 +159,7 @@ function TblReception() {
 }}>
    <Button  variant="contained" color="error" sx={{
     width:"fit-content",
-    marginTop:"40px"}}onClick={handledossier}>
+    marginTop:"40px"}}onClick={handledossier} >
             Retour
            </Button>
 
@@ -205,14 +196,14 @@ function TblReception() {
             background:"white",
             padding:"0px"
           }}>
-            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.nom_patient}</span></h3>
-            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.age}</span></h3>
-            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.sexe}</span></h3>
-            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.poids}</span></h3>
-            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.to_to}</span></h3>
-            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.ta_ta}</span></h3>
-            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.adresse}</span></h3>
-            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.telephone}</span></h3>
+            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.nom_patient}</span></h3>
+            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.age}</span></h3>
+            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.sexe}</span></h3>
+            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.poids}</span></h3>
+            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.to_to}</span></h3>
+            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.ta_ta}</span></h3>
+            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.adresse}</span></h3>
+            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.telephone}</span></h3>
           </Box>
      
 

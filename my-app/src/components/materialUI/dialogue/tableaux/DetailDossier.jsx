@@ -20,40 +20,38 @@ import Consultation from '../../Consultation.jsx';
 import Laboratoire from '../../Laboratoire.jsx';
 import OrganisationClinique from '../../OrganisationClinique.jsx';
 import Factutation from '../../Facturation.jsx';
-import { useState,useEffect } from 'react'
+import { useState,useEffect, useContext } from 'react'
 import  {toast} from 'react-hot-toast';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
+import { DossierContext } from '../../../../DossierContext.jsx'
 
 
 function DetailDossier() {
-  const [datas,setDatas]=useState([])
-  const BASE_URL = import.meta.env.VITE_API_URL;
 
-  const location = useLocation();
-  const dossier = location.state?.dossier;  // Access the dossier data
+  const { dossier } = useContext(DossierContext);
 
 
 
 
 
 
+//   const BASE_URL = import.meta.env.VITE_API_URL;
+//  // get dossier route
+// const get_dossiers = () => {
+//   axios.get(`${BASE_URL}/get_dossiers`)
+//     .then(({ data }) => {
+//       setDatas(data.data || []); 
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//       toast.error("Il y a une erreur");
+//     });
+// };
 
- // get dossier route
-const get_dossiers = () => {
-  axios.get(`${BASE_URL}/get_dossiers`)
-    .then(({ data }) => {
-      setDatas(data.data || []); 
-    })
-    .catch((err) => {
-      console.log(err);
-      toast.error("Il y a une erreur");
-    });
-};
-
-useEffect(() => {
-  get_dossiers();
-  }, []);
+// useEffect(() => {
+//   get_dossiers();
+//   }, []);
 
 
 
@@ -67,6 +65,7 @@ useEffect(() => {
   navigate("/detailPatient")
 }
 const reception=()=>{
+  
   navigate("/reception")
 }
 const laboratoire=()=>{
@@ -83,17 +82,6 @@ const hospitalisation =()=>{
 const ambulatoiredetail= ()=>{
   navigate("/ambulatoire")
 }
-
-const [data,setdatas]=useState([])
-const getDossierData = () => {
-  const INFO_Utilisateur_from_localStorage = JSON.parse(localStorage.getItem('Dossier'));
-  setdatas(INFO_Utilisateur_from_localStorage);
-}
-
-useEffect(()=>{
-  getDossierData()
-  },[])
-
 
 
 

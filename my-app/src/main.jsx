@@ -32,6 +32,8 @@ import TblDossierLaboratoire from './components/materialUI/dialogue/tableaux/Tbl
 import TblDossierHospitalisation from './components/materialUI/dialogue/tableaux/TblDossierHospitalisation.jsx';
 import UpdateProfil from './components/UpdateProfil.jsx';
 import TblMedicamentAutre from './components/materialUI/dialogue/tableaux/TblMedicamentAutre.jsx';
+import { DossierProvider } from './DossierContext'; 
+
 
 
 
@@ -119,7 +121,6 @@ const routes=createBrowserRouter([
     path:"/receptiondetail",
     element:<Reception_detail/>
    },
-   ,
    {
     path:"/laboratoiredetail",
     element:<Laboratoire_detail/>
@@ -158,10 +159,18 @@ const routes=createBrowserRouter([
    }
 ])
 
+
 ReactDOM.createRoot(document.getElementById('root')).render(
+  
+
   <React.StrictMode>
+    <DossierProvider>
 
     <Toaster />
     <RouterProvider router={routes}></RouterProvider>
+    
+    </DossierProvider>
   </React.StrictMode>,
 )
+
+

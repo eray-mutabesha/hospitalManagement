@@ -22,10 +22,10 @@ import Ressources from '../../../Resources.jsx'
 import Laboratoire from '../../../Laboratoire.jsx'
 import OrganisationClinique from '../../../OrganisationClinique.jsx'
 import Factutation from '../../../Facturation.jsx'
-import { useState,useEffect } from 'react'
+import { useState,useEffect,useContext } from 'react'
 import  {toast} from 'react-hot-toast';
 import axios from 'axios';
-
+import { DossierContext } from '../../../../../DossierContext.jsx'
 
 
 
@@ -39,21 +39,12 @@ function Reception_detail() {
     navigate("/reception")
   }
 
-
-  const [data,setdatas]=useState([])
-  const getDossierData = () => {
-    const INFO_Utilisateur_from_localStorage = JSON.parse(localStorage.getItem('Dossier'));
-    setdatas(INFO_Utilisateur_from_localStorage);
-    diagnosticsID(INFO_Utilisateur_from_localStorage.id)
-  }
-  
-  useEffect(()=>{
-    getDossierData()
-    },[])
+// get data from contex
+const { dossier } = useContext(DossierContext);
 
 
 
- const [diagnostics,diagnosticsID]=useState([])  
+
   return (
     <>
       <section  id='all_section'>
@@ -144,14 +135,14 @@ function Reception_detail() {
             background:"white",
             padding:"0px"
           }}>
-            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.nom_patient}</span></h3>
-            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.age}</span></h3>
-            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.sexe}</span></h3>
-            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.poids}</span></h3>
-            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.to_to}</span></h3>
-            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.ta_ta}</span></h3>
-            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.adresse}</span></h3>
-            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data.telephone}</span></h3>
+            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.nom_patient}</span></h3>
+            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.age}</span></h3>
+            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.sexe}</span></h3>
+            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.poids}</span></h3>
+            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.to_to}</span></h3>
+            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.ta_ta}</span></h3>
+            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.adresse}</span></h3>
+            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.telephone}</span></h3>
           </Box>
      
 
@@ -182,7 +173,7 @@ function Reception_detail() {
      
      
      <Typography mt={8}variant='h6'>  Premiers diagnostics</Typography>
-     <p>{data.diagnostic}</p>
+     <p>{dossier?.diagnostic}</p>
      <Box sx={{
         display:"flex",
         justifyContent:"end",

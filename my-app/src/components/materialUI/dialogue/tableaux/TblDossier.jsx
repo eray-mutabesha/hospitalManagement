@@ -23,8 +23,9 @@ import DossierForm from '../DossierForm.jsx'
 import DeleteIcon from '@mui/icons-material/Delete';
 import  {toast} from 'react-hot-toast';
 import axios from 'axios';
-
-
+import { useLocation } from 'react-router-dom';
+import { DossierContext } from '../../../../DossierContext.jsx'
+import { useContext } from 'react'
 
 
 
@@ -45,9 +46,7 @@ const get_dossiers = () => {
     });
 };
 
-useEffect(() => {
-  get_dossiers();
-  }, []);
+
   
  // delete dossier route
 const deleteEntree = (model) => {
@@ -70,15 +69,32 @@ useEffect(() => {
  
 
 
-// pushing dossier's data in local storage
+   const { setDossier } = useContext(DossierContext);
   const navigate = useNavigate()
-
-  const [dossierID,setDossierID] = useState([])
   const handledetail=(dat)=>{
-    console.log(dat.id);
-    setDossierID(dat.id);
-    navigate("/detaildossier", { state: { dossier: dat } });
+
+    // const location = useLocation();
+ 
+ 
+    setDossier(dat)
+
+    navigate("/detaildossier");
+
   }
+
+  
+
+
+
+  // useEffect(() => {
+  //   if (dossier) {
+  //    ;  // Stocker les données dans le contexte
+  //   } else {
+  //     console.warn("Aucun dossier trouvé dans location.state");
+  //   }
+  // }, [dossier, setDossier]);
+
+
 
   const handledossier=()=>{
     navigate("/reception")
