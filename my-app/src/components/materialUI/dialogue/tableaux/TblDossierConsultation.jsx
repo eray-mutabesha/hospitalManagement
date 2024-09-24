@@ -1,4 +1,3 @@
-import React from 'react'
 import './tbl.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Navigate, useNavigate } from 'react-router-dom'
@@ -20,25 +19,65 @@ import Laboratoire from '../../Laboratoire.jsx'
 import OrganisationClinique from '../../OrganisationClinique.jsx'
 import Factutation from '../../Facturation.jsx'
 import DossierForm from '../DossierForm.jsx'
+import { useState,useEffect } from 'react'
+import axios from 'axios';
+import  {toast} from 'react-hot-toast';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { useContext} from 'react'
+import { DossierContext } from '../../../../DossierContext.jsx'
 
 
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
 
-const rows = [
-  createData(1,'Katembo mwami john', '12/03/2024','En attente',),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
+
+
+
+
+
+
+
 
 
 function TblDossierConsultation() {
+  const BASE_URL = import.meta.env.VITE_API_URL;
+  const { setDossier } = useContext(DossierContext);
+const [data,setDatas]=useState([])
+
+  const get_dossiers_consultation = () => {
+    axios.get(`${BASE_URL}/get_consultation_dossier`)
+      .then(({ data }) => {
+        setDatas(data.data || []); 
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Il y a une erreur");
+      });
+  };
+
+useEffect(()=>{
+ get_dossiers_consultation()
+},[])
+
+
+
+const deleteEntree = (model) => {
+  axios.delete(`${BASE_URL}/delete_dossier_consultation/${model.id}`)
+    .then(({ data }) => {
+      setDatas(data.data || []); // Assurer que data.data est un tableau
+      get_dossiers_consultation()
+    })
+    .catch((err) => {
+      console.log(err);
+      toast.error("Il y a une erreur");
+    });
+};
+
+
+
+
   const navigate = useNavigate()
-  const handledetail=()=>{
+  const handledetail=(dat)=>{
+    setDossier(dat)
     navigate("/detaildossier")
   }
 
@@ -118,21 +157,25 @@ function TblDossierConsultation() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {data.map((dat,key) => (
             <TableRow
-              key={row.name}
+              key={key}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
                 002
               </TableCell>
-              <TableCell >Katembo mwami jean</TableCell>
-              <TableCell >12/04/2024</TableCell>
+              <TableCell >{dat.nom_patient}</TableCell>
+              <TableCell >{dat.date_entre}</TableCell>
               <TableCell sx={{color:"red"}}>En attente...</TableCell>
-              <TableCell align="right"><Button sx={{
+              <TableCell align="right">
+             <Button sx={{
                 border:"1px solid rgb(201, 199, 199)",
                 color:"black"
-              }}   onClick={handledetail}>Details</Button></TableCell>
+              }}   onClick={()=>handledetail(dat)}>Details</Button>
+               <Button size="small" variant="outlined" color="error" startIcon={<DeleteIcon />}  onClick={() => deleteEntree(dat)}>Sup</Button>
+                
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

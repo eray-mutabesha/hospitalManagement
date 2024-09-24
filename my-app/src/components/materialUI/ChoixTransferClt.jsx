@@ -37,9 +37,40 @@ const handledeconnexion=()=>{
 const BASE_URL = import.meta.env.VITE_API_URL;
 const { dossier } = useContext(DossierContext);
 
+
+
+
 // constttttttttttttttttttttttttttttttttttttttttttttt
 const Consultation =()=>{
+  axios.post(`${BASE_URL}/post_consultation_dossier`,{
+    nom_patient:dossier?.nom_patient,
+    date:dossier?.date_entre,
+    poids:dossier?.poids,
+    to_to:dossier?.to_to,
+    ta_ta:dossier?.ta_ta,
+    adresse:dossier?.adresse,
+    age:dossier?.age,
+    sexe:dossier?.sexe,
+    telephone:dossier?.telephone,
+    diagnostic:dossier?.diagnostic,
+    traitement:dossier?.traitement,
+    observation:dossier?.observation
+    
+   })
+          
+   .then(({ data }) => {
+     if (data.status == 500) {
+       toast.error("Il y a une erreur");
+     } else {
+      console.log(dossier)
+     toast.success("PATIENT ENVOYER A LA CONSULTATION")
 
+   }
+   })
+    .catch((err) => {
+      console.log(err);
+      toast.error("Il y a une erreur");
+    });
 
 }
 
@@ -57,7 +88,9 @@ console.log(Laboratoire)
     age:dossier?.age,
     sexe:dossier?.sexe,
     telephone:dossier?.telephone,
-    diagnostic:dossier?.diagnostic
+    diagnostic:dossier?.diagnostic,
+    traitement:dossier?.traitement,
+    observation:dossier?.observation
     
    })
           

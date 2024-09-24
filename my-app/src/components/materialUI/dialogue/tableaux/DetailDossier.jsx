@@ -31,28 +31,7 @@ function DetailDossier() {
 
   const { dossier } = useContext(DossierContext);
 
-
-
-
-
-
-//   const BASE_URL = import.meta.env.VITE_API_URL;
-//  // get dossier route
-// const get_dossiers = () => {
-//   axios.get(`${BASE_URL}/get_dossiers`)
-//     .then(({ data }) => {
-//       setDatas(data.data || []); 
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//       toast.error("Il y a une erreur");
-//     });
-// };
-
-// useEffect(() => {
-//   get_dossiers();
-//   }, []);
-
+console.log(dossier)
 
 
 
@@ -258,7 +237,8 @@ const ambulatoiredetail= ()=>{
                 002
               </TableCell>
               <TableCell >Consultation</TableCell>
-              <TableCell sx={{color:"red"}}>En attente</TableCell>
+              {dossier?.traitement && dossier?.observation ? <TableCell sx={{color:"green"}}>Terminer</TableCell> :
+              <TableCell sx={{color:"red"}}>En attente...</TableCell>}
               <TableCell align='right'> <Button onClick={Detailconsultation} variant="outlined"  color="success">
                Details
              </Button></TableCell>

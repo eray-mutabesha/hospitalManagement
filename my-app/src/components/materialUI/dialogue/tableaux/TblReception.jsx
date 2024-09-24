@@ -66,9 +66,8 @@ const { dossier,setDossier  } = useContext(DossierContext);
    })
   
 
-
-
    const onsubmit = (formData) => {
+    const diagnosticText = formData.diagnostics;
     // Mettre à jour le dossier du patient
     const updatePatientDossier = axios.put(
       `${BASE_URL}/patch_patient_dossier/${dossier?.id}`, 
@@ -78,22 +77,24 @@ const { dossier,setDossier  } = useContext(DossierContext);
     // Mettre à jour le diagnostic au labo
     const updateLaboDiagnostic = axios.put(
       `${BASE_URL}/put_dossier_labo_diagnostic/${dossier?.id}`, 
-      formData
+      {diagnostic:diagnosticText}
     );
   
-    // Gérer les deux requêtes simultanément
-    Promise.all([updatePatientDossier, updateLaboDiagnostic])
-      .then(([patientResponse, laboResponse]) => {
+    // Mettre à jour le diagnostic au consultation
+    const updateConsultationDiagnostic = axios.put(
+      `${BASE_URL}/update_diagnostic/${dossier?.id}`, 
+      {diagnostic:diagnosticText}
+    );
+  
+    // Gérer les trois requêtes simultanément
+    Promise.all([updatePatientDossier, updateLaboDiagnostic, updateConsultationDiagnostic])
+      .then(([patientResponse, laboResponse, consultRes]) => {
         // Vérification de la réponse du patient dossier
         const { data: patientData } = patientResponse;
         if (patientData.status === 500) {
           toast.error("Il y a une erreur lors de la mise à jour du dossier patient.");
           return;
         }
-  
-        // Mise à jour du dossier dans le contexte après la réussite
-        const updatedDossier = { ...dossier, diagnostic: formData.diagnostics };
-        setDossier(updatedDossier);
   
         // Vérification de la réponse du labo
         const { data: laboData } = laboResponse;
@@ -102,9 +103,20 @@ const { dossier,setDossier  } = useContext(DossierContext);
           return;
         }
   
-        // Si les deux mises à jour sont réussies
+        // Vérification de la réponse de la consultation
+        const { data: consulData } = consultRes;
+        if (consulData.status === 500) {
+          toast.error("Il y a une erreur lors de la mise à jour de la consultation.");
+          return;
+        }
+  
+        // Si toutes les mises à jour sont réussies, mettre à jour le contexte
+        const updatedDossier = { ...dossier, diagnostic: formData };
+        setDossier(updatedDossier);
+  
+        // Afficher le message de succès
         toast.success("Mise à jour du diagnostic réussie !");
-        
+  
         // Réinitialiser le formulaire
         setFormData({
           diagnostics: "",
@@ -115,7 +127,8 @@ const { dossier,setDossier  } = useContext(DossierContext);
         toast.error("Une erreur est survenue lors de la mise à jour du diagnostic.");
       });
   };
-  
+
+console.log(dossier)
 
 
 

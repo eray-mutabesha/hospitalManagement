@@ -62,45 +62,9 @@ function TblChambre() {
     traitement:""
   })
 
-  const onsubmit=(data)=>{
-    console.log(data)
-    axios.post(`${BASE_URL}/post_consultation_dossier`,{
-      nom_patient:dossier?.nom_patient,
-      date:dossier?.date_entre,
-      poids:dossier?.poids,
-      to_to:dossier?.to_to,
-      ta_ta:dossier?.ta_ta,
-      adresse:dossier?.adresse,
-      age:dossier?.age,
-      sexe:dossier?.sexe,
-      telephone:dossier?.telephone,
-      observation:formData.observation,
-      traitement:formData.traitement
-      
-     })
-          
-          .then(({ data }) => {
-            if (data.status == 500) {
-              toast.error("Il y a une erreur");
-            } else {
-            
-              const updatedDossier = { ...dossier, observation: formData.observation,traitement:formData.traitement };
-              setDossier(updatedDossier);
-              console.log(dossier)
-              setFormData({
-                    observation:"",
-                    traitement:""
-              })
-            toast.success("Enregistrement réussi");
+const onsubmit=()=>{
 
-          }
-          })
-           .catch((err) => {
-             console.log(err);
-             toast.error("Il y a une erreur");
-           });
-
-  }
+}
 
 
 
