@@ -60,6 +60,9 @@ useEffect(()=>{
 
 
 
+
+
+
 const deleteEntree = (model) => {
   axios.delete(`${BASE_URL}/delete_dossier_consultation/${model.id}`)
     .then(({ data }) => {
@@ -77,8 +80,8 @@ const deleteEntree = (model) => {
 
   const navigate = useNavigate()
   const handledetail=(dat)=>{
-    setDossier(dat)
-    navigate("/detaildossier")
+        // const location = useLocation();
+        navigate("/detaildossier", { state: { detailData: dat.id } });
   }
 
   const handledossier=()=>{
@@ -163,7 +166,7 @@ const deleteEntree = (model) => {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                002
+                {data[0]?.id}
               </TableCell>
               <TableCell >{dat.nom_patient}</TableCell>
               <TableCell >{dat.date_entre}</TableCell>

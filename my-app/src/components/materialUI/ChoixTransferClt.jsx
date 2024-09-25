@@ -14,8 +14,8 @@ import { DossierContext } from '../../DossierContext.jsx';
 import { useContext } from 'react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-
-
+import { useLocation } from 'react-router-dom'
+import { useState,useEffect } from 'react';
 
 
 
@@ -35,7 +35,27 @@ const handledeconnexion=()=>{
 }
 
 const BASE_URL = import.meta.env.VITE_API_URL;
-const { dossier } = useContext(DossierContext);
+
+ // Access the data from location.state
+ const location = useLocation();
+ const { detailData } = location.state || {};  // Handle undefined state
+ const [data,setDatas]=useState([]);
+
+ const get_dossiers = () => {
+  axios.get(`${BASE_URL}/get_dossiers_id/${detailData}`)
+    .then(({ data }) => {
+      setDatas(data.data || []); 
+    })
+    .catch((err) => {
+      console.log(err);
+      toast.error("Il y a une erreur");
+    });
+};
+
+useEffect(()=>{
+get_dossiers()
+console.log(detailData)
+},[])
 
 
 
@@ -43,18 +63,19 @@ const { dossier } = useContext(DossierContext);
 // constttttttttttttttttttttttttttttttttttttttttttttt
 const Consultation =()=>{
   axios.post(`${BASE_URL}/post_consultation_dossier`,{
-    nom_patient:dossier?.nom_patient,
-    date:dossier?.date_entre,
-    poids:dossier?.poids,
-    to_to:dossier?.to_to,
-    ta_ta:dossier?.ta_ta,
-    adresse:dossier?.adresse,
-    age:dossier?.age,
-    sexe:dossier?.sexe,
-    telephone:dossier?.telephone,
-    diagnostic:dossier?.diagnostic,
-    traitement:dossier?.traitement,
-    observation:dossier?.observation
+    id:data[0]?.id,
+    nom_patient:data[0]?.nom_patient,
+    date:data[0]?.date_entre,
+    poids:data[0]?.poids,
+    to_to:data[0]?.to_to,
+    ta_ta:data[0]?.ta_ta,
+    adresse:data[0]?.adresse,
+    age:data[0]?.age,
+    sexe:data[0]?.sexe,
+    telephone:data[0]?.telephone,
+    diagnostic:data[0]?.diagnostic,
+    traitement:data[0]?.traitement,
+    observation:data[0]?.observation
     
    })
           
@@ -62,7 +83,7 @@ const Consultation =()=>{
      if (data.status == 500) {
        toast.error("Il y a une erreur");
      } else {
-      console.log(dossier)
+     
      toast.success("PATIENT ENVOYER A LA CONSULTATION")
 
    }
@@ -75,37 +96,6 @@ const Consultation =()=>{
 }
 
 const LaboratoireData = () => {
-console.log(Laboratoire)
-   console.log(dossier)
-
-   axios.post(`${BASE_URL}/post_laboratoire_dossier`,{
-    nom_patient:dossier?.nom_patient,
-    date:dossier?.date_entre,
-    poids:dossier?.poids,
-    to_to:dossier?.to_to,
-    ta_ta:dossier?.ta_ta,
-    adresse:dossier?.adresse,
-    age:dossier?.age,
-    sexe:dossier?.sexe,
-    telephone:dossier?.telephone,
-    diagnostic:dossier?.diagnostic,
-    traitement:dossier?.traitement,
-    observation:dossier?.observation
-    
-   })
-          
-   .then(({ data }) => {
-     if (data.status == 500) {
-       toast.error("Il y a une erreur");
-     } else {
-     toast.success("PATIENT ENVOYER AU LABO")
-
-   }
-   })
-    .catch((err) => {
-      console.log(err);
-      toast.error("Il y a une erreur");
-    });
 
 
 

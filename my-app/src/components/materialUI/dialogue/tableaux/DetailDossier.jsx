@@ -24,7 +24,6 @@ import { useState,useEffect, useContext } from 'react'
 import  {toast} from 'react-hot-toast';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
-import { DossierContext } from '../../../../DossierContext.jsx'
 
 
 function DetailDossier() {
@@ -35,26 +34,29 @@ function DetailDossier() {
   const { detailData } = location.state || {};  // Handle undefined state
 
   const BASE_URL = import.meta.env.VITE_API_URL;
-  const { dossier } = useContext(DossierContext);
   const [data,setDatas]=useState([])
 
   const get_dossiers = () => {
-    axios.get(`${BASE_URL}/get_dossiers_id/${detailData}`)
-      .then(({ data }) => {
-        setDatas(data.data || []); 
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error("Il y a une erreur");
-      });
+    if (detailData) {
+      axios.get(`${BASE_URL}/get_dossiers_id/${detailData}`)
+        .then(({ data }) => {
+          setDatas(data.data || []); 
+        })
+        .catch((err) => {
+          console.log(err);
+          toast.error("Il y a une erreur");
+        });
+    } else {
+      console.log("detailData is undefined");
+    }
   };
+  
   
 useEffect(()=>{
   get_dossiers()
-  console.log(detailData)
 },[])
 
-console.log(data[0])
+console.log(data)
 
 
 
@@ -68,8 +70,8 @@ console.log(data[0])
   navigate("/detailPatient")
 }
 const reception=()=>{
-  
-  navigate("/reception")
+  navigate("/reception", { state: { detailData: data[0]?.id } });
+
 }
 const laboratoire=()=>{
   navigate("/Laboratoire")
@@ -100,7 +102,7 @@ const ambulatoiredetail= ()=>{
           </div>
           <div className='menus'>
               <Dashboard />
-              <nav id='personaliser'> <Reception/></nav>
+              <Reception/>
               <Consultation/>
               <Laboratoire/>
               <OrganisationClinique/>
@@ -135,17 +137,18 @@ const ambulatoiredetail= ()=>{
           margin:"20px"
         
         }}>
-          <Box mt={5}>
+          {/* <Box mt={5}>
           <Button variant="contained" color="error" onClick={handledossier}>
             Retour
            </Button>
-      </Box>
+      </Box> */}
 
 
 
           <Box  sx={{
             display:"flex",
-            justifyContent:"space-between"
+            justifyContent:"space-between",
+            marginTop:"50px"
           }}>
           
 
@@ -231,7 +234,7 @@ const ambulatoiredetail= ()=>{
                 002
               </TableCell>
               <TableCell >Reception</TableCell>
-              {data.diagnostic ? <TableCell sx={{color:"green"}}>Terminer</TableCell> :
+              {data[0]?.diagnostic? <TableCell sx={{color:"green"}}>Terminer</TableCell> :
               <TableCell sx={{color:"red"}}>En attente...</TableCell>}
               
               <TableCell align='right'> <Button onClick={reception} variant="outlined" color="success">
@@ -252,7 +255,7 @@ const ambulatoiredetail= ()=>{
                 002
               </TableCell>
               <TableCell >Consultation</TableCell>
-              {data.traitement && data.observation ? <TableCell sx={{color:"green"}}>Terminer</TableCell> :
+              {data[0]  && data[0]?.observation ? <TableCell sx={{color:"green"}}>Terminer</TableCell> :
               <TableCell sx={{color:"red"}}>En attente...</TableCell>}
               <TableCell align='right'> <Button onClick={Detailconsultation} variant="outlined"  color="success">
                Details

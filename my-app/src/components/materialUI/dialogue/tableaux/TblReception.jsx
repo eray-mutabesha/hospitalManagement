@@ -44,18 +44,46 @@ const { dossier,setDossier  } = useContext(DossierContext);
   const { register, handleSubmit,formState:{errors} } = useForm();
   const navigate = useNavigate()
 
+ 
+
+
+
+  const location = useLocation();
+
+  // Access the data from location.state
+  const { detailData } = location.state || {};  // Handle undefined state
+
+  const [data,setDatas]=useState([]);
+
   const handledossier=()=>{
-    navigate("/detaildossier")
+    navigate("/detaildossier", { state: { detailData: data[0]?.id } });
+ 
   }
-
-
-
-
 
   // navigate("/detaildossier", { state: { dossier: dat } });
   const detail =()=>{
-    navigate("/receptiondetail")
+    navigate("/receptiondetail", { state: { detailData: data[0]?.id } })
   }
+
+
+
+
+  const get_dossiers = () => {
+    axios.get(`${BASE_URL}/get_dossiers_id/${detailData}`)
+      .then(({ data }) => {
+        setDatas(data.data || []); 
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Il y a une erreur");
+      });
+  };
+  
+useEffect(()=>{
+  get_dossiers()
+  console.log(detailData)
+},[])
+
 
 
 
@@ -70,20 +98,20 @@ const { dossier,setDossier  } = useContext(DossierContext);
     const diagnosticText = formData.diagnostics;
     // Mettre à jour le dossier du patient
     const updatePatientDossier = axios.put(
-      `${BASE_URL}/patch_patient_dossier/${dossier?.id}`, 
+      `${BASE_URL}/patch_patient_dossier/${detailData}`, 
       formData
     );
   
     // Mettre à jour le diagnostic au labo
     const updateLaboDiagnostic = axios.put(
-      `${BASE_URL}/put_dossier_labo_diagnostic/${dossier?.id}`, 
-      {diagnostic:diagnosticText}
+      `${BASE_URL}/put_dossier_labo_diagnostic/${detailData}`,
+      formData
     );
   
     // Mettre à jour le diagnostic au consultation
     const updateConsultationDiagnostic = axios.put(
-      `${BASE_URL}/update_diagnostic/${dossier?.id}`, 
-      {diagnostic:diagnosticText}
+      `${BASE_URL}/update_diagnostic/${detailData}`, 
+      formData
     );
   
     // Gérer les trois requêtes simultanément
@@ -109,11 +137,7 @@ const { dossier,setDossier  } = useContext(DossierContext);
           toast.error("Il y a une erreur lors de la mise à jour de la consultation.");
           return;
         }
-  
-        // Si toutes les mises à jour sont réussies, mettre à jour le contexte
-        const updatedDossier = { ...dossier, diagnostic: formData };
-        setDossier(updatedDossier);
-  
+
         // Afficher le message de succès
         toast.success("Mise à jour du diagnostic réussie !");
   
@@ -228,14 +252,14 @@ console.log(dossier)
             background:"white",
             padding:"0px"
           }}>
-            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.nom_patient}</span></h3>
-            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.age}</span></h3>
-            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.sexe}</span></h3>
-            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.poids}</span></h3>
-            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.to_to}</span></h3>
-            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.ta_ta}</span></h3>
-            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.adresse}</span></h3>
-            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.telephone}</span></h3>
+            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.nom_patient}</span></h3>
+            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.age}</span></h3>
+            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.sexe}</span></h3>
+            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.poids}</span></h3>
+            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.to_to}</span></h3>
+            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.ta_ta}</span></h3>
+            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.adresse}</span></h3>
+            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.telephone}</span></h3>
           </Box>
      
 

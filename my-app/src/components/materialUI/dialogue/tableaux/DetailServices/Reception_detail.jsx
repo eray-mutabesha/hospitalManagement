@@ -26,24 +26,46 @@ import { useState,useEffect,useContext } from 'react'
 import  {toast} from 'react-hot-toast';
 import axios from 'axios';
 import { DossierContext } from '../../../../../DossierContext.jsx'
-
+import { useLocation } from 'react-router-dom'
 
 
 
 
 
 function Reception_detail() {
+  const BASE_URL = import.meta.env.VITE_API_URL;
     const { register, handleSubmit,formState:{errors} } = useForm();
   const navigate = useNavigate()
+
+
+  // Access the data from location.state
+  const location = useLocation();
+  const { detailData } = location.state || {};  // Handle undefined state
+  
+
+  const [data,setDatas]=useState([]);
+
   const handledossier=()=>{
-    navigate("/reception")
+    navigate("/reception",{ state: { detailData: data[0]?.id } })
   }
 
-// get data from contex
-const { dossier } = useContext(DossierContext);
 
 
-
+  const get_dossiers = () => {
+    axios.get(`${BASE_URL}/get_dossiers_id/${detailData}`)
+      .then(({ data }) => {
+        setDatas(data.data || []); 
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Il y a une erreur");
+      });
+  };
+  
+useEffect(()=>{
+  get_dossiers()
+ 
+},[])
 
   return (
     <>
@@ -135,14 +157,14 @@ const { dossier } = useContext(DossierContext);
             background:"white",
             padding:"0px"
           }}>
-            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.nom_patient}</span></h3>
-            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.age}</span></h3>
-            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.sexe}</span></h3>
-            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.poids}</span></h3>
-            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.to_to}</span></h3>
-            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.ta_ta}</span></h3>
-            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.adresse}</span></h3>
-            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.telephone}</span></h3>
+            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.nom_patient}</span></h3>
+            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.age}</span></h3>
+            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.sexe}</span></h3>
+            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.poids}</span></h3>
+            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.to_to}</span></h3>
+            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.ta_ta}</span></h3>
+            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.adresse}</span></h3>
+            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.telephone}</span></h3>
           </Box>
      
 
@@ -173,7 +195,7 @@ const { dossier } = useContext(DossierContext);
      
      
      <Typography mt={8}variant='h6'>  Premiers diagnostics</Typography>
-     <p>{dossier?.diagnostic}</p>
+     <p>{data[0]?.diagnostic}</p>
      <Box sx={{
         display:"flex",
         justifyContent:"end",
