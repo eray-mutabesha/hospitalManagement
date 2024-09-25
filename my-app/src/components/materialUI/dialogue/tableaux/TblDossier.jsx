@@ -74,11 +74,8 @@ useEffect(() => {
   const handledetail=(dat)=>{
 
     // const location = useLocation();
+    navigate("/detaildossier", { state: { detailData: dat.id } });
  
- 
-    setDossier(dat)
-
-    navigate("/detaildossier");
 
   }
 

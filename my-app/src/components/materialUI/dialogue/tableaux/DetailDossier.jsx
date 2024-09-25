@@ -29,9 +29,33 @@ import { DossierContext } from '../../../../DossierContext.jsx'
 
 function DetailDossier() {
 
-  const { dossier } = useContext(DossierContext);
+  const location = useLocation();
 
-console.log(dossier)
+  // Access the data from location.state
+  const { detailData } = location.state || {};  // Handle undefined state
+
+  const BASE_URL = import.meta.env.VITE_API_URL;
+  const { dossier } = useContext(DossierContext);
+  const [data,setDatas]=useState([])
+
+  const get_dossiers = () => {
+    axios.get(`${BASE_URL}/get_dossiers_id/${detailData}`)
+      .then(({ data }) => {
+        setDatas(data.data || []); 
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Il y a une erreur");
+      });
+  };
+  
+useEffect(()=>{
+  get_dossiers()
+  console.log(detailData)
+},[])
+
+console.log(data[0])
+
 
 
 
@@ -142,14 +166,14 @@ const ambulatoiredetail= ()=>{
             background:"white",
             padding:"0px"
           }}>
-            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.nom_patient}</span></h3>
-            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.age}</span></h3>
-            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.sexe}</span></h3>
-            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.poids}</span></h3>
-            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.to_to}</span></h3>
-            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.ta_ta}</span></h3>
-            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.adresse}</span></h3>
-            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.telephone}</span></h3>
+            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.nom_patient}</span></h3>
+            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.age}</span></h3>
+            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.sexe}</span></h3>
+            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.poids}</span></h3>
+            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.to_to}</span></h3>
+            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.ta_ta}</span></h3>
+            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.adresse}</span></h3>
+            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.telephone}</span></h3>
           </Box>
             </Box>
             
@@ -207,7 +231,7 @@ const ambulatoiredetail= ()=>{
                 002
               </TableCell>
               <TableCell >Reception</TableCell>
-              {dossier?.diagnostic ? <TableCell sx={{color:"green"}}>Terminer</TableCell> :
+              {data.diagnostic ? <TableCell sx={{color:"green"}}>Terminer</TableCell> :
               <TableCell sx={{color:"red"}}>En attente...</TableCell>}
               
               <TableCell align='right'> <Button onClick={reception} variant="outlined" color="success">
@@ -216,6 +240,24 @@ const ambulatoiredetail= ()=>{
             </TableRow>
 
 
+
+
+
+
+
+
+
+            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+              <TableCell component="th" scope="row">
+                002
+              </TableCell>
+              <TableCell >Consultation</TableCell>
+              {data.traitement && data.observation ? <TableCell sx={{color:"green"}}>Terminer</TableCell> :
+              <TableCell sx={{color:"red"}}>En attente...</TableCell>}
+              <TableCell align='right'> <Button onClick={Detailconsultation} variant="outlined"  color="success">
+               Details
+             </Button></TableCell>
+            </TableRow>
 
 
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
@@ -230,19 +272,6 @@ const ambulatoiredetail= ()=>{
             </TableRow>
 
 
-
-
-            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-              <TableCell component="th" scope="row">
-                002
-              </TableCell>
-              <TableCell >Consultation</TableCell>
-              {dossier?.traitement && dossier?.observation ? <TableCell sx={{color:"green"}}>Terminer</TableCell> :
-              <TableCell sx={{color:"red"}}>En attente...</TableCell>}
-              <TableCell align='right'> <Button onClick={Detailconsultation} variant="outlined"  color="success">
-               Details
-             </Button></TableCell>
-            </TableRow>
 
 
 
