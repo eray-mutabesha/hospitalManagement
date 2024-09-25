@@ -77,7 +77,7 @@ const laboratoire=()=>{
   navigate("/Laboratoire")
 }
 const Detailconsultation=()=>{
-  navigate("/consultation")
+  navigate("/consultation",{ state: { detailData: data[0]?.id } })
 }
 
 const hospitalisation =()=>{

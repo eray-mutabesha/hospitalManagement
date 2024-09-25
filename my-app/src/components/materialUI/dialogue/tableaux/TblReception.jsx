@@ -26,9 +26,7 @@ import Factutation from '../../Facturation.jsx'
 import { useState,useEffect,useContext } from 'react'
 import  {toast} from 'react-hot-toast';
 import axios from 'axios';
-import DossierForm from '../DossierForm.jsx'
 import { useLocation } from 'react-router-dom'
-import { DossierContext } from '../../../../DossierContext.jsx'
 
 
 
@@ -37,8 +35,7 @@ import { DossierContext } from '../../../../DossierContext.jsx'
 
 function TblReception() {
   
-// get data from contex
-const { dossier,setDossier  } = useContext(DossierContext);
+
 
   const BASE_URL = import.meta.env.VITE_API_URL;
   const { register, handleSubmit,formState:{errors} } = useForm();
@@ -81,7 +78,6 @@ const { dossier,setDossier  } = useContext(DossierContext);
   
 useEffect(()=>{
   get_dossiers()
-  console.log(detailData)
 },[])
 
 
@@ -95,7 +91,6 @@ useEffect(()=>{
   
 
    const onsubmit = (formData) => {
-    const diagnosticText = formData.diagnostics;
     // Mettre à jour le dossier du patient
     const updatePatientDossier = axios.put(
       `${BASE_URL}/patch_patient_dossier/${detailData}`, 
@@ -152,7 +147,7 @@ useEffect(()=>{
       });
   };
 
-console.log(dossier)
+
 
 
 

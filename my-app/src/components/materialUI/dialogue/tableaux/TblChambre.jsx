@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import './tbl.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash ,faEye} from '@fortawesome/free-solid-svg-icons'
@@ -23,11 +22,10 @@ import Ressources from '../../Resources.jsx'
 import Laboratoire from '../../Laboratoire.jsx'
 import OrganisationClinique from '../../OrganisationClinique.jsx'
 import Factutation from '../../Facturation.jsx'
-import { DossierContext } from '../../../../DossierContext.jsx'
-import { useContext } from 'react'
 import  {toast} from 'react-hot-toast';
 import axios from 'axios';
-
+import { useLocation } from 'react-router-dom'
+import { useState,useEffect,useContext } from 'react'
 
 
 
@@ -35,8 +33,6 @@ import axios from 'axios';
 
 function TblChambre() {
   const BASE_URL = import.meta.env.VITE_API_URL;
-  // get data from contex
-    const { dossier,setDossier  } = useContext(DossierContext);
 
 
 
@@ -46,25 +42,107 @@ function TblChambre() {
 
   const navigate = useNavigate()
   const handledossier=()=>{
-    navigate("/detaildossier")
+    navigate("/detaildossier",{ state: { detailData: data[0]?.id } })
   }
   const detail =()=>{
-    navigate("/consultationdetail")
+    navigate("/consultationdetail",{ state: { detailData: data[0]?.id } })
   }
 
 
 
+ // Access the data from location.state
+ const location = useLocation();
+ const { detailData } = location.state || {};  // Handle undefined state
+ const [data,setDatas]=useState([]);
+
+// get datas from consultation
+const get_dossiers = () => {
+  axios.get(`${BASE_URL}/get_dossiers_id/${detailData}`)
+    .then(({ data }) => {
+      setDatas(data.data || []); 
+    })
+    .catch((err) => {
+      console.log(err);
+      toast.error("Il y a une erreur");
+    });
+};
+
+useEffect(()=>{
+get_dossiers()
+},[])
 
 
 
-  const [formData,setFormData]= useState({
-    observation:"",
-    traitement:""
-  })
 
-const onsubmit=()=>{
 
-}
+
+
+
+
+
+const [formData,setFormData]= useState({
+  observation:"",
+  traitement:""
+})
+
+
+
+const onsubmit = (formData) => {
+  // Mettre à jour le dossier du patient
+  const updatePatientDossier = axios.put(
+    `${BASE_URL}/put_traitement_observation/${detailData}`, 
+    formData
+  );
+
+  // Mettre à jour le diagnostic au labo
+  const updateLaboDiagnostic = axios.put(
+    `${BASE_URL}/put_traitement_observation_consultation/${detailData}`,
+    formData
+  );
+
+  // Mettre à jour le diagnostic au consultation
+  const updateConsultationDiagnostic = axios.put(
+    `${BASE_URL}/put_dossier_laboratoire_traitement_observation/${detailData}`, 
+    formData
+  );
+
+  // Gérer les trois requêtes simultanément
+  Promise.all([updatePatientDossier, updateLaboDiagnostic, updateConsultationDiagnostic])
+    .then(([patientResponse, laboResponse, consultRes]) => {
+      // Vérification de la réponse du patient dossier
+      const { data: patientData } = patientResponse;
+      if (patientData.status === 500) {
+        toast.error("Il y a une erreur lors de la mise à jour du dossier patient.");
+        return;
+      }
+
+      // Vérification de la réponse du labo
+      const { data: laboData } = laboResponse;
+      if (laboData.status === 500) {
+        toast.error("Il y a une erreur lors de la mise à jour du labo.");
+        return;
+      }
+
+      // Vérification de la réponse de la consultation
+      const { data: consulData } = consultRes;
+      if (consulData.status === 500) {
+        toast.error("Il y a une erreur lors de la mise à jour de la consultation.");
+        return;
+      }
+
+      // Afficher le message de succès
+      toast.success("Traitement et observation Enregister ");
+
+      // Réinitialiser le formulaire
+      setFormData({
+        diagnostics: "",
+      });
+    })
+    .catch((err) => {
+      console.error(err);
+      toast.error("Une erreur est survenue lors de la mise à jour.");
+    });
+};
 
 
 
@@ -163,14 +241,14 @@ const onsubmit=()=>{
             background:"white",
             padding:"0px"
           }}>
-            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.nom_patient}</span></h3>
-            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.age}</span></h3>
-            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.sexe}</span></h3>
-            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.poids}</span></h3>
-            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.to_to}</span></h3>
-            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.ta_ta}</span></h3>
-            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.adresse}</span></h3>
-            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.telephone}</span></h3>
+            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.nom_patient}</span></h3>
+            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.age}</span></h3>
+            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.sexe}</span></h3>
+            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.poids}</span></h3>
+            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.to_to}</span></h3>
+            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.ta_ta}</span></h3>
+            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.adresse}</span></h3>
+            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.telephone}</span></h3>
           </Box>
      
 
