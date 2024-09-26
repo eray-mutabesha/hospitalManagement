@@ -43,7 +43,6 @@ function TblDossierLaboratoire() {
   const [datas,setDatas]= useState([])
   const BASE_URL = import.meta.env.VITE_API_URL;
 
-
  // get dossier_labo route
 const get_laboratoire_dossier = () => {
   axios.get(`${BASE_URL}/get_laboratoire_dossier`)

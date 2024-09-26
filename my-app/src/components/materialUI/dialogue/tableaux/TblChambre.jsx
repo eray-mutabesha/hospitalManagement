@@ -95,19 +95,20 @@ const onsubmit = (formData) => {
   );
 
   // Mettre à jour le diagnostic au labo
-  const updateLaboDiagnostic = axios.put(
-    `${BASE_URL}/put_traitement_observation_consultation/${detailData}`,
+  const updateLabo = axios.put(
+    `${BASE_URL}/put_dossier_laboratoire_traitement_observation/${detailData}`,
+    
     formData
   );
 
   // Mettre à jour le diagnostic au consultation
-  const updateConsultationDiagnostic = axios.put(
-    `${BASE_URL}/put_dossier_laboratoire_traitement_observation/${detailData}`, 
+  const updateConsultation = axios.put(
+    `${BASE_URL}/put_traitement_observation_consultation/${detailData}`, 
     formData
   );
 
   // Gérer les trois requêtes simultanément
-  Promise.all([updatePatientDossier, updateLaboDiagnostic, updateConsultationDiagnostic])
+  Promise.all([updatePatientDossier, updateLabo, updateConsultation])
     .then(([patientResponse, laboResponse, consultRes]) => {
       // Vérification de la réponse du patient dossier
       const { data: patientData } = patientResponse;
