@@ -1,7 +1,6 @@
 import React from 'react'
 import './tbl.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash ,faEye} from '@fortawesome/free-solid-svg-icons'
 import { Navigate, useNavigate } from 'react-router-dom'
 import Dashboard from '../../Dashboard.jsx'
 import Reception from '../../Reception.jsx'
@@ -10,15 +9,7 @@ import { faBell,faCaretDown,faCheck,faXmark,faMagnifyingGlass,faListCheck,faUser
 import { Box ,TextField, Typography,InputLabel,Select,MenuItem,FormControl,Button}  from '@mui/material';
 import { useForm} from "react-hook-form"
 import Consultation from '../../Consultation.jsx'
-import SaveIcon from '@mui/icons-material/Save';
 import ChoixTransferClt from '../../ChoixTransferClt.jsx'
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import IconButton from '@mui/material/IconButton';
-import CommentIcon from '@mui/icons-material/Comment';
 import Ressources from '../../Resources.jsx'
 import Laboratoire from '../../Laboratoire.jsx'
 import OrganisationClinique from '../../OrganisationClinique.jsx'
@@ -45,6 +36,9 @@ function TblReception() {
 
 
 
+
+  
+
   const location = useLocation();
 
   // Access the data from location.state
@@ -65,6 +59,10 @@ function TblReception() {
 
 
 
+
+
+
+
   const get_dossiers = () => {
     axios.get(`${BASE_URL}/get_dossiers_id/${detailData}`)
       .then(({ data }) => {
@@ -79,6 +77,12 @@ function TblReception() {
 useEffect(()=>{
   get_dossiers()
 },[])
+
+
+
+
+
+
 
 
 
