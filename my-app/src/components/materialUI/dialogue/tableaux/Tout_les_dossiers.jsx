@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Navigate, useNavigate } from 'react-router-dom'
 import Dashboard from '../../Dashboard.jsx'
 import Reception from '../../Reception.jsx'
+import Dossier from '../../Dossier.jsx'
 import Parametre from '../../Parametre.jsx'
 import { Box, Button, Typography } from '@mui/material'
 import { faBell,faCaretDown,faCheck,faXmark,faMagnifyingGlass,faListCheck,faUserDoctor,faStethoscope,faCommentsDollar,faChevronDown} from '@fortawesome/free-solid-svg-icons'
@@ -26,17 +27,18 @@ import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import { DossierContext } from '../../../../DossierContext.jsx'
 import { useContext } from 'react'
-import Dossier from '../../Dossier.jsx'
+import ChoixtransferTout_les_Dossier from '../../ChoixtransferTout_les_Dossier.jsx'
 
 
-function TblDossier() {
+
+function Tout_les_dossiers() {
   const [datas,setDatas]= useState([])
   const BASE_URL = import.meta.env.VITE_API_URL;
 
 
  // get dossier route
 const get_dossiers = () => {
-  axios.get(`${BASE_URL}/get_dossiers`)
+  axios.get(`${BASE_URL}/get_tout_les_dossiers`)
     .then(({ data }) => {
       setDatas(data.data || []); 
     })
@@ -67,9 +69,7 @@ useEffect(() => {
 }, []);
  
  
-
-
-   const { setDossier } = useContext(DossierContext);
+  const { setDossier } = useContext(DossierContext);
   const navigate = useNavigate()
   const handledetail=(dat)=>{
 
@@ -100,8 +100,8 @@ useEffect(() => {
           </div>
           <div className='menus'>
               <Dashboard />
-              <Dossier/>
-              <nav id='personaliser'> <Reception/></nav>
+              <nav id='personaliser'><Dossier/></nav>
+               <Reception/>
               <Consultation/>
               <Laboratoire/>
               <OrganisationClinique/>
@@ -137,7 +137,7 @@ useEffect(() => {
           }}>
           
        <Box mt={5}>
-       {/* <DossierForm/> */}
+       <DossierForm/>
        </Box>
           
          
@@ -148,7 +148,7 @@ useEffect(() => {
           
           
         }}>
-          <Typography variant='h5'>RECEPTION</Typography>
+          <Typography variant='h5'>Tout les dossiers des patients</Typography>
         <TableContainer component={Paper}>
       <Table sx={{ textAlign:"left"}} size="small" aria-label="a dense table">
         <TableHead  
@@ -180,8 +180,7 @@ useEffect(() => {
               <TableCell align="right" sx={{display:"flex",gap:"10px"}}>
                 <Button size="small" variant="outlined" color="error" startIcon={<DeleteIcon />}  onClick={() => deleteEntree(dat)}>Sup</Button>
                 <Button sx={{border:"1px solid rgb(201, 199, 199)",color:"black"}} onClick={()=>handledetail(dat)}>Details</Button>
-                
-                
+                <ChoixtransferTout_les_Dossier  dat={dat}/>
                 </TableCell>
             </TableRow>
           ))}
@@ -200,7 +199,7 @@ useEffect(() => {
   
 }
 
-export default TblDossier
+export default Tout_les_dossiers
 
 
 

@@ -20,7 +20,7 @@ import Reception from './Reception.jsx';
 
 
 
-export default function ChoixTransferClt() {
+export default function ChoixtransferTout_les_Dossier({dat}) {
 
  
  
@@ -43,6 +43,22 @@ const BASE_URL = import.meta.env.VITE_API_URL;
  
 
 
+const [data,setDatas]=useState([]);
+const get_dossiers = () => {
+  axios.get(`${BASE_URL}/get_tout_les_dossiers_id/${dat.id}`)
+    .then(({ data }) => {
+      setDatas(data.data || []); 
+    })
+    .catch((err) => {
+      console.log(err);
+      toast.error("Il y a une erreur");
+    });
+};
+
+useEffect(()=>{
+get_dossiers()
+
+},[])
 
 
 
@@ -55,7 +71,65 @@ const Reception =()=>{
 
 
 
+  console.log(data[0]?.nom_patient)
+  axios.post(`${BASE_URL}/post_patient_dossier`,{
+    id:data[0]?.id,
+    nom_patient:data[0]?.nom_patient,
+    date:data[0]?.date_entre,
+    poids:data[0]?.poids,
+    to_to:data[0]?.to_to,
+    ta_ta:data[0]?.ta_ta,
+    adresse:data[0]?.adresse,
+    age:data[0]?.age,
+    sexe:data[0]?.sexe,
+    telephone:data[0]?.telephone,
+    diagnostic:data[0]?.diagnostic,
+    traitement:data[0]?.traitement,
+    observation:data[0]?.observation
+    
+   })
+          
+   .then(({ data }) => {
+     if (data.status == 500) {
+       toast.error("Il y a une erreur");
+     } else {
+
+       // delete dossier route
+
+
+
+     
+     toast.success("PATIENT ENVOYER A LA RECEPTION")
+
+   }
+   })
+    .catch((err) => {
+      console.log(err);
+      toast.error("Il y a une erreur");
+    });
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -162,7 +236,7 @@ const LaboratoireData = () => {
       {(popupState) => (
         <React.Fragment>
           <Button  {...bindTrigger(popupState)}  variant="contained" endIcon={<SaveIcon />} type='submit'>
-           Enregistrer
+           Envoyer
           </Button>
           <Menu {...bindMenu(popupState)}>
             <MenuItem onClick={()=>Reception(dat.id)  } ><Button endIcon={<SendIcon />}>Reception</Button></MenuItem>

@@ -19,6 +19,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Ressources from './components/materialUI/Resources.jsx'
+import Dossier from './components/materialUI/Dossier.jsx'
 import Reception from './components/materialUI/Reception.jsx'
 import Consultation from './components/materialUI/Consultation.jsx'
 import Laboratoire from './components/materialUI/Laboratoire.jsx'
@@ -56,6 +57,7 @@ useEffect(()=>{
           </div>
         <div className='menus'>
               <nav id='personaliser'><Dashboard /></nav>
+              <nav><Dossier/></nav>
               <nav><Reception/></nav>
               <nav><Consultation/></nav>
               <nav><Laboratoire/></nav>

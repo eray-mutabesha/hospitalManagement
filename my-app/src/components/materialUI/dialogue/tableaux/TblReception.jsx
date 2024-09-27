@@ -95,6 +95,13 @@ useEffect(()=>{
   
 
    const onsubmit = (formData) => {
+
+    // Mettre à jour le dossier du patient
+    const updatePatient_tout_Dossier = axios.put(
+      `${BASE_URL}/update_diagnostic_tout_les_dossiers/${detailData}`, 
+      formData
+    );
+
     // Mettre à jour le dossier du patient
     const updatePatientDossier = axios.put(
       `${BASE_URL}/patch_patient_dossier/${detailData}`, 
@@ -114,8 +121,19 @@ useEffect(()=>{
     );
   
     // Gérer les trois requêtes simultanément
-    Promise.all([updatePatientDossier, updateLaboDiagnostic, updateConsultationDiagnostic])
-      .then(([patientResponse, laboResponse, consultRes]) => {
+    Promise.all([updatePatient_tout_Dossier,updatePatientDossier, updateLaboDiagnostic, updateConsultationDiagnostic])
+      .then(([tout_DossierRes,patientResponse, laboResponse, consultRes]) => {
+
+
+        // Vérification de la réponse de tout les dossiers
+        const { data: tout_dossier_Data } = tout_DossierRes;
+        if (tout_dossier_Data.status === 500) {
+          toast.error("Il y a une erreur lors de la mise à jour de tout les dossiers");
+          return;
+        }
+
+        
+
         // Vérification de la réponse du patient dossier
         const { data: patientData } = patientResponse;
         if (patientData.status === 500) {

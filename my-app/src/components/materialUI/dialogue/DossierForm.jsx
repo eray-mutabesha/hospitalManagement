@@ -57,6 +57,7 @@ axios.get(`${BASE_URL}/get_patient_Option`)
 
   const BASE_URL = import.meta.env.VITE_API_URL;
   const [formData, setFormData] = useState({
+
     nom_patient: "",
     date: "",
     poids: "",
@@ -71,7 +72,7 @@ axios.get(`${BASE_URL}/get_patient_Option`)
 
 
   const onsubmit=(data)=>{
-    axios.post(`${BASE_URL}/post_patient_dossier`, data)
+    axios.post(`${BASE_URL}/post_tout_les_dossiers`, data)
           
           .then(({ data }) => {
             if (data.status == 500) {
@@ -79,17 +80,15 @@ axios.get(`${BASE_URL}/get_patient_Option`)
             } else {
              
              setFormData({
-              nom_patient: "",
-              date: "",
-              poids: "",
-              to_to: "",
-              ta_ta: "",
-              adresse:"",
-              age:"",
-              sexe:"",
-              telephone:""
+              nom: "",
+              date_arrive: "",
+              sexe: "",
+              specialisation: "",
+              email: "",
+              telephone: "",
             });
-
+            
+            toast.success("Enregistrement réussi");
           }
           })
            .catch((err) => {
@@ -98,10 +97,6 @@ axios.get(`${BASE_URL}/get_patient_Option`)
            });
 
   }
-
-
-
- 
 
 
 

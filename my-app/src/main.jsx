@@ -33,6 +33,7 @@ import TblDossierHospitalisation from './components/materialUI/dialogue/tableaux
 import UpdateProfil from './components/UpdateProfil.jsx';
 import TblMedicamentAutre from './components/materialUI/dialogue/tableaux/TblMedicamentAutre.jsx';
 import { DossierProvider } from './DossierContext'; 
+import Tout_les_dossiers from './components/materialUI/dialogue/tableaux/Tout_les_dossiers.jsx';
 
 
 
@@ -73,6 +74,10 @@ const routes=createBrowserRouter([
     path:"/Consultation",
     element:<TblChambre/>
   },
+{
+path:"/tout_les_dossiers",
+element:<Tout_les_dossiers/>
+},
   
   {
     path:"/dossier",
