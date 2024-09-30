@@ -39,7 +39,7 @@ function DetailDossier() {
 
   const get_dossiers = () => {
     if (detailData) {
-      axios.get(`${BASE_URL}/get_dossiers_id/${detailData}`)
+      axios.get(`${BASE_URL}/get_tout_les_dossiers_id/${detailData}`)
         .then(({ data }) => {
           setDatas(data.data || []); 
         })
@@ -75,18 +75,18 @@ const reception=()=>{
 
 }
 const laboratoire=()=>{
-  navigate("/Laboratoire")
+  navigate("/Laboratoire",{ state: { detailData: data[0]?.id } })
 }
 const Detailconsultation=()=>{
   navigate("/consultation",{ state: { detailData: data[0]?.id } })
 }
 
 const hospitalisation =()=>{
-  navigate("/hospitalisation")
+  navigate("/hospitalisation",{ state: { detailData: data[0]?.id } })
 }
 
 const ambulatoiredetail= ()=>{
-  navigate("/ambulatoire")
+  navigate("/ambulatoire",{ state: { detailData: data[0]?.id } })
 }
 
 

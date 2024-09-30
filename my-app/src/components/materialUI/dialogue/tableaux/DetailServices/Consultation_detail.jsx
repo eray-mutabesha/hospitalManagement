@@ -41,7 +41,7 @@ function Consultation_detail() {
    navigate("/consultation",{ state: { detailData: data[0]?.id } })
  }
  const get_dossiers = () => {
-  axios.get(`${BASE_URL}/get_dossiers_id/${detailData}`)
+  axios.get(`${BASE_URL}/get_tout_les_dossiers_id/${detailData}`)
     .then(({ data }) => {
       setDatas(data.data || []); 
     })
@@ -71,9 +71,9 @@ get_dossiers()
               <Dashboard />
               <Dossier/>
               <Reception/>
-              <Consultation/>
+              <nav id='personaliser'><Consultation/></nav>
               <Laboratoire/>
-              <nav id='personaliser'> <OrganisationClinique/></nav>
+               <OrganisationClinique/>
               <Factutation/>
               <Ressources/>
               <Parametre/>

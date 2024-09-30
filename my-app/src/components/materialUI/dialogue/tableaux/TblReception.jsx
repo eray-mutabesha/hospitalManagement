@@ -65,7 +65,7 @@ function TblReception() {
 
 
   const get_dossiers = () => {
-    axios.get(`${BASE_URL}/get_dossiers_id/${detailData}`)
+    axios.get(`${BASE_URL}/get_tout_les_dossiers_id/${detailData}`)
       .then(({ data }) => {
         setDatas(data.data || []); 
       })

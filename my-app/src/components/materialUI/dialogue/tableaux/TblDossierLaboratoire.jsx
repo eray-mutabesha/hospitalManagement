@@ -20,8 +20,7 @@ import Laboratoire from '../../Laboratoire.jsx'
 import OrganisationClinique from '../../OrganisationClinique.jsx'
 import Factutation from '../../Facturation.jsx'
 import DossierForm from '../DossierForm.jsx'
-import { useState ,useEffect,useContext} from 'react'
-import { DossierContext } from '../../../../DossierContext.jsx'
+import { useState ,useEffect} from 'react'
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
 import  {toast} from 'react-hot-toast';
@@ -45,11 +44,10 @@ import Dossier from '../../Dossier.jsx'
 
 function TblDossierLaboratoire() {
 
-  const { setDossier } = useContext(DossierContext);
   const navigate = useNavigate()
   const handledetail=(dat)=>{
-    setDossier(dat)
-    navigate("/detaildossier")
+   
+    navigate("/detaildossier", { state: { detailData: dat.id } });
   }
 
   const handledossier=()=>{

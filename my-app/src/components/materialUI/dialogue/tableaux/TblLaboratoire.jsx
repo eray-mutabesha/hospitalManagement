@@ -5,14 +5,6 @@ import Dashboard from '../../Dashboard.jsx'
 import Parametre from '../../Parametre.jsx'
 import { Box, Button, Typography,TextField, Stack } from '@mui/material'
 import { faBell,faCaretDown,faCheck,faXmark,faMagnifyingGlass,faListCheck,faUserDoctor,faStethoscope,faCommentsDollar,faChevronDown} from '@fortawesome/free-solid-svg-icons'
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import IconButton from '@mui/material/IconButton';
-import CommentIcon from '@mui/icons-material/Comment';
-import SaveIcon from '@mui/icons-material/Save';
 import { InputLabel,Select,MenuItem,FormControl}  from '@mui/material';
 import { useForm} from "react-hook-form"
 import Consultation from '../../Consultation.jsx'
@@ -24,11 +16,11 @@ import Factutation from '../../Facturation.jsx'
 import ChoixTransferClt from '../../ChoixTransferClt.jsx'
 import { useNavigate } from 'react-router-dom'
 import { DossierContext } from '../../../../DossierContext.jsx'
-import { useContext } from 'react'
 import Dossier from '../../Dossier.jsx'
-
-
-
+import { useLocation } from 'react-router-dom'
+import { useState,useEffect,useContext } from 'react';
+import  {toast} from 'react-hot-toast';
+import axios from 'axios';
 
 
 
@@ -43,18 +35,231 @@ import Dossier from '../../Dossier.jsx'
 
 
 function TblLaboratoire() {
+  const BASE_URL = import.meta.env.VITE_API_URL;
   const { register, handleSubmit,formState:{errors} } = useForm();
   const [checked, setChecked] = React.useState([1]);
 
 
   const navigate = useNavigate()
-  const detailLabo =()=>{
-    navigate("/laboratoiredetail")
-  }
   const handledossier=()=>{
-    navigate("/detaildossier")
+    navigate("/detaildossier",{ state: { detailData: data[0]?.id } })
   }
+  const detailLabo =()=>{
+    navigate("/laboratoiredetail",{ state: { detailData: data[0]?.id } })
+  }
+ 
   const { dossier } = useContext(DossierContext);
+
+  // Access the data from location.state
+  const location = useLocation();
+  const { detailData } = location.state || {};  // Handle undefined state
+  const [data,setDatas]=useState([]);
+
+
+
+
+  
+  const get_dossiers = () => {
+   axios.get(`${BASE_URL}/get_laboratoire_id/${detailData}`)
+     .then(({ data }) => {
+       setDatas(data.data || []); 
+     })
+     .catch((err) => {
+       console.log(err);
+       toast.error("Il y a une erreur");
+     });
+ };
+ 
+ useEffect(()=>{
+ get_dossiers()
+ 
+ },[])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const [formData,setFormData] = useState({
+  hermoglobine:"",
+  globule_blanc:"",
+  hematocrite:"",
+  globule_rouge:"",
+  n_n:"",
+  e_e:"",
+  b_b:"",
+  t_s:"",
+  plaquette_sanguines:"",
+  l_l:"",
+  m_m:"",
+  vitesse_de_sedimentation:"",
+  t_c:"",
+  test_emmel:"",
+  goute_epaisse:"",
+  goute_fraiche:"",
+  salle_directe:"",
+  frottis_urettrale:"",
+  frottis_vaginale:"",
+  lcr_element:"",
+  tdr:"",
+  salle_enrechies:"",
+  sediment_urinaire:"",
+  f_i:"",
+  fv_gram:"",
+  lcr_gram:"",
+  spermogramme:"",
+  fu_gram:"",
+  sediment_urinaire_gram:"",
+  glycemie:"",
+  creatine_sanguine:"",
+  sgot_ast:"",
+  bil_tot:"",
+  bil_dir:"",
+  phosphatase_alcaline:"",
+  glucosurie:"",
+  uree_sanguine:"",
+  creatine_sanguine:"",
+  sgpt_alt:"",
+  bil_dir:"",
+  bil_ind:"",
+  phosphatase_acide:"",
+  albuminirie:"",
+  test_widal_to:"",
+  facteurs_rhumatoides:"",
+  hbs_age:"",
+  test_vdrl:"",
+  test_grossesse:"",
+  hapatite_viral_b:"",
+  t_h:"",
+  also:"",
+  hbs_age_also:"",
+  test_vih:"",
+  crp:"",
+  hpylorie:"",
+  date:"",
+  autre:""
+
+})
+
+const onsubmit = (formData) => {
+  // Mettre à jour tout les dossier 
+  const update_tout_Dossier = axios.put(
+    `${BASE_URL}/tout_les_dossiers_traitement_observation/${detailData}`, 
+    formData
+  );
+
+
+  // Mettre à jour le dossier du patient
+  const updatePatientDossier = axios.put(
+    `${BASE_URL}/put_traitement_observation/${detailData}`, 
+    formData
+  );
+
+  // Mettre à jour le diagnostic au labo
+  const updateLabo = axios.put(
+    `${BASE_URL}/put_dossier_laboratoire_traitement_observation/${detailData}`,
+    
+    formData
+  );
+
+  // Mettre à jour le diagnostic au consultation
+  const updateConsultation = axios.put(
+    `${BASE_URL}/put_traitement_observation_consultation/${detailData}`, 
+    formData
+  );
+
+  // Gérer les trois requêtes simultanément
+  Promise.all([update_tout_Dossier,updatePatientDossier, updateLabo, updateConsultation])
+    
+  
+  .then(([tout_DossierRes,patientResponse, laboResponse, consultRes]) => {
+
+
+      // Vérification de la réponse du patient dossier
+      const { data: tout_les_dossier_Data } = tout_DossierRes;
+      if (tout_les_dossier_Data.status === 500) {
+        toast.error("Il y a une erreur lors de la mise à jour de tout les dossier");
+        return;
+      }
+
+      // Vérification de la réponse du patient dossier
+      const { data: patientData } = patientResponse;
+      if (patientData.status === 500) {
+        toast.error("Il y a une erreur lors de la mise à jour du dossier patient.");
+        return;
+      }
+
+      // Vérification de la réponse du labo
+      const { data: laboData } = laboResponse;
+      if (laboData.status === 500) {
+        toast.error("Il y a une erreur lors de la mise à jour du labo.");
+        return;
+      }
+
+      // Vérification de la réponse de la consultation
+      const { data: consulData } = consultRes;
+      if (consulData.status === 500) {
+        toast.error("Il y a une erreur lors de la mise à jour de la consultation.");
+        return;
+      }
+
+      // Afficher le message de succès
+      toast.success("Traitement et observation Enregister ");
+
+      // Réinitialiser le formulaire
+      setFormData({
+          observation:"",
+          traitement:""
+      });
+    })
+    .catch((err) => {
+      console.error(err);
+      toast.error("Une erreur est survenue lors de la mise à jour.");
+    });
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -164,14 +369,14 @@ function TblLaboratoire() {
             background:"white",
             padding:"0px"
           }}>
-            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.nom_patient}</span></h3>
-            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.age}</span></h3>
-            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.sexe}</span></h3>
-            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.poids}</span></h3>
-            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.to_to}</span></h3>
-            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.ta_ta}</span></h3>
-            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.adresse}</span></h3>
-            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{dossier?.telephone}</span></h3>
+            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.nom_patient}</span></h3>
+            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.age}</span></h3>
+            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.sexe}</span></h3>
+            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.poids}</span></h3>
+            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.to_to}</span></h3>
+            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.ta_ta}</span></h3>
+            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.adresse}</span></h3>
+            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.telephone}</span></h3>
           </Box>
             </Box>
             
@@ -212,56 +417,8 @@ function TblLaboratoire() {
 
 
 
-     <form action="" style={{
-     
-      display:"grid"
-    }}
+<form action="" onsubmit={handleSubmit(onsubmit)} style={{display:"grid"}}
      >
-<Box  sx={{
-display:"grid",
-gridTemplateColumns:"auto  auto",
-gap:"10px",}}> 
-<FormControl variant="standard"   >
-<InputLabel id="demo-simple-select-standard-label">Nom du patient</InputLabel>
-        <Select
-           labelId="demo-simple-select-standard-label"
-          id="demo-simple-select-standard"
-          size="small"
-          {...register("patient_id", { required: true })}>
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>1</MenuItem>
-          <MenuItem value={20}>2</MenuItem>
-        </Select>
-</FormControl>
-<FormControl variant="standard"   >
-<InputLabel id="demo-simple-select-standard-label">Service</InputLabel>
-        <Select
-           labelId="demo-simple-select-standard-label"
-          id="demo-simple-select-standard"
-          size="small"
-          {...register("patient_id", { required: true })}>
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Hospitalisation</MenuItem>
-          <MenuItem value={20}>Ambilatoire</MenuItem>
-        </Select>
-</FormControl>
-</Box> 
-
-
-
-
-
-
-
-
-
-
-
-
 <Typography variant='h6'>Hermatologie :</Typography>
 <Box sx={{
   display:"grid",
@@ -277,7 +434,10 @@ className='inpt_material'
 id="standard-basic" label="Hemoglobine" variant="standard"
  type="text"
  size="small"
- {...register("Hemoglobine", { required: true })}/>
+ {...register("hemoglobine", { required: "Veuillez entrer le point" })}
+ value={formData.hemoglobine}
+ onChange={(e) => setFormData({ ...formData, hemoglobine: e.target.value })}/>
+
 
 <TextField
 className='inpt_material'
@@ -286,7 +446,12 @@ className='inpt_material'
  variant="standard"
  type="text"
  size="small"
- {...register("Hematocrite", { required: true })}/>
+{...register("hematocrite", { required: "Veuillez entrer le point" })}
+ value={formData.hematocrite}
+ onChange={(e) => setFormData({ ...formData, hematocrite: e.target.value })}/>
+
+
+
 
 <TextField
 className='inpt_material'
@@ -295,7 +460,11 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Globule_blanc", { required: true })}/>
+ {...register("globule_blanc", { required: "Veuillez entrer le point" })}
+ value={formData.globule_blanc}
+ onChange={(e) => setFormData({ ...formData, globule_blanc: e.target.value })}/>
+
+
 
 <TextField
 className='inpt_material'
@@ -304,9 +473,11 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Globule_rouge", { required: true })}/>
+ {...register("globule_rouge", { required: "Veuillez entrer le point" })}
+ value={formData.globule_rouge}
+ onChange={(e) => setFormData({ ...formData, globule_rouge: e.target.value })}/>
 </Box>         
-
+{/* /////////////////////////////////////////////////////////////////////////////////////////////////// */}
 
 
 
@@ -332,7 +503,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("fl_n", { required: true })}/>
+ {...register("n_n", { required: "Veuillez entrer le point" })}
+ value={formData.n_n}
+ onChange={(e) => setFormData({ ...formData, n_n: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -341,7 +514,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("fl_l", { required: true })}/>
+ {...register("l_l", { required: "Veuillez entrer le point" })}
+ value={formData.l_l}
+ onChange={(e) => setFormData({ ...formData, l_l: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -350,7 +525,11 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("fl_E", { required: true })}/>
+ {...register("e_e", { required: "Veuillez entrer le point" })}
+ value={formData.e_e}
+ onChange={(e) => setFormData({ ...formData, e_e: e.target.value })}/>
+
+
 
 <TextField
 className='inpt_material'
@@ -359,7 +538,10 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("fl_m", { required: true })}/>
+ {...register("m_m", { required: "Veuillez entrer le point" })}
+ value={formData.m_m}
+ onChange={(e) => setFormData({ ...formData, m_m: e.target.value })}/>
+
 
 <TextField
 className='inpt_material'
@@ -368,7 +550,11 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("fl_B", { required: true })}/>
+ {...register("b_b", { required: "Veuillez entrer le point" })}
+ value={formData.b_b}
+ onChange={(e) => setFormData({ ...formData, b_b: e.target.value })}/>
+
+
 
 <TextField
 className='inpt_material'
@@ -377,7 +563,11 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Vitesse_de_sedimentation", { required: true })}/>
+ {...register("vitesse_de_sedimentation", { required: "Veuillez entrer le point" })}
+ value={formData.vitesse_de_sedimentation}
+ onChange={(e) => setFormData({ ...formData, vitesse_de_sedimentation: e.target.value })}/>
+
+
 
 <TextField
 className='inpt_material'
@@ -386,7 +576,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("ts", { required: true })}/>
+ {...register("t_s", { required: "Veuillez entrer le point" })}
+ value={formData.t_s}
+ onChange={(e) => setFormData({ ...formData, t_s: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -395,7 +587,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("tc", { required: true })}/>
+ {...register("t_c", { required: "Veuillez entrer le point" })}
+ value={formData.t_c}
+ onChange={(e) => setFormData({ ...formData, t_c: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -404,7 +598,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Plaquette_sanguines", { required: true })}/>
+ {...register("plaquette_sanguines", { required: "Veuillez entrer le point" })}
+ value={formData.plaquette_sanguines}
+ onChange={(e) => setFormData({ ...formData, plaquette_sanguines: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -413,7 +609,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Test_Emmel", { required: true })}/>
+ {...register("test_emmel", { required: "Veuillez entrer le point" })}
+ value={formData.test_emmel}
+ onChange={(e) => setFormData({ ...formData, test_emmel: e.target.value })}/>
 
 </Box>
 
@@ -443,7 +641,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Goutte_epaisse", { required: true })}/>
+ {...register("goute_epaisse", { required: "Veuillez entrer le point" })}
+ value={formData.goute_epaisse}
+ onChange={(e) => setFormData({ ...formData, goute_epaisse: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -452,7 +652,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("TDR", { required: true })}/>
+ {...register("tdr", { required: "Veuillez entrer le point" })}
+ value={formData.tdr}
+ onChange={(e) => setFormData({ ...formData, tdr: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -461,7 +663,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Goutte_fraiche", { required: true })}/>
+ {...register("goute_fraiche", { required: "Veuillez entrer le point" })}
+ value={formData.goute_fraiche}
+ onChange={(e) => setFormData({ ...formData, goute_fraiche: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -470,7 +674,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("salle_enrichie", { required: true })}/>
+ {...register("salle_enrechies", { required: "Veuillez entrer le point" })}
+ value={formData.salle_enrechies}
+ onChange={(e) => setFormData({ ...formData, salle_enrechies: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -479,7 +685,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("salle_directes", { required: true })}/>
+ {...register("salle_directe", { required: "Veuillez entrer le point" })}
+ value={formData.salle_directe}
+ onChange={(e) => setFormData({ ...formData, salle_directe: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -488,7 +696,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Frottis_uretral", { required: true })}/>
+ {...register("frottis_urettrale", { required: "Veuillez entrer le point" })}
+ value={formData.frottis_urettrale}
+ onChange={(e) => setFormData({ ...formData, frottis_urettrale: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -497,7 +707,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Frottis_vaginal", { required: true })}/>
+ {...register("frottis_vaginale", { required: "Veuillez entrer le point" })}
+ value={formData.frottis_vaginale}
+ onChange={(e) => setFormData({ ...formData, frottis_vaginale: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -506,7 +718,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Sediment_urinaire", { required: true })}/>
+ {...register("sediment_urinaire", { required: "Veuillez entrer le point" })}
+ value={formData.sediment_urinaire}
+ onChange={(e) => setFormData({ ...formData, sediment_urinaire: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -515,7 +729,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("LCR_Element", { required: true })}/>
+ {...register("lcr_element", { required: "Veuillez entrer le point" })}
+ value={formData.lcr_element}
+ onChange={(e) => setFormData({ ...formData, lcr_element: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -524,12 +740,14 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("FI", { required: true })}/>
+ {...register("f_i", { required: "Veuillez entrer le point" })}
+ value={formData.f_i}
+ onChange={(e) => setFormData({ ...formData, f_i: e.target.value })}/>
 
 </Box>
 
-
-
+{/* ////////////////////////////////////////////////////////////////////////////////////////////// */}
+{/* ////////////////////////////////////////////////////////////////////////////////////////////// */}
 
 
 
@@ -555,7 +773,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("FV_Gram", { required: true })}/>
+ {...register("fv_gram", { required: "Veuillez entrer le point" })}
+ value={formData.fv_gram}
+ onChange={(e) => setFormData({ ...formData, fv_gram: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -564,7 +784,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("FU_Gram", { required: true })}/>
+ {...register("fu_gram", { required: "Veuillez entrer le point" })}
+ value={formData.fu_gram}
+ onChange={(e) => setFormData({ ...formData, fu_gram: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -573,7 +795,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Lcr_gram", { required: true })}/>
+ {...register("lcr_gram", { required: "Veuillez entrer le point" })}
+ value={formData.lcr_gram}
+ onChange={(e) => setFormData({ ...formData, lcr_gram: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -582,7 +806,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Sediment_urinaire_Gram", { required: true })}/>
+ {...register("sediment_urinaire_gram", { required: "Veuillez entrer le point" })}
+ value={formData.sediment_urinaire_gram}
+ onChange={(e) => setFormData({ ...formData, sediment_urinaire_gram: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -591,7 +817,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("spermogramme", { required: true })}/>
+ {...register("spermogramme", { required: "Veuillez entrer le point" })}
+ value={formData.spermogramme}
+ onChange={(e) => setFormData({ ...formData, spermogramme: e.target.value })}/>
 
 </Box>
 
@@ -612,7 +840,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Glycemie", { required: true })}/>
+ {...register("glycemie", { required: "Veuillez entrer le point" })}
+ value={formData.glycemie}
+ onChange={(e) => setFormData({ ...formData, glycemie: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -621,7 +851,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Uree_sanguine", { required: true })}/>
+ {...register("uree_sanguine", { required: "Veuillez entrer le point" })}
+ value={formData.uree_sanguine}
+ onChange={(e) => setFormData({ ...formData, uree_sanguine: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -630,17 +862,10 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Creatine_sanguine", { required: true })}/>
+ {...register("creatine_sanguine", { required: "Veuillez entrer le point" })}
+ value={formData.creatine_sanguine}
+ onChange={(e) => setFormData({ ...formData, creatine_sanguine: e.target.value })}/>
 
-
-<TextField
-className='inpt_material'
- id="standard-basic" 
- label="Creatine sanguine" 
- variant="standard" 
- type="text"
- size="small"
- {...register("Creatine_sanguine", { required: true })}/>
 
 <TextField
 className='inpt_material'
@@ -649,7 +874,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("SGOT", { required: true })}/>
+ {...register("sgot_ast", { required: "Veuillez entrer le point" })}
+ value={formData.sgot_ast}
+ onChange={(e) => setFormData({ ...formData, sgot_ast: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -658,7 +885,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("SGPT(ALT)", { required: true })}/>
+ {...register("sgpt_alt", { required: "Veuillez entrer le point" })}
+ value={formData.sgpt_alt}
+ onChange={(e) => setFormData({ ...formData, sgpt_alt: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -667,7 +896,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Bil_Tot", { required: true })}/>
+ {...register("bil_tot", { required: "Veuillez entrer le point" })}
+ value={formData.bil_tot}
+ onChange={(e) => setFormData({ ...formData, bil_tot: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -676,16 +907,11 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Bil_dir", { required: true })}/>
+ {...register("bil_dir", { required: "Veuillez entrer le point" })}
+ value={formData.bil_dir}
+ onChange={(e) => setFormData({ ...formData, bil_dir: e.target.value })}/>
 
-<TextField
-className='inpt_material'
- id="standard-basic" 
- label="Bil Dir" 
- variant="standard" 
- type="text"
- size="small"
- {...register("Bil_dir", { required: true })}/>
+
 
 <TextField
 className='inpt_material'
@@ -694,7 +920,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Bil_ind", { required: true })}/>
+ {...register("bil_ind", { required: "Veuillez entrer le point" })}
+ value={formData.bil_ind}
+ onChange={(e) => setFormData({ ...formData, bil_ind: e.target.value })}/>
 
 
 <TextField
@@ -704,7 +932,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Phosphatase_alcaline", { required: true })}/>
+ {...register("phosphatase_alcaline", { required: "Veuillez entrer le point" })}
+ value={formData.phosphatase_alcaline}
+ onChange={(e) => setFormData({ ...formData, phosphatase_alcaline: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -713,7 +943,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Phosphatase_acide", { required: true })}/>
+ {...register("phosphatase_acide", { required: "Veuillez entrer le point" })}
+ value={formData.phosphatase_acide}
+ onChange={(e) => setFormData({ ...formData, phosphatase_acide: e.target.value })}/>
 
 
 <TextField
@@ -723,7 +955,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Glucosurie", { required: true })}/>
+ {...register("glucosurie", { required: "Veuillez entrer le point" })}
+ value={formData.glucosurie}
+ onChange={(e) => setFormData({ ...formData, glucosurie: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -732,13 +966,15 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Albuminirie", { required: true })}/>
+ {...register("albuminirie", { required: "Veuillez entrer le point" })}
+ value={formData.albuminirie}
+ onChange={(e) => setFormData({ ...formData, albuminirie: e.target.value })}/>
 
 </Box>
 
 
-
-
+{/* ..................................................................................................... */}
+{/* ..................................................................................................... */}
 
 
 
@@ -759,7 +995,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Test_WIDAL_TO", { required: true })}/>
+ {...register("test_widal_to", { required: "Veuillez entrer le point" })}
+ value={formData.test_widal_to}
+ onChange={(e) => setFormData({ ...formData, test_widal_to: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -768,7 +1006,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("TH", { required: true })}/>
+ {...register("t_h", { required: "Veuillez entrer le point" })}
+ value={formData.t_h}
+ onChange={(e) => setFormData({ ...formData, t_h: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -777,7 +1017,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Facteurs_Rhumatoides", { required: true })}/>
+ {...register("facteurs_rhumatoides", { required: "Veuillez entrer le point" })}
+ value={formData.facteurs_rhumatoides}
+ onChange={(e) => setFormData({ ...formData, facteurs_rhumatoides: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -786,7 +1028,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("ASLO", { required: true })}/>
+ {...register("also", { required: "Veuillez entrer le point" })}
+ value={formData.also}
+ onChange={(e) => setFormData({ ...formData, also: e.target.value })}/>
 
 
 <TextField
@@ -796,7 +1040,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Hbs_Ag", { required: true })}/>
+ {...register("hbs_age", { required: "Veuillez entrer le point" })}
+ value={formData.hbs_age}
+ onChange={(e) => setFormData({ ...formData, hbs_age: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -805,7 +1051,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Hbs_Ag_ALSO", { required: true })}/>
+ {...register("hbs_age_also", { required: "Veuillez entrer le point" })}
+ value={formData.hbs_age_also}
+ onChange={(e) => setFormData({ ...formData, hbs_age_also: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -814,7 +1062,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Test_VDRL_ou_RPR", { required: true })}/>
+ {...register("test_vdrl", { required: "Veuillez entrer le point" })}
+ value={formData.test_vdrl}
+ onChange={(e) => setFormData({ ...formData, test_vdrl: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -823,7 +1073,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Test_VIH", { required: true })}/>
+ {...register("test_vih", { required: "Veuillez entrer le point" })}
+ value={formData.test_vih}
+ onChange={(e) => setFormData({ ...formData, test_vih: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -832,7 +1084,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Test_de_Grossesse", { required: true })}/>
+ {...register("test_grossesse", { required: "Veuillez entrer le point" })}
+ value={formData.test_grossesse}
+ onChange={(e) => setFormData({ ...formData, test_grossesse: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -841,7 +1095,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("CRP", { required: true })}/>
+ {...register("crp", { required: "Veuillez entrer le point" })}
+ value={formData.crp}
+ onChange={(e) => setFormData({ ...formData, crp: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -850,7 +1106,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Hapatite_virale_B", { required: true })}/>
+ {...register("hapatite_viral_b", { required: "Veuillez entrer le point" })}
+ value={formData.hapatite_viral_b}
+ onChange={(e) => setFormData({ ...formData, hapatite_viral_b: e.target.value })}/>
 
 
 <TextField
@@ -860,7 +1118,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("H.Pylori", { required: true })}/>
+ {...register("hpylorie", { required: "Veuillez entrer le point" })}
+ value={formData.hpylorie}
+ onChange={(e) => setFormData({ ...formData, hpylorie: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -869,7 +1129,9 @@ className='inpt_material'
  variant="standard" 
  type="text"
  size="small"
- {...register("Autre", { required: true })}/>
+ {...register("autre", { required: "Veuillez entrer le point" })}
+ value={formData.autre}
+ onChange={(e) => setFormData({ ...formData, autre: e.target.value })}/>
 
 <TextField
 className='inpt_material'
@@ -878,7 +1140,9 @@ className='inpt_material'
  variant="standard" 
  type="date"
  size="small"
- {...register("date", { required: true })}/>
+ {...register("date", { required: "Veuillez entrer le point" })}
+ value={formData.date}
+ onChange={(e) => setFormData({ ...formData, date: e.target.value })}/>
 
 </Box>
 
@@ -889,7 +1153,7 @@ className='inpt_material'
 <Button   sx={{
   width:"fit-content",
 }}variant="outlined" color="success" onClick={detailLabo}>
-          Detail
+          Voire la fiche
 </Button>
 </Box>
 

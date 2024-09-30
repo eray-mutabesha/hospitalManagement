@@ -57,7 +57,7 @@ function TblChambre() {
 
 // get datas from consultation
 const get_dossiers = () => {
-  axios.get(`${BASE_URL}/get_dossiers_id/${detailData}`)
+  axios.get(`${BASE_URL}/get_tout_les_dossiers_id/${detailData}`)
     .then(({ data }) => {
       setDatas(data.data || []); 
     })
@@ -154,7 +154,8 @@ const onsubmit = (formData) => {
 
       // Réinitialiser le formulaire
       setFormData({
-        diagnostics: "",
+          observation:"",
+          traitement:""
       });
     })
     .catch((err) => {
@@ -175,8 +176,8 @@ const onsubmit = (formData) => {
           <div className='menus'>
               <Dashboard />
               <Dossier/>
-              <nav id='personaliser'> <Reception/></nav>
-              <Consultation/>
+               <Reception/>
+               <nav id='personaliser'> <Consultation/></nav>
               <Laboratoire/>
               <OrganisationClinique/>
               <Factutation/>
@@ -325,7 +326,7 @@ const onsubmit = (formData) => {
         marginTop:"10px"
      }}>
 
-      <Button variant='outlined' onClick={detail}>DETAILS</Button>
+      <Button variant='outlined' onClick={detail}>Voire la fiche</Button>
        <ChoixTransferClt/>
        
        

@@ -42,6 +42,35 @@ const BASE_URL = import.meta.env.VITE_API_URL;
   const { detailData } = location.state || {};  // Handle undefined state
  
 
+  const [data,setDatas]=useState([]);
+  const get_dossiers = () => {
+    axios.get(`${BASE_URL}/get_tout_les_dossiers_id/${detailData}`)
+      .then(({ data }) => {
+        setDatas(data.data || []); 
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Il y a une erreur");
+      });
+  };
+  
+  useEffect(()=>{
+  get_dossiers()
+  
+  },[])
+  
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -49,7 +78,65 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 const Reception =()=>{
  
 
+  axios.post(`${BASE_URL}/post_patient_dossier`,{
+    id:data[0]?.id,
+    nom_patient:data[0]?.nom_patient,
+    date:data[0]?.date_entre,
+    poids:data[0]?.poids,
+    to_to:data[0]?.to_to,
+    ta_ta:data[0]?.ta_ta,
+    adresse:data[0]?.adresse,
+    age:data[0]?.age,
+    sexe:data[0]?.sexe,
+    telephone:data[0]?.telephone,
+    diagnostic:data[0]?.diagnostic,
+    traitement:data[0]?.traitement,
+    observation:data[0]?.observation
+    
+   })
+          
+   .then(({ data }) => {
+     if (data.status == 500) {
+       toast.error("Il y a une erreur");
+     } else {
 
+       // delete dossier route
+
+
+
+     
+     toast.success("PATIENT ENVOYER A LA CONSULTATION")
+
+   }
+   })
+    .catch((err) => {
+      console.log(err);
+      toast.error("Il y a une erreur");
+    });
+
+// the patient must be just in one service
+
+    axios.delete(`${BASE_URL}/delete_dossier_labo/${data[0]?.id}`)
+    .then(({ data }) => {
+      setDatas(data.data || []); // Assurer que data.data est un tableau
+      get_dossiers();
+    })
+    .catch((err) => {
+      console.log(err);
+      toast.error("Il y a une erreur");
+    });
+
+
+
+    axios.delete(`${BASE_URL}/delete_dossier_consultation/${data[0]?.id}`)
+    .then(({ data }) => {
+      setDatas(data.data || []); // Assurer que data.data est un tableau
+      get_dossiers();
+    })
+    .catch((err) => {
+      console.log(err);
+      toast.error("Il y a une erreur");
+    });
 
 
 
@@ -109,7 +196,37 @@ const Consultation =()=>{
       toast.error("Il y a une erreur");
     });
 
+
+
+    axios.delete(`${BASE_URL}/delete_dossier_labo/${data[0]?.id}`)
+    .then(({ data }) => {
+      setDatas(data.data || []); // Assurer que data.data est un tableau
+      get_dossiers();
+    })
+    .catch((err) => {
+      console.log(err);
+      toast.error("Il y a une erreur");
+    });
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const LaboratoireData = () => {
   axios.post(`${BASE_URL}/post_laboratoire_dossier`,{
@@ -131,7 +248,7 @@ const LaboratoireData = () => {
           
    .then(({ data }) => {
      if (data.status == 500) {
-       toast.error("Il y a une erreur");
+       toast.error("Il y a une erreur ");
      } else {
      
      toast.success("PATIENT ENVOYER AU LABOS")
@@ -143,6 +260,29 @@ const LaboratoireData = () => {
       toast.error("Il y a une erreur");
     });
 
+
+
+    axios.delete(`${BASE_URL}/delete_dossier/${data[0]?.id}`)
+    .then(({ data }) => {
+      setDatas(data.data || []); // Assurer que data.data est un tableau
+      get_dossiers();
+    })
+    .catch((err) => {
+      console.log(err);
+      toast.error("Il y a une erreur lors de la supression reception");
+    });
+
+
+
+    axios.delete(`${BASE_URL}/delete_dossier_consultation/${data[0]?.id}`)
+    .then(({ data }) => {
+      setDatas(data.data || []); // Assurer que data.data est un tableau
+      get_dossiers();
+    })
+    .catch((err) => {
+      console.log(err);
+      toast.error("Il y a une erreur lors de la supression consultation");
+    });
 
 }
 
@@ -165,7 +305,7 @@ const LaboratoireData = () => {
            Enregistrer
           </Button>
           <Menu {...bindMenu(popupState)}>
-            <MenuItem onClick={()=>Reception(dat.id)  } ><Button endIcon={<SendIcon />}>Reception</Button></MenuItem>
+            <MenuItem onClick={Reception} ><Button endIcon={<SendIcon />}>Reception</Button></MenuItem>
             <MenuItem onClick={Consultation}><Button endIcon={<SendIcon />}>Consultation</Button></MenuItem>
             <MenuItem onClick={LaboratoireData}><Button endIcon={<SendIcon />}>Laboratoire</Button></MenuItem>
             <MenuItem onClick={handleclick}><Button endIcon={<SendIcon />}>Hospitalisation</Button></MenuItem>
