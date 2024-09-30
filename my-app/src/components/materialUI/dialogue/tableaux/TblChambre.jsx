@@ -26,7 +26,7 @@ import  {toast} from 'react-hot-toast';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom'
 import { useState,useEffect,useContext } from 'react'
-
+import Dossier from '../../Dossier.jsx'
 
 
 
@@ -88,6 +88,13 @@ const [formData,setFormData]= useState({
 
 
 const onsubmit = (formData) => {
+  // Mettre à jour tout les dossier 
+  const update_tout_Dossier = axios.put(
+    `${BASE_URL}/tout_les_dossiers_traitement_observation/${detailData}`, 
+    formData
+  );
+
+
   // Mettre à jour le dossier du patient
   const updatePatientDossier = axios.put(
     `${BASE_URL}/put_traitement_observation/${detailData}`, 
@@ -108,8 +115,19 @@ const onsubmit = (formData) => {
   );
 
   // Gérer les trois requêtes simultanément
-  Promise.all([updatePatientDossier, updateLabo, updateConsultation])
-    .then(([patientResponse, laboResponse, consultRes]) => {
+  Promise.all([update_tout_Dossier,updatePatientDossier, updateLabo, updateConsultation])
+    
+  
+  .then(([tout_DossierRes,patientResponse, laboResponse, consultRes]) => {
+
+
+      // Vérification de la réponse du patient dossier
+      const { data: tout_les_dossier_Data } = tout_DossierRes;
+      if (tout_les_dossier_Data.status === 500) {
+        toast.error("Il y a une erreur lors de la mise à jour de tout les dossier");
+        return;
+      }
+
       // Vérification de la réponse du patient dossier
       const { data: patientData } = patientResponse;
       if (patientData.status === 500) {
@@ -156,6 +174,7 @@ const onsubmit = (formData) => {
           </div>
           <div className='menus'>
               <Dashboard />
+              <Dossier/>
               <nav id='personaliser'> <Reception/></nav>
               <Consultation/>
               <Laboratoire/>

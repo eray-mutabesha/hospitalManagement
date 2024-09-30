@@ -19,7 +19,14 @@ import Ressources from '../../Resources.jsx'
 import Laboratoire from '../../Laboratoire.jsx'
 import OrganisationClinique from '../../OrganisationClinique.jsx'
 import Factutation from '../../Facturation.jsx'
-import DossierForm from '../DossierForm.jsx'
+import Dossier from '../../Dossier.jsx'
+
+
+
+
+
+
+
 
 
 
@@ -54,6 +61,7 @@ function TblDossierHospitalisation() {
           </div>
           <div className='menus'>
               <Dashboard />
+              <Dossier/>
               <Reception/>
                <Consultation/>
               <Laboratoire/>

@@ -16,6 +16,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Ressources from '../../Resources.jsx';
 import Reception from '../../Reception.jsx';
+import Dossier from '../../Dossier.jsx'
 import Consultation from '../../Consultation.jsx';
 import Laboratoire from '../../Laboratoire.jsx';
 import OrganisationClinique from '../../OrganisationClinique.jsx';
@@ -102,6 +103,7 @@ const ambulatoiredetail= ()=>{
           </div>
           <div className='menus'>
               <Dashboard />
+              <Dossier/>
               <Reception/>
               <Consultation/>
               <Laboratoire/>

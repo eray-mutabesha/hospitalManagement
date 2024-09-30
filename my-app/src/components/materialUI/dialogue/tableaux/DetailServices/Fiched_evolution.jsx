@@ -4,7 +4,6 @@ import { faTrash ,faEye} from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
 import { Box, Button, Typography } from '@mui/material'
 import { faBell,faCaretDown,faCheck,faXmark,faMagnifyingGlass,faListCheck,faUserDoctor,faStethoscope,faCommentsDollar,faChevronDown} from '@fortawesome/free-solid-svg-icons'
-
 import Ressources from '../../../Resources.jsx';
 import Reception from '../../../Reception.jsx';
 import Consultation from '../../../Consultation.jsx';
@@ -15,9 +14,6 @@ import Dashboard from '../../../Dashboard.jsx'
 import Parametre from '../../../Parametre.jsx'
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-
-
-
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -25,7 +21,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-
+import Dossier from '../../../Dossier';
 
 
 
@@ -78,6 +74,7 @@ const reception=()=>{
           </div>
           <div className='menus'>
               <Dashboard />
+              <Dossier/>
               <Reception/>
               <Consultation/>
               <Laboratoire/>

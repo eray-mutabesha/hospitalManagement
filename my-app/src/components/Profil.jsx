@@ -4,6 +4,7 @@ import { Box, Button, Typography,TextField, Stack } from '@mui/material'
 import { faBell,faCaretDown,faCheck,faXmark,faMagnifyingGlass,faListCheck,faUserDoctor,faStethoscope,faCommentsDollar,faChevronDown} from '@fortawesome/free-solid-svg-icons'
 import Dashboard from './materialUI/Dashboard.jsx'
 import Reception from './materialUI/Reception.jsx'
+import Dossier from './materialUI/Dossier.jsx'
 import Consultation from './materialUI/Consultation.jsx'
 import Laboratoire from './materialUI/Laboratoire.jsx'
 import OrganisationClinique from './materialUI/OrganisationClinique.jsx'
@@ -15,6 +16,7 @@ import UpdateProfil from './UpdateProfil.jsx'
 import { useState } from 'react'
 import axios from 'axios';
 import toast from 'react-hot-toast';
+
 
 function Profil() {
   const BASE_URL = import.meta.env.VITE_API_URL;
@@ -54,6 +56,7 @@ function Profil() {
           </div>
           <div className='menus'>
               <Dashboard />
+              <Dossier/>
               <Reception/>
               <Consultation/>
               <Laboratoire/>

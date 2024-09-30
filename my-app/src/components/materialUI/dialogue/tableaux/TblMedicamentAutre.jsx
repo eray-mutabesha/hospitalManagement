@@ -7,7 +7,6 @@ import Dashboard from '../../Dashboard.jsx'
 import Parametre from '../../Parametre.jsx'
 import { Box, Button, Typography } from '@mui/material'
 import { faBell,faCaretDown,faCheck,faXmark,faMagnifyingGlass,faListCheck,faUserDoctor,faStethoscope,faCommentsDollar,faChevronDown} from '@fortawesome/free-solid-svg-icons'
-
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -23,14 +22,21 @@ import MedicamentForm from '../MedicamentForm.jsx'
 import Laboratoire from '../../Laboratoire.jsx'
 import OrganisationClinique from '../../OrganisationClinique.jsx'
 import Factutation from '../../Facturation.jsx'
-
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-
 import { useState,useEffect } from 'react'
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import MedicamentFormUpdt from './MedicamentFormUpdt.jsx'
+import Dossier from '../../Dossier.jsx'
+
+
+
+
+
+
+
+
 
 
 
@@ -105,6 +111,7 @@ function TblMedicamentAutre() {
           </div>
           <div className='menus'>
               <Dashboard />
+              <Dossier/>
               <Reception/>
               <Consultation/>
               <Laboratoire/>

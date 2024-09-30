@@ -26,7 +26,7 @@ import toast from 'react-hot-toast';
 import axios from 'axios';
 import {useEffect } from 'react'
 import PersonelFormUpdt from '../PersonelFormUpdt.jsx'
-
+import Dossier from '../../Dossier.jsx'
 
 
 
@@ -93,6 +93,7 @@ if(FormVisible == false){
           </div>
           <div className='menus'>
               <Dashboard />
+              <Dossier/>
               <Reception/>
               <Consultation/>
               <Laboratoire/>

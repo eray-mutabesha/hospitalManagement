@@ -25,7 +25,7 @@ import  {toast} from 'react-hot-toast';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useContext} from 'react'
 import { DossierContext } from '../../../../DossierContext.jsx'
-
+import Dossier from '../../Dossier.jsx'
 
 
 
@@ -96,6 +96,7 @@ const deleteEntree = (model) => {
           </div>
           <div className='menus'>
               <Dashboard />
+              <Dossier/>
               <Reception/>
               <nav id='personaliser'> <Consultation/></nav>
               <Laboratoire/>

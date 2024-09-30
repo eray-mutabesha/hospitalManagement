@@ -25,6 +25,21 @@ import ChoixTransferClt from '../../ChoixTransferClt.jsx'
 import { useNavigate } from 'react-router-dom'
 import { DossierContext } from '../../../../DossierContext.jsx'
 import { useContext } from 'react'
+import Dossier from '../../Dossier.jsx'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function TblLaboratoire() {
@@ -52,7 +67,8 @@ function TblLaboratoire() {
           </div>
           <div className='menus'>
               <Dashboard />
-             <Reception/>
+              <Dossier/>
+              <Reception/>
               <Consultation/>
               <nav id='personaliser'><Laboratoire/></nav>
               <OrganisationClinique/>

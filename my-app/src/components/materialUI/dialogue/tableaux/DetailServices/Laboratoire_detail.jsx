@@ -19,6 +19,23 @@ import OrganisationClinique from '../../../OrganisationClinique.jsx';
 import Factutation from '../../../Facturation.jsx';
 import Dashboard from '../../../Dashboard.jsx'
 import Parametre from '../../../Parametre.jsx'
+import Dossier from '../../../Dossier';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function createData(name, calories, fat, carbs, protein) {
@@ -58,6 +75,7 @@ const reception=()=>{
           </div>
           <div className='menus'>
               <Dashboard />
+              <Dossier/>
               <Reception/>
               <Consultation/>
               <Laboratoire/>

@@ -5,15 +5,6 @@ import Dashboard from '../../Dashboard.jsx'
 import Parametre from '../../Parametre.jsx'
 import { Box, Button, Typography,TextField, Stack } from '@mui/material'
 import { faBell,faCaretDown,faCheck,faXmark,faMagnifyingGlass,faListCheck,faUserDoctor,faStethoscope,faCommentsDollar,faChevronDown} from '@fortawesome/free-solid-svg-icons'
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import IconButton from '@mui/material/IconButton';
-import CommentIcon from '@mui/icons-material/Comment';
-import SaveIcon from '@mui/icons-material/Save';
-import { InputLabel,Select,MenuItem,FormControl}  from '@mui/material';
 import { useForm} from "react-hook-form"
 import Consultation from '../../Consultation.jsx'
 import Reception from '../../Reception.jsx'
@@ -23,6 +14,15 @@ import OrganisationClinique from '../../OrganisationClinique.jsx'
 import Factutation from '../../Facturation.jsx'
 import ChoixTransferClt from '../../ChoixTransferClt.jsx'
 import { useNavigate } from 'react-router-dom'
+import Dossier from '../../Dossier.jsx'
+
+
+
+
+
+
+
+
 
 
 
@@ -58,7 +58,8 @@ function TblLaboratoire() {
           </div>
           <div className='menus'>
               <Dashboard />
-             <Reception/>
+              <Reception/>
+              <Dossier/>
               <Consultation/>
               <Laboratoire/>
               <nav id='personaliser'><OrganisationClinique/></nav>

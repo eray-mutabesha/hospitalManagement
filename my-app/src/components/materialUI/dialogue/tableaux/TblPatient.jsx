@@ -26,6 +26,21 @@ import toast from 'react-hot-toast';
 import axios from 'axios';
 import { useState,useEffect } from 'react'
 import PatientFormUpdt from '../PatientFormUpdt.jsx'
+import Dossier from '../../Dossier.jsx'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function TblPatient() {
@@ -93,6 +108,7 @@ if(FormVisible == false){
           </div>
           <div className='menus'>
               <Dashboard />
+              <Dossier/>
               <Reception/>
               <Consultation/>
               <Laboratoire/>

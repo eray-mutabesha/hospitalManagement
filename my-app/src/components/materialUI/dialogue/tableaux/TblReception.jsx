@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Navigate, useNavigate } from 'react-router-dom'
 import Dashboard from '../../Dashboard.jsx'
 import Reception from '../../Reception.jsx'
+import Dossier from '../../Dossier.jsx'
 import Parametre from '../../Parametre.jsx'
 import { faBell,faCaretDown,faCheck,faXmark,faMagnifyingGlass,faListCheck,faUserDoctor,faStethoscope,faCommentsDollar,faChevronDown} from '@fortawesome/free-solid-svg-icons'
 import { Box ,TextField, Typography,InputLabel,Select,MenuItem,FormControl,Button}  from '@mui/material';
@@ -188,6 +189,7 @@ useEffect(()=>{
           </div>
           <div className='menus'>
               <Dashboard />
+              <Dossier/>
               <nav id='personaliser'> <Reception/></nav>
               <Consultation/>
               <Laboratoire/>

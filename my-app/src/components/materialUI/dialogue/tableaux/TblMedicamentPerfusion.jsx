@@ -23,14 +23,21 @@ import MedicamentForm from '../MedicamentForm.jsx'
 import Laboratoire from '../../Laboratoire.jsx'
 import OrganisationClinique from '../../OrganisationClinique.jsx'
 import Factutation from '../../Facturation.jsx'
-
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
-
 import { useState,useEffect } from 'react'
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import MedicamentFormUpdt from './MedicamentFormUpdt.jsx'
+import Dossier from '../../Dossier.jsx'
+
+
+
+
+
+
+
+
 
 
 
@@ -105,6 +112,7 @@ function TblMedicamentPerfusion() {
           </div>
           <div className='menus'>
               <Dashboard />
+              <Dossier/>
               <Reception/>
               <Consultation/>
               <Laboratoire/>

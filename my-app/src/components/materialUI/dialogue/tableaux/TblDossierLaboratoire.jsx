@@ -25,6 +25,23 @@ import { DossierContext } from '../../../../DossierContext.jsx'
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
 import  {toast} from 'react-hot-toast';
+import Dossier from '../../Dossier.jsx'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function TblDossierLaboratoire() {
 
@@ -88,6 +105,7 @@ useEffect(()=>{
           </div>
           <div className='menus'>
               <Dashboard />
+              <Dossier/>
               <Reception/>
                <Consultation/>
                <nav id='personaliser'><Laboratoire/></nav>

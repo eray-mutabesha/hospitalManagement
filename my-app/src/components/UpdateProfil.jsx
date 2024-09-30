@@ -4,6 +4,7 @@ import { Box, Button, Typography,TextField, Stack } from '@mui/material'
 import { faBell,faCaretDown,faCheck,faXmark,faMagnifyingGlass,faListCheck,faUserDoctor,faStethoscope,faCommentsDollar,faChevronDown} from '@fortawesome/free-solid-svg-icons'
 import Dashboard from './materialUI/Dashboard.jsx'
 import Reception from './materialUI/Reception.jsx'
+import Dossier from './materialUI/Dossier.jsx'
 import Consultation from './materialUI/Consultation.jsx'
 import Laboratoire from './materialUI/Laboratoire.jsx'
 import OrganisationClinique from './materialUI/OrganisationClinique.jsx'
@@ -79,6 +80,7 @@ function UpdateProfil(singleData,onUpdate) {
           </div>
           <div className='menus'>
               <Dashboard />
+              <Dossier/>
               <Reception/>
               <Consultation/>
               <Laboratoire/>

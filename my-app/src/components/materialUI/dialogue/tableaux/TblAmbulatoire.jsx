@@ -21,10 +21,9 @@ import IconButton from '@mui/material/IconButton';
 import CommentIcon from '@mui/icons-material/Comment';
 import Ressources from '../../Resources.jsx'
 import Laboratoire from '../../Laboratoire.jsx'
-
 import OrganisationClinique from '../../OrganisationClinique.jsx'
 import Factutation from '../../Facturation.jsx'
-
+import Dossier from '../../Dossier.jsx'
 
 
 
@@ -63,6 +62,7 @@ function TblAmbulatoire() {
           </div>
           <div className='menus'>
               <Dashboard />
+              <Dossier/>
                <Reception/>
                 <Consultation/>
               <Laboratoire/>

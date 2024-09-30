@@ -15,6 +15,11 @@ import  {toast} from 'react-hot-toast';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import { useState,useEffect,useContext } from 'react';
+import Dossier from '../../../Dossier';
+
+
+
+
 
 
 
@@ -64,6 +69,7 @@ get_dossiers()
           </div>
           <div className='menus'>
               <Dashboard />
+              <Dossier/>
               <Reception/>
               <Consultation/>
               <Laboratoire/>
