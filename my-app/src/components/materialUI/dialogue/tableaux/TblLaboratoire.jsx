@@ -15,7 +15,6 @@ import OrganisationClinique from '../../OrganisationClinique.jsx'
 import Factutation from '../../Facturation.jsx'
 import ChoixTransferClt from '../../ChoixTransferClt.jsx'
 import { useNavigate } from 'react-router-dom'
-import { DossierContext } from '../../../../DossierContext.jsx'
 import Dossier from '../../Dossier.jsx'
 import { useLocation } from 'react-router-dom'
 import { useState,useEffect,useContext } from 'react';
@@ -48,7 +47,7 @@ function TblLaboratoire() {
     navigate("/laboratoiredetail",{ state: { detailData: data[0]?.id } })
   }
  
-  const { dossier } = useContext(DossierContext);
+  
 
   // Access the data from location.state
   const location = useLocation();
@@ -57,10 +56,9 @@ function TblLaboratoire() {
 
 
 
-
   
   const get_dossiers = () => {
-   axios.get(`${BASE_URL}/get_laboratoire_id/${detailData}`)
+   axios.get(`${BASE_URL}/get_tout_les_dossiers_id/${detailData}`)
      .then(({ data }) => {
        setDatas(data.data || []); 
      })
@@ -155,81 +153,99 @@ const [formData,setFormData] = useState({
 
 })
 
-const onsubmit = (formData) => {
-  // Mettre à jour tout les dossier 
-  const update_tout_Dossier = axios.put(
-    `${BASE_URL}/tout_les_dossiers_traitement_observation/${detailData}`, 
+const onsubmit = () => {
+ 
+  axios.put(`${BASE_URL}/update_tout_le_dossier_labo_datas/${detailData}`, 
     formData
-  );
+  )      
+  .then(({ data }) => {
+    setDatas(data.data || []); 
+  })
+  .catch((err) => {
+    console.log(err);
+    toast.error("Il y a une erreur");
+  });
 
 
-  // Mettre à jour le dossier du patient
-  const updatePatientDossier = axios.put(
-    `${BASE_URL}/put_traitement_observation/${detailData}`, 
+
+
+
+  axios.put(`${BASE_URL}/update_labo_datas/${detailData}`, 
     formData
-  );
-
-  // Mettre à jour le diagnostic au labo
-  const updateLabo = axios.put(
-    `${BASE_URL}/put_dossier_laboratoire_traitement_observation/${detailData}`,
-    
-    formData
-  );
-
-  // Mettre à jour le diagnostic au consultation
-  const updateConsultation = axios.put(
-    `${BASE_URL}/put_traitement_observation_consultation/${detailData}`, 
-    formData
-  );
-
-  // Gérer les trois requêtes simultanément
-  Promise.all([update_tout_Dossier,updatePatientDossier, updateLabo, updateConsultation])
-    
-  
-  .then(([tout_DossierRes,patientResponse, laboResponse, consultRes]) => {
-
-
-      // Vérification de la réponse du patient dossier
-      const { data: tout_les_dossier_Data } = tout_DossierRes;
-      if (tout_les_dossier_Data.status === 500) {
-        toast.error("Il y a une erreur lors de la mise à jour de tout les dossier");
-        return;
-      }
-
-      // Vérification de la réponse du patient dossier
-      const { data: patientData } = patientResponse;
-      if (patientData.status === 500) {
-        toast.error("Il y a une erreur lors de la mise à jour du dossier patient.");
-        return;
-      }
-
-      // Vérification de la réponse du labo
-      const { data: laboData } = laboResponse;
-      if (laboData.status === 500) {
-        toast.error("Il y a une erreur lors de la mise à jour du labo.");
-        return;
-      }
-
-      // Vérification de la réponse de la consultation
-      const { data: consulData } = consultRes;
-      if (consulData.status === 500) {
-        toast.error("Il y a une erreur lors de la mise à jour de la consultation.");
-        return;
-      }
-
-      // Afficher le message de succès
-      toast.success("Traitement et observation Enregister ");
-
-      // Réinitialiser le formulaire
-      setFormData({
-          observation:"",
-          traitement:""
-      });
+  )      
+  .then(({ data }) => {
+    setDatas(data.data || []); 
+    setDatas({
+      hermoglobine:"",
+      globule_blanc:"",
+      hematocrite:"",
+      globule_rouge:"",
+      n_n:"",
+      e_e:"",
+      b_b:"",
+      t_s:"",
+      plaquette_sanguines:"",
+      l_l:"",
+      m_m:"",
+      vitesse_de_sedimentation:"",
+      t_c:"",
+      test_emmel:"",
+      goute_epaisse:"",
+      goute_fraiche:"",
+      salle_directe:"",
+      frottis_urettrale:"",
+      frottis_vaginale:"",
+      lcr_element:"",
+      tdr:"",
+      salle_enrechies:"",
+      sediment_urinaire:"",
+      f_i:"",
+      fv_gram:"",
+      lcr_gram:"",
+      spermogramme:"",
+      fu_gram:"",
+      sediment_urinaire_gram:"",
+      glycemie:"",
+      creatine_sanguine:"",
+      sgot_ast:"",
+      bil_tot:"",
+      bil_dir:"",
+      phosphatase_alcaline:"",
+      glucosurie:"",
+      uree_sanguine:"",
+      creatine_sanguine:"",
+      sgpt_alt:"",
+      bil_dir:"",
+      bil_ind:"",
+      phosphatase_acide:"",
+      albuminirie:"",
+      test_widal_to:"",
+      facteurs_rhumatoides:"",
+      hbs_age:"",
+      test_vdrl:"",
+      test_grossesse:"",
+      hapatite_viral_b:"",
+      t_h:"",
+      also:"",
+      hbs_age_also:"",
+      test_vih:"",
+      crp:"",
+      hpylorie:"",
+      date:"",
+      autre:""
     })
-    .catch((err) => {
-      console.error(err);
-      toast.error("Une erreur est survenue lors de la mise à jour.");
-    });
+  })
+  .catch((err) => {
+    console.log(err);
+    toast.success("Enregistrement reussi")
+    toast.error("Il y a une erreur");
+  });
+
+
+
+
+
+
 };
 
 
@@ -417,7 +433,7 @@ const onsubmit = (formData) => {
 
 
 
-<form action="" onsubmit={handleSubmit(onsubmit)} style={{display:"grid"}}
+<form  onSubmit={handleSubmit(onsubmit)} style={{display:"grid"}}
      >
 <Typography variant='h6'>Hermatologie :</Typography>
 <Box sx={{
@@ -431,12 +447,12 @@ const onsubmit = (formData) => {
 
 <TextField
 className='inpt_material'
-id="standard-basic" label="Hemoglobine" variant="standard"
+id="standard-basic" label="Hermoglobine" variant="standard"
  type="text"
  size="small"
- {...register("hemoglobine", { required: "Veuillez entrer le point" })}
- value={formData.hemoglobine}
- onChange={(e) => setFormData({ ...formData, hemoglobine: e.target.value })}/>
+ {...register("hermoglobine", { required: "Veuillez entrer le point" })}
+ value={formData.hermoglobine}
+ onChange={(e) => setFormData({ ...formData, hermoglobine: e.target.value })}/>
 
 
 <TextField

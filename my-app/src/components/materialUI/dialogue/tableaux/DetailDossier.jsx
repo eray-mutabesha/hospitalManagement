@@ -270,7 +270,8 @@ const ambulatoiredetail= ()=>{
                 002
               </TableCell>
               <TableCell >Laboratoire</TableCell>
-              <TableCell sx={{color:"blue"}}>En cours...</TableCell>
+              {data[0]?.hermoglobine? <TableCell sx={{color:"green"}}>Terminer</TableCell> :
+              <TableCell sx={{color:"red"}}>En attente...</TableCell>}
               <TableCell align='right'> <Button onClick={laboratoire} variant="outlined"  color="success">
                Details
              </Button></TableCell>

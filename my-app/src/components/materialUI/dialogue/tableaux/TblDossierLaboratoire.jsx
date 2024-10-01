@@ -50,9 +50,6 @@ function TblDossierLaboratoire() {
     navigate("/detaildossier", { state: { detailData: dat.id } });
   }
 
-  const handledossier=()=>{
-    navigate("/reception")
-  }
 
 
   const [datas,setDatas]= useState([])

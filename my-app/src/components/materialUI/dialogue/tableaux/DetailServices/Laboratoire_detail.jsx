@@ -4,13 +4,6 @@ import { faTrash ,faEye} from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
 import { Box, Button, Typography } from '@mui/material'
 import { faBell,faCaretDown,faCheck,faXmark,faMagnifyingGlass,faListCheck,faUserDoctor,faStethoscope,faCommentsDollar,faChevronDown} from '@fortawesome/free-solid-svg-icons'
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import Ressources from '../../../Resources.jsx';
 import Reception from '../../../Reception.jsx';
 import Consultation from '../../../Consultation.jsx';
@@ -20,6 +13,10 @@ import Factutation from '../../../Facturation.jsx';
 import Dashboard from '../../../Dashboard.jsx'
 import Parametre from '../../../Parametre.jsx'
 import Dossier from '../../../Dossier';
+import { useLocation } from 'react-router-dom'
+import { useState,useEffect,useContext } from 'react';
+import  {toast} from 'react-hot-toast';
+import axios from 'axios';
 
 
 
@@ -53,10 +50,10 @@ const rows = [
 
 function Laboratoire_detail() {
   
-
+const BASE_URL = import.meta.env.VITE_API_URL;
  const navigate = useNavigate()
  const handledossier=()=>{
-   navigate("/Laboratoire")
+   navigate("/Laboratoire",{ state: { detailData: data[0]?.id } })
  }
  const Detailpatient=()=>{
   navigate("/detailPatient")
@@ -64,6 +61,37 @@ function Laboratoire_detail() {
 const reception=()=>{
   navigate("/receptiondetail")
 }
+
+  // Access the data from location.state
+  const location = useLocation();
+  const { detailData } = location.state || {};  // Handle undefined state
+  const [data,setDatas]=useState([]);
+
+
+
+  
+  const get_dossiers = () => {
+   axios.get(`${BASE_URL}/get_tout_les_dossiers_id/${detailData}`)
+     .then(({ data }) => {
+       setDatas(data.data || []); 
+     })
+     .catch((err) => {
+       console.log(err);
+       toast.error("Il y a une erreur");
+     });
+ };
+ 
+ useEffect(()=>{
+ get_dossiers()
+ 
+ },[])
+
+
+
+console.log(data[0])
+
+
+
 
  
   return (
@@ -142,14 +170,14 @@ const reception=()=>{
             background:"white",
             padding:"0px"
           }}>
-            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>kasongo</span></h3>
-            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>22 ans</span></h3>
-            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>masculin</span></h3>
-            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
-            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
-            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
-            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>Goma/Q.ndosho/AV.ngungu</span></h3>
-            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>078374848</span></h3>
+            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.nom_patient}</span></h3>
+            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.age}</span></h3>
+            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.sexe}</span></h3>
+            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.poids}</span></h3>
+            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.to_to}</span></h3>
+            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.ta_ta}</span></h3>
+            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.adresse}</span></h3>
+            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.telephone}</span></h3>
           </Box>
      
 
@@ -187,108 +215,97 @@ const reception=()=>{
 
 
 
-          <Box sx={{
-            background:"white",
-           
-            marginTop:"150px",
-            display:"grid",
-            gridTemplateColumns:"auto auto auto",
-            gap:"40px"
-          }}>
+            <Box
+  sx={{
+    background: "white",
+    marginTop: "150px",
+    display: "grid",
+    gridTemplateColumns: "auto auto auto",
+    gap: "40px",
+  }}
+>
+  <Box>
+    <h2 style={{ color: "rgba(0, 0, 0, 0.322)" }}>Hermatologie :</h2>
+    <p><strong>Hemoglobine:</strong> {data[0]?.hermoglobine}</p>
+    <p><strong>Hematocrite:</strong> {data[0]?.hematocrite}</p>
+    <p><strong>Globule blanc:</strong> {data[0]?.globule_blanc}</p>
+    <p><strong>Globule rouge:</strong> {data[0]?.globule_rouge}</p>
+  </Box>
 
+  <Box>
+    <h2 style={{ color: "rgba(0, 0, 0, 0.322)" }}>FL(%) :</h2>
+    <p><strong>N:</strong> {data[0]?.n_n}</p>
+    <p><strong>E:</strong> {data[0]?.e_e}</p>
+    <p><strong>B:</strong> {data[0]?.b_b}</p>
+    <p><strong>TS:</strong> {data[0]?.t_s}</p>
+    <p><strong>Paquette sanguine:</strong> {data[0]?.plaquette_sanguines}</p>
+    <p><strong>L:</strong> {data[0]?.l_l}</p>
+    <p><strong>M:</strong> {data[0]?.m_m}</p>
+    <p><strong>Vitesse sedimentation:</strong> {data[0]?.vitesse_de_sedimentation}</p>
+    <p><strong>TC:</strong> {data[0]?.t_c}</p>
+    <p><strong>Test d'EMEIL:</strong> {data[0]?.test_emmel}</p>
+  </Box>
 
+  <Box>
+    <h2 style={{ color: "rgba(0, 0, 0, 0.322)" }}>Parasitologie/cytologie :</h2>
+    <p><strong>Goutte epaisse:</strong> {data[0]?.goute_epaisse}</p>
+    <p><strong>Goutte fraiche:</strong> {data[0]?.goute_fraiche}</p>
+    <p><strong>Salle directes:</strong> {data[0]?.salle_directe}</p>
+    <p><strong>Frottis vaginale a frais:</strong> {data[0]?.frottis_vaginale}</p>
+    <p><strong>LCR-Element:</strong> {data[0]?.lcr_element}</p>
+    <p><strong>TDR:</strong> {data[0]?.tdr}</p>
+    <p><strong>Salle-enrechies:</strong> {data[0]?.salle_enrechies}</p>
+    <p><strong>Frottis uretrale a frais:</strong> {data[0]?.frottis_urettrale}</p>
+    <p><strong>Sediment urinaire:</strong> {data[0]?.sediment_urinaire}</p>
+    <p><strong>FI:</strong> {data[0]?.f_i}</p>
+  </Box>
 
+  <Box>
+    <h2 style={{ color: "rgba(0, 0, 0, 0.322)" }}>Bacteriologie :</h2>
+    <p><strong>Fv-Gram:</strong> {data[0]?.fv_gram}</p>
+    <p><strong>FU-Gram:</strong> {data[0]?.fu_gram}</p>
+    <p><strong>LCR-Gram:</strong> {data[0]?.lcr_gram}</p>
+    <p><strong>Sediment urinaire Gram:</strong> {data[0]?.sediment_urinaire_gram}</p>
+    <p><strong>Spermatogram:</strong> {data[0]?.spermogramme}</p>
+  </Box>
 
+  <Box>
+    <h2 style={{ color: "rgba(0, 0, 0, 0.322)" }}>Biochimie :</h2>
+    <p><strong>Glycemie:</strong> {data[0]?.glycemie}</p>
+    <p><strong>Creatine sanguine:</strong> {data[0]?.creatine_sanguine}</p>
+    <p><strong>SGOT(AST):</strong> {data[0]?.sgot_ast}</p>
+    <p><strong>Bil to:</strong> {data[0]?.bil_tot}</p>
+    <p><strong>Bil Dir:</strong> {data[0]?.bil_dir}</p>
+    <p><strong>Phosphatase alcoline:</strong> {data[0]?.phosphatase_alcaline}</p>
+    <p><strong>Glucosirie:</strong> {data[0]?.glucosurie}</p>
+    <p><strong>Uree sanguine:</strong> {data[0]?.uree_sanguine}</p>
+    <p><strong>Creatine sanguine:</strong> {data[0]?.creatine_sanguine}</p>
+    <p><strong>SGPT(ALT):</strong> {data[0]?.sgpt_alt}</p>
+    <p><strong>Bil ind:</strong> {data[0]?.bil_ind}</p>
+    <p><strong>Phosphatase acide:</strong> {data[0]?.phosphatase_acide}</p>
+    <p><strong>Albuminurie:</strong> {data[0]?.albuminirie}</p>
+  </Box>
 
-            
-            <Box>
-           <h2  style={{color:"rgba(0, 0, 0, 0.322)"}}>Hermatologie :</h2>
-           <p><strong>Hemoglobine:</strong> lorem lorem</p>
-           <p><strong>Hematocrite:</strong> lorem</p>
-           <p><strong>Globule blanc:</strong> lorem</p>
-           <p><strong>Globule rouge:</strong> lorem</p>
-           </Box>
+  <Box>
+    <h2 style={{ color: "rgba(0, 0, 0, 0.322)" }}>Sero-immunologie :</h2>
+    <p><strong>Test WIDAL TO:</strong> {data[0]?.test_widal_to}</p>
+    <p><strong>Facteurs rhumatoide:</strong> {data[0]?.facteurs_rhumatoides}</p>
+    <p><strong>Hbs Ag :</strong> {data[0]?.hbs_age}</p>
+    <p><strong>Test VDRL ou RPR:</strong> {data[0]?.test_vdrl}</p>
+    <p><strong>Test grossesse:</strong> {data[0]?.test_grossesse}</p>
+    <p><strong>Hapatite virale B:</strong> {data[0]?.hapatite_viral_b}</p>
+    <p><strong>TH:</strong> {data[0]?.t_h}</p>
+    <p><strong>ALSO:</strong> {data[0]?.also}</p>
+    <p><strong>Hbs Age ALSO:</strong> {data[0]?.hbs_age_also}</p>
+    <p><strong>Test VIH:</strong> {data[0]?.test_vih}</p>
+    <p><strong>CRP:</strong> {data[0]?.crp}</p>
+    <p><strong>H.Pilori:</strong> {data[0]?.hpylorie}</p>
+    <p><strong>Date:</strong> {data[0]?.date}</p>
+    <p><strong>Autre:</strong> {data[0]?.autre}</p>
+  </Box>
+</Box>
 
-
-        <Box>
-           <h2 style={{color:"rgba(0, 0, 0, 0.322)"}}>FL(%) :</h2>
-           <p><strong>N:</strong> lorem</p>
-           <p><strong>E:</strong> lorem</p>
-           <p><strong>B:</strong> lorem</p>
-           <p><strong>TS:</strong> lorem</p>
-           <p><strong>Paquette sanguine:</strong> lorem</p>
-           <p><strong>L:</strong> lorem</p>
-           <p><strong>M:</strong> lorem</p>
-           <p><strong>Vitesse sedimentation:</strong> lorem</p>
-           <p><strong>TC:</strong> lorem</p>
-           <p><strong>Test d'EMEIL: lorem</strong> lorem</p>
-           </Box>
-           
-
-           <Box>
-           <h2 style={{color:"rgba(0, 0, 0, 0.322)"}}>Parasitologie/cytologie :</h2>
-           <p><strong>Goutte epaisse:</strong> lorem</p>
-           <p><strong>Goutte fraiche:</strong> lorem</p>
-           <p><strong>Salle directes:</strong> lorem</p>
-           <p><strong>Frottis vaginale a frais:</strong> lorem</p>
-           <p><strong>LCR-Element:</strong> lorem</p>
-           <p><strong>TDR:</strong> lorem</p>
-           <p><strong>Salle-enrechies:</strong> lorem</p>
-           <p><strong>Frottis uretrale a frais:</strong> lorem</p>
-           <p><strong>Sediment urinaire:</strong> lorem</p>
-           <p><strong>FI:</strong> lorem</p>
-           </Box>
-
-
-
-         <Box >
-          <h2 style={{color:"rgba(0, 0, 0, 0.322)"}}>Bacteriologie :</h2>
-           <p><strong>Fv-Gram:</strong> lorem</p>
-           <p><strong>FU-Gram:</strong> lorem</p>
-           <p><strong>LCR-Gram:</strong> lorem</p>
-           <p><strong>Sediment urinaire Gram:</strong> lorem</p>
-           <p><strong>Spermatogram:</strong> lorem</p>
-           </Box>
-
-<Box>
-           <h2 style={{color:"rgba(0, 0, 0, 0.322)"}}>Biochimie :</h2>
-           <p><strong>Glycemie:</strong> lorem</p>
-           <p><strong>Creatine sanguine:</strong> lorem</p>
-           <p><strong>SGOT(AST):</strong> lorem</p>
-           <p><strong>Bil to:</strong> lorem</p>
-           <p><strong>Bil Dir:</strong> lorem</p>
-           <p><strong>Phosphatase alcoline:</strong> lorem</p>
-           <p><strong>Glucosirie:</strong> lorem</p>
-           <p><strong>uree sanguine:</strong> lorem</p>
-           <p><strong>Creatine sanguine:</strong> lorem</p>
-           <p><strong>SGPT(ALT):</strong> lorem</p>
-           <p><strong>Bil Dir:</strong> lorem</p>
-           <p><strong>Bil ind:</strong> lorem</p>
-           <p><strong>Phosphatase acide:</strong> lorem</p>
-           <p><strong>Albuminurie:</strong> lorem</p>
-           </Box>
-
-
-
-<Box>
-           <h2 style={{color:"rgba(0, 0, 0, 0.322)"}}>Sero-immunologie :</h2>
-           <p><strong>Test WIDAL TO:</strong> lorem</p>
-           <p><strong>Facteurs rhumatoide:</strong> lorem</p>
-           <p><strong>Hbs Ag :</strong> lorem</p>
-           <p><strong>Test VDRL ou RPR:</strong> lorem</p>
-           <p><strong>Test grossesse:</strong> lorem</p>
-           <p><strong>Hapatite virale B:</strong> lorem</p>
-           <p><strong>TH:</strong> lorem</p>
-           <p><strong>ALSO:</strong> lorem</p>
-           <p><strong>Hbs Age ALSO:</strong> lorem</p>
-           <p><strong>Test VIH:</strong> lorem</p>
-           <p><strong>CRP:</strong> lorem</p>
-           <p><strong>H.Pilori:</strong> lorem</p>
-           <p><strong>Date:</strong> lorem</p>
-           <p><strong>Autre:</strong> lorem</p>
-           </Box>
-
-        </Box>
+ 
         <Box sx={{
         display:"flex",
         justifyContent:"end",
@@ -296,7 +313,7 @@ const reception=()=>{
         marginTop:"10px"
      }}>
 
-      <Button variant='outlined' >Modifier</Button>
+      {/* <Button variant='outlined' >Modifier</Button> */}
       
        
        

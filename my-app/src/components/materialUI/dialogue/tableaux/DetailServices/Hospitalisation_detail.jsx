@@ -22,7 +22,10 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Dossier from '../../../Dossier';
-
+import  {toast} from 'react-hot-toast';
+import axios from 'axios';
+import { useLocation } from 'react-router-dom';
+import { useState,useEffect,useContext } from 'react';
 
 
 
@@ -53,8 +56,9 @@ function Hospitalisation_detail() {
   
 
  const navigate = useNavigate()
+
  const handledossier=()=>{
-   navigate("/hospitalisation")
+   navigate("/hospitalisation",{ state: { detailData: data[0]?.id } })
  }
  const fiche_de_nursing=(event, value) =>{
   navigate(`/hospitalisationdetail${value}`)
@@ -65,6 +69,67 @@ const reception=()=>{
 }
 
  
+
+
+
+
+
+const BASE_URL = import.meta.env.VITE_API_URL;
+// Access the data from location.state
+const location = useLocation();
+const { detailData } = location.state || {};  // Handle undefined state
+const [data,setDatas]=useState([]);
+
+
+
+
+const get_dossiers = () => {
+axios.get(`${BASE_URL}/get_tout_les_dossiers_id/${detailData}`)
+  .then(({ data }) => {
+    setDatas(data.data || []); 
+  })
+  .catch((err) => {
+    console.log(err);
+    toast.error("Il y a une erreur");
+  });
+};
+
+useEffect(()=>{
+get_dossiers()
+
+},[])
+
+
+
+
+const [nursing,setNursing]=useState([])
+
+
+const get_fiche_de_nursing = () => {
+  axios.get(`${BASE_URL}/get_fiche_de_nursing/${detailData}`)
+    .then(({ data }) => {
+      setNursing(data.data || []); 
+    })
+    .catch((err) => {
+      console.log(err);
+      toast.error("Il y a une erreur");
+    });
+};
+
+useEffect(()=>{
+  get_fiche_de_nursing()
+
+},[])
+
+
+
+
+console.log(nursing)
+
+
+
+
+
   return (
     <>
       <section  id='all_section'>
@@ -147,14 +212,14 @@ const reception=()=>{
             background:"white",
             
           }}>
-            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>kasongo</span></h3>
-            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>22 ans</span></h3>
-            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>masculin</span></h3>
-            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
-            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
-            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
-            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>Goma/Q.ndosho/AV.ngungu</span></h3>
-            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>078374848</span></h3>
+            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.nom_patient}</span></h3>
+            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.age}</span></h3>
+            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.sexe}</span></h3>
+            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.poids}</span></h3>
+            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.to_to}</span></h3>
+            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.ta_ta}</span></h3>
+            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.adresse}</span></h3>
+            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.telephone}</span></h3>
           </Box>
      
 
