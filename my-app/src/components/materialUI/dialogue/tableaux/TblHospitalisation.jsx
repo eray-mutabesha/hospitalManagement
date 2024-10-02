@@ -446,7 +446,7 @@ get_dossiers()
 }}>
  <ChoixTransferClt/>
  <Button variant='outlined' color="success" onClick={detail}>
-  details
+  voire la fiche
  </Button>
 </Box>
 </form>

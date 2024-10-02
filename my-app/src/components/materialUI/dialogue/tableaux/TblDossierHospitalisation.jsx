@@ -64,7 +64,7 @@ useEffect(()=>{
 
  // delete  route
  const deleteEntree = (model) => {
-  axios.delete(`${BASE_URL}/delete_dossier_labo/${model.id}`)
+  axios.delete(`${BASE_URL}/delete_hospitalisation/${model.id}`)
     .then(({ data }) => {
       setDatas(data.data || []); // Assurer que data.data est un tableau
       get_laboratoire_dossier()

@@ -264,6 +264,7 @@ console.log(nursing)
                backgroundPosition:"center",
                color:"white"}}>
           <TableRow >
+            <TableCell sx={{ width: "100px",color:"white"}}>Date et heure</TableCell>
             <TableCell sx={{ width: "100px",color:"white"}}>Diagnostic de prosomption</TableCell>
             <TableCell sx={{ width: "100px",color:"white"}}>Operation prevue</TableCell>
             <TableCell sx={{ width: "100px",color:"white"}}>Pouls</TableCell>
@@ -272,25 +273,24 @@ console.log(nursing)
             <TableCell sx={{ width: "100px",color:"white"}}>Injectable</TableCell>
             <TableCell sx={{ width: "100px",color:"white"}}>Perfusion</TableCell>
             <TableCell sx={{ width: "100px",color:"white"}}>Autre</TableCell>
+            
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {nursing.map((nur,index) => (
             <TableRow
-              key={row.name}
+              key={index}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-             
-              <TableCell > lorem lorem lorem</TableCell>
-              <TableCell > lorem lorem lorem</TableCell>
-              <TableCell > lorem lorem lorem</TableCell>
-              <TableCell > lorem lorem lorem</TableCell>
-              <TableCell > lorem lorem lorem</TableCell>
-              <TableCell > lorem lorem lorem</TableCell>
-              <TableCell > lorem lorem lorem</TableCell>
-              <TableCell > lorem lorem lorem</TableCell>
-
-              
+              <TableCell >{nur?.updated_at}</TableCell>
+              <TableCell >{nur?.diagnostic_de_prosomption}</TableCell>
+              <TableCell >{nur?.operation_prevue}</TableCell>
+              <TableCell > {nur?.pouls}</TableCell>
+              <TableCell >{nur?.respiration}</TableCell>
+              <TableCell >{nur?.medicament_per_os}</TableCell>
+              <TableCell >{nur?.injectable}</TableCell>
+              <TableCell >{nur?.Perfusion}</TableCell>
+              <TableCell >{nur?.Autre}</TableCell>
             </TableRow>
           ))}
         </TableBody>

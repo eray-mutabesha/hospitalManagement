@@ -57,7 +57,44 @@ useEffect(()=>{
   get_dossiers()
 },[])
 
-console.log(data)
+
+
+
+
+// 33333333333333333333333333333333333333
+const [hospi,sethospi]=useState([])
+
+
+const get_hosp = () => {
+  axios.get(`${BASE_URL}/get_hospitalisation`)
+    .then(({ data }) => {
+      sethospi(data.data || []); 
+    })
+    .catch((err) => {
+      console.log(err);
+      toast.error("Il y a une erreur");
+    });
+};
+
+useEffect(()=>{
+  get_hosp()
+
+},[])
+
+
+
+// if (hospi.length > 0 && detailData) {
+//   const existsInHospi = hospi.some(h => h.id === detailData);
+//   if (existsInHospi) {
+//     console.log("detailData exists in hospi!");
+//   } else {
+//     console.log("detailData does not exist in hospi.");
+//   }
+// }
+
+const existsInHospi = hospi.some(h => h.id === detailData);
+
+
 
 
 
@@ -281,17 +318,21 @@ const ambulatoiredetail= ()=>{
 
 
 
-
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell component="th" scope="row">
                 002
               </TableCell>
               <TableCell >Hospitalisation</TableCell>
-              <TableCell sx={{color:"red"}}>En attente</TableCell>
+              { existsInHospi? <TableCell sx={{color:"blue"}}>Patient hospitaliser...</TableCell> :
+              <TableCell sx={{color:"green"}}>Patient non interner</TableCell>}
               <TableCell align='right'> <Button onClick={hospitalisation} variant="outlined"  color="success">
                Details
              </Button></TableCell>
             </TableRow>
+
+
+           
+       
          
 
 
