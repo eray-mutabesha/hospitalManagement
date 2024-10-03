@@ -81,18 +81,48 @@ useEffect(()=>{
 
 },[])
 
-
-
-// if (hospi.length > 0 && detailData) {
-//   const existsInHospi = hospi.some(h => h.id === detailData);
-//   if (existsInHospi) {
-//     console.log("detailData exists in hospi!");
-//   } else {
-//     console.log("detailData does not exist in hospi.");
-//   }
-// }
+// verification de 
 
 const existsInHospi = hospi.some(h => h.id === detailData);
+
+
+
+
+
+
+
+
+
+const [ambu,setambu]=useState([])
+
+
+const get_ambu = () => {
+  axios.get(`${BASE_URL}/get_ambulatoires`)
+    .then(({ data }) => {
+      setambu(data.data || []); 
+    })
+    .catch((err) => {
+      console.log(err);
+      toast.error("Il y a une erreur");
+    });
+};
+
+useEffect(()=>{
+  get_ambu()
+
+},[])
+
+// verification de 
+
+const existsInAmbu = ambu.some(h => h.id === detailData);
+
+
+
+
+
+
+
+
 
 
 
@@ -270,7 +300,7 @@ const ambulatoiredetail= ()=>{
 
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell component="th" scope="row">
-                002
+                1
               </TableCell>
               <TableCell >Reception</TableCell>
               {data[0]?.diagnostic? <TableCell sx={{color:"green"}}>Terminer</TableCell> :
@@ -291,7 +321,7 @@ const ambulatoiredetail= ()=>{
 
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell component="th" scope="row">
-                002
+                2
               </TableCell>
               <TableCell >Consultation</TableCell>
               {data[0]  && data[0]?.observation ? <TableCell sx={{color:"green"}}>Terminer</TableCell> :
@@ -304,7 +334,7 @@ const ambulatoiredetail= ()=>{
 
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell component="th" scope="row">
-                002
+                3
               </TableCell>
               <TableCell >Laboratoire</TableCell>
               {data[0]?.hermoglobine? <TableCell sx={{color:"green"}}>Terminer</TableCell> :
@@ -320,7 +350,7 @@ const ambulatoiredetail= ()=>{
 
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell component="th" scope="row">
-                002
+                4
               </TableCell>
               <TableCell >Hospitalisation</TableCell>
               { existsInHospi? <TableCell sx={{color:"blue"}}>Patient hospitaliser...</TableCell> :
@@ -332,22 +362,20 @@ const ambulatoiredetail= ()=>{
 
 
            
-       
-         
-
-
-
             <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
               <TableCell component="th" scope="row">
-                002
+                5
               </TableCell>
               <TableCell >Ambulatoire</TableCell>
-              <TableCell sx={{color:"red"}}>En attente</TableCell>
-              <TableCell align='right'> 
-                <Button onClick={ambulatoiredetail} variant="outlined"  color="success" >
+              { existsInAmbu? <TableCell sx={{color:"blue"}}>Patient ambulant...</TableCell> :
+              <TableCell sx={{color:"green"}}>Non ambulant</TableCell>}
+              <TableCell align='right'> <Button onClick={ambulatoiredetail} variant="outlined"  color="success">
                Details
              </Button></TableCell>
             </TableRow>
+         
+
+
         </TableBody>
 
 

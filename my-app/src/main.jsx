@@ -34,6 +34,7 @@ import UpdateProfil from './components/UpdateProfil.jsx';
 import TblMedicamentAutre from './components/materialUI/dialogue/tableaux/TblMedicamentAutre.jsx';
 import { DossierProvider } from './DossierContext'; 
 import Tout_les_dossiers from './components/materialUI/dialogue/tableaux/Tout_les_dossiers.jsx';
+import TblDossierAmbulatoire from './components/materialUI/dialogue/tableaux/TblDossierAmbulatoire.jsx';
 
 
 
@@ -157,6 +158,10 @@ element:<Tout_les_dossiers/>
    {
     path:"/acceuilHospitalisation",
     element:<TblDossierHospitalisation/>
+   },
+   {
+    path:"/acceuilAmbulatoire",
+    element:<TblDossierAmbulatoire/>
    },
    {
     path:"/updateprofil",

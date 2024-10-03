@@ -205,6 +205,89 @@ const LaboratoireData = () => {
 }
 
 
+const Hospitalisation = () => {
+  axios.post(`${BASE_URL}/post_hospoitalisation`,{
+    id:data[0]?.id,
+    nom_patient:data[0]?.nom_patient,
+    date:data[0]?.date_entre,
+    poids:data[0]?.poids,
+    to_to:data[0]?.to_to,
+    ta_ta:data[0]?.ta_ta,
+    adresse:data[0]?.adresse,
+    age:data[0]?.age,
+    sexe:data[0]?.sexe,
+    telephone:data[0]?.telephone,
+    diagnostic:data[0]?.diagnostic,
+    traitement:data[0]?.traitement,
+    observation:data[0]?.observation
+    
+   })
+          
+   .then(({ data }) => {
+     if (data.status == 500) {
+       toast.error("Il y a une erreur");
+     } else {
+     
+     toast.success("PATIENT ENVOYER AU LABOS")
+
+   }
+   })
+    .catch((err) => {
+      console.log(err);
+      toast.error("Il y a une erreur");
+    });
+
+
+}
+
+
+
+
+
+
+
+
+
+const Ambulatoire = () => {
+  axios.post(`${BASE_URL}/post_ambulatoires`,{
+    id:data[0]?.id,
+    nom_patient:data[0]?.nom_patient,
+    date:data[0]?.date_entre,
+    poids:data[0]?.poids,
+    to_to:data[0]?.to_to,
+    ta_ta:data[0]?.ta_ta,
+    adresse:data[0]?.adresse,
+    age:data[0]?.age,
+    sexe:data[0]?.sexe,
+    telephone:data[0]?.telephone,
+    diagnostic:data[0]?.diagnostic,
+    traitement:data[0]?.traitement,
+    observation:data[0]?.observation
+    
+   })
+          
+   .then(({ data }) => {
+     if (data.status == 500) {
+       toast.error("Il y a une erreur");
+     } else {
+     
+     toast.success("PATIENT ENVOYER AUX AMBULANTS")
+
+   }
+   })
+    .catch((err) => {
+      console.log(err);
+      toast.error("Il y a une erreur");
+    });
+
+
+}
+
+
+
+
+
+
 
 
 
@@ -219,8 +302,8 @@ const LaboratoireData = () => {
             <MenuItem onClick={()=>Reception(dat.id)  } ><Button endIcon={<SendIcon />}>Reception</Button></MenuItem>
             <MenuItem onClick={Consultation}><Button endIcon={<SendIcon />}>Consultation</Button></MenuItem>
             <MenuItem onClick={LaboratoireData}><Button endIcon={<SendIcon />}>Laboratoire</Button></MenuItem>
-            <MenuItem onClick={handleclick}><Button endIcon={<SendIcon />}>Hospitalisation</Button></MenuItem>
-            <MenuItem onClick={handledeconnexion}><Button endIcon={<SendIcon />}>Embilatoire</Button></MenuItem>
+            <MenuItem onClick={Hospitalisation}><Button endIcon={<SendIcon />}>Hospitalisation</Button></MenuItem>
+            <MenuItem onClick={Ambulatoire}><Button endIcon={<SendIcon />}>Ambilatoire</Button></MenuItem>
             <MenuItem onClick={handleclick}><Button endIcon={<SendIcon />}>Urgence</Button></MenuItem>
           </Menu>
         </React.Fragment>

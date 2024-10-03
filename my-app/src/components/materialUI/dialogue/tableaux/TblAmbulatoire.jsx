@@ -24,26 +24,92 @@ import Laboratoire from '../../Laboratoire.jsx'
 import OrganisationClinique from '../../OrganisationClinique.jsx'
 import Factutation from '../../Facturation.jsx'
 import Dossier from '../../Dossier.jsx'
+import { useLocation } from 'react-router-dom'
+import { useState,useEffect,useContext } from 'react';
+import  {toast} from 'react-hot-toast';
+import axios from 'axios';
 
 
 
 
-
-
-function createData(name, calories, fat, carbs, protein) {
-return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData(1,'Katembo mwami john', '12/03/2024','En attente',),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
 
 function TblAmbulatoire() {
+
+  const BASE_URL = import.meta.env.VITE_API_URL;
+ // Access the data from location.state
+ const location = useLocation();
+ const { detailData } = location.state || {};  // Handle undefined state
+ const [data,setDatas]=useState([]);
+
+
+
+ 
+ const get_dossiers = () => {
+  axios.get(`${BASE_URL}/get_tout_les_dossiers_id/${detailData}`)
+    .then(({ data }) => {
+      setDatas(data.data || []); 
+    })
+    .catch((err) => {
+      console.log(err);
+      toast.error("Il y a une erreur");
+    });
+};
+
+useEffect(()=>{
+get_dossiers()
+
+},[])
+
+
+
+
+
+const [formData, setFormData] = useState({
+   
+observation:"",
+traitement:""
+});
+
+
+
+const onsubmit = () => {
+
+  axios.post(`${BASE_URL}/post_fichede_ambulatoire`,{
+    id_patient:detailData,
+    observation:formData.observation,
+    traitement:formData.traitement
+ 
+    
+  }
+   
+  )      
+  .then(({ data }) => {
+    setFormData(data.data || []); 
+    toast.success("enregistrement reussi")
+    setFormData({
+     observation:"",
+     traitement:""
+    })
+  })
+  .catch((err) => {
+    console.log(err);
+    toast.error("Il y a une erreur");
+  });
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
     const { register, handleSubmit,formState:{errors} } = useForm();
   const navigate = useNavigate()
   const handledossier=()=>{
@@ -51,7 +117,7 @@ function TblAmbulatoire() {
   }
 
   const detail =()=>{
-    navigate("/ambulatoiredetail")
+    navigate("/ambulatoiredetail",{ state: { detailData: data[0]?.id } })
   }
   return (
     <>
@@ -117,7 +183,7 @@ function TblAmbulatoire() {
       
       <Box>
       
-        <form action="" style={{
+        <form  onSubmit={handleSubmit(onsubmit)}  style={{
             background:"white",
             padding:"20px",
             borderRadius:"10px",
@@ -149,14 +215,14 @@ function TblAmbulatoire() {
             background:"white",
             padding:"0px"
           }}>
-            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>kasongo</span></h3>
-            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>22 ans</span></h3>
-            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>masculin</span></h3>
-            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
-            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
-            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>67 kg</span></h3>
-            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>Goma/Q.ndosho/AV.ngungu</span></h3>
-            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>078374848</span></h3>
+            <h3>Nom: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.nom_patient}</span></h3>
+            <h3>Age: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.age}</span></h3>
+            <h3>Sexe: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.sexe}</span></h3>
+            <h3>Poids: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.poids}</span></h3>
+            <h3>TO: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.to_to}</span></h3>
+            <h3>TA: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.ta_ta}</span></h3>
+            <h3>Adresse: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.adresse}</span></h3>
+            <h3>Telephone: <span style={{color:"rgba(0, 0, 0, 0.322)"}}>{data[0]?.telephone}</span></h3>
           </Box>
      
 
@@ -196,7 +262,9 @@ function TblAmbulatoire() {
                rows={3}
                
                variant="standard"
-        />
+               {...register("traitement", { required: "Veuillez entrer le point" })}
+               value={formData.traitement}
+               onChange={(e) => setFormData({ ...formData, traitement: e.target.value })}/>
 
 <Typography variant='h6'>Observation</Typography>
      <TextField
@@ -207,7 +275,11 @@ function TblAmbulatoire() {
                multiline
                rows={3}
                variant="standard"
-        />
+               {...register("observation", { required: "Veuillez entrer le point" })}
+               value={formData.observation}
+               onChange={(e) => setFormData({ ...formData, observation: e.target.value })}/>
+
+
      <Box sx={{
         display:"flex",
         justifyContent:"end",
@@ -215,7 +287,7 @@ function TblAmbulatoire() {
         marginTop:"10px"
      }}>
 
-      <Button variant='outlined' onClick={detail}>DETAILS</Button>
+      <Button variant='outlined' onClick={detail}>VOIRE LA FICHE</Button>
        <ChoixTransferClt/>
        
        

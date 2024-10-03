@@ -16,7 +16,7 @@ const navigate=useNavigate()
   }
  
    const ambulatoire=()=>{
-    navigate("/ambulatoire")
+    navigate("/acceuilAmbulatoire")
    }
    
   return (
