@@ -35,7 +35,7 @@ import TblMedicamentAutre from './components/materialUI/dialogue/tableaux/TblMed
 import { DossierProvider } from './DossierContext'; 
 import Tout_les_dossiers from './components/materialUI/dialogue/tableaux/Tout_les_dossiers.jsx';
 import TblDossierAmbulatoire from './components/materialUI/dialogue/tableaux/TblDossierAmbulatoire.jsx';
-
+import RendezVous from './components/materialUI/dialogue/tableaux/RendezVous.jsx';
 
 
 
@@ -166,6 +166,10 @@ element:<Tout_les_dossiers/>
    {
     path:"/updateprofil",
     element:<UpdateProfil/>
+   },
+   {
+    path:"/rendezvous",
+    element:<RendezVous/>
    }
 ])
 

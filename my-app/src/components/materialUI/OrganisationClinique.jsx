@@ -30,7 +30,7 @@ const navigate=useNavigate()
           <Menu {...bindMenu(popupState)} >
             <MenuItem onClick={hospitalisation} >Hospitalisation</MenuItem>
             <MenuItem onClick={ambulatoire}>Ambulatoire</MenuItem>
-            <MenuItem onClick={hospitalisation}>Urgences</MenuItem>
+            <MenuItem onClick={hospitalisation}>Rendez-vous</MenuItem>
             
           </Menu>
         </React.Fragment>

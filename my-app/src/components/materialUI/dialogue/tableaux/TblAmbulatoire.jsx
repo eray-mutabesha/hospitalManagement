@@ -28,7 +28,7 @@ import { useLocation } from 'react-router-dom'
 import { useState,useEffect,useContext } from 'react';
 import  {toast} from 'react-hot-toast';
 import axios from 'axios';
-
+import Icon from '../../Icon.jsx'
 
 
 
@@ -42,6 +42,17 @@ function TblAmbulatoire() {
  const { detailData } = location.state || {};  // Handle undefined state
  const [data,setDatas]=useState([]);
 
+  // profil connected
+  const [profil,setprofil]= useState([])
+  const getUserData = () => {
+   const INFO_Utilisateur_from_localStorage = JSON.parse(localStorage.getItem('Utilisateur'));
+   setprofil(INFO_Utilisateur_from_localStorage);
+ }
+ 
+ useEffect(()=>{
+   getUserData()
+   
+   },[])
 
 
  
@@ -113,7 +124,7 @@ const onsubmit = () => {
     const { register, handleSubmit,formState:{errors} } = useForm();
   const navigate = useNavigate()
   const handledossier=()=>{
-    navigate("/detaildossier")
+    navigate("/detaildossier",{ state: { detailData: data[0]?.id } })
   }
 
   const detail =()=>{
@@ -152,8 +163,8 @@ const onsubmit = () => {
                <nav>
                <img src='public/Dr. MUAMBA.jpg' className='admin_photo' alt='administrateur'/>
                </nav> 
-               <nav> <p> Dr jonathan kasongo </p></nav>
-               <nav><FontAwesomeIcon icon={faCaretDown} /></nav>
+               <nav> <p> {profil.nom}</p></nav>
+               <nav><Icon /></nav>
               </div>
            </div>
 

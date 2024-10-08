@@ -16,7 +16,7 @@ import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import { useState,useEffect,useContext } from 'react';
 import Dossier from '../../../Dossier';
-
+import Icon from '../../../Icon.jsx';
 
 
 
@@ -32,8 +32,17 @@ function Consultation_detail() {
   const { detailData } = location.state || {};  // Handle undefined state
   const [data,setDatas]=useState([]);
 
-
-
+// profil connected
+  const [profil,setprofil]= useState([])
+  const getUserData = () => {
+   const INFO_Utilisateur_from_localStorage = JSON.parse(localStorage.getItem('Utilisateur'));
+   setprofil(INFO_Utilisateur_from_localStorage);
+ }
+ 
+ useEffect(()=>{
+   getUserData()
+   
+   },[])
 
 
  const navigate = useNavigate()
@@ -93,8 +102,8 @@ get_dossiers()
                <nav>
                <img src='public/Dr. MUAMBA.jpg' className='admin_photo' alt='administrateur'/>
                </nav> 
-               <nav> <p> Dr jonathan kasongo </p></nav>
-               <nav><FontAwesomeIcon icon={faCaretDown} /></nav>
+               <nav> <p> {profil.nom}</p></nav>
+               <nav><Icon/></nav>
               </div>
            </div>
            

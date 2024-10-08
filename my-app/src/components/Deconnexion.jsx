@@ -14,10 +14,7 @@ function Deconnexion() {
         navigate("/")
     }
   return (
-    <div className="all" sx={{
-        
-        
-    }}>
+    <div className="all" style={{background: "rgb(223, 216, 216)"}}>
     <Box sx={{
        width:"400px",
     }}>

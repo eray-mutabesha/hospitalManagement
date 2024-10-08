@@ -2,7 +2,6 @@
 import './App.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell,faCaretDown,faCheck,faXmark,faMagnifyingGlass,faListCheck,faUserDoctor,faStethoscope,faCommentsDollar,faChevronDown} from '@fortawesome/free-solid-svg-icons'
-
 import Parametre from './components/materialUI/Parametre.jsx'
 import Dashboard from './components/materialUI/Dashboard.jsx'
 import { useNavigate } from 'react-router-dom'
@@ -24,9 +23,12 @@ import Reception from './components/materialUI/Reception.jsx'
 import Consultation from './components/materialUI/Consultation.jsx'
 import Laboratoire from './components/materialUI/Laboratoire.jsx'
 import OrganisationClinique from './components/materialUI/OrganisationClinique.jsx'
-import Factutation from './components/materialUI/Facturation.jsx'
-
-
+// rendez-vous................................................
+import Factutation from './components/materialUI/Facturation.jsx'  
+// ................................................................
+import Icon from './components/materialUI/Icon.jsx'
+import  {toast} from 'react-hot-toast';
+import axios from 'axios';
 
 
 
@@ -36,6 +38,7 @@ const navigate= useNavigate()
  const handleConsultation=()=>{
   navigate("/consultation")
  }
+ const [rdv,setRDV]=useState([])
 
 const [datas,setdatas]= useState([])
  const getUserData = () => {
@@ -43,11 +46,82 @@ const [datas,setdatas]= useState([])
   setdatas(INFO_Utilisateur_from_localStorage);
 }
 
+
+
+  const BASE_URL = import.meta.env.VITE_API_URL;
+
+
+ // get dossier route
+const get_all_rdv = () => {
+  axios.get(`${BASE_URL}/get_all_rdv`)
+    .then(({ data }) => {
+      setRDV(data.data || []); 
+    })
+    .catch((err) => {
+      console.log(err);
+      toast.error("Il y a une erreur");
+    });
+};
+
+const deleteRdv= (model) => {
+  axios.delete(`${BASE_URL}/delete_get_all_rdv/${model.id}`)
+    .then(({ data }) => {
+      setRDV(data.data || []);
+      toast.error("RDV annuler") 
+      get_all_rdv()
+      
+    })
+    .catch((err) => {
+      console.log(err);
+      toast.error("Il y a une erreur");
+    });
+};
+
+
+const acceptedRdv=(model)=>{
+
+  axios.post(`${BASE_URL}/post_rdv_accepted`,{
+    id:model.id,
+    nom_patient:model.nom_patient,
+    date:model.date_entre,
+    adresse:model.adresse,
+    age:model.age,
+    sexe:model.sexe,
+    telephone:model.telephone
+  })
+          
+  .then(({ data }) => {
+    if (data.status == 500) {
+      toast.error("Il y a une erreur");
+    } else {
+     
+    toast.success("RDV accepter");
+    axios.delete(`${BASE_URL}/delete_get_all_rdv/${model.id}`)
+    .then(({ data }) => {
+      setRDV(data.data || []);
+      get_all_rdv()
+      
+    })
+    .catch((err) => {
+      console.log(err);
+      toast.error("Il y a une erreur");
+    });
+  }
+  })
+   .catch((err) => {
+     console.log(err);
+     toast.error("Il y a une erreur");
+   });
+}
+
+
+
 useEffect(()=>{
-  getUserData()
+  getUserData(),
+  get_all_rdv()
   },[])
  
- 
+ console.log(rdv)
   return (
     <>
       <section id='all_section'>
@@ -83,7 +157,7 @@ useEffect(()=>{
                <img src='public/Dr. MUAMBA.jpg' className='admin_photo' alt='administrateur'/>
                </nav> 
                <nav> <p>{datas.nom}</p></nav>
-               <nav><FontAwesomeIcon icon={faCaretDown} /></nav>
+               <nav><Icon/></nav>
               </div>
            </div>
            <div className='statistic'>
@@ -180,7 +254,6 @@ useEffect(()=>{
                 }}
                 
                 />
-
                
               </div>
               <div className='all_doctor_div'>
@@ -225,6 +298,27 @@ useEffect(()=>{
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
        <Box  sx={{
         border:"1px solid rgb(223, 221, 221)",
         borderRadius:"10px",
@@ -237,211 +331,56 @@ useEffect(()=>{
            overflowY:"scroll"
            }} component={Paper}>
             <Typography sx={{margin:"20px"}} variant='h6'>Demande d'un rendez-vous </Typography>
+
+
+   
       <Table  aria-label="caption table">
-        
-        <TableHead>
-          <TableRow>
-            <TableCell>Kakule kitsha jean </TableCell>
-            <TableCell align="right">12/07/2024</TableCell>
-            <TableCell align="right">12/07/2024</TableCell>
-            <TableCell align="right" >
-              <Box sx={{
-                display:"flex",
-                justifyContent:"flex-end",
-                gap:"10px"
-              }}>
-              <Box sx={{
-                border:"2px solid green",
-                width:"20px",
-                height:"20px",
-                borderRadius:"50%",
-                display:"flex",
-                alignItems:"center",
-                justifyContent:"center",
-                color:"green"
-                
-              }}>
-                <FontAwesomeIcon icon={faCheck} style={{fontSize:"13px"}}/>
-              </Box>
-              <Box sx={{
-                border:"2px solid red",
-                width:"20px",
-                height:"20px",
-                borderRadius:"50%",
-                display:"flex",
-                alignItems:"center",
-                justifyContent:"center",
-                color:"red"
-              }}>
-                <FontAwesomeIcon icon={faXmark} style={{fontSize:"13px"}}/>
-              </Box>
-              </Box>
-              </TableCell>
-          </TableRow>
-          
+      
+           
+            {rdv.map((dat,index) => (
+              <TableHead key={index}>
+              <TableRow >
+                <TableCell>{dat.nom_patient}</TableCell>
+                <TableCell align="right">{dat.updated_at}</TableCell>
+                <TableCell align="right">{dat.date_entre}</TableCell>
+                <TableCell align="right" >
+                  <Box sx={{
+                    display:"flex",
+                    justifyContent:"flex-end",
+                    gap:"10px"
+                  }}>
+                  <Box sx={{
+                    border:"2px solid green",
+                    width:"20px",
+                    height:"20px",
+                    borderRadius:"50%",
+                    display:"flex",
+                    alignItems:"center",
+                    justifyContent:"center",
+                    color:"green"
+                    
+                  }}>
+                    <FontAwesomeIcon icon={faCheck} style={{fontSize:"13px"}}   onClick={()=>acceptedRdv(dat)}/>
+                  </Box>
+                  <Box sx={{
+                    border:"2px solid red",
+                    width:"20px",
+                    height:"20px",
+                    borderRadius:"50%",
+                    display:"flex",
+                    alignItems:"center",
+                    justifyContent:"center",
+                    color:"red"
+                  }}>
+                    <FontAwesomeIcon icon={faXmark} style={{fontSize:"13px"}}   onClick={()=>deleteRdv(dat)}/>
+                  </Box>
+                  </Box>
+                  </TableCell>
+              </TableRow>
+            </TableHead>
+          ))}
 
 
-          <TableRow>
-            <TableCell>Kakule kitsha jean </TableCell>
-            <TableCell align="right">12/07/2024</TableCell>
-            <TableCell align="right">12/07/2024</TableCell>
-            <TableCell align="right" >
-              <Box sx={{
-                display:"flex",
-                justifyContent:"flex-end",
-                gap:"10px"
-              }}>
-              <Box sx={{
-                border:"2px solid green",
-                width:"20px",
-                height:"20px",
-                borderRadius:"50%",
-                display:"flex",
-                alignItems:"center",
-                justifyContent:"center",
-                color:"green"
-                
-              }}>
-                <FontAwesomeIcon icon={faCheck} style={{fontSize:"13px"}}/>
-              </Box>
-              <Box sx={{
-                border:"2px solid red",
-                width:"20px",
-                height:"20px",
-                borderRadius:"50%",
-                display:"flex",
-                alignItems:"center",
-                justifyContent:"center",
-                color:"red"
-              }}>
-                <FontAwesomeIcon icon={faXmark} style={{fontSize:"13px"}}/>
-              </Box>
-              </Box>
-              </TableCell>
-          </TableRow>
-
-
-
-        <TableRow>
-            <TableCell>Kakule kitsha jean </TableCell>
-            <TableCell align="right">12/07/2024</TableCell>
-            <TableCell align="right">12/07/2024</TableCell>
-            <TableCell align="right" >
-              <Box sx={{
-                display:"flex",
-                justifyContent:"flex-end",
-                gap:"10px"
-              }}>
-              <Box sx={{
-                border:"2px solid green",
-                width:"20px",
-                height:"20px",
-                borderRadius:"50%",
-                display:"flex",
-                alignItems:"center",
-                justifyContent:"center",
-                color:"green"
-                
-              }}>
-                <FontAwesomeIcon icon={faCheck} style={{fontSize:"13px"}}/>
-              </Box>
-              <Box sx={{
-                border:"2px solid red",
-                width:"20px",
-                height:"20px",
-                borderRadius:"50%",
-                display:"flex",
-                alignItems:"center",
-                justifyContent:"center",
-                color:"red"
-              }}>
-                <FontAwesomeIcon icon={faXmark} style={{fontSize:"13px"}}/>
-              </Box>
-              </Box>
-              </TableCell>
-          </TableRow>
-          
-
-          <TableRow>
-            <TableCell>Kakule kitsha jean </TableCell>
-            <TableCell align="right">12/07/2024</TableCell>
-            <TableCell align="right">12/07/2024</TableCell>
-            <TableCell align="right" >
-              <Box sx={{
-                display:"flex",
-                justifyContent:"flex-end",
-                gap:"10px"
-              }}>
-              <Box sx={{
-                border:"2px solid green",
-                width:"20px",
-                height:"20px",
-                borderRadius:"50%",
-                display:"flex",
-                alignItems:"center",
-                justifyContent:"center",
-                color:"green"
-                
-              }}>
-                <FontAwesomeIcon icon={faCheck} style={{fontSize:"13px"}}/>
-              </Box>
-              <Box sx={{
-                border:"2px solid red",
-                width:"20px",
-                height:"20px",
-                borderRadius:"50%",
-                display:"flex",
-                alignItems:"center",
-                justifyContent:"center",
-                color:"red"
-              }}>
-                <FontAwesomeIcon icon={faXmark} style={{fontSize:"13px"}}/>
-              </Box>
-              </Box>
-              </TableCell>
-          </TableRow>
-          
-
-          <TableRow>
-            <TableCell>Kakule kitsha jean </TableCell>
-            <TableCell align="right">12/07/2024</TableCell>
-            <TableCell align="right">12/07/2024</TableCell>
-            <TableCell align="right" >
-              <Box sx={{
-                display:"flex",
-                justifyContent:"flex-end",
-                gap:"10px"
-              }}>
-              <Box sx={{
-                border:"2px solid green",
-                width:"20px",
-                height:"20px",
-                borderRadius:"50%",
-                display:"flex",
-                alignItems:"center",
-                justifyContent:"center",
-                color:"green"
-                
-              }}>
-                <FontAwesomeIcon icon={faCheck} style={{fontSize:"13px"}}/>
-              </Box>
-              <Box sx={{
-                border:"2px solid red",
-                width:"20px",
-                height:"20px",
-                borderRadius:"50%",
-                display:"flex",
-                alignItems:"center",
-                justifyContent:"center",
-                color:"red"
-              }}>
-                <FontAwesomeIcon icon={faXmark} style={{fontSize:"13px"}}/>
-              </Box>
-              </Box>
-              </TableCell>
-          </TableRow>
-        </TableHead>
-       
       </Table>
     </TableContainer>
     </Box>

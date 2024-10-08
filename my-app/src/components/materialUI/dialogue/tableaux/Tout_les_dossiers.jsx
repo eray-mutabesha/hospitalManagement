@@ -6,7 +6,7 @@ import Dashboard from '../../Dashboard.jsx'
 import Reception from '../../Reception.jsx'
 import Dossier from '../../Dossier.jsx'
 import Parametre from '../../Parametre.jsx'
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Button, Typography ,Stack} from '@mui/material'
 import { faBell,faCaretDown,faCheck,faXmark,faMagnifyingGlass,faListCheck,faUserDoctor,faStethoscope,faCommentsDollar,faChevronDown} from '@fortawesome/free-solid-svg-icons'
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -28,10 +28,23 @@ import { useLocation } from 'react-router-dom';
 import { DossierContext } from '../../../../DossierContext.jsx'
 import { useContext } from 'react'
 import ChoixtransferTout_les_Dossier from '../../ChoixtransferTout_les_Dossier.jsx'
-
+import RendezVousForm from '../RendezVousForm.jsx'
+import Icon from '../../Icon.jsx'
 
 
 function Tout_les_dossiers() {
+    // profil connected
+    const [profil,setprofil]= useState([])
+    const getUserData = () => {
+     const INFO_Utilisateur_from_localStorage = JSON.parse(localStorage.getItem('Utilisateur'));
+     setprofil(INFO_Utilisateur_from_localStorage);
+   }
+   
+   useEffect(()=>{
+     getUserData()
+     
+     },[])
+  
   const [datas,setDatas]= useState([])
   const BASE_URL = import.meta.env.VITE_API_URL;
 
@@ -124,20 +137,20 @@ useEffect(() => {
                <nav>
                <img src='public/Dr. MUAMBA.jpg' className='admin_photo' alt='administrateur'/>
                </nav> 
-               <nav> <p> Dr jonathan kasongo </p></nav>
-               <nav><FontAwesomeIcon icon={faCaretDown} /></nav>
+               <nav> <p> {profil.nom}</p></nav>
+               <nav><Icon/></nav>
               </div>
            </div>
 
         <Box sx={{
-          
           display:"grid",
           gap:"50px",
           margin:"20px",
           }}>
-          
-       <Box mt={5}>
+
+       <Box mt={5} sx={{display:"flex",gap:"75%"}}>
        <DossierForm/>
+       <RendezVousForm/>
        </Box>
           
          

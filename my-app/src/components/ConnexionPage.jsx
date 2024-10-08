@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useForm} from "react-hook-form"
 import toast from 'react-hot-toast';
 import axios from 'axios';
-
+import { Stack,Box,Typography,TextField,Button} from '@mui/material'
 
 function ConnexionPage() {
   const BASE_URL = import.meta.env.VITE_API_URL;
@@ -55,46 +55,50 @@ const onSubmit = (data) => {
 
 
   return (
-    <div className='login_all_div'>
-     <div className='black_div'>
-      <div className='flex'>
-        <div className='text_div'>
-            <nav>
-             <h1>Welcome Again</h1>
-             <p>Lorem ipsum, dolor sit amet incidunt placeat totam nesciunt ducimus! Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum iure, veniam, earum accusantium optio est dolorum delectus quas veritatis, recusandae asperiores! Ex quos ullam obcaecati vel magni eligendi dicta architecto.</p>
-            </nav>
-        </div>
-        <div className='login_div'>
 
 
-        <form action="" onSubmit={handleSubmit(onSubmit)}>
-        <h1>Connectez-vous</h1>
+    <div style={{background: "rgb(223, 216, 216)"}}>
+    <Stack direction="row" spacing={2}
+    alignItems={"center"} justifyContent={"center"}
+    width={"100%"} height={"100vh"}>
+      <Box  width={400} 
+      sx={{backgroundColor:"white",
+          padding:3
+      }}>
+      <Typography variant="h5">
+        Connexion
+      </Typography>
+      <form onSubmit={handleSubmit(onSubmit)}>
+      <Box sx={{
+          display:"grid",
+          gap:2
+      }}>
 
-        <input type='text' 
-        placeholder='Email'
-        {...register("email", { required: "Veuillez entrer le nom" })} />
+      <TextField id="filled-basic" label="Email" variant="filled" type="email" fullWidth size='small' 
+       {...register("email", { required:"Veillez entrer votre Adresse mail"})}/>
+        {errors.email&& <span style={{color:"red"}}>Ce champ est obligatoire</span>}
+
+      <TextField id="filled-basic" label="Mot de passe" variant="filled" type="password" fullWidth size='small' 
+       {...register("password", { required:"Veillez entrer votre mot de passe",minLength:{message:
+          "Veillez entrer un mot de passe de plus de 6 characteres"
+       }})}/>
+        {errors.password&& <span style={{color:"red"}}>Ce champ est obligatoire</span>}
 
 
-          <input type='password' 
-        placeholder='password'
-        {...register("password", { required: "Veuillez entrer le nom" })} />
-
+      </Box>
+      <Box sx={{
         
-        <nav>
-        <button type='submit'>connexion</button>
-        </nav>
-        
-        </form>
-
-        <div className='links'>
-        <Link to={'/inscription'}><p>Vous n'avez pas de compte? creez un compte</p></Link><br></br>
-        </div>
-        
-      </div>
-      </div>
-    
-    </div>
-    </div>
+        display:"flex",
+        justifyContent: "space-between"
+      }}>
+      <Button variant="contained" sx={{marginTop:2}} type="submit">Connexion</Button>
+         <a href="/inscription"  style={{textDecoration:"none",marginTop:"35px"}}>Vous n'avez pas de compte?</a>
+      
+      </Box>
+      </form>
+      </Box>
+    </Stack>
+  </div>
   )
 }
 

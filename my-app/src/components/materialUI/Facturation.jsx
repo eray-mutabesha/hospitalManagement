@@ -5,19 +5,19 @@ import MenuItem from '@mui/material/MenuItem';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faReceipt } from '@fortawesome/free-solid-svg-icons'
-import FacturationForm from './dialogue/FacturationForm';
+import FacturationForm from './dialogue/tableaux/RendezVous';
 import { useNavigate } from 'react-router-dom';
 
 export default function Factutation() {
   const navigate=useNavigate()
   const handleclick=()=>{
-    navigate("/")
+    navigate("/rendezvous")
   }
   return (
     
           <nav  onClick={handleclick} className='navone'>
            <FontAwesomeIcon icon={faReceipt} /> 
-           Factutation
+           Rendez-Vous
           </nav>
           
     

@@ -34,7 +34,7 @@
   
   .login_all_div{
     margin-top:-25px;
-    background-image: url("moderate-aquamarine-dark-gradient-background_608506-1382.avif"); 
+    background-image: url("purewhite.jpg"); 
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
@@ -42,14 +42,14 @@
     color: rgb(233, 233, 233); 
   }
   .black_div{
-    box-shadow: rgba(240, 239, 239, 0.185) 0px 0px 5px 0px ;  
+    /* box-shadow: rgba(240, 239, 239, 0.185) 0px 0px 5px 0px ;  
     background-color: rgba(0, 0, 0, 0.719);
     position: relative;
     width: 80%;
     height: 80%;
     top:10%;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: auto; */
   }
   .black_div .flex{
    

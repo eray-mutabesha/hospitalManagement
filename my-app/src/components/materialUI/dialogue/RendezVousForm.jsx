@@ -15,7 +15,7 @@ import axios from 'axios';
 
 
 
-export default function DossierForm(single) {
+export default function RendezVousForm(single) {
   const { register, handleSubmit,formState:{errors} } = useForm();
   const [open, setOpen] = React.useState(false);
 
@@ -60,9 +60,6 @@ axios.get(`${BASE_URL}/get_patient_Option`)
 
     nom_patient: "",
     date: "",
-    poids: "",
-    to_to: "",
-    ta_ta: "",
     adresse:"",
     age:"",
     sexe:"",
@@ -72,7 +69,7 @@ axios.get(`${BASE_URL}/get_patient_Option`)
 
 
   const onsubmit=(data)=>{
-    axios.post(`${BASE_URL}/post_tout_les_dossiers`, data)
+    axios.post(`${BASE_URL}/post_all_rdv`, data)
           
           .then(({ data }) => {
             if (data.status == 500) {
@@ -80,18 +77,15 @@ axios.get(`${BASE_URL}/get_patient_Option`)
             } else {
              
              setFormData({
-              nom_patient: "",
-              date: "",
-              poids: "",
-              to_to: "",
-              ta_ta: "",
-              adresse:"",
-              age:"",
-              sexe:"",
-              telephone:""
+                nom_patient: "",
+                date: "",
+                adresse:"",
+                age:"",
+                sexe:"",
+                telephone:""
             });
             
-            toast.success("Enregistrement réussi");
+            toast.success("RDV enregistrer");
           }
           })
            .catch((err) => {
@@ -117,7 +111,7 @@ axios.get(`${BASE_URL}/get_patient_Option`)
             border:"1px solid rgb(201, 199, 199)",
                 color:"black"
           }}>
-           Nouveau Dossier
+           Rendez-vous
           </Button>
        </Box>
       <Dialog
@@ -205,38 +199,6 @@ className='inpt_material'
  onChange={(e) => setFormData({ ...formData, telephone: e.target.value })}/>
 
 
-<TextField
-className='inpt_material'
- id="filled-basic" 
- label="Poids" 
- variant="filled" 
- type='text'
- size="small"
- {...register("poids", { required: "Veuillez entrer le point" })}
- value={formData.poids}
- onChange={(e) => setFormData({ ...formData, poids: e.target.value })}/>
-
-<TextField
-className='inpt_material'
- id="filled-basic" 
- label="TO" 
- variant="filled" 
- type='text'
- size="small"
- {...register("to_to", { required: "Veuillez entrer le point" })}
- value={formData.to_to}
- onChange={(e) => setFormData({ ...formData, to_to: e.target.value })}/>
-
-<TextField
-className='inpt_material'
- id="filled-basic" 
- label="TA" 
- variant="filled" 
- type='text'
- size="small"
- {...register("ta_ta", { required: "Veuillez entrer le point" })}
- value={formData.ta_ta}
- onChange={(e) => setFormData({ ...formData, ta_ta: e.target.value })}/>
 
 <TextField
 className='inpt_material'

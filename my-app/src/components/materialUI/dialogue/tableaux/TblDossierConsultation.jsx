@@ -26,7 +26,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useContext} from 'react'
 import { DossierContext } from '../../../../DossierContext.jsx'
 import Dossier from '../../Dossier.jsx'
-
+import Icon from '../../Icon.jsx'
 
 
 
@@ -39,6 +39,19 @@ import Dossier from '../../Dossier.jsx'
 
 
 function TblDossierConsultation() {
+
+    // profil connected
+    const [profil,setprofil]= useState([])
+    const getUserData = () => {
+     const INFO_Utilisateur_from_localStorage = JSON.parse(localStorage.getItem('Utilisateur'));
+     setprofil(INFO_Utilisateur_from_localStorage);
+   }
+   
+   useEffect(()=>{
+     getUserData()
+     
+     },[])
+  
   const BASE_URL = import.meta.env.VITE_API_URL;
   const { setDossier } = useContext(DossierContext);
 const [data,setDatas]=useState([])
@@ -120,8 +133,8 @@ const deleteEntree = (model) => {
                <nav>
                <img src='public/Dr. MUAMBA.jpg' className='admin_photo' alt='administrateur'/>
                </nav> 
-               <nav> <p> Dr jonathan kasongo </p></nav>
-               <nav><FontAwesomeIcon icon={faCaretDown} /></nav>
+               <nav> <p>{profil.nom}</p></nav>
+               <nav><Icon /></nav>
               </div>
            </div>
 
