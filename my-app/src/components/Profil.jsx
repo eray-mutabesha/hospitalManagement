@@ -16,7 +16,7 @@ import UpdateProfil from './UpdateProfil.jsx'
 import { useState } from 'react'
 import axios from 'axios';
 import toast from 'react-hot-toast';
-
+import Icon from './materialUI/Icon.jsx'
 
 function Profil() {
   const BASE_URL = import.meta.env.VITE_API_URL;
@@ -84,7 +84,7 @@ function Profil() {
                <img src='public/Dr. MUAMBA.jpg' className='admin_photo' alt='administrateur'/>
                </nav> 
                <nav> <p>{datas.nom}</p></nav>
-               <nav><FontAwesomeIcon icon={faCaretDown} /></nav>
+               <nav><Icon/></nav>
               </div>
 
 

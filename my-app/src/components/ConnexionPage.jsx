@@ -44,8 +44,8 @@ const onSubmit = (data) => {
   })
 
   .catch((err) => {
-
-      toast.error("erreur technique essayer plus tard");
+    toast.error("Email ou mot de passe incorrecte");
+      // toast.error("erreur technique essayer plus tard");
   });
 }
 

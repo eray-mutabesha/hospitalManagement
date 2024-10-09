@@ -48,7 +48,7 @@ useEffect(()=>{
     }).then((res) => {
         if (res.data.exists) {
           
-            toast.error("le compte existe");
+          toast.error("Un compte existe deja avec ce Mail");
         } 
         else {
           
@@ -76,7 +76,8 @@ useEffect(()=>{
   
     .catch((err) => {
           console.log(err)
-        toast.error("erreur technique essayer plus tard");
+         toast.error("erreur technique essayer plus tard");
+        
     });
   
        
