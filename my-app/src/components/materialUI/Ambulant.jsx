@@ -8,16 +8,16 @@ import { faReceipt } from '@fortawesome/free-solid-svg-icons'
 import FacturationForm from './dialogue/tableaux/RendezVous';
 import { useNavigate } from 'react-router-dom';
 
-export default function RendezVous() {
+export default function Ambulant() {
   const navigate=useNavigate()
   const handleclick=()=>{
-    navigate("/rendezvous")
+    navigate("/acceuilAmbulatoire")
   }
   return (
     
           <nav  onClick={handleclick} className='navone'>
            <FontAwesomeIcon icon={faReceipt} /> 
-           Rendez-vous
+           Ambulatoire
           </nav>
           
     

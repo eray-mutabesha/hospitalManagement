@@ -28,6 +28,9 @@ import { DossierContext } from '../../../../DossierContext.jsx'
 import { useContext } from 'react'
 import Dossier from '../../Dossier.jsx'
 import Icon from '../../Icon.jsx'
+import Ambulant from '../../Ambulant.jsx'
+import Hospital from '../../Hospital.jsx'
+import RendezVous from '../../RendezVous.jsx'
 
 
 
@@ -127,17 +130,43 @@ useEffect(() => {
         <div className='logo'>
             <img src='public/logo-removebg-preview.png' alt='logo hopital'/>
           </div>
-          <div className='menus'>
+          {
+            profil.service == "Reception"? (
+              <div className='menus'>
               <Dashboard />
               <Dossier/>
-              <nav id='personaliser'> <Reception/></nav>
-              <Consultation/>
-              <Laboratoire/>
-              <OrganisationClinique/>
-              <Factutation/>
-              <Ressources/>
+             <nav id='personaliser'><Reception/></nav>
+             
               <Parametre/>
-          </div>
+              </div>):profil.service == "Consultation"? (
+                        <div className='menus'>
+                        <Dashboard />
+                        <nav id='personaliser'><Consultation/></nav>
+                        <RendezVous/>
+                        <Parametre/>
+                       
+                       </div>
+              ) : profil.service == "Laboratoire"? (
+                <div className='menus'>
+                <Dashboard />
+                <nav id='personaliser'><Laboratoire/></nav>
+                <Parametre/>
+               </div>
+              ): profil.service == "Hospitalisation"? (
+                <div className='menus'>
+                <Dashboard />
+                <nav id='personaliser'><Hospital/></nav>
+                <Parametre/>
+               </div>
+              ) : profil.service == "Ambulatoire"? (
+                <div className='menus'>
+                <Dashboard />
+                <nav id='personaliser'><Ambulant/></nav>
+                <Parametre/>
+               </div>
+              ):null
+
+          }
         </div>
         <div className='div_two' style={{ background:"rgba(231, 230, 230, 0.301)",}}> 
         <div className='header'>

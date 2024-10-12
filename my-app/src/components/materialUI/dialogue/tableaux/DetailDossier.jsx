@@ -27,6 +27,8 @@ import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import Icon from '../../Icon.jsx';
 import RendezVous from '../../RendezVous.jsx'
+import Hospital from '../../Hospital.jsx'
+import Ambulant from '../../Ambulant.jsx'
 
 function DetailDossier() {
 
@@ -166,18 +168,39 @@ const reception=()=>{
 
 
 const laboratoire=()=>{
-  navigate("/Laboratoire",{ state: { detailData: data[0]?.id } })
+  if(profil.service == "Laboratoire"){
+    navigate("/Laboratoire",{ state: { detailData: data[0]?.id } })
+  }else{
+    navigate("/laboratoiredetail",{ state: { detailData: data[0]?.id } })
+  }
+  
 }
 const Detailconsultation=()=>{
-  navigate("/consultation",{ state: { detailData: data[0]?.id } })
+  if(profil.service == "Consultation"){
+    navigate("/consultation",{ state: { detailData: data[0]?.id } })
+  }else{
+    navigate("/consultationdetail",{ state: { detailData: data[0]?.id } })
+  }
+  
 }
 
 const hospitalisation =()=>{
-  navigate("/hospitalisation",{ state: { detailData: data[0]?.id } })
+  if(profil.service == "Hospitalisation"){
+    navigate("/hospitalisation",{ state: { detailData: data[0]?.id } })
+  }
+  else{
+    navigate("/hospitalisationdetail1",{ state: { detailData: data[0]?.id } })
+  }
 }
 
 const ambulatoiredetail= ()=>{
-  navigate("/ambulatoire",{ state: { detailData: data[0]?.id } })
+  if(profil.service == "Ambulatoire"){
+    navigate("/ambulatoire",{ state: { detailData: data[0]?.id } })
+  }
+  else{
+    navigate("/ambulatoiredetail",{ state: { detailData: data[0]?.id } })
+  }
+ 
 }
 
 
@@ -192,6 +215,15 @@ const ambulatoiredetail= ()=>{
         <div className='logo'>
             <img src='public/logo-removebg-preview.png' alt='logo hopital'/>
           </div>
+
+
+
+
+
+
+
+
+
           {
             profil.service == "Reception"? (
               <div className='menus'>
@@ -206,18 +238,40 @@ const ambulatoiredetail= ()=>{
                         <nav id='personaliser'><Consultation/></nav>
                         <RendezVous/>
                         <Parametre/>
+                       
                        </div>
-              ) : profil.service == "Consultation"? (
+              ) : profil.service == "Laboratoire"? (
                 <div className='menus'>
                 <Dashboard />
                 <nav id='personaliser'><Laboratoire/></nav>
                 <Parametre/>
                </div>
+              ): profil.service == "Hospitalisation"? (
+                <div className='menus'>
+                <Dashboard />
+                <nav id='personaliser'><Hospital/></nav>
+                <Parametre/>
+               </div>
+              ) : profil.service == "Ambulatoire"? (
+                <div className='menus'>
+                <Dashboard />
+                <nav id='personaliser'><Ambulant/></nav>
+                <Parametre/>
+               </div>
               ):null
-
 
           }
  
+
+
+
+
+
+
+
+
+
+
         </div>
         <div className='div_two' style={{ background:"rgba(231, 230, 230, 0.301)",}}> 
         <div className='header'>

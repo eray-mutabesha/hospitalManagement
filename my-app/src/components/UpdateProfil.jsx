@@ -15,6 +15,9 @@ import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import Ambulant from './materialUI/Ambulant.jsx'
+import Hospital from './materialUI/Hospital.jsx'
+import RendezVous from './materialUI/RendezVous.jsx'
 
 function UpdateProfil(singleData,onUpdate) {
   const BASE_URL = import.meta.env.VITE_API_URL;
@@ -78,17 +81,43 @@ function UpdateProfil(singleData,onUpdate) {
         <div className='logo'>
             <img src='public/logo-removebg-preview.png' alt='logo hopital'/>
           </div>
-          <div className='menus'>
+          {
+            profil.service == "Reception"? (
+              <div className='menus'>
               <Dashboard />
               <Dossier/>
-              <Reception/>
-              <Consultation/>
-              <Laboratoire/>
-              <OrganisationClinique/>
-              <Factutation/>
-              <Ressources/>
-              <nav id='personaliser'><Parametre/></nav>
-          </div>
+             <nav id='personaliser'><Reception/></nav>
+             
+              <Parametre/>
+              </div>):profil.service == "Consultation"? (
+                        <div className='menus'>
+                        <Dashboard />
+                        <nav id='personaliser'><Consultation/></nav>
+                        <RendezVous/>
+                        <Parametre/>
+                       
+                       </div>
+              ) : profil.service == "Laboratoire"? (
+                <div className='menus'>
+                <Dashboard />
+                <nav id='personaliser'><Laboratoire/></nav>
+                <Parametre/>
+               </div>
+              ): profil.service == "Hospitalisation"? (
+                <div className='menus'>
+                <Dashboard />
+                <nav id='personaliser'><Hospital/></nav>
+                <Parametre/>
+               </div>
+              ) : profil.service == "Ambulatoire"? (
+                <div className='menus'>
+                <Dashboard />
+                <nav id='personaliser'><Ambulant/></nav>
+                <Parametre/>
+               </div>
+              ):null
+
+          }
         </div>
         <div className='div_two' style={{
            height:"fit-content",

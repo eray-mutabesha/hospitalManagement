@@ -29,6 +29,7 @@ import Factutation from './components/materialUI/Facturation.jsx'
 import Icon from './components/materialUI/Icon.jsx'
 import  {toast} from 'react-hot-toast';
 import axios from 'axios';
+import RendezVous from './components/materialUI/RendezVous.jsx'
 
 
 
@@ -129,17 +130,43 @@ useEffect(()=>{
           <div className='logo'>
             <img src='public/logo-removebg-preview.png' alt='logo hopital'/>
           </div>
-        <div className='menus'>
-              <nav id='personaliser'><Dashboard /></nav>
-              <nav><Dossier/></nav>
-              <nav><Reception/></nav>
-              <nav><Consultation/></nav>
-              <nav><Laboratoire/></nav>
-              <nav><OrganisationClinique/></nav>
-              <nav><Factutation/></nav>
-              <nav><Ressources/></nav>
-              <nav><Parametre/></nav>
-          </div>
+          {
+            datas.service == "Reception"? (
+              <div className='menus'>
+              <Dashboard />
+              <Dossier/>
+             <nav id='personaliser'><Reception/></nav>
+             
+              <Parametre/>
+              </div>):datas.service == "Consultation"? (
+                        <div className='menus'>
+                        <Dashboard />
+                        <nav id='personaliser'><Consultation/></nav>
+                        <RendezVous/>
+                        <Parametre/>
+                       
+                       </div>
+              ) : datas.service == "Laboratoire"? (
+                <div className='menus'>
+                <Dashboard />
+                <nav id='personaliser'><Laboratoire/></nav>
+                <Parametre/>
+               </div>
+              ): datas.service == "Hospitalisation"? (
+                <div className='menus'>
+                <Dashboard />
+                <nav id='personaliser'><Hospital/></nav>
+                <Parametre/>
+               </div>
+              ) : datas.service == "Ambulatoire"? (
+                <div className='menus'>
+                <Dashboard />
+                <nav id='personaliser'><Ambulant/></nav>
+                <Parametre/>
+               </div>
+              ):null
+
+          }
 
         </div>
         <div className='section_two'>

@@ -30,6 +30,9 @@ import { useContext } from 'react'
 import ChoixtransferTout_les_Dossier from '../../ChoixtransferTout_les_Dossier.jsx'
 import RendezVousForm from '../RendezVousForm.jsx'
 import Icon from '../../Icon.jsx'
+import Ambulant from '../../Ambulant.jsx'
+import Hospital from '../../Hospital.jsx'
+import RendezVous from '../../RendezVous.jsx'
 
 
 function Tout_les_dossiers() {
@@ -111,17 +114,43 @@ useEffect(() => {
         <div className='logo'>
             <img src='public/logo-removebg-preview.png' alt='logo hopital'/>
           </div>
-          <div className='menus'>
+          {
+            profil.service == "Reception"? (
+              <div className='menus'>
               <Dashboard />
-              <nav id='personaliser'><Dossier/></nav>
-               <Reception/>
-              <Consultation/>
-              <Laboratoire/>
-              <OrganisationClinique/>
-              <Factutation/>
-              <Ressources/>
+              <Dossier/>
+             <nav id='personaliser'><Reception/></nav>
+             
               <Parametre/>
-          </div>
+              </div>):profil.service == "Consultation"? (
+                        <div className='menus'>
+                        <Dashboard />
+                        <nav id='personaliser'><Consultation/></nav>
+                        <RendezVous/>
+                        <Parametre/>
+                       
+                       </div>
+              ) : profil.service == "Laboratoire"? (
+                <div className='menus'>
+                <Dashboard />
+                <nav id='personaliser'><Laboratoire/></nav>
+                <Parametre/>
+               </div>
+              ): profil.service == "Hospitalisation"? (
+                <div className='menus'>
+                <Dashboard />
+                <nav id='personaliser'><Hospital/></nav>
+                <Parametre/>
+               </div>
+              ) : profil.service == "Ambulatoire"? (
+                <div className='menus'>
+                <Dashboard />
+                <nav id='personaliser'><Ambulant/></nav>
+                <Parametre/>
+               </div>
+              ):null
+
+          }
         </div>
         <div className='div_two' style={{ background:"rgba(231, 230, 230, 0.301)",}}> 
         <div className='header'>
