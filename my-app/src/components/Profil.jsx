@@ -17,8 +17,36 @@ import { useState } from 'react'
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import Icon from './materialUI/Icon.jsx'
+import { useForm} from "react-hook-form"
+import { useNavigate } from 'react-router-dom'
+import NouveauAdminFORM from './NouveauAdminFORM.jsx'
+
 
 function Profil() {
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const BASE_URL = import.meta.env.VITE_API_URL;
   const [datas,setdatas]=useState([])
   const [singleData,setSingleData] = useState([])
@@ -214,8 +242,28 @@ function Profil() {
               }}
               onClick={() => Edit_nom(datas)}/></Box>
              </Box>
+             
             </Box>
+           
           </div>
+          <NouveauAdminFORM/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
       </section>
     </>

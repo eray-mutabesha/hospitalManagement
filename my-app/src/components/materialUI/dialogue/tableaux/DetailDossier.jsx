@@ -25,7 +25,8 @@ import { useState,useEffect, useContext } from 'react'
 import  {toast} from 'react-hot-toast';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
-import Icon from '../../Icon.jsx'
+import Icon from '../../Icon.jsx';
+import RendezVous from '../../RendezVous.jsx'
 
 function DetailDossier() {
 
@@ -135,7 +136,7 @@ const existsInAmbu = ambu.some(h => h.id === detailData);
 
 
 
-
+console.log(profil.service)
 
 
 
@@ -153,9 +154,17 @@ const existsInAmbu = ambu.some(h => h.id === detailData);
   navigate("/detailPatient")
 }
 const reception=()=>{
-  navigate("/reception", { state: { detailData: data[0]?.id } });
+
+  if(profil.service == "Reception"){
+    navigate("/reception", { state: { detailData: data[0]?.id } });
+  }else{
+    navigate("/receptiondetail", { state: { detailData: data[0]?.id } })
+  }
+  
 
 }
+
+
 const laboratoire=()=>{
   navigate("/Laboratoire",{ state: { detailData: data[0]?.id } })
 }
@@ -183,17 +192,32 @@ const ambulatoiredetail= ()=>{
         <div className='logo'>
             <img src='public/logo-removebg-preview.png' alt='logo hopital'/>
           </div>
-          <div className='menus'>
+          {
+            profil.service == "Reception"? (
+              <div className='menus'>
               <Dashboard />
               <Dossier/>
-              <Reception/>
-              <Consultation/>
-              <Laboratoire/>
-              <OrganisationClinique/>
-              <Factutation/>
-              <Ressources/>
+             <nav id='personaliser'><Reception/></nav>
+             
               <Parametre/>
-          </div>
+              </div>):profil.service == "Consultation"? (
+                        <div className='menus'>
+                        <Dashboard />
+                        <nav id='personaliser'><Consultation/></nav>
+                        <RendezVous/>
+                        <Parametre/>
+                       </div>
+              ) : profil.service == "Consultation"? (
+                <div className='menus'>
+                <Dashboard />
+                <nav id='personaliser'><Laboratoire/></nav>
+                <Parametre/>
+               </div>
+              ):null
+
+
+          }
+ 
         </div>
         <div className='div_two' style={{ background:"rgba(231, 230, 230, 0.301)",}}> 
         <div className='header'>

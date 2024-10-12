@@ -172,7 +172,12 @@ width={"100%"} height={"100vh"}>
          {...register("password_confirm", { required: "Veuillez entrer le nom" })}
         value={formData.password_confirm}
         onChange={(e) => setFormData({ ...formData, password_confirm: e.target.value })}/>
+   
 
+       <TextField id="filled-basic" label="" variant="filled" type="file" fullWidth size='small' 
+         {...register("file", { required: "Veuillez entrer le nom" })}
+        value={formData.file}
+        onChange={(e) => setFormData({ ...formData, file: e.target.value })}/>
         
   </Box>
   <Box sx={{
