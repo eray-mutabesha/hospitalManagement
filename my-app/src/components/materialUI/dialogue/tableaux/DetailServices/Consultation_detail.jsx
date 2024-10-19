@@ -20,6 +20,8 @@ import Icon from '../../../Icon.jsx';
 import RendezVous from '../../../RendezVous.jsx';
 import Hospital from '../../../Hospital.jsx';
 import Ambulant from '../../../Ambulant.jsx';
+import Patient from '../../../Patients.jsx';
+import Sedeconecter from '../../../Sedeconecter.jsx';
 
 
 
@@ -50,7 +52,11 @@ function Consultation_detail() {
 
  const navigate = useNavigate()
  const handledossier=()=>{
-   navigate("/consultation",{ state: { detailData: data[0]?.id } })
+   if(profil.service == "consultation"){
+    navigate("/consultation", { state: { detailData: data[0]?.id } });
+  }else{
+    navigate("/detaildossier", { state: { detailData: data[0]?.id } })
+  }
  }
  const get_dossiers = () => {
   axios.get(`${BASE_URL}/get_tout_les_dossiers_id/${detailData}`)
@@ -82,13 +88,16 @@ get_dossiers()
           {
             profil.service == "Reception"? (
               <div className='menus'>
+                <nav id='deconection'> <Sedeconecter/> </nav>
               <Dashboard />
+              <Patient/>
               <Dossier/>
              <nav id='personaliser'><Reception/></nav>
              
               <Parametre/>
               </div>):profil.service == "Consultation"? (
                         <div className='menus'>
+                          <nav id='deconection'> <Sedeconecter/> </nav>
                         <Dashboard />
                         <nav id='personaliser'><Consultation/></nav>
                         <RendezVous/>
@@ -97,22 +106,38 @@ get_dossiers()
                        </div>
               ) : profil.service == "Laboratoire"? (
                 <div className='menus'>
+                  <nav id='deconection'> <Sedeconecter/> </nav>
                 <Dashboard />
                 <nav id='personaliser'><Laboratoire/></nav>
                 <Parametre/>
                </div>
               ): profil.service == "Hospitalisation"? (
                 <div className='menus'>
+                  <nav id='deconection'> <Sedeconecter/> </nav>
                 <Dashboard />
                 <nav id='personaliser'><Hospital/></nav>
                 <Parametre/>
                </div>
               ) : profil.service == "Ambulatoire"? (
                 <div className='menus'>
+                  <nav id='deconection'> <Sedeconecter/> </nav>
                 <Dashboard />
                 <nav id='personaliser'><Ambulant/></nav>
                 <Parametre/>
                </div>
+              ):profil.service == "Administrateur"?(
+                <div className='menus'>
+                <nav id='deconection'> <Sedeconecter /> </nav>
+                  <Dashboard />
+                    <Dossier/>
+                    <Reception/>
+                    <nav id='personaliser'><Consultation/></nav>
+                    <Laboratoire/>
+                    <OrganisationClinique/>
+                    <Ressources/>
+                    <Parametre/>
+                    
+                </div>
               ):null
 
           }
@@ -219,23 +244,25 @@ get_dossiers()
 
 
 
+          {
+            data[0]?.traitement?<Box>          <Box sx={{
+              background:"white",
+              
+              marginTop:"30px"
+            }}>
+             <h3>Traitement :</h3>
+             <p>{data[0]?.traitement}</p>
+             </Box>
+  
+            <Box sx={{
+              background:"white",
+              marginTop:"30px"
+            }}>
+             <h3>Observation :</h3>
+             <p>{data[0]?.observation}</p>
+             </Box></Box>:<Typography sx={{color:"red"}}>La fiche est vide pour le moment</Typography>
+          }
 
-          <Box sx={{
-            background:"white",
-            
-            marginTop:"30px"
-          }}>
-           <h3>Traitement :</h3>
-           <p>{data[0]?.traitement}</p>
-           </Box>
-
-          <Box sx={{
-            background:"white",
-            marginTop:"30px"
-          }}>
-           <h3>Observation :</h3>
-           <p>{data[0]?.observation}</p>
-           </Box>
          </Box>
       
       

@@ -18,6 +18,10 @@ const navigate=useNavigate()
    const ambulatoire=()=>{
     navigate("/acceuilAmbulatoire")
    }
+   const redezvous=()=>{
+    navigate("/rendezvous")
+   }
+
    
   return (
     <PopupState variant="popover" popupId="demo-popup-menu">
@@ -30,7 +34,7 @@ const navigate=useNavigate()
           <Menu {...bindMenu(popupState)} >
             <MenuItem onClick={hospitalisation} >Hospitalisation</MenuItem>
             <MenuItem onClick={ambulatoire}>Ambulatoire</MenuItem>
-            <MenuItem onClick={hospitalisation}>Rendez-vous</MenuItem>
+            <MenuItem onClick={redezvous}>Rendez-vous</MenuItem>
             
           </Menu>
         </React.Fragment>

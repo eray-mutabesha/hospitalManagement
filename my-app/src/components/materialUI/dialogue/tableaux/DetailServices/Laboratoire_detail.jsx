@@ -21,6 +21,8 @@ import Icon from '../../../Icon.jsx'
 import Ambulant from '../../../Ambulant.jsx'
 import Hospital from '../../../Hospital.jsx'
 import RendezVous from '../../../RendezVous.jsx'
+import Patient from '../../../Patients.jsx'
+import Sedeconecter from '../../../Sedeconecter.jsx'
 
 
 
@@ -38,17 +40,6 @@ import RendezVous from '../../../RendezVous.jsx'
 
 
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData(1,'Katembo mwami john', '12/03/2024','En attente',),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
 
 function Laboratoire_detail() {
@@ -56,14 +47,13 @@ function Laboratoire_detail() {
 const BASE_URL = import.meta.env.VITE_API_URL;
  const navigate = useNavigate()
  const handledossier=()=>{
-   navigate("/Laboratoire",{ state: { detailData: data[0]?.id } })
+   if(profil.service == "Laboratoire"){
+    navigate("/Laboratoire", { state: { detailData: data[0]?.id } });
+  }else{
+    navigate("/detaildossier", { state: { detailData: data[0]?.id } })
+  }
  }
- const Detailpatient=()=>{
-  navigate("/detailPatient")
-}
-const reception=()=>{
-  navigate("/receptiondetail")
-}
+
 
   // Access the data from location.state
   const location = useLocation();
@@ -118,13 +108,16 @@ console.log(data[0])
           {
             profil.service == "Reception"? (
               <div className='menus'>
+                <nav id='deconection'> <Sedeconecter/> </nav>
               <Dashboard />
+              <Patient/>
               <Dossier/>
              <nav id='personaliser'><Reception/></nav>
              
               <Parametre/>
               </div>):profil.service == "Consultation"? (
                         <div className='menus'>
+                          <nav id='deconection'> <Sedeconecter/> </nav>
                         <Dashboard />
                         <nav id='personaliser'><Consultation/></nav>
                         <RendezVous/>
@@ -133,22 +126,38 @@ console.log(data[0])
                        </div>
               ) : profil.service == "Laboratoire"? (
                 <div className='menus'>
+                  <nav id='deconection'> <Sedeconecter/> </nav>
                 <Dashboard />
                 <nav id='personaliser'><Laboratoire/></nav>
                 <Parametre/>
                </div>
               ): profil.service == "Hospitalisation"? (
                 <div className='menus'>
+                  <nav id='deconection'> <Sedeconecter/> </nav>
                 <Dashboard />
                 <nav id='personaliser'><Hospital/></nav>
                 <Parametre/>
                </div>
               ) : profil.service == "Ambulatoire"? (
                 <div className='menus'>
+                  <nav id='deconection'> <Sedeconecter/> </nav>
                 <Dashboard />
                 <nav id='personaliser'><Ambulant/></nav>
                 <Parametre/>
                </div>
+              ):profil.service == "Administrateur"?(
+                <div className='menus'>
+                <nav id='deconection'> <Sedeconecter /> </nav>
+                  <Dashboard />
+                    <Dossier/>
+                    <Reception/>
+                    <Consultation/>
+                    <Laboratoire/>
+                    <nav id='personaliser'><OrganisationClinique/></nav>
+                    <Ressources/>
+                    <Parametre/>
+                    
+                </div>
               ):null
 
           }

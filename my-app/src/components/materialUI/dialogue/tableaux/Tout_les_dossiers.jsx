@@ -33,6 +33,8 @@ import Icon from '../../Icon.jsx'
 import Ambulant from '../../Ambulant.jsx'
 import Hospital from '../../Hospital.jsx'
 import RendezVous from '../../RendezVous.jsx'
+import Patient from '../../Patients.jsx'
+import Sedeconecter from '../../Sedeconecter.jsx'
 
 
 function Tout_les_dossiers() {
@@ -95,16 +97,13 @@ useEffect(() => {
 
   }
 
-  
+  const [searchTerm, setSearchTerm] = useState(''); // État pour la recherche
+  // Filtrer les dossiers en fonction de la recherche
+  const filteredDatas = datas.filter((dat) =>
+    dat.nom_patient.toLowerCase().includes(searchTerm.toLowerCase()) // Filtre par nom du patient
+  );
 
 
-
-
-
-
-  const handledossier=()=>{
-    navigate("/reception")
-  }
   return (
     <>
     
@@ -117,13 +116,16 @@ useEffect(() => {
           {
             profil.service == "Reception"? (
               <div className='menus'>
+                <nav id='deconection'> <Sedeconecter/> </nav>
               <Dashboard />
-              <Dossier/>
-             <nav id='personaliser'><Reception/></nav>
+              <Patient/>
+              <nav id='personaliser'> <Dossier/></nav>
+            <Reception/>
              
               <Parametre/>
               </div>):profil.service == "Consultation"? (
                         <div className='menus'>
+                          <nav id='deconection'> <Sedeconecter/> </nav>
                         <Dashboard />
                         <nav id='personaliser'><Consultation/></nav>
                         <RendezVous/>
@@ -132,22 +134,38 @@ useEffect(() => {
                        </div>
               ) : profil.service == "Laboratoire"? (
                 <div className='menus'>
+                  <nav id='deconection'> <Sedeconecter/> </nav>
                 <Dashboard />
                 <nav id='personaliser'><Laboratoire/></nav>
                 <Parametre/>
                </div>
               ): profil.service == "Hospitalisation"? (
                 <div className='menus'>
+                  <nav id='deconection'> <Sedeconecter/> </nav>
                 <Dashboard />
                 <nav id='personaliser'><Hospital/></nav>
                 <Parametre/>
                </div>
               ) : profil.service == "Ambulatoire"? (
                 <div className='menus'>
+                  <nav id='deconection'> <Sedeconecter/> </nav>
                 <Dashboard />
                 <nav id='personaliser'><Ambulant/></nav>
                 <Parametre/>
                </div>
+              ):profil.service == "Administrateur"?(
+                <div className='menus'>
+                <nav id='deconection'> <Sedeconecter /> </nav>
+                  <Dashboard />
+                    <nav id='personaliser'> <Dossier/></nav>
+                    <Reception/>
+                    <Consultation/>
+                    <Laboratoire/>
+                    <OrganisationClinique/>
+                    <Ressources/>
+                    <Parametre/>
+                    
+                </div>
               ):null
 
           }
@@ -156,7 +174,13 @@ useEffect(() => {
         <div className='header'>
               <div className='recherch'>
                <FontAwesomeIcon icon={faMagnifyingGlass} /> 
-               <input type="text" placeholder='recherch'/>
+
+               <input
+                type="text"
+                placeholder="recherch"
+                value={searchTerm} // Lier la valeur de l'input à l'état searchTerm
+                onChange={(e) => setSearchTerm(e.target.value)} // Mettre à jour la recherche à chaque saisie
+              />
               </div>
 
               <div className='administrateur'>
@@ -191,6 +215,14 @@ useEffect(() => {
           
         }}>
           <Typography variant='h5'>Tout les dossiers des patients</Typography>
+
+
+                        {/* Si aucun élément n'est trouvé, afficher un message */}
+                        {filteredDatas.length === 0 ? (
+                <Typography variant="body1" sx={{ textAlign: "center", marginTop: "20px" }}>
+                  Aucun dossier trouvé pour "{searchTerm}"
+                </Typography>
+              ) : (
         <TableContainer component={Paper}>
       <Table sx={{ textAlign:"left"}} size="small" aria-label="a dense table">
         <TableHead  
@@ -208,13 +240,13 @@ useEffect(() => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {datas.map((dat,index) => (
+          {filteredDatas.map((dat,index) => (
             <TableRow
               key={index}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {dat.id}
+              {index + 1} 
               </TableCell>
               <TableCell >{dat.nom_patient}</TableCell>
               <TableCell >{dat.date_entre}</TableCell>
@@ -228,7 +260,7 @@ useEffect(() => {
           ))}
         </TableBody>
       </Table>
-    </TableContainer>
+    </TableContainer>)}
     </Box>
     </Box>  
         </div>

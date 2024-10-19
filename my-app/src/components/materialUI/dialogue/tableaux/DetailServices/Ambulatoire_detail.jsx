@@ -28,6 +28,10 @@ import { useLocation } from 'react-router-dom';
 import { useState,useEffect,useContext } from 'react';
 import Icon from '../../../Icon.jsx'
 import RendezVous from '../../../RendezVous.jsx'
+import Hospital from '../../../Hospital.jsx'
+import Ambulant from '../../../Ambulant.jsx'
+import Patient from '../../../Patients.jsx'
+import Sedeconecter from '../../../Sedeconecter.jsx'
 
 
 
@@ -48,11 +52,12 @@ function Ambulatoire_detail() {
  const navigate = useNavigate()
 
  const handledossier=()=>{
-   navigate("/ambulatoire",{ state: { detailData: data[0]?.id } })
+   if(profil.service == "Ambulatoire"){
+    navigate("/ambulatoire", { state: { detailData: data[0]?.id } });
+  }else{
+    navigate("/detaildossier", { state: { detailData: data[0]?.id } })
+  }
  }
- const fiche_de_nursing=(event, value) =>{
-  navigate(`/hospitalisationdetail${value}`)
-}
 
 
 // profil connected
@@ -134,13 +139,16 @@ console.log(nursing)
           {
             profil.service == "Reception"? (
               <div className='menus'>
+                <nav id='deconection'> <Sedeconecter/> </nav>
               <Dashboard />
+              <Patient/>
               <Dossier/>
              <nav id='personaliser'><Reception/></nav>
              
               <Parametre/>
               </div>):profil.service == "Consultation"? (
                         <div className='menus'>
+                          <nav id='deconection'> <Sedeconecter/> </nav>
                         <Dashboard />
                         <nav id='personaliser'><Consultation/></nav>
                         <RendezVous/>
@@ -149,22 +157,38 @@ console.log(nursing)
                        </div>
               ) : profil.service == "Laboratoire"? (
                 <div className='menus'>
+                  <nav id='deconection'> <Sedeconecter/> </nav>
                 <Dashboard />
                 <nav id='personaliser'><Laboratoire/></nav>
                 <Parametre/>
                </div>
               ): profil.service == "Hospitalisation"? (
                 <div className='menus'>
+                  <nav id='deconection'> <Sedeconecter/> </nav>
                 <Dashboard />
                 <nav id='personaliser'><Hospital/></nav>
                 <Parametre/>
                </div>
               ) : profil.service == "Ambulatoire"? (
                 <div className='menus'>
+                  <nav id='deconection'> <Sedeconecter/> </nav>
                 <Dashboard />
                 <nav id='personaliser'><Ambulant/></nav>
                 <Parametre/>
                </div>
+              ):profil.service == "Administrateur"?(
+                <div className='menus'>
+                <nav id='deconection'> <Sedeconecter /> </nav>
+                  <Dashboard />
+                    <Dossier/>
+                    <Reception/>
+                    <Consultation/>
+                    <Laboratoire/>
+                    <nav id='personaliser'><OrganisationClinique/></nav>
+                    <Ressources/>
+                    <Parametre/>
+                    
+                </div>
               ):null
 
           }
@@ -202,9 +226,9 @@ console.log(nursing)
             Retour
            </Button>
 
-           <Stack mt={5} spacing={2}>
+           {/* <Stack mt={5} spacing={2}>
            <Pagination count={2} color="primary" onChange={fiche_de_nursing}/>
-           </Stack>
+           </Stack> */}
 
           </Box>
 
@@ -217,8 +241,7 @@ console.log(nursing)
            border:"1px solid rgba(0, 0, 0, 0.103)",
          }}>
 
-          <h1>FICHE DE NURSING</h1>
-         
+          <h1>FICHE DE NURSING (Ambulatoire)</h1>
 
           <Box sx={{
                 marginTop:"10px",
@@ -267,7 +290,7 @@ console.log(nursing)
             </Box>
             </Box>
         
-         
+ {nursing[0]?.observation?      
 <Box  sx={{
  overflowX:"auto",
  marginTop:"80px"
@@ -305,7 +328,7 @@ console.log(nursing)
         </TableBody>
       </Table>
     </TableContainer>
-    </Box>
+    </Box>:<Typography sx={{color:"red"}}>La fiche est vide pour le moment</Typography>} 
     </Box>
 
 

@@ -30,6 +30,10 @@ import Icon from './components/materialUI/Icon.jsx'
 import  {toast} from 'react-hot-toast';
 import axios from 'axios';
 import RendezVous from './components/materialUI/RendezVous.jsx'
+import Hospital from './components/materialUI/Hospital.jsx'
+import Ambulant from './components/materialUI/Ambulant.jsx'
+import Patient from './components/materialUI/Patients.jsx'
+import Sedeconecter from './components/materialUI/Sedeconecter.jsx'
 
 
 
@@ -124,6 +128,7 @@ useEffect(()=>{
  
  console.log(rdv)
   return (
+
     <>
       <section id='all_section'>
         <div className='div_one'>
@@ -133,37 +138,55 @@ useEffect(()=>{
           {
             datas.service == "Reception"? (
               <div className='menus'>
-              <Dashboard />
+              <nav id='deconection'> <Sedeconecter /> </nav>
+              <nav id='personaliser'> <Dashboard /> </nav>
+              <Patient/>
               <Dossier/>
-             <nav id='personaliser'><Reception/></nav>
-             
+              <Reception/>
               <Parametre/>
+              
               </div>):datas.service == "Consultation"? (
                         <div className='menus'>
-                        <Dashboard />
-                        <nav id='personaliser'><Consultation/></nav>
+                          <nav id='deconection'> <Sedeconecter /> </nav>
+                        <nav id='personaliser'><Dashboard /></nav>
+                        <Consultation/>
                         <RendezVous/>
                         <Parametre/>
                        
                        </div>
               ) : datas.service == "Laboratoire"? (
                 <div className='menus'>
-                <Dashboard />
-                <nav id='personaliser'><Laboratoire/></nav>
+                  <nav id='deconection'> <Sedeconecter /> </nav>
+               <nav id='personaliser'> <Dashboard /></nav>
+                <Laboratoire/>
                 <Parametre/>
                </div>
               ): datas.service == "Hospitalisation"? (
                 <div className='menus'>
-                <Dashboard />
-                <nav id='personaliser'><Hospital/></nav>
+               <nav id='personaliser'> <Dashboard /></nav>
+                <Hospital/>
                 <Parametre/>
                </div>
               ) : datas.service == "Ambulatoire"? (
                 <div className='menus'>
-                <Dashboard />
-                <nav id='personaliser'><Ambulant/></nav>
+                  <nav id='deconection'> <Sedeconecter /> </nav>
+               <nav id='personaliser'> <Dashboard /> </nav>
+                <Ambulant/>
                 <Parametre/>
                </div>
+              ):datas.service == "Administrateur"?(
+                <div className='menus'>
+                <nav id='deconection'> <Sedeconecter /> </nav>
+                <nav id='personaliser'>  <Dashboard /></nav>
+                    <Dossier/>
+                    <Reception/>
+                    <Consultation/>
+                    <Laboratoire/>
+                    <OrganisationClinique/>
+                    <Ressources/>
+                    <Parametre/>
+                    
+                </div>
               ):null
 
           }

@@ -228,7 +228,7 @@ const Hospitalisation = () => {
        toast.error("Il y a une erreur");
      } else {
      
-     toast.success("PATIENT ENVOYER AU LABOS")
+     toast.success("PATIENT INTERNER")
 
    }
    })

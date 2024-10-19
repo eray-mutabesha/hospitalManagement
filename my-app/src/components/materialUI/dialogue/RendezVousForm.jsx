@@ -130,26 +130,17 @@ axios.get(`${BASE_URL}/get_patient_Option`)
 
 <form className='medecin_fom'  onSubmit={handleSubmit(onsubmit)}>
 
-   
-<FormControl variant="filled">
-<InputLabel id="demo-simple-select-filled-label">Nom complet du patient</InputLabel>
-        <Select
-           labelId="demo-simple-select-filled-label"
-          id="demo-simple-select-standard"
-          size="small"
-          {...register("nom_patient", { required: "Veuillez entrer le nom" })}
-          value={formData.nom_patient}
-          onChange={(e) => setFormData({ ...formData, nom_patient: e.target.value })}>
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Nom complet" 
+ variant="filled" 
+ type='text'
+ size="small"
+ {...register("nom_patient", { required: "Veuillez entrer le point" })}
+ value={formData.nom_patient}
+ onChange={(e) => setFormData({ ...formData, nom_patient: e.target.value })}/>   
 
-            
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          {patient_list.map((dat,index)=>(
-            <MenuItem key={index}  value={dat.nom}>{dat.nom}</MenuItem>
-          ))}
-        </Select>
-</FormControl>
 
 <FormControl variant="filled">
 <InputLabel id="demo-simple-select-filled-label">Sexe</InputLabel>

@@ -70,8 +70,13 @@ axios.get(`${BASE_URL}/get_patient_Option`)
   });
 
 
+ 
+
 
   const onsubmit=(data)=>{
+
+
+  
     axios.post(`${BASE_URL}/post_tout_les_dossiers`, data)
           
           .then(({ data }) => {
@@ -127,7 +132,7 @@ axios.get(`${BASE_URL}/get_patient_Option`)
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title" >
-          {"Nouveau patient"}
+          {"Nouveau dossier"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
@@ -137,7 +142,7 @@ axios.get(`${BASE_URL}/get_patient_Option`)
 <form className='medecin_fom'  onSubmit={handleSubmit(onsubmit)}>
 
    
-<FormControl variant="filled">
+{/* <FormControl variant="filled">
 <InputLabel id="demo-simple-select-filled-label">Nom complet du patient</InputLabel>
         <Select
            labelId="demo-simple-select-filled-label"
@@ -155,10 +160,37 @@ axios.get(`${BASE_URL}/get_patient_Option`)
             <MenuItem key={index}  value={dat.nom}>{dat.nom}</MenuItem>
           ))}
         </Select>
-</FormControl>
+</FormControl> */}
+
+       
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Nom complet du Patient" 
+ variant="filled" 
+ type='text'
+ size="small"
+ {...register("nom_patient", { required: "Veuillez entrer le point" })}
+ value={formData.nom_patient}
+ onChange={(e) => setFormData({ ...formData, nom_patient: e.target.value })}/>
+
+
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Age" 
+ variant="filled" 
+ type='number'
+ size="small"
+ {...register("age", { required: "Veuillez entrer le point" })}
+ value={formData.age}
+ onChange={(e) => setFormData({ ...formData, age: e.target.value })}/>
+
+
 
 <FormControl variant="filled">
-<InputLabel id="demo-simple-select-filled-label">Sexe</InputLabel>
+<InputLabel id="demo-simple-select-filled-label">Genre</InputLabel>
         <Select
            labelId="demo-simple-select-filled-label"
           id="demo-simple-select-standard"
@@ -172,37 +204,14 @@ axios.get(`${BASE_URL}/get_patient_Option`)
             <em>None</em>
           </MenuItem>
           
-            <MenuItem   value="Masculin">Masculin</MenuItem>
-            <MenuItem   value="Feminin">Feminin</MenuItem>
-            <MenuItem   value="Autre">Autre</MenuItem>
+            <MenuItem  value="Masculin">Masculin</MenuItem>
+            <MenuItem  value="Feminin">Feminin</MenuItem>
+            <MenuItem  value="Autre">Autre</MenuItem>
         </Select>
-</FormControl>          
+</FormControl>
 
 
 
-<TextField
-className='inpt_material'
- id="filled-basic" 
- label="Age" 
- variant="filled" 
- type='text'
- size="small"
- {...register("age", { required: "Veuillez entrer le point" })}
- value={formData.age}
- onChange={(e) => setFormData({ ...formData, age: e.target.value })}/>
-
-
-
-<TextField
-className='inpt_material'
- id="filled-basic" 
- label="Telephone" 
- variant="filled" 
- type='number'
- size="small"
- {...register("telephone", { required: "Veuillez entrer le point" })}
- value={formData.telephone}
- onChange={(e) => setFormData({ ...formData, telephone: e.target.value })}/>
 
 
 <TextField
@@ -227,6 +236,8 @@ className='inpt_material'
  value={formData.to_to}
  onChange={(e) => setFormData({ ...formData, to_to: e.target.value })}/>
 
+
+
 <TextField
 className='inpt_material'
  id="filled-basic" 
@@ -238,16 +249,6 @@ className='inpt_material'
  value={formData.ta_ta}
  onChange={(e) => setFormData({ ...formData, ta_ta: e.target.value })}/>
 
-<TextField
-className='inpt_material'
- id="filled-basic" 
- label="Adresse" 
- variant="filled" 
- type='text'
- size="small"
- {...register("adresse", { required: "Veuillez entrer le point" })}
- value={formData.adresse}
- onChange={(e) => setFormData({ ...formData, adresse: e.target.value })}/>
 
 
 
@@ -262,6 +263,32 @@ className='inpt_material'
  value={formData.date}
  onChange={(e) => setFormData({ ...formData, date: e.target.value })}/>
 
+
+
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Telephone" 
+ variant="filled" 
+ type='number'
+ size="small"
+ {...register("telephone", { required: "Veuillez entrer le nom" })}
+ value={formData.telephone}
+ onChange={(e) => setFormData({ ...formData, telephone: e.target.value })}/>
+
+
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Adresse" 
+ variant="filled" 
+ type='text'
+ size="small"
+ {...register("adresse", { required: "Veuillez entrer le nom" })}
+ value={formData.adresse}
+ onChange={(e) => setFormData({ ...formData, adresse: e.target.value })}/>
 
 
 

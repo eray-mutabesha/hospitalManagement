@@ -8,16 +8,16 @@ import { faFolder } from '@fortawesome/free-solid-svg-icons'
 import DossieForm from './dialogue/DossierForm';
 import { useNavigate } from 'react-router-dom';
 
-export default function Parametre() {
+export default function Patient() {
   const navigate=useNavigate()
   const handleclick=()=>{
-    navigate("/profil")
+    navigate("/tableaupatient")
   }
   return (
     
           <nav className='navone'   onClick={handleclick}>
            <FontAwesomeIcon icon={faFolder} /> 
-           Mon Profil
+           Patients
           </nav>
           
   );

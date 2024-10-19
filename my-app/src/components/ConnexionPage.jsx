@@ -92,7 +92,7 @@ const onSubmit = (data) => {
         justifyContent: "space-between"
       }}>
       <Button variant="contained" sx={{marginTop:2}} type="submit">Connexion</Button>
-         <a href="/inscription"  style={{textDecoration:"none",marginTop:"35px"}}>Vous n'avez pas de compte?</a>
+         {/* <a href="/inscription"  style={{textDecoration:"none",marginTop:"35px"}}>Vous n'avez pas de compte?</a> */}
       
       </Box>
       </form>

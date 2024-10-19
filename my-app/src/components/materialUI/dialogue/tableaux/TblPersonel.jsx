@@ -31,6 +31,7 @@ import Icon from '../../Icon.jsx'
 import Ambulant from '../../Ambulant.jsx'
 import Hospital from '../../Hospital.jsx'
 import RendezVous from '../../RendezVous.jsx'
+import Sedeconecter from '../../Sedeconecter.jsx'
 
 
 function TblPersonel() {
@@ -110,6 +111,7 @@ if(FormVisible == false){
           {
             profil.service == "Reception"? (
               <div className='menus'>
+                <nav id='deconection'> <Sedeconecter/> </nav>
               <Dashboard />
               <Dossier/>
              <nav id='personaliser'><Reception/></nav>
@@ -117,6 +119,7 @@ if(FormVisible == false){
               <Parametre/>
               </div>):profil.service == "Consultation"? (
                         <div className='menus'>
+                          <nav id='deconection'> <Sedeconecter/> </nav>
                         <Dashboard />
                         <nav id='personaliser'><Consultation/></nav>
                         <RendezVous/>
@@ -125,22 +128,38 @@ if(FormVisible == false){
                        </div>
               ) : profil.service == "Laboratoire"? (
                 <div className='menus'>
+                  <nav id='deconection'> <Sedeconecter/> </nav>
                 <Dashboard />
                 <nav id='personaliser'><Laboratoire/></nav>
                 <Parametre/>
                </div>
               ): profil.service == "Hospitalisation"? (
                 <div className='menus'>
+                  <nav id='deconection'> <Sedeconecter/> </nav>
                 <Dashboard />
                 <nav id='personaliser'><Hospital/></nav>
                 <Parametre/>
                </div>
               ) : profil.service == "Ambulatoire"? (
                 <div className='menus'>
+                  <nav id='deconection'> <Sedeconecter/> </nav>
                 <Dashboard />
                 <nav id='personaliser'><Ambulant/></nav>
                 <Parametre/>
                </div>
+              ):profil.service == "Administrateur"?(
+                <div className='menus'>
+                <nav id='deconection'> <Sedeconecter /> </nav>
+                  <Dashboard />
+                    <Dossier/>
+                    <Reception/>
+                    <Consultation/>
+                     <Laboratoire/>
+                    <OrganisationClinique/>
+                    <nav id='personaliser'><Ressources/></nav>
+                    <Parametre/>
+                    
+                </div>
               ):null
 
           }

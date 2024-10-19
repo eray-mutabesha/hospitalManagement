@@ -27,7 +27,7 @@ function Deconnexion() {
        
     }}> 
    <img src='public\logoutimage-removebg-preview.png' alt='logoutimage' className='logoutimage'/>
-        <Typography sx={{color:"red"}} variant="h5">Oh !! voulez-vous vraiment vous deconnectez??</Typography>
+        <Typography sx={{color:""}} variant="h5">Oh !! voulez-vous vraiment vous deconnectez??</Typography>
         
         
         <Button  onClick={handleAcceuil} variant='outlined' sx={{

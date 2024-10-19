@@ -220,6 +220,7 @@ width={"100%"}>
             <MenuItem value="Laboratoire">Laboratoire</MenuItem>
             <MenuItem value="Hospitalisation">Hospitalisation</MenuItem>
             <MenuItem value="Ambulatoire">Ambulatoire</MenuItem>
+            <MenuItem value="Administrateur">Administrateur</MenuItem>
           
         </Select>
         </FormControl>

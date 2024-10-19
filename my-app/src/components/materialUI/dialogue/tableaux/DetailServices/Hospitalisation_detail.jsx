@@ -30,6 +30,8 @@ import Icon from '../../../Icon.jsx'
 import Ambulant from '../../../Ambulant.jsx'
 import Hospital from '../../../Hospital.jsx'
 import RendezVous from '../../../RendezVous.jsx'
+import Patient from '../../../Patients.jsx'
+import Sedeconecter from '../../../Sedeconecter.jsx'
 
 
 
@@ -50,11 +52,13 @@ function Hospitalisation_detail() {
  const navigate = useNavigate()
 
  const handledossier=()=>{
-   navigate("/hospitalisation",{ state: { detailData: data[0]?.id } })
+   if(profil.service == "Hospitalisation"){
+    navigate("/hospitalisation", { state: { detailData: data[0]?.id } });
+  }else{
+    navigate("/detaildossier", { state: { detailData: data[0]?.id } })
+  }
  }
- const fiche_de_nursing=(event, value) =>{
-  navigate(`/hospitalisationdetail${value}`)
-}
+
 
   // profil connected
   const [profil,setprofil]= useState([])
@@ -123,7 +127,7 @@ useEffect(()=>{
 
 
 
-console.log(nursing)
+console.log(nursing[0]?.temperature)
 
 
 
@@ -139,13 +143,16 @@ console.log(nursing)
           {
             profil.service == "Reception"? (
               <div className='menus'>
+                <nav id='deconection'> <Sedeconecter/> </nav>
               <Dashboard />
+              <Patient/>
               <Dossier/>
              <nav id='personaliser'><Reception/></nav>
              
               <Parametre/>
               </div>):profil.service == "Consultation"? (
                         <div className='menus'>
+                          <nav id='deconection'> <Sedeconecter/> </nav>
                         <Dashboard />
                         <nav id='personaliser'><Consultation/></nav>
                         <RendezVous/>
@@ -154,22 +161,38 @@ console.log(nursing)
                        </div>
               ) : profil.service == "Laboratoire"? (
                 <div className='menus'>
+                  <nav id='deconection'> <Sedeconecter/> </nav>
                 <Dashboard />
                 <nav id='personaliser'><Laboratoire/></nav>
                 <Parametre/>
                </div>
               ): profil.service == "Hospitalisation"? (
                 <div className='menus'>
+                  <nav id='deconection'> <Sedeconecter/> </nav>
                 <Dashboard />
                 <nav id='personaliser'><Hospital/></nav>
                 <Parametre/>
                </div>
               ) : profil.service == "Ambulatoire"? (
                 <div className='menus'>
+                  <nav id='deconection'> <Sedeconecter/> </nav>
                 <Dashboard />
                 <nav id='personaliser'><Ambulant/></nav>
                 <Parametre/>
                </div>
+              ):profil.service == "Administrateur"?(
+                <div className='menus'>
+                <nav id='deconection'> <Sedeconecter /> </nav>
+                  <Dashboard />
+                    <Dossier/>
+                    <Reception/>
+                    <Consultation/>
+                    <Laboratoire/>
+                    <nav id='personaliser'><OrganisationClinique/></nav>
+                    <Ressources/>
+                    <Parametre/>
+                    
+                </div>
               ):null
 
           }
@@ -207,9 +230,9 @@ console.log(nursing)
             Retour
            </Button>
 
-           <Stack mt={5} spacing={2}>
+           {/* <Stack mt={5} spacing={2}>
            <Pagination count={2} color="primary" onChange={fiche_de_nursing}/>
-           </Stack>
+           </Stack> */}
 
           </Box>
 
@@ -250,10 +273,10 @@ console.log(nursing)
 
           <Box sx={{
               
-              border:"1px solid rgb(201, 199, 199)",
-               backgroundImage:"url('moderate-aquamarine-dark-gradient-background_608506-1382.avif')",
-              backgroundRepeat:"no-repeat",
-              backgroundSize: "cover",
+             border:"1px solid rgb(201, 199, 199)",
+             backgroundImage:"url('moderate-aquamarine-dark-gradient-background_608506-1382.avif')",
+             backgroundRepeat:"no-repeat",
+             backgroundSize: "cover",
              backgroundPosition:"center",
              width:"150px",
              height:"150px",
@@ -272,7 +295,7 @@ console.log(nursing)
             </Box>
             </Box>
         
-         
+   { nursing[0]?.temperature?      
 <Box  sx={{
  overflowX:"auto",
  marginTop:"80px"
@@ -289,7 +312,8 @@ console.log(nursing)
                backgroundPosition:"center",
                color:"white"}}>
           <TableRow >
-            <TableCell sx={{ width: "100px",color:"white"}}>Date et heure</TableCell>
+            <TableCell sx={{ width: "100px",color:"white"}}>Date et heure</TableCell> 
+            <TableCell sx={{ width: "100px",color:"white"}}>temperature</TableCell>
             <TableCell sx={{ width: "100px",color:"white"}}>Diagnostic de prosomption</TableCell>
             <TableCell sx={{ width: "100px",color:"white"}}>Operation prevue</TableCell>
             <TableCell sx={{ width: "100px",color:"white"}}>Pouls</TableCell>
@@ -308,6 +332,7 @@ console.log(nursing)
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell >{nur?.updated_at}</TableCell>
+              <TableCell >{nur?.temperature}</TableCell>
               <TableCell >{nur?.diagnostic_de_prosomption}</TableCell>
               <TableCell >{nur?.operation_prevue}</TableCell>
               <TableCell > {nur?.pouls}</TableCell>
@@ -321,7 +346,7 @@ console.log(nursing)
         </TableBody>
       </Table>
     </TableContainer>
-    </Box>
+    </Box>:<Typography sx={{color:"red"}}>La fiche est vide pour le moment</Typography>}  
     </Box>
 
 

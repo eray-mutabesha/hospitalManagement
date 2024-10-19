@@ -25,6 +25,7 @@ import Dossier from '../../../Dossier';
 import Ambulant from '../../../Ambulant.jsx'
 import Hospital from '../../../Hospital.jsx'
 import RendezVous from '../../../RendezVous.jsx'
+import Patient from '../../../Patients.jsx'
 
 
 
@@ -68,7 +69,9 @@ const reception=()=>{
           {
             profil.service == "Reception"? (
               <div className='menus'>
+                
               <Dashboard />
+              <Patient/>
               <Dossier/>
              <nav id='personaliser'><Reception/></nav>
              

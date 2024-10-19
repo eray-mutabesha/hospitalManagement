@@ -18,6 +18,8 @@ import toast from 'react-hot-toast';
 import Ambulant from './materialUI/Ambulant.jsx'
 import Hospital from './materialUI/Hospital.jsx'
 import RendezVous from './materialUI/RendezVous.jsx'
+import Patient from './materialUI/Patients.jsx'
+import Sedeconecter from './materialUI/Sedeconecter.jsx'
 
 function UpdateProfil(singleData,onUpdate) {
   const BASE_URL = import.meta.env.VITE_API_URL;
@@ -84,13 +86,16 @@ function UpdateProfil(singleData,onUpdate) {
           {
             profil.service == "Reception"? (
               <div className='menus'>
+                <nav id='deconection'> <Sedeconecter /> </nav>
               <Dashboard />
+              <Patient/>
               <Dossier/>
              <nav id='personaliser'><Reception/></nav>
              
               <Parametre/>
               </div>):profil.service == "Consultation"? (
                         <div className='menus'>
+                          <nav id='deconection'> <Sedeconecter /> </nav>
                         <Dashboard />
                         <nav id='personaliser'><Consultation/></nav>
                         <RendezVous/>
@@ -99,18 +104,21 @@ function UpdateProfil(singleData,onUpdate) {
                        </div>
               ) : profil.service == "Laboratoire"? (
                 <div className='menus'>
+                  <nav id='deconection'> <Sedeconecter /> </nav>
                 <Dashboard />
                 <nav id='personaliser'><Laboratoire/></nav>
                 <Parametre/>
                </div>
               ): profil.service == "Hospitalisation"? (
                 <div className='menus'>
+                  <nav id='deconection'> <Sedeconecter /> </nav>
                 <Dashboard />
                 <nav id='personaliser'><Hospital/></nav>
                 <Parametre/>
                </div>
               ) : profil.service == "Ambulatoire"? (
                 <div className='menus'>
+                  <nav id='deconection'> <Sedeconecter /> </nav>
                 <Dashboard />
                 <nav id='personaliser'><Ambulant/></nav>
                 <Parametre/>

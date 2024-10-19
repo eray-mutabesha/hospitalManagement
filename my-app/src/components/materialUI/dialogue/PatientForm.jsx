@@ -37,7 +37,7 @@ export default function PatientForm() {
   });
 
 
-
+ 
     const onSubmit=(data)=>{
       console.log(data)
       axios.post(`${BASE_URL}/insert_patient`, data)
@@ -63,7 +63,8 @@ export default function PatientForm() {
                console.log(err);
                toast.error("Il y a une erreur");
              });
-  
+
+
     }
 
 

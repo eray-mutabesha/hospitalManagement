@@ -20,7 +20,11 @@ import Icon from './materialUI/Icon.jsx'
 import { useForm} from "react-hook-form"
 import { useNavigate } from 'react-router-dom'
 import NouveauAdminFORM from './NouveauAdminFORM.jsx'
-
+import Sedeconecter from './materialUI/Sedeconecter.jsx'
+import RendezVous from './materialUI/RendezVous.jsx'
+import Ambulant from './materialUI/Ambulant.jsx'
+import Hospital from './materialUI/Hospital.jsx'
+import Patient from './materialUI/Patients.jsx'
 
 function Profil() {
 
@@ -82,17 +86,62 @@ function Profil() {
         <div className='logo'>
             <img src='public/logo-removebg-preview.png' alt='logo hopital'/>
           </div>
-          <div className='menus'>
+          {
+            datas.service == "Reception"? (
+              <div className='menus'>
+                <nav id='deconection'> <Sedeconecter/> </nav>
               <Dashboard />
+              <Patient/>
               <Dossier/>
-              <Reception/>
-              <Consultation/>
-              <Laboratoire/>
-              <OrganisationClinique/>
-              <Factutation/>
-              <Ressources/>
-              <nav id='personaliser'><Parametre/></nav>
-          </div>
+             <nav id='personaliser'><Reception/></nav>
+             
+              <Parametre/>
+              </div>):datas.service == "Consultation"? (
+                        <div className='menus'>
+                          <nav id='deconection'> <Sedeconecter/> </nav>
+                        <Dashboard />
+                        <nav id='personaliser'><Consultation/></nav>
+                        <RendezVous/>
+                        <Parametre/>
+                       
+                       </div>
+              ) : datas.service == "Laboratoire"? (
+                <div className='menus'>
+                  <nav id='deconection'> <Sedeconecter/> </nav>
+                <Dashboard />
+                <nav id='personaliser'><Laboratoire/></nav>
+                <Parametre/>
+               </div>
+              ): datas.service == "Hospitalisation"? (
+                <div className='menus'>
+                  <nav id='deconection'> <Sedeconecter/> </nav>
+                <Dashboard />
+                <nav id='personaliser'><Hospital/></nav>
+                <Parametre/>
+               </div>
+              ) : datas.service == "Ambulatoire"? (
+                <div className='menus'>
+                  <nav id='deconection'> <Sedeconecter/> </nav>
+                <Dashboard />
+                <nav id='personaliser'><Ambulant/></nav>
+                <Parametre/>
+               </div>
+              ):datas.service == "Administrateur"?(
+                <div className='menus'>
+                <nav id='deconection'> <Sedeconecter /> </nav>
+                  <Dashboard />
+                    <Dossier/>
+                    <nav id='personaliser'><Reception/></nav>
+                    <Consultation/>
+                     <Laboratoire/>
+                    <OrganisationClinique/>
+                    <Ressources/>
+                    <Parametre/>
+                    
+                </div>
+              ):null
+
+          }
         </div>
         <div className='div_two' style={{
            height:"fit-content",
@@ -246,7 +295,19 @@ function Profil() {
             </Box>
            
           </div>
+         {
+          datas.service =="Administrateur"?
+          <Box sx={{
+            width:"100%",
+            display:"flex",
+            justifyContent:"center",
+            marginTop:"20px"
+          }}>
           <NouveauAdminFORM/>
+          </Box>: null
+          
+         }
+
 
 
 

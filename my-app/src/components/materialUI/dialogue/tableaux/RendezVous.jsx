@@ -32,6 +32,8 @@ import Icon from '../../Icon.jsx'
 import Ambulant from '../../Ambulant.jsx'
 import Hospital from '../../Hospital.jsx'
 import RendezVous from '../../RendezVous.jsx'
+import Patient from '../../Patients.jsx'
+import Sedeconecter from '../../Sedeconecter.jsx'
 
 
 function TblMedecins() {
@@ -102,33 +104,39 @@ function TblMedecins() {
           {
             profil.service == "Reception"? (
               <div className='menus'>
+                <nav id='deconection'> <Sedeconecter/> </nav>
               <Dashboard />
+              <Patient/>
               <Dossier/>
              <nav id='personaliser'><Reception/></nav>
              
               <Parametre/>
               </div>):profil.service == "Consultation"? (
                         <div className='menus'>
+                       <nav id='deconection'> <Sedeconecter/> </nav>
                         <Dashboard />
-                        <nav id='personaliser'><Consultation/></nav>
-                        <RendezVous/>
+                        <Consultation/>
+                       <nav id='personaliser'><RendezVous/></nav> 
                         <Parametre/>
                        
                        </div>
               ) : profil.service == "Laboratoire"? (
                 <div className='menus'>
+                  <nav id='deconection'> <Sedeconecter/> </nav>
                 <Dashboard />
                 <nav id='personaliser'><Laboratoire/></nav>
                 <Parametre/>
                </div>
               ): profil.service == "Hospitalisation"? (
                 <div className='menus'>
+                  <nav id='deconection'> <Sedeconecter/> </nav>
                 <Dashboard />
                 <nav id='personaliser'><Hospital/></nav>
                 <Parametre/>
                </div>
               ) : profil.service == "Ambulatoire"? (
                 <div className='menus'>
+                  <nav id='deconection'> <Sedeconecter/> </nav>
                 <Dashboard />
                 <nav id='personaliser'><Ambulant/></nav>
                 <Parametre/>
