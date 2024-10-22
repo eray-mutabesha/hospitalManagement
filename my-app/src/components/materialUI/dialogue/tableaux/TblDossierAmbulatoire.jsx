@@ -30,6 +30,7 @@ import Hospital from '../../Hospital.jsx'
 import RendezVous from '../../RendezVous.jsx'
 import Patient from '../../Patients.jsx'
 import Sedeconecter from '../../Sedeconecter.jsx'
+import SupressionChoix from '../../SupressionChoix.jsx'
 
 
 
@@ -100,7 +101,11 @@ useEffect(()=>{
 
 
 
-
+const [searchTerm, setSearchTerm] = useState(''); // État pour la recherche
+// Filtrer les dossiers en fonction de la recherche
+const filteredDatas = datas.filter((dat) =>
+  dat.nom_patient.toLowerCase().includes(searchTerm.toLowerCase()) // Filtre par nom du patient
+);
 
 
   return (
@@ -171,7 +176,12 @@ useEffect(()=>{
         <div className='header'>
               <div className='recherch'>
                <FontAwesomeIcon icon={faMagnifyingGlass} /> 
-               <input type="text" placeholder='recherch'/>
+               <input
+                type="text"
+                placeholder="recherch"
+                value={searchTerm} // Lier la valeur de l'input à l'état searchTerm
+                onChange={(e) => setSearchTerm(e.target.value)} // Mettre à jour la recherche à chaque saisie
+              />
               </div>
 
               <div className='administrateur'>
@@ -204,8 +214,8 @@ useEffect(()=>{
           
           
         }}>
-          <Typography variant='h5'>Dossiers des patients ambulants</Typography>
-        <TableContainer component={Paper}>
+          <Typography variant='h5'>AMBULATOIRE</Typography>
+        <TableContainer component={Paper} sx={{marginTop:"45px"}}>
       <Table sx={{ textAlign:"left"}} size="small" aria-label="a dense table">
         <TableHead  
               sx={{ backgroundImage:"url('moderate-aquamarine-dark-gradient-background_608506-1382.avif')",
@@ -221,8 +231,16 @@ useEffect(()=>{
             <TableCell align="right" sx={{color:"white"}}>ACTION</TableCell>
           </TableRow>
         </TableHead>
+        
+
+                      {/* Si aucun élément n'est trouvé, afficher un message */}
+                      {filteredDatas.length === 0 ? (
+                <Typography variant="body1" sx={{ textAlign: "center", marginTop: "20px" ,color:"red"}}>
+                  Aucun dossier trouvé pour "{searchTerm}"
+                </Typography>
+              ) :( 
         <TableBody>
-        {datas?.map((dat,index) => (
+        {filteredDatas?.map((dat,index) => (
             <TableRow
               key={index}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -234,15 +252,14 @@ useEffect(()=>{
               <TableCell >{dat.date_entre}</TableCell>
               <TableCell sx={{color:"red"}}>En attente...</TableCell>
               <TableCell align="right" sx={{display:"flex",gap:"10px"}}>
-
-                <Button size="small" variant="outlined" color="error" startIcon={<DeleteIcon />}  onClick={() => deleteEntree(dat)}>Sup</Button>
+                <SupressionChoix deleteEntree={() => deleteEntree(dat)}/>
                 <Button sx={{border:"1px solid rgb(201, 199, 199)",color:"black"}} onClick={()=>handledetail(dat)}>Details</Button>
                 
                 </TableCell>
             </TableRow>
           ))}
 
-        </TableBody>
+        </TableBody>)}
       </Table>
     </TableContainer>
     </Box>

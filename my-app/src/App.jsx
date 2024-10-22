@@ -34,7 +34,8 @@ import Hospital from './components/materialUI/Hospital.jsx'
 import Ambulant from './components/materialUI/Ambulant.jsx'
 import Patient from './components/materialUI/Patients.jsx'
 import Sedeconecter from './components/materialUI/Sedeconecter.jsx'
-
+import SupressionXicon from './components/materialUI/SupressionXicon.jsx'
+import ValidXicon from './components/materialUI/ValidXicon.jsx'
 
 
 
@@ -126,7 +127,13 @@ useEffect(()=>{
   get_all_rdv()
   },[])
  
- console.log(rdv)
+  const [searchTerm, setSearchTerm] = useState(''); // État pour la recherche
+  // Filtrer les dossiers en fonction de la recherche
+  const filteredDatas = rdv.filter((dat) =>
+    dat.nom_patient.toLowerCase().includes(searchTerm.toLowerCase()) // Filtre par nom du patient
+  );
+  
+
   return (
 
     <>
@@ -196,7 +203,12 @@ useEffect(()=>{
            <div className='header'>
               <div className='recherch'>
                <FontAwesomeIcon icon={faMagnifyingGlass} /> 
-               <input type="text" placeholder='recherch'/>
+               <input
+                type="text"
+                placeholder="recherch"
+                value={searchTerm} // Lier la valeur de l'input à l'état searchTerm
+                onChange={(e) => setSearchTerm(e.target.value)} // Mettre à jour la recherche à chaque saisie
+              />
               </div>
 
               <div className='administrateur'>
@@ -384,10 +396,16 @@ useEffect(()=>{
 
 
    
+                      {/* Si aucun élément n'est trouvé, afficher un message */}
+                      {filteredDatas.length === 0 ? (
+                <Typography variant="body1" sx={{ textAlign: "center", marginTop: "20px" ,color:"red"}}>
+                  Aucun dossier trouvé pour "{searchTerm}"
+                </Typography>
+              ) :( 
       <Table  aria-label="caption table">
       
            
-            {rdv.map((dat,index) => (
+            {filteredDatas.map((dat,index) => (
               <TableHead key={index}>
               <TableRow >
                 <TableCell>{dat.nom_patient}</TableCell>
@@ -399,31 +417,9 @@ useEffect(()=>{
                     justifyContent:"flex-end",
                     gap:"10px"
                   }}>
-                  <Box sx={{
-                    border:"2px solid green",
-                    width:"20px",
-                    height:"20px",
-                    borderRadius:"50%",
-                    display:"flex",
-                    alignItems:"center",
-                    justifyContent:"center",
-                    color:"green"
-                    
-                  }}>
-                    <FontAwesomeIcon icon={faCheck} style={{fontSize:"13px"}}   onClick={()=>acceptedRdv(dat)}/>
-                  </Box>
-                  <Box sx={{
-                    border:"2px solid red",
-                    width:"20px",
-                    height:"20px",
-                    borderRadius:"50%",
-                    display:"flex",
-                    alignItems:"center",
-                    justifyContent:"center",
-                    color:"red"
-                  }}>
-                    <FontAwesomeIcon icon={faXmark} style={{fontSize:"13px"}}   onClick={()=>deleteRdv(dat)}/>
-                  </Box>
+  
+                  <ValidXicon acceptedRdv={()=>acceptedRdv(dat)}/>
+                  <SupressionXicon deleteRdv={()=>deleteRdv(dat)}/>
                   </Box>
                   </TableCell>
               </TableRow>
@@ -431,7 +427,7 @@ useEffect(()=>{
           ))}
 
 
-      </Table>
+      </Table>)}
     </TableContainer>
     </Box>
         </div>

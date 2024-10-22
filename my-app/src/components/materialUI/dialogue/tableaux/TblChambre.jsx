@@ -386,7 +386,7 @@ const onsubmit = (formData) => {
         gap:"20px",
         marginTop:"10px"
      }}>
-
+      
       <Button variant='outlined' onClick={detail}>Voire la fiche</Button>
        <ChoixTransferClt/>
        

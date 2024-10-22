@@ -35,6 +35,7 @@ import Hospital from '../../Hospital.jsx'
 import RendezVous from '../../RendezVous.jsx'
 import Patient from '../../Patients.jsx'
 import Sedeconecter from '../../Sedeconecter.jsx'
+import SupressionChoix from '../../SupressionChoix.jsx'
 
 
 function Tout_les_dossiers() {
@@ -217,13 +218,8 @@ useEffect(() => {
           <Typography variant='h5'>Tout les dossiers des patients</Typography>
 
 
-                        {/* Si aucun élément n'est trouvé, afficher un message */}
-                        {filteredDatas.length === 0 ? (
-                <Typography variant="body1" sx={{ textAlign: "center", marginTop: "20px" }}>
-                  Aucun dossier trouvé pour "{searchTerm}"
-                </Typography>
-              ) : (
-        <TableContainer component={Paper}>
+
+        <TableContainer component={Paper} sx={{marginTop:"40px"}}>
       <Table sx={{ textAlign:"left"}} size="small" aria-label="a dense table">
         <TableHead  
               sx={{ backgroundImage:"url('moderate-aquamarine-dark-gradient-background_608506-1382.avif')",
@@ -239,6 +235,12 @@ useEffect(() => {
             <TableCell align="right" sx={{color:"white"}}>ACTION</TableCell>
           </TableRow>
         </TableHead>
+                                {/* Si aucun élément n'est trouvé, afficher un message */}
+                                {filteredDatas.length === 0 ? (
+                <Typography variant="body1" sx={{ textAlign: "center", marginTop: "20px" ,color:"red"}}>
+                  Aucun dossier trouvé pour "{searchTerm}"
+                </Typography>
+              ) : (
         <TableBody>
           {filteredDatas.map((dat,index) => (
             <TableRow
@@ -252,15 +254,16 @@ useEffect(() => {
               <TableCell >{dat.date_entre}</TableCell>
               <TableCell sx={{color:"red"}}>En attente...</TableCell>
               <TableCell align="right" sx={{display:"flex",gap:"10px"}}>
-                <Button size="small" variant="outlined" color="error" startIcon={<DeleteIcon />}  onClick={() => deleteEntree(dat)}>Sup</Button>
+                {/* <Button size="small" variant="outlined" color="error" startIcon={<DeleteIcon />}  onClick={() => deleteEntree(dat)}>Sup</Button> */}
+                <SupressionChoix deleteEntree={() => deleteEntree(dat)}/>
                 <Button sx={{border:"1px solid rgb(201, 199, 199)",color:"black"}} onClick={()=>handledetail(dat)}>Details</Button>
                 <ChoixtransferTout_les_Dossier  dat={dat}/>
                 </TableCell>
             </TableRow>
           ))}
-        </TableBody>
+        </TableBody>)}
       </Table>
-    </TableContainer>)}
+    </TableContainer>
     </Box>
     </Box>  
         </div>

@@ -34,6 +34,7 @@ import Hospital from '../../Hospital.jsx'
 import RendezVous from '../../RendezVous.jsx'
 import Patient from '../../Patients.jsx'
 import Sedeconecter from '../../Sedeconecter.jsx'
+import SupressionChoix from '../../SupressionChoix.jsx'
 
 
 function TblMedecins() {
@@ -90,7 +91,12 @@ function TblMedecins() {
 
 
     
-    
+  const [searchTerm, setSearchTerm] = useState(''); // État pour la recherche
+  // Filtrer les dossiers en fonction de la recherche
+  const filteredDatas = datas.filter((dat) =>
+    dat.nom_patient.toLowerCase().includes(searchTerm.toLowerCase()) // Filtre par nom du patient
+  );
+  
 
 
   return (
@@ -101,8 +107,7 @@ function TblMedecins() {
         <div className='logo'>
             <img src='public/logo-removebg-preview.png' alt='logo hopital'/>
           </div>
-          {
-            profil.service == "Reception"? (
+          {profil.service == "Reception"? (
               <div className='menus'>
                 <nav id='deconection'> <Sedeconecter/> </nav>
               <Dashboard />
@@ -113,10 +118,10 @@ function TblMedecins() {
               <Parametre/>
               </div>):profil.service == "Consultation"? (
                         <div className='menus'>
-                       <nav id='deconection'> <Sedeconecter/> </nav>
+                          <nav id='deconection'> <Sedeconecter/> </nav>
                         <Dashboard />
-                        <Consultation/>
-                       <nav id='personaliser'><RendezVous/></nav> 
+                        <nav id='personaliser'><Consultation/></nav>
+                        <RendezVous/>
                         <Parametre/>
                        
                        </div>
@@ -141,6 +146,19 @@ function TblMedecins() {
                 <nav id='personaliser'><Ambulant/></nav>
                 <Parametre/>
                </div>
+              ):profil.service == "Administrateur"?(
+                <div className='menus'>
+                <nav id='deconection'> <Sedeconecter /> </nav>
+                  <Dashboard />
+                    <Dossier/>
+                    <Reception/>
+                     <Consultation/>
+                    <Laboratoire/>
+                    <nav id='personaliser'> <OrganisationClinique/></nav>
+                    <Ressources/>
+                    <Parametre/>
+                    
+                </div>
               ):null
 
           }
@@ -150,7 +168,12 @@ function TblMedecins() {
         <div className='header'>
               <div className='recherch'>
                <FontAwesomeIcon icon={faMagnifyingGlass} /> 
-               <input type="text" placeholder='recherch'/>
+               <input
+                type="text"
+                placeholder="recherch"
+                value={searchTerm} // Lier la valeur de l'input à l'état searchTerm
+                onChange={(e) => setSearchTerm(e.target.value)} // Mettre à jour la recherche à chaque saisie
+              />
               </div>
 
               <div className='administrateur'>
@@ -178,8 +201,8 @@ function TblMedecins() {
           marginRight:"auto",
           marginTop:"50px"
         }}>
-          <Typography variant='h5'>Tout les Rendez-vous prevus</Typography>
-        <TableContainer component={Paper}>
+          <Typography variant='h5'>RENDEZ-VOUS</Typography>
+        <TableContainer component={Paper} sx={{marginTop:"45px"}}>
       <Table sx={{ minWidth: 950 ,textAlign:"left"}} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow >
@@ -194,14 +217,21 @@ function TblMedecins() {
 
           </TableRow>
         </TableHead>
+
+                              {/* Si aucun élément n'est trouvé, afficher un message */}
+                              {filteredDatas.length === 0 ? (
+                <Typography variant="body1" sx={{ textAlign: "center", marginTop: "20px" ,color:"red"}}>
+                  Aucun dossier trouvé pour "{searchTerm}"
+                </Typography>
+              ) :( 
         <TableBody>
-          {datas.map((dat,index) => (
+          {filteredDatas.map((dat,index) => (
             <TableRow
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               key={index}
             >
               <TableCell component="th" scope="row">
-                {dat.id}
+                {index+1}
               </TableCell>
               <TableCell >{dat.nom_patient}</TableCell>
               <TableCell >{dat.date_entre}</TableCell>
@@ -216,12 +246,12 @@ function TblMedecins() {
               }}>
                
                 
-                <Button size="small" variant="outlined" onClick={() => deleteEntree(dat)}>TERMINER</Button>
+               <SupressionChoix deleteEntree={() => deleteEntree(dat)}/>
                 </Box>
               </TableCell>
             </TableRow>
           ))}
-        </TableBody>
+        </TableBody>)}
       </Table>
     </TableContainer>
     </Box>
