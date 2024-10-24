@@ -32,7 +32,6 @@ import TblDossierLaboratoire from './components/materialUI/dialogue/tableaux/Tbl
 import TblDossierHospitalisation from './components/materialUI/dialogue/tableaux/TblDossierHospitalisation.jsx';
 import UpdateProfil from './components/UpdateProfil.jsx';
 import TblMedicamentAutre from './components/materialUI/dialogue/tableaux/TblMedicamentAutre.jsx';
-import { DossierProvider } from './DossierContext'; 
 import Tout_les_dossiers from './components/materialUI/dialogue/tableaux/Tout_les_dossiers.jsx';
 import TblDossierAmbulatoire from './components/materialUI/dialogue/tableaux/TblDossierAmbulatoire.jsx';
 import RendezVous from './components/materialUI/dialogue/tableaux/RendezVous.jsx';
@@ -178,12 +177,12 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   
 
   <React.StrictMode>
-    <DossierProvider>
+
 
     <Toaster />
     <RouterProvider router={routes}></RouterProvider>
     
-    </DossierProvider>
+   
   </React.StrictMode>,
 )
 

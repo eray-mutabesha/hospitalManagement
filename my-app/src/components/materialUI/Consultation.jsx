@@ -2,7 +2,7 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBed } from '@fortawesome/free-solid-svg-icons'
+import {  faFile} from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom';
 
 
@@ -13,9 +13,10 @@ const navigate=useNavigate()
    navigate("/acceuilconsultation")
   }
   return (
+    
        <>
           <nav onClick={handleclick} className='navone'>
-           <FontAwesomeIcon icon={faBed} /> 
+           <FontAwesomeIcon icon={faFile} /> 
             Consultation
           </nav>
         </>

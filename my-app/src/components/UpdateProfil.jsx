@@ -22,6 +22,19 @@ import Patient from './materialUI/Patients.jsx'
 import Sedeconecter from './materialUI/Sedeconecter.jsx'
 
 function UpdateProfil(singleData,onUpdate) {
+
+  const [datas,setdatas]=useState([])
+
+  const getUserData = () => {
+    const INFO_Utilisateur_from_localStorage = JSON.parse(localStorage.getItem('Utilisateur'));
+    setdatas(INFO_Utilisateur_from_localStorage);
+  }
+
+
+
+
+
+
   const BASE_URL = import.meta.env.VITE_API_URL;
   const { register, handleSubmit,formState:{errors} } = useForm();
 
@@ -45,6 +58,7 @@ function UpdateProfil(singleData,onUpdate) {
        
       });
     }
+    getUserData()
   }, [singleData]);
 
 
@@ -71,6 +85,8 @@ function UpdateProfil(singleData,onUpdate) {
          console.log(err);
          toast.error("pas de mise en jour ");
        });
+   } else{
+    console.log("singleData undefined")
    }
 }
   
@@ -84,45 +100,58 @@ function UpdateProfil(singleData,onUpdate) {
             <img src='public/logo-removebg-preview.png' alt='logo hopital'/>
           </div>
           {
-            profil.service == "Reception"? (
+            datas.service == "Reception"? (
               <div className='menus'>
-                <nav id='deconection'> <Sedeconecter /> </nav>
+                <nav id='deconection'> <Sedeconecter/> </nav>
               <Dashboard />
               <Patient/>
               <Dossier/>
              <nav id='personaliser'><Reception/></nav>
              
               <Parametre/>
-              </div>):profil.service == "Consultation"? (
+              </div>):datas.service == "Consultation"? (
                         <div className='menus'>
-                          <nav id='deconection'> <Sedeconecter /> </nav>
+                          <nav id='deconection'> <Sedeconecter/> </nav>
                         <Dashboard />
                         <nav id='personaliser'><Consultation/></nav>
                         <RendezVous/>
                         <Parametre/>
                        
                        </div>
-              ) : profil.service == "Laboratoire"? (
+              ) : datas.service == "Laboratoire"? (
                 <div className='menus'>
-                  <nav id='deconection'> <Sedeconecter /> </nav>
+                  <nav id='deconection'> <Sedeconecter/> </nav>
                 <Dashboard />
                 <nav id='personaliser'><Laboratoire/></nav>
                 <Parametre/>
                </div>
-              ): profil.service == "Hospitalisation"? (
+              ): datas.service == "Hospitalisation"? (
                 <div className='menus'>
-                  <nav id='deconection'> <Sedeconecter /> </nav>
+                  <nav id='deconection'> <Sedeconecter/> </nav>
                 <Dashboard />
                 <nav id='personaliser'><Hospital/></nav>
                 <Parametre/>
                </div>
-              ) : profil.service == "Ambulatoire"? (
+              ) : datas.service == "Ambulatoire"? (
                 <div className='menus'>
-                  <nav id='deconection'> <Sedeconecter /> </nav>
+                  <nav id='deconection'> <Sedeconecter/> </nav>
                 <Dashboard />
                 <nav id='personaliser'><Ambulant/></nav>
                 <Parametre/>
                </div>
+              ):datas.service == "Administrateur"?(
+                <div className='menus'>
+                <nav id='deconection'> <Sedeconecter /> </nav>
+                  <Dashboard />
+                    <Dossier/>
+                    <nav id='personaliser'><Reception/></nav>
+                    <Consultation/>
+                     <Laboratoire/>
+                    <OrganisationClinique/>
+                    <Ressources/>
+                    <Parametre/>
+                    
+                </div>
               ):null
 
           }
@@ -205,7 +234,7 @@ function UpdateProfil(singleData,onUpdate) {
               <input type='texte'  
               placeholder='Nom complet'
               {...register("nom", { required:false})}
-              value={formData.nom}
+              defaultValue={formData.nom || datas.nom} 
               onChange={(e) => setFormData({ ...formData, nom: e.target.value })}/>
               </p>
              
@@ -222,7 +251,7 @@ function UpdateProfil(singleData,onUpdate) {
               }}><p><strong>Fonction : </strong>
               <input type='texte'
                  {...register("fonction", { required:false})}
-                 value={formData.fonction}
+                 defaultValue={formData.fonction || datas.fonction} 
                  onChange={(e) => setFormData({ ...formData, fonction: e.target.value })}/>
               </p>
               </Box>
@@ -238,7 +267,7 @@ function UpdateProfil(singleData,onUpdate) {
                  borderRadius:"5px"
               }}><p><strong>Adresse : </strong><input type='texte'
               {...register("Adresse", { required:false})}
-               value={formData.Adresse}
+              defaultValue={formData.Adresse || datas.Adresse} 
                onChange={(e) => setFormData({ ...formData, Adresse: e.target.value })}/></p>
               </Box>
 
@@ -256,9 +285,10 @@ function UpdateProfil(singleData,onUpdate) {
               <select
             className='select'
             {...register("sexe", { required:false})}
-            value={formData.sexe}
+            defaultValue={formData.sexe || datas.sexe} 
             onChange={(e) => setFormData({ ...formData, sexe: e.target.value })}
           >
+
 
           <option value="">Genre</option>
           <option value="Masculin">Masculin</option>
@@ -281,7 +311,7 @@ function UpdateProfil(singleData,onUpdate) {
               }}><p><strong>Email : </strong>
               <input type='texte' 
               {...register("email", { required:false})}
-              value={formData.email}
+              defaultValue={formData.email || datas.email} 
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}/></p>
               </Box>
               <Button type='submit'>Enregistrer la modification</Button>

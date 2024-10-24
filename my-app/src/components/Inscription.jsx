@@ -1,109 +1,136 @@
-import React, { useState,useEffect } from 'react'
-import { useNavigate } from "react-router-dom"; 
-import { Link } from 'react-router-dom';
-import { useForm} from "react-hook-form"
-import toast from 'react-hot-toast';
-import axios from 'axios';
+import * as React from 'react';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import { useForm} from "react-hook-form";
 import { Stack,Box,Typography,TextField,Button,InputLabel,Select,MenuItem,FormControl} from '@mui/material'
 
 
 
-function Inscription() {
+import { useState,useEffect } from 'react';
+import toast from 'react-hot-toast';
+import axios from 'axios';
 
 
-const BASE_URL = import.meta.env.VITE_API_URL;
 
-const { register, handleSubmit,formState:{errors} } = useForm();
-// const { onChange} = register('select');
- const navigate=useNavigate()
- 
-//protection de route
-useEffect(()=>{
-  if(localStorage.getItem("Utilisateur")){
-     navigate("/home");
-     }
-  })
+export default function Inscription() {
 
- const [formData, setFormData] = useState({
-  nom: "",
-  fonction: "",
-  sexe: "",
-  Adresse:"",
-  email: "",
-  password: "",
-  password_confirm:""
-});
+    const [open, setOpen] = React.useState(false);
 
 
- const onSubmit=(data)=>{
- 
-    if(data.password !== data.password_confirm){
-      toast.error("verifiez votre mot de passe")
-    }else{
+
+    const handleClickOpen = () => {
+      setOpen(true);
       
-      
-      axios.post(`${BASE_URL}/getadminData_admin`, {
-        email: data.email,
-        password:data.password
-    }).then((res) => {
-        if (res.data.exists) {
-          
-          toast.error("Un compte existe deja avec ce Mail");
-        } 
-        else {
-          
-          localStorage.setItem("Utilisateur", JSON.stringify(data));
-              
-          axios.post(`${BASE_URL}/insert_admin`, data)
-          
-          .then(({ data }) => {
-            if (data.status == 500) {
-              toast.error("Il y a une erreur");
-            } else {
-            console.log(res.data)
-             navigate("/home")
-             toast.success("inscription réussi");
-             
-            
-          }
-          })
-           .catch((err) => {
-             console.log(err);
-             toast.error("Il y a une erreur");
-           });
-        }
-    })
+    };
+    const handleClose = () => {
+        setOpen(false);
+        window.location.reload();
+      };
   
-    .catch((err) => {
-          console.log(err)
-         toast.error("erreur technique essayer plus tard");
-        
+    const BASE_URL = import.meta.env.VITE_API_URL;
+
+    const { register, handleSubmit,formState:{errors} } = useForm();
+
+    
+    
+     const [formData, setFormData] = useState({
+      nom: "",
+      fonction: "",
+      sexe: "",
+      Adresse:"",
+      email: "",
+      service:"",
+      password: "",
+      password_confirm:"",
+      image:null
     });
-  
-       
+    
+    
+
+
+
+
+    const onSubmit = async (data) => {
+      if (data.password !== data.password_confirm) {
+        toast.error("Vérifiez votre mot de passe");
+        return;
       }
-
-
-  }
-
-   
+    
+      try {
+        const res = await axios.post(`${BASE_URL}/getadminData_admin`, {
+          email: data.email,
+          password: data.password,
+        });
+    
+        if (res.data.exists) {
+          toast.error("Un compte existe déjà avec ce Mail");
+          return;
+        }
+    
+        const formData = new FormData();
+        formData.append('nom', data.nom);
+        formData.append('sexe', data.sexe);
+        formData.append('fonction', data.fonction);
+        formData.append('Adresse', data.Adresse);
+        formData.append('email', data.email);
+        formData.append('service', data.service);
+        formData.append('password', data.password);
+        if (data.image) {
+          formData.append('image', data.image);
+        }
+    
+        localStorage.setItem("Utilisateur", JSON.stringify(data));
+    
+        const response = await axios.post(`${BASE_URL}/insert_admin`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+    
+        if (response.data.status === 500) {
+          toast.error("Il y a une erreur");
+        } else {
+          console.log(response.data);
+          toast.success("Inscription réussie");
+        }
+      } catch (err) {
+        console.log(err);
+        toast.error("Erreur technique, essayez plus tard");
+      }
+    };
+    
   
 
 
   return (
+    <React.Fragment > 
+      <Button onClick={handleClickOpen} variant="contained"  >
+        Creer un administrateur
+       </Button>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title" >
+          {"Creer un administrateur"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+          <Box>
 
-<div style={{background: "rgb(223, 216, 216)"}}>
-<Stack 
+          <Stack 
 alignItems={"center"} justifyContent={"center"}
-width={"100%"} height={"100vh"}>
+width={"100%"}>
   <Box  width={400} 
   sx={{backgroundColor:"white",
       padding:3
   }}>
-  <Typography variant="h5">
-    Connexion
-  </Typography>
-
+ 
 
 
 
@@ -174,30 +201,67 @@ width={"100%"} height={"100vh"}>
         onChange={(e) => setFormData({ ...formData, password_confirm: e.target.value })}/>
    
 
-       <TextField id="filled-basic" label="" variant="filled" type="file" fullWidth size='small' 
+       {/* <TextField id="filled-basic" label="" variant="filled" type="file" fullWidth size='small' 
          {...register("file", { required: "Veuillez entrer le nom" })}
         value={formData.file}
-        onChange={(e) => setFormData({ ...formData, file: e.target.value })}/>
+        onChange={(e) => setFormData({ ...formData, file: e.target.value })}/> */}
+
+<FormControl variant="filled">
+        <InputLabel id="demo-simple-select-filled-label">Service</InputLabel>
+        <Select
+           labelId="demo-simple-select-filled-label"
+          id="demo-simple-select-standard"
+          size="small"
+          {...register("service", { required: "Veuillez entrer le nom" })}
+          value={formData.service}
+          onChange={(e) => setFormData({ ...formData, service: e.target.value })}>
+
+            
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
         
+            <MenuItem value="Reception">Reception</MenuItem>
+            <MenuItem value="Consultation">Consultation</MenuItem>
+            <MenuItem value="Laboratoire">Laboratoire</MenuItem>
+            <MenuItem value="Hospitalisation">Hospitalisation</MenuItem>
+            <MenuItem value="Ambulatoire">Ambulatoire</MenuItem>
+            <MenuItem value="Administrateur">Administrateur</MenuItem>
+          
+        </Select>
+        </FormControl>
+        
+        {/* <input 
+    type="file" 
+    accept="image/*" 
+    required 
+    {...register("image", { required: "Veuillez sélectionner une image" })}
+    onChange={(e) => {
+        const file = e.target.files[0]; // Récupérer le premier fichier sélectionné
+        setFormData({ ...formData, image: file }); // Mettre à jour formData avec le fichier
+    }} 
+/> */}
+
   </Box>
-  <Box sx={{
-    
-    display:"flex",
-    justifyContent: "space-between"
-  }}>
-  <Button variant="contained" sx={{marginTop:2}} type="submit">Inscription</Button>
-     <a href="/"  style={{textDecoration:"none",marginTop:"35px"}}>Vous avez deja compte?</a>
-  
-  </Box>
+
+
+
+  <DialogActions>
+          <Button variant="contained" color="error" onClick={handleClose}>Annuler</Button>
+          <Button  variant="contained" color="success" type='submit'>
+           Enregistrer
+       </Button>
+</DialogActions>
+
   </form>
   </Box>
 </Stack>
-</div>
 
-  )
+       </Box>
+          </DialogContentText>
+        </DialogContent>
+        
+      </Dialog>
+    </React.Fragment>
+  );
 }
-
-export default Inscription
-
-
-

@@ -10,7 +10,6 @@ import { useNavigate } from 'react-router-dom';
 import SendIcon from '@mui/icons-material/Send';
 import SaveIcon from '@mui/icons-material/Save';
 import Laboratoire from './Laboratoire';
-import { DossierContext } from '../../DossierContext.jsx';
 import { useContext } from 'react';
 import toast from 'react-hot-toast';
 import axios from 'axios';

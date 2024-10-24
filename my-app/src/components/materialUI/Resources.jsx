@@ -4,7 +4,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTableColumns } from '@fortawesome/free-solid-svg-icons'
+import { faHospital } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom';
 
 
@@ -31,7 +31,7 @@ const navigate=useNavigate()
       {(popupState) => (
         <React.Fragment>
           <nav  {...bindTrigger(popupState)} className='navone'>
-           <FontAwesomeIcon icon={faTableColumns} /> 
+           <FontAwesomeIcon icon={faHospital} /> 
            Ressources
           </nav>
           <Menu {...bindMenu(popupState)}>

@@ -24,7 +24,6 @@ import axios from 'axios';
 import  {toast} from 'react-hot-toast';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useContext} from 'react'
-import { DossierContext } from '../../../../DossierContext.jsx'
 import Dossier from '../../Dossier.jsx'
 import Icon from '../../Icon.jsx'
 import Ambulant from '../../Ambulant.jsx'
@@ -59,7 +58,6 @@ function TblDossierConsultation() {
      },[])
   
   const BASE_URL = import.meta.env.VITE_API_URL;
-  const { setDossier } = useContext(DossierContext);
 const [data,setDatas]=useState([])
 
   const get_dossiers_consultation = () => {

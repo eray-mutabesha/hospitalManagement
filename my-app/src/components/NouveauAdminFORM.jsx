@@ -44,59 +44,159 @@ export default function NouveauAdminFORM() {
       email: "",
       service:"",
       password: "",
-      password_confirm:""
+      password_confirm:"",
+      image:null
     });
     
     
-     const onSubmit=(data)=>{
-     
-        if(data.password !== data.password_confirm){
-          toast.error("verifiez votre mot de passe")
-        }else{
-          
-          
-          axios.post(`${BASE_URL}/getadminData_admin`, {
-            email: data.email,
-            password:data.password
-        }).then((res) => {
-            if (res.data.exists) {
-              
-              toast.error("Un compte existe deja avec ce Mail");
-            } 
-            else {
-              
-              localStorage.setItem("Utilisateur", JSON.stringify(data));
-                  
-              axios.post(`${BASE_URL}/insert_admin`, data)
-              
-              .then(({ data }) => {
-                if (data.status == 500) {
-                  toast.error("Il y a une erreur");
-                } else {
-                console.log(res.data)
-                 toast.success("inscription réussi");
-                 
-                
-              }
-              })
-               .catch((err) => {
-                 console.log(err);
-                 toast.error("Il y a une erreur");
-               });
-            }
-        })
-      
-        .catch((err) => {
-              console.log(err)
-             toast.error("erreur technique essayer plus tard");
-            
-        });
-      
-           
-          }
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    const onSubmit = async (data) => {
+      if (data.password !== data.password_confirm) {
+        toast.error("Vérifiez votre mot de passe");
+        return;
       }
+    
+      try {
+        const res = await axios.post(`${BASE_URL}/insert_admin`, {
+          email: data.email,
+          password: data.password,
+        });
+    
+        if (res.data.exists) {
+          toast.error("Un compte existe déjà avec ce Mail");
+          return;
+        }
+    
+        // Création d'un nouvel objet FormData pour inclure les champs du formulaire et l'image
+        const formData = new FormData();
+        formData.append('nom', data.nom);
+        formData.append('sexe', data.sexe);
+        formData.append('fonction', data.fonction);
+        formData.append('Adresse', data.Adresse);
+        formData.append('email', data.email);
+        formData.append('service', data.service);
+        formData.append('password', data.password);
+    
+        // Ajouter l'image sélectionnée dans le FormData si présente
+        if (data.image && data.image.length > 0) {
+          formData.append('image', data.image[0]); // data.image est un tableau
+        }
+    
+        localStorage.setItem("Utilisateur", JSON.stringify(data));
+    
+        const response = await axios.post(`${BASE_URL}/insert_admin`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+    
+        if (response.data.status === 500) {
+          toast.error("Il y a une erreur");
+        } else {
+          console.log(response.data);
+          toast.success("Inscription réussie");
+        }
+      } catch (err) {
+        console.log(err);
+        toast.error("Erreur technique, essayez plus tard");
+      }
+    };
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    const onSubmi = async (data) => {
+      if (data.password !== data.password_confirm) {
+        toast.error("Vérifiez votre mot de passe");
+        return;
+      }
+    
+      try {
+        const res = await axios.post(`${BASE_URL}/getadminData_admin`, {
+          email: data.email,
+          password: data.password,
+        });
+    
+        if (res.data.exists) {
+          toast.error("Un compte existe déjà avec ce Mail");
+          return;
+        }
+    
+        const formData = new FormData();
+        formData.append('nom', data.nom);
+        formData.append('sexe', data.sexe);
+        formData.append('fonction', data.fonction);
+        formData.append('Adresse', data.Adresse);
+        formData.append('email', data.email);
+        formData.append('service', data.service);
+        formData.append('password', data.password);
+        if (data.image) {
+          formData.append('image', data.image);
+        }
+    
+        localStorage.setItem("Utilisateur", JSON.stringify(data));
+    
+        const response = await axios.post(`${BASE_URL}/insert_admin`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+    
+        if (response.data.status === 500) {
+          toast.error("Il y a une erreur");
+        } else {
+          console.log(response.data);
+          toast.success("Inscription réussie");
+        }
+      } catch (err) {
+        console.log(err);
+        toast.error("Erreur technique, essayez plus tard");
+      }
+    };
+    
+  
 
 
   return (
@@ -225,6 +325,21 @@ width={"100%"}>
         </Select>
         </FormControl>
         
+
+
+<input 
+    type="file" 
+    accept="image/*" 
+    required 
+    name="image"
+    {...register("image", { required: "Veuillez sélectionner une image" })}
+    onChange={(e) => {
+        const file = e.target.files[0]; // Récupérer le premier fichier sélectionné
+        setFormData({ ...formData, image: [file] }); // Assurez-vous de l'ajouter comme tableau avec un seul fichier
+    }} 
+/>
+
+
   </Box>
 
 

@@ -24,7 +24,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import  {toast} from 'react-hot-toast';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
-import { DossierContext } from '../../../../DossierContext.jsx'
 import { useContext } from 'react'
 import Dossier from '../../Dossier.jsx'
 import Icon from '../../Icon.jsx'
@@ -104,7 +103,7 @@ useEffect(() => {
  
 
 
-   const { setDossier } = useContext(DossierContext);
+  
   const navigate = useNavigate()
   const handledetail=(dat)=>{
 

@@ -25,7 +25,6 @@ import Factutation from '../../../Facturation.jsx'
 import { useState,useEffect,useContext } from 'react'
 import  {toast} from 'react-hot-toast';
 import axios from 'axios';
-import { DossierContext } from '../../../../../DossierContext.jsx'
 import { useLocation } from 'react-router-dom'
 import Dossier from '../../../Dossier';
 import Icon from '../../../Icon.jsx'

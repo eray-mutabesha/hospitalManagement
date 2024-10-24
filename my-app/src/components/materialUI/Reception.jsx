@@ -7,6 +7,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFolder } from '@fortawesome/free-solid-svg-icons'
 import DossieForm from './dialogue/DossierForm';
 import { useNavigate } from 'react-router-dom';
+import {faHouseChimneyMedical } from '@fortawesome/free-solid-svg-icons'
+
+
+
+
+
 
 export default function Reception() {
   const navigate=useNavigate()
@@ -16,7 +22,7 @@ export default function Reception() {
   return (
     
           <nav className='navone'   onClick={handleclick}>
-           <FontAwesomeIcon icon={faFolder} /> 
+           <FontAwesomeIcon icon={faHouseChimneyMedical} /> 
            Reception
           </nav>
           

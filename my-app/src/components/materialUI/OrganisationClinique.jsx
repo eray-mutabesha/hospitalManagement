@@ -32,9 +32,10 @@ const navigate=useNavigate()
            Organisations clinique
           </nav>
           <Menu {...bindMenu(popupState)} >
-            <MenuItem onClick={hospitalisation} >Hospitalisation</MenuItem>
-            <MenuItem onClick={ambulatoire}>Ambulatoire</MenuItem>
-            <MenuItem onClick={redezvous}>Rendez-vous</MenuItem>
+          
+            <MenuItem onClick={hospitalisation} className='navone'>Hospitalisation</MenuItem>
+            <MenuItem onClick={ambulatoire} className='navone'>Ambulatoire</MenuItem>
+            <MenuItem onClick={redezvous} className='navone'>Rendez-vous</MenuItem>
             
           </Menu>
         </React.Fragment>

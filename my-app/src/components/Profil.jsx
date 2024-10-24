@@ -47,10 +47,6 @@ function Profil() {
 
 
 
-
-
-
-
   const BASE_URL = import.meta.env.VITE_API_URL;
   const [datas,setdatas]=useState([])
   const [singleData,setSingleData] = useState([])
@@ -75,6 +71,9 @@ function Profil() {
       setFormVisible(true)
     }
  
+console.log(datas)
+
+
 
     if(FormVisible == false){
       

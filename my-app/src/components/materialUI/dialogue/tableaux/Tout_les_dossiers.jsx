@@ -25,7 +25,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import  {toast} from 'react-hot-toast';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
-import { DossierContext } from '../../../../DossierContext.jsx'
 import { useContext } from 'react'
 import ChoixtransferTout_les_Dossier from '../../ChoixtransferTout_les_Dossier.jsx'
 import RendezVousForm from '../RendezVousForm.jsx'
@@ -88,7 +87,7 @@ useEffect(() => {
 }, []);
  
  
-  const { setDossier } = useContext(DossierContext);
+
   const navigate = useNavigate()
   const handledetail=(dat)=>{
 
