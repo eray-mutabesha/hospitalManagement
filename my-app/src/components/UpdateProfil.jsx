@@ -30,7 +30,7 @@ function UpdateProfil(singleData,onUpdate) {
     setdatas(INFO_Utilisateur_from_localStorage);
   }
 
-
+  console.log(singleData)
 
 
 
@@ -61,12 +61,35 @@ function UpdateProfil(singleData,onUpdate) {
     getUserData()
   }, [singleData]);
 
+  useEffect(() => {
+    if (datas) {
+      setFormData({
+        id:datas.id,
+        email: datas.email,
+        nom: datas.nom,
+        fonction: datas.fonction,
+        Adresse: datas.Adresse,
+        sexe: datas.sexe,
+        service:datas.service
+        // Initialiser d'autres champs si nécessaire
+      });
+    }
+  }, [datas]);
+
 
   const onSubmit=(data)=>{
-    
+    console.log(formData)
    if (singleData.singleData && singleData.singleData.id) {
      // API pour mettre à jour les données
-     axios.put(`${BASE_URL}/update_user/${singleData.singleData.id}`, data)
+     axios.put(`${BASE_URL}/update_user/${singleData.singleData.id}`,{
+
+      id:datas.id,
+      nom:formData.nom,
+      Adresse:formData.Adresse,
+      sexe:formData.sexe,
+      fonction:formData.fonction,
+      email:formData.email
+     })
        .then(({ data }) => {
          if (data.status == 500) {
            toast.error("Il y a une erreur");
@@ -87,6 +110,7 @@ function UpdateProfil(singleData,onUpdate) {
        });
    } else{
     console.log("singleData undefined")
+    console.log(singleData)
    }
 }
   
@@ -173,7 +197,7 @@ function UpdateProfil(singleData,onUpdate) {
                <nav>
                <img src='public/Dr. MUAMBA.jpg' className='admin_photo' alt='administrateur'/>
                </nav> 
-               <nav> <p>eratata</p></nav>
+               <nav> <p>{datas.nom}</p></nav>
                <nav><FontAwesomeIcon icon={faCaretDown} /></nav>
               </div>
 
@@ -282,19 +306,20 @@ function UpdateProfil(singleData,onUpdate) {
                  padding:"5px",
                  borderRadius:"5px"
               }}><p><strong>Genre : </strong>
-              <select
-            className='select'
-            {...register("sexe", { required:false})}
-            defaultValue={formData.sexe || datas.sexe} 
-            onChange={(e) => setFormData({ ...formData, sexe: e.target.value })}
-          >
-
-
-          <option value="">Genre</option>
-          <option value="Masculin">Masculin</option>
-          <option value="Feminin">Feminin</option>
-
-        </select>
+            <select
+              className="select"
+              {...register("sexe", { required: false })}
+              value={formData.sexe || datas.sexe} // Changed from defaultValue to value for controlled select
+              onChange={(e) =>
+                setFormData({ ...formData, sexe: e.target.value })
+              }
+            >
+              <option value={formData.sexe || datas.sexe} key={datas.sexe}>
+                {formData.sexe || datas.sexe}
+              </option>
+              <option value="Masculin">Masculin</option>
+              <option value="Feminin">Feminin</option>
+            </select>
               </p>
               </Box>
 

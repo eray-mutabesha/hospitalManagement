@@ -216,7 +216,7 @@ useEffect(()=>{
                 <FontAwesomeIcon icon={faBell} />
                 </nav>
                <nav>
-               <img src='public/Dr. MUAMBA.jpg' className='admin_photo' alt='administrateur'/>
+               <img src={`http://localhost:3001${datas.image}`} alt="Profile" className='admin_photo' />
                </nav> 
                <nav> <p>{datas.nom}</p></nav>
                <nav><Icon/></nav>
@@ -321,25 +321,26 @@ useEffect(()=>{
               <div className='all_doctor_div'>
                 <div className='all_doctor_div_header'>
                     <nav>
-                       <h4>Meilleur docteur</h4>
+                       <h4>Personel agreer</h4>
                     </nav>
                     <nav style={{
                       display:"flex",
                       gap:"10px",
                       alignItems:"center"
                   }}>
+                     <p><strong>{datas.service}</strong></p>
                       <FontAwesomeIcon icon={faChevronDown} style={{fontSize:"13px"}}/>
-                      <p><strong>Cette annee</strong></p>
+                     
                       
                      
                     </nav>
                 </div>
                 
-               <img src='public/Dr. MUAMBA.jpg' className='admin_photos' alt='administrateur'/>
-               <Typography variant='h5'sx={{color:"white"}}>Dr jonathan kasongo</Typography>
-               <p style={{color:"rgb(223, 221, 221)"}}>Gynecologue et ophtamologue</p>
+               <img src={`http://localhost:3001${datas.image}`} alt="Profile" className='admin_photos' style={{objectFit:"cover"}}/>
+               <Typography variant='h5'sx={{color:"white"}}>{datas.fonction}</Typography>
+               <p style={{color:"rgb(223, 221, 221)"}}>Email: {datas.email}</p>
 
-               <div className='buttons'>
+               {/* <div className='buttons'>
                 <div>
                   <h4>Experience</h4>
                   <nav><h4>18 ans</h4></nav>
@@ -353,7 +354,7 @@ useEffect(()=>{
                   <nav><h4>1.500</h4></nav>
                 </div>
               
-               </div>
+               </div> */}
                </div>
              
            </div>

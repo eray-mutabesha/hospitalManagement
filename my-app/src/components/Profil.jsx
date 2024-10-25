@@ -57,8 +57,30 @@ function Profil() {
     setdatas(INFO_Utilisateur_from_localStorage);
   }
 
+
+  // const [datasFromDB,setdatasFromDB]=useState([])
+
+  // const getdataFromDB= ()=>{
+
+  //   axios.get(`${BASE_URL}/getadminData_admin/${datas.email,password}`)
+  //   .then(({ data }) => {
+  //     setdatasFromDB(data.data || []); 
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //     toast.error("Il y a une erreur");
+  //   });
+
+
+  // }
+  //  console.log(datasFromDB);
+
+
+
+
   useEffect(()=>{
     getUserData()
+    // getdataFromDB()
     },[])
 
     const handleUpdate = () => {
@@ -157,7 +179,10 @@ console.log(datas)
                 <FontAwesomeIcon icon={faBell} />
                 </nav>
                <nav>
-               <img src='public/Dr. MUAMBA.jpg' className='admin_photo' alt='administrateur'/>
+               <img src={`http://localhost:3001${datas.image}`} alt="Profile" className='admin_photo'/>
+               
+
+      
                </nav> 
                <nav> <p>{datas.nom}</p></nav>
                <nav><Icon/></nav>
@@ -195,9 +220,11 @@ console.log(datas)
               justifyContent:"center",
               alignItems:"center",
              }}>
-              <img src='public/profilphoto.png' style={{
+              {/* <img src='public/profilphoto.png' /> */}
+               <img src={`http://localhost:3001${datas.image}`} alt="Profile" className='admin_photo' style={{
                 width:"150px",
                 height:"150px",
+                objectFit:"cover",
                 borderRadius:"50%"
               }}/>
               </Box> 
@@ -221,7 +248,10 @@ console.log(datas)
                 height:"20px",
                 cursor:"pointer"
               }}
+
+              
               onClick={() => Edit_nom(datas)}/>
+
               </Box>
 
 

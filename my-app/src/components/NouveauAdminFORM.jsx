@@ -53,101 +53,7 @@ export default function NouveauAdminFORM() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
     const onSubmit = async (data) => {
-      if (data.password !== data.password_confirm) {
-        toast.error("Vérifiez votre mot de passe");
-        return;
-      }
-    
-      try {
-        const res = await axios.post(`${BASE_URL}/insert_admin`, {
-          email: data.email,
-          password: data.password,
-        });
-    
-        if (res.data.exists) {
-          toast.error("Un compte existe déjà avec ce Mail");
-          return;
-        }
-    
-        // Création d'un nouvel objet FormData pour inclure les champs du formulaire et l'image
-        const formData = new FormData();
-        formData.append('nom', data.nom);
-        formData.append('sexe', data.sexe);
-        formData.append('fonction', data.fonction);
-        formData.append('Adresse', data.Adresse);
-        formData.append('email', data.email);
-        formData.append('service', data.service);
-        formData.append('password', data.password);
-    
-        // Ajouter l'image sélectionnée dans le FormData si présente
-        if (data.image && data.image.length > 0) {
-          formData.append('image', data.image[0]); // data.image est un tableau
-        }
-    
-        localStorage.setItem("Utilisateur", JSON.stringify(data));
-    
-        const response = await axios.post(`${BASE_URL}/insert_admin`, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
-    
-        if (response.data.status === 500) {
-          toast.error("Il y a une erreur");
-        } else {
-          console.log(response.data);
-          toast.success("Inscription réussie");
-        }
-      } catch (err) {
-        console.log(err);
-        toast.error("Erreur technique, essayez plus tard");
-      }
-    };
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    const onSubmi = async (data) => {
       if (data.password !== data.password_confirm) {
         toast.error("Vérifiez votre mot de passe");
         return;
@@ -172,11 +78,13 @@ export default function NouveauAdminFORM() {
         formData.append('email', data.email);
         formData.append('service', data.service);
         formData.append('password', data.password);
+    
+        // Vérification si l'image est présente avant de l'ajouter au formData
         if (data.image) {
-          formData.append('image', data.image);
+          formData.append('image', data.image[0]); // Utilisez `data.image[0]` pour sélectionner le fichier unique
         }
     
-        localStorage.setItem("Utilisateur", JSON.stringify(data));
+        // localStorage.setItem("Utilisateur", JSON.stringify(data));
     
         const response = await axios.post(`${BASE_URL}/insert_admin`, formData, {
           headers: {
@@ -195,6 +103,8 @@ export default function NouveauAdminFORM() {
         toast.error("Erreur technique, essayez plus tard");
       }
     };
+    
+    
     
   
 
@@ -228,7 +138,7 @@ width={"100%"}>
 
 
 
-  <form onSubmit={handleSubmit(onSubmit)}>
+  <form onSubmit={handleSubmit(onSubmit)} encType='multipart/form-data'>
   <Box sx={{
       display:"grid",
       gap:2
@@ -330,15 +240,14 @@ width={"100%"}>
 <input 
     type="file" 
     accept="image/*" 
+    name='image'
     required 
-    name="image"
     {...register("image", { required: "Veuillez sélectionner une image" })}
     onChange={(e) => {
         const file = e.target.files[0]; // Récupérer le premier fichier sélectionné
-        setFormData({ ...formData, image: [file] }); // Assurez-vous de l'ajouter comme tableau avec un seul fichier
+        setFormData({ ...formData, image: file }); // Mettre à jour formData avec le fichier, pas le tableau
     }} 
 />
-
 
   </Box>
 

@@ -4,7 +4,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFolder } from '@fortawesome/free-solid-svg-icons'
+import { faFolder, faUserGroup } from '@fortawesome/free-solid-svg-icons'
 import DossieForm from './dialogue/DossierForm';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,7 +16,7 @@ export default function Patient() {
   return (
     
           <nav className='navone'   onClick={handleclick}>
-           <FontAwesomeIcon icon={faFolder} /> 
+           <FontAwesomeIcon icon={faUserGroup} /> 
            Patients
           </nav>
           
