@@ -189,7 +189,7 @@ const filteredDatas = datas.filter((dat) =>
                 <FontAwesomeIcon icon={faBell} />
                 </nav>
                <nav>
-               <img src='public/Dr. MUAMBA.jpg' className='admin_photo' alt='administrateur'/>
+               <img src={`http://localhost:3001${profil.image}`} alt="Profile" className='admin_photo'/>
                </nav> 
                <nav> <p> {profil.nom} </p></nav>
                <nav><Icon /></nav>

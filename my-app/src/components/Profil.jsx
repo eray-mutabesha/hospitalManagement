@@ -220,7 +220,6 @@ console.log(datas)
               justifyContent:"center",
               alignItems:"center",
              }}>
-              {/* <img src='public/profilphoto.png' /> */}
                <img src={`http://localhost:3001${datas.image}`} alt="Profile" className='admin_photo' style={{
                 width:"150px",
                 height:"150px",

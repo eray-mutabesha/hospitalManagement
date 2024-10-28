@@ -15,10 +15,7 @@ export default function Patient() {
   }
   return (
     
-          <nav className='navone'   onClick={handleclick}>
-           <FontAwesomeIcon icon={faUserGroup} /> 
-           Patients
-          </nav>
+      <div></div>
           
   );
 }

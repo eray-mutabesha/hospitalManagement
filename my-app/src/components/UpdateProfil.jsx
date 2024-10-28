@@ -195,7 +195,8 @@ function UpdateProfil(singleData,onUpdate) {
                 <FontAwesomeIcon icon={faBell} />
                 </nav>
                <nav>
-               <img src='public/Dr. MUAMBA.jpg' className='admin_photo' alt='administrateur'/>
+               <img src={`http://localhost:3001${datas.image}`} alt="Profile" className='admin_photo'/>
+               
                </nav> 
                <nav> <p>{datas.nom}</p></nav>
                <nav><FontAwesomeIcon icon={faCaretDown} /></nav>
@@ -234,9 +235,10 @@ function UpdateProfil(singleData,onUpdate) {
               justifyContent:"center",
               alignItems:"center",
              }}>
-              <img src='public/profilphoto.png' style={{
+               <img src={`http://localhost:3001${datas.image}`} alt="Profile" className='admin_photo' style={{
                 width:"150px",
                 height:"150px",
+                objectFit:"cover",
                 borderRadius:"50%"
               }}/>
               </Box> 

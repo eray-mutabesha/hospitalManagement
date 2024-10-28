@@ -78,11 +78,13 @@ export default function Inscription() {
         formData.append('email', data.email);
         formData.append('service', data.service);
         formData.append('password', data.password);
+    
+        // Vérification si l'image est présente avant de l'ajouter au formData
         if (data.image) {
-          formData.append('image', data.image);
+          formData.append('image', data.image[0]); // Utilisez `data.image[0]` pour sélectionner le fichier unique
         }
     
-        localStorage.setItem("Utilisateur", JSON.stringify(data));
+        // localStorage.setItem("Utilisateur", JSON.stringify(data));
     
         const response = await axios.post(`${BASE_URL}/insert_admin`, formData, {
           headers: {
@@ -101,6 +103,8 @@ export default function Inscription() {
         toast.error("Erreur technique, essayez plus tard");
       }
     };
+    
+    
     
   
 
@@ -134,7 +138,7 @@ width={"100%"}>
 
 
 
-  <form onSubmit={handleSubmit(onSubmit)}>
+  <form onSubmit={handleSubmit(onSubmit)} encType='multipart/form-data'>
   <Box sx={{
       display:"grid",
       gap:2
@@ -231,16 +235,19 @@ width={"100%"}>
         </Select>
         </FormControl>
         
-        {/* <input 
+
+
+<input 
     type="file" 
     accept="image/*" 
+    name='image'
     required 
     {...register("image", { required: "Veuillez sélectionner une image" })}
     onChange={(e) => {
         const file = e.target.files[0]; // Récupérer le premier fichier sélectionné
-        setFormData({ ...formData, image: file }); // Mettre à jour formData avec le fichier
+        setFormData({ ...formData, image: file }); // Mettre à jour formData avec le fichier, pas le tableau
     }} 
-/> */}
+/>
 
   </Box>
 
