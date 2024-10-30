@@ -5,16 +5,23 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Box ,TextField} from '@mui/material';
 import { useForm} from "react-hook-form"
 import { useState,useEffect } from 'react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
+import { Box ,TextField, Typography,InputLabel,Select,MenuItem,FormControl}  from '@mui/material';
 
 
 
 
- function MedecinsFormUpdt(singleData,onUpdate) {
+
+
+
+
+
+
+
+ function MedecinsFormUpdt({singleData,onUpdate}) {
   const BASE_URL = import.meta.env.VITE_API_URL;
 
   const { register, handleSubmit,formState:{errors} } = useForm();
@@ -28,6 +35,20 @@ import axios from 'axios';
      setOpen(false);
      window.location.reload();
    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const [formData, setFormData] = useState({
     nom: "",
     date_arrive: "",
@@ -50,6 +71,25 @@ import axios from 'axios';
       });
     }
   }, [singleData]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     const onSubmit=(data)=>{
@@ -100,8 +140,8 @@ className='inpt_material'
  variant="filled" 
  type="text"
  size="small"
- {...register("nom", { required: "Veuillez entrer le nom" })}
- value={formData.nom}
+ {...register("nom", { required: false })}
+ defaultValue={formData.nom || singleData.singleData.nom} 
  onChange={(e) => setFormData({ ...formData, nom: e.target.value })}/>
 
 
@@ -112,8 +152,8 @@ className='inpt_material'
  variant="filled" 
  type="date"
  size="small"
- {...register("date_arrive", { required: "Veuillez entrer le nom" })}
-  value={formData.date_arrive}
+ {...register("date_arrive", { required: false })}
+   defaultValue={formData.nom || singleData.singleData.date_arrive} 
   onChange={(e) => setFormData({ ...formData, date_arrive: e.target.value })}/>
 
         
@@ -124,23 +164,31 @@ className='inpt_material'
  variant="filled" 
  size="small"
  type='text'
- {...register("specialisation", { required: "Veuillez entrer le nom" })}
- value={formData.specialisation}
+ {...register("specialisation", { required: false })}
+ value={formData.specialisation || singleData.singleData.specialisation} 
  onChange={(e) => setFormData({ ...formData, specialisation: e.target.value })}/>
 
 
-<select
-            className='select'
-            {...register("sexe", { required: "Veuillez entrer l'action" })}
-            value={formData.sexe}
-            onChange={(e) => setFormData({ ...formData, sexe: e.target.value })}
-          >
+<FormControl variant="filled">
+<InputLabel id="demo-simple-select-filled-label">Sexe</InputLabel>
+        <Select
+           labelId="demo-simple-select-filled-label"
+          id="demo-simple-select-standard"
+          size="small"
+          {...register("sexe", { required: false })}
+          value={formData.sexe || singleData.singleData.sexe}
+          onChange={(e) => setFormData({ ...formData, sexe: e.target.value })}>
 
-          <option value="">Genre</option>
-          <option value="Masculin">Masculin</option>
-          <option value="Feminin">Feminin</option>
-
-</select>
+            
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          
+            <MenuItem   value="Masculin">Masculin</MenuItem>
+            <MenuItem   value="Feminin">Feminin</MenuItem>
+            <MenuItem   value="Autre">Autre</MenuItem>
+        </Select>
+</FormControl> 
 
 <TextField
 className='inpt_material'
@@ -149,8 +197,8 @@ className='inpt_material'
  variant="filled" 
  size="small"
  type='number'
- {...register("telephone", { required: "Veuillez entrer le nom" })}
- value={formData.telephone}
+ {...register("telephone", { required: false})}
+ value={formData.telephone || singleData.singleData.telephone}
  onChange={(e) => setFormData({ ...formData, telephone: e.target.value })}/>
 
 <TextField
@@ -160,8 +208,8 @@ className='inpt_material'
  variant="filled" 
  size="small"
  type='email'
- {...register("email", { required: "Veuillez entrer le nom" })}
- value={formData.email}
+ {...register("email", { required: false })}
+ value={formData.email || singleData.singleData.email}
  onChange={(e) => setFormData({ ...formData, email: e.target.value })}/>
      
        <DialogActions>

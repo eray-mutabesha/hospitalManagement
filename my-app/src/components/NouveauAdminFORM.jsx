@@ -205,11 +205,6 @@ width={"100%"}>
         onChange={(e) => setFormData({ ...formData, password_confirm: e.target.value })}/>
    
 
-       {/* <TextField id="filled-basic" label="" variant="filled" type="file" fullWidth size='small' 
-         {...register("file", { required: "Veuillez entrer le nom" })}
-        value={formData.file}
-        onChange={(e) => setFormData({ ...formData, file: e.target.value })}/> */}
-
 <FormControl variant="filled">
         <InputLabel id="demo-simple-select-filled-label">Service</InputLabel>
         <Select

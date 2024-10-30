@@ -14,7 +14,9 @@ import axios from 'axios';
 
 
 
- function PatientFormUpdt(singleData,onUpdate) {
+ function PatientFormUpdt({singleData,onUpdate}) {
+console.log(singleData.id)
+const onUpdate =onUpdate()
   const BASE_URL = import.meta.env.VITE_API_URL;
 
   const { register, handleSubmit,formState:{errors} } = useForm();
@@ -54,19 +56,19 @@ import axios from 'axios';
 
     const onSubmit=(data)=>{
     
-   if (singleData.singleData && singleData.singleData.id) {
+   if (singleData && singleData.id) {
      // API pour mettre à jour les données
-     axios.put(`${BASE_URL}/update_personel/${singleData.singleData.id}`, data)
+     axios.put(`${BASE_URL}/update_personel/${singleData.id}`, data)
        .then(({ data }) => {
          if (data.status == 500) {
            toast.error("Il y a une erreur");
          } else {
           
            toast.success("Mise à jour réussie");
-           
            if (singleData.onUpdate) {
             singleData.onUpdate();
           }
+
          }
        })
        .catch((err) => {
@@ -85,7 +87,7 @@ import axios from 'axios';
          aria-describedby="alert-dialog-description"
        >
          <DialogTitle id="alert-dialog-title" >
-           {`Modifier les informations de ${singleData.singleData.nom} `}
+           {`Modifier les informations de ${singleData.nom} `}
          </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
@@ -93,22 +95,31 @@ import axios from 'axios';
 
           <form className='medecin_fom' onSubmit={handleSubmit(onSubmit)}>
 
+
+
+
 <TextField
-id="filled-basic" 
-label="Nom"
-variant="filled"
-size="small"
-{...register("nom", { required: "Veuillez entrer le nom" })}
-value={formData.nom}
-onChange={(e) => setFormData({ ...formData, nom: e.target.value })}/>
+className='inpt_material'
+ id="filled-basic" 
+ label="Nom" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("nom", { required: false })}
+ defaultValue={formData.nom || singleData.nom}
+ onChange={(e) => setFormData({ ...formData, nom: e.target.value })}/>
+
+
+
+
 
 <TextField
 id="filled-basic" 
 label="Nom de famille"
 variant="filled"
 size="small"
-{...register("nom_famille", { required: "Veuillez entrer le nom" })}
-value={formData.nom_famille}
+{...register("nom_famille", { required: false })}
+defaultValue={formData.nom_famille || singleData.nom_famille}
 onChange={(e) => setFormData({ ...formData, nom_famille: e.target.value })}/>
 
 <FormControl variant="filled"   >
@@ -117,8 +128,8 @@ onChange={(e) => setFormData({ ...formData, nom_famille: e.target.value })}/>
            labelId="demo-simple-select-filled-label"
           id="demo-simple-select-standard"
           size="small"
-          {...register("sexe", { required: "Veuillez entrer le nom" })}
-          value={formData.sexe}
+          {...register("sexe", { required: false})}
+          defaultValue={formData.sexe || singleData.sexe}
           onChange={(e) => setFormData({ ...formData, sexe: e.target.value })}
         >
           <MenuItem value="">
@@ -135,8 +146,8 @@ id="filled-basic"
 label="Fonction"
 variant="filled"
 size="small"
-{...register("fonction", { required: "Veuillez entrer le nom" })}
-value={formData.fonction}
+{...register("fonction", { required: false})}
+defaultValue={formData.fonction || singleData.fonction}
 onChange={(e) => setFormData({ ...formData, fonction: e.target.value })}/>
 
 <TextField
@@ -146,8 +157,8 @@ className='inpt_material'
  variant="filled" 
  type="text"
  size="small"
- {...register("specialisation", { required: "Veuillez entrer le nom" })}
- value={formData.specialisation}
+ {...register("specialisation", { required: false })}
+ defaultValue={formData.specialisation || singleData.specialisation}
  onChange={(e) => setFormData({ ...formData, specialisation: e.target.value })}/>
 
 
@@ -159,8 +170,8 @@ className='inpt_material'
  variant="filled" 
  size="small"
  type='number'
- {...register("telephone", { required: "Veuillez entrer le nom" })}
- value={formData.telephone}
+ {...register("telephone", { required: false})}
+ defaultValue={formData.telephone || singleData.telephone}
  onChange={(e) => setFormData({ ...formData, telephone: e.target.value })}/>
 
 <TextField
@@ -170,8 +181,9 @@ className='inpt_material'
  variant="filled" 
  size="small"
  type='email'
- {...register("email", { required: "Veuillez entrer le nom" })}
- value={formData.email}
+ {...register("email", { required: false})}
+
+ defaultValue={formData.email ||singleData.email}
  onChange={(e) => setFormData({ ...formData, email: e.target.value })}/>
 
 <DialogActions>

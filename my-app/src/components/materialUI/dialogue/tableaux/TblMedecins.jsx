@@ -33,6 +33,7 @@ import Hospital from '../../Hospital.jsx'
 import RendezVous from '../../RendezVous.jsx'
 import Patient from '../../Patients.jsx'
 import Sedeconecter from '../../Sedeconecter.jsx'
+import SupressionChoix from '../../SupressionChoix.jsx'
 
 
 
@@ -260,9 +261,7 @@ function TblMedecins() {
               }}>
                
                 <Button size="small" variant="outlined" onClick={() => Edit_medecin(dat)}>Modf</Button>
-                <Button size="small" variant="outlined" color="error" startIcon={<DeleteIcon />} onClick={() => deleteEntree(dat)}>
-                Sup
-                </Button>
+                <SupressionChoix deleteEntree={() => deleteEntree(dat)}/>
                 </Box>
               </TableCell>
             </TableRow>

@@ -32,6 +32,7 @@ import Ambulant from '../../Ambulant.jsx'
 import Hospital from '../../Hospital.jsx'
 import RendezVous from '../../RendezVous.jsx'
 import Sedeconecter from '../../Sedeconecter.jsx'
+import SupressionChoix from '../../SupressionChoix.jsx'
 
 
 function TblPersonel() {
@@ -236,9 +237,7 @@ if(FormVisible == false){
               }}>
                
                 <Button size="small" variant="outlined" onClick={() => Edit_patient(dat)}>Modf</Button>
-                <Button size="small" variant="outlined" color="error" startIcon={<DeleteIcon />} onClick={() => deleteEntree(dat)}>
-                Sup
-                </Button>
+                <SupressionChoix deleteEntree={() => deleteEntree(dat)}/>
                 </Box>
               </TableCell>
             </TableRow>

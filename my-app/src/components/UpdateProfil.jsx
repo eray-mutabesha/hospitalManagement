@@ -21,7 +21,15 @@ import RendezVous from './materialUI/RendezVous.jsx'
 import Patient from './materialUI/Patients.jsx'
 import Sedeconecter from './materialUI/Sedeconecter.jsx'
 
-function UpdateProfil(singleData,onUpdate) {
+function UpdateProfil({ singleData, onUpdate }) {
+
+
+
+
+
+
+
+
 
   const [datas,setdatas]=useState([])
 
@@ -44,6 +52,7 @@ function UpdateProfil(singleData,onUpdate) {
     sexe: "",
     Adresse:"",
     email: "",
+    image: "" // Stocker l'image actuelle ou nouvelle
   });
   
 
@@ -55,6 +64,7 @@ function UpdateProfil(singleData,onUpdate) {
         sexe: singleData.sexe || "",
         Adresse: singleData.Adresse || "",
         email: singleData.email || "",
+        image: singleData.image // Charger l'image actuelle
        
       });
     }
@@ -76,43 +86,55 @@ function UpdateProfil(singleData,onUpdate) {
     }
   }, [datas]);
 
+  // Gérer l'upload d'une nouvelle image
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setFormData({ ...formData, image: file });
+  };
 
-  const onSubmit=(data)=>{
-    console.log(formData)
-   if (singleData.singleData && singleData.singleData.id) {
-     // API pour mettre à jour les données
-     axios.put(`${BASE_URL}/update_user/${singleData.singleData.id}`,{
 
-      id:datas.id,
-      nom:formData.nom,
-      Adresse:formData.Adresse,
-      sexe:formData.sexe,
-      fonction:formData.fonction,
-      email:formData.email
-     })
-       .then(({ data }) => {
-         if (data.status == 500) {
-           toast.error("Il y a une erreur");
-         } else {
-          console.log(formData)
-         
-           localStorage.setItem("Utilisateur", JSON.stringify(formData));
-           toast.success("Mise à jour réussie");
-           console.log(singleData)
-           if (singleData.onUpdate) {
-            singleData.onUpdate();
-          }
-         }
-       })
-       .catch((err) => {
-         console.log(err);
-         toast.error("pas de mise en jour ");
-       });
-   } else{
-    console.log("singleData undefined")
-    console.log(singleData)
-   }
-}
+   
+
+
+  const onSubmit = async () => {
+    const formDataToSend = new FormData();
+    formDataToSend.append("nom", formData.nom);
+    formDataToSend.append("fonction", formData.fonction);
+    formDataToSend.append("sexe", formData.sexe);
+    formDataToSend.append("Adresse", formData.Adresse);
+    formDataToSend.append("email", formData.email);
+  
+    if (formData.image instanceof File) {
+      formDataToSend.append("image", formData.image);
+    }
+  
+    try {
+      const response = await axios.put(`${BASE_URL}/update_user/${datas.id}`, formDataToSend, {
+        headers: { "Content-Type": "multipart/form-data" }
+      });
+  
+      // Récupérez le chemin de l'image depuis la réponse
+      const imagePath = response.data.imagePath;
+  
+      // Mettez à jour l'objet avec le nouveau chemin d'image ou gardez l'ancienne image
+      const updatedUserData = {
+        ...datas,
+        ...formData,
+        image: formData.image instanceof File ? imagePath : datas.image // Conserve l'ancienne image si aucune nouvelle image n'est fournie
+      };
+  
+      localStorage.setItem("Utilisateur", JSON.stringify(updatedUserData));
+  
+      toast.success("Mise à jour réussie");
+      if (onUpdate) onUpdate();
+  
+    } catch (error) {
+      console.error("Erreur de mise à jour :", error);
+      toast.error("Erreur de mise à jour");
+    }
+  };
+  
+  
   
    
   return (
@@ -340,7 +362,18 @@ function UpdateProfil(singleData,onUpdate) {
               {...register("email", { required:false})}
               defaultValue={formData.email || datas.email} 
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}/></p>
+
+
               </Box>
+
+              <Box>
+          
+          <input 
+            type="file" 
+            accept="image/*" 
+            onChange={handleFileChange} 
+          />
+        </Box>
               <Button type='submit'>Enregistrer la modification</Button>
              </Box>
             </Box>

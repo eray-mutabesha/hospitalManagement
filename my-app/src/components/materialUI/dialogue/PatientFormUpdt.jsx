@@ -101,8 +101,8 @@ className='inpt_material'
  variant="filled" 
  type="text"
  size="small"
- {...register("nom", { required: "Veuillez entrer le nom" })}
- value={formData.nom}
+ {...register("nom", { required: false })}
+ defaultValue={formData.nom || singleData.singleData.nom}
  onChange={(e) => setFormData({ ...formData, nom: e.target.value })}/>
 
 
@@ -113,8 +113,9 @@ className='inpt_material'
  variant="filled" 
  type="text"
  size="small"
- {...register("post_nom", { required: "Veuillez entrer le nom" })}
- value={formData.post_nom}
+ {...register("post_nom", { required: false})}
+
+ defaultValue={formData.post_nom || singleData.singleData.post_nom}
  onChange={(e) => setFormData({ ...formData, post_nom: e.target.value })}/>
 
 
@@ -125,8 +126,8 @@ className='inpt_material'
  variant="filled" 
  type="text"
  size="small"
- {...register("age", { required: "Veuillez entrer le nom" })}
-  value={formData.age}
+ {...register("age", { required: false })}
+  defaultValue={formData.age || singleData.singleData.age}
   onChange={(e) => setFormData({ ...formData, age: e.target.value })}/>
 
 
@@ -136,8 +137,8 @@ className='inpt_material'
            labelId="demo-simple-select-filled-label"
           id="demo-simple-select-standard"
           size="small"
-          {...register("sexe", { required: "Veuillez entrer le nom" })}
-          value={formData.sexe}
+          {...register("sexe", { required: false })}
+          defaultValue={formData.sexe || singleData.singleData.sexe}
           onChange={(e) => setFormData({ ...formData, sexe: e.target.value })}
         >
           <MenuItem value="">
@@ -155,8 +156,8 @@ className='inpt_material'
  variant="filled" 
  type='number'
  size="small"
- {...register("telephone", { required: "Veuillez entrer le nom" })}
- value={formData.telephone}
+ {...register("telephone", { required: false })}
+ defaultValue={formData.telephone || singleData.singleData.telephone}
  onChange={(e) => setFormData({ ...formData, telephone: e.target.value })}/>
 
 
@@ -167,8 +168,9 @@ className='inpt_material'
  label="Adresse" 
  variant="filled" 
  size="small"
- {...register("adresse", { required: "Veuillez entrer le nom" })}
- value={formData.adresse}
+ {...register("adresse", { required: false })}
+
+ defaultValue={formData.adresse || singleData.singleData.adresse}
  onChange={(e) => setFormData({ ...formData, adresse: e.target.value })}/>
 
       <DialogActions>

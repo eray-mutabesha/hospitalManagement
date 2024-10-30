@@ -83,7 +83,7 @@ function Profil() {
     // getdataFromDB()
     },[])
 
-    const handleUpdate = () => {
+    function handleUpdate(){
       setFormVisible(false);
       getUserData()
     };

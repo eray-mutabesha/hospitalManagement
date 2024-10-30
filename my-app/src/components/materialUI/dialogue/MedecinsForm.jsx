@@ -5,11 +5,22 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { Box ,TextField} from '@mui/material';
 import { useForm} from "react-hook-form"
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
+import { Box ,TextField, Typography,InputLabel,Select,MenuItem,FormControl}  from '@mui/material';
+
+
+
+
+
+
+
+
+
+
+
 
 export default function MedecinsForm() {
 
@@ -123,18 +134,27 @@ className='inpt_material'
  onChange={(e) => setFormData({ ...formData, specialisation: e.target.value })}/>
 
 
-<select
-            className='select'
-            {...register("sexe", { required: "Veuillez entrer l'action" })}
-            value={formData.sexe}
-            onChange={(e) => setFormData({ ...formData, sexe: e.target.value })}
-          >
 
-          <option value="">Genre</option>
-          <option value="Masculin">Masculin</option>
-          <option value="Feminin">Feminin</option>
+<FormControl variant="filled">
+<InputLabel id="demo-simple-select-filled-label">Sexe</InputLabel>
+        <Select
+           labelId="demo-simple-select-filled-label"
+          id="demo-simple-select-standard"
+          size="small"
+          {...register("sexe", { required: "Veuillez entrer le nom" })}
+          value={formData.sexe}
+          onChange={(e) => setFormData({ ...formData, sexe: e.target.value })}>
 
-</select>
+            
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          
+            <MenuItem   value="Masculin">Masculin</MenuItem>
+            <MenuItem   value="Feminin">Feminin</MenuItem>
+            <MenuItem   value="Autre">Autre</MenuItem>
+        </Select>
+</FormControl>    
 
 <TextField
 className='inpt_material'
