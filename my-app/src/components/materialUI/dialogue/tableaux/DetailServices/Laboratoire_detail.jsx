@@ -258,12 +258,6 @@ console.log(data[0])
 
 
 
-
-
-
-
-
-
             <Box
   sx={{
     background: "white",

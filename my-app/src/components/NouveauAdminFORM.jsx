@@ -95,7 +95,18 @@ export default function NouveauAdminFORM() {
         if (response.data.status === 500) {
           toast.error("Il y a une erreur");
         } else {
-          console.log(response.data);
+          setFormData({
+            nom: "",
+            fonction: "",
+            sexe: "",
+            Adresse:"",
+            email: "",
+            service:"",
+            password: "",
+            password_confirm:"",
+            image:""
+          })
+          window.location.reload();
           toast.success("Inscription réussie");
         }
       } catch (err) {

@@ -120,8 +120,8 @@ function TblMedecins() {
                         <div className='menus'>
                           <nav id='deconection'> <Sedeconecter/> </nav>
                         <Dashboard />
-                        <nav id='personaliser'><Consultation/></nav>
-                        <RendezVous/>
+                        <Consultation/>
+                        <nav id='personaliser'><RendezVous/></nav>
                         <Parametre/>
                        
                        </div>

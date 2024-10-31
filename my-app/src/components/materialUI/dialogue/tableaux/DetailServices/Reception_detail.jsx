@@ -205,7 +205,7 @@ useEffect(()=>{
             borderRadius:"10px",
             border:"1px solid rgba(0, 0, 0, 0.103)",
              marginTop:"10px",
-            background:"white"
+            background:"white",
         }}>
      
 <Box sx={
@@ -269,7 +269,16 @@ useEffect(()=>{
       data[0]?.diagnostic?<Typography mt={8}variant='h6'>  Premiers diagnostics</Typography>:
       <Typography mt={8} sx={{color:"red"}}>La fiche est vide pour le moment</Typography>
      }
-     <p>{data[0]?.diagnostic}</p>
+     <Box sx={{
+      width:"160vh",
+      display:"inline-block",
+      wordWrap:"break-word",
+      display:"inline-block"
+      
+     }}>
+  <p style={{ }}>{data[0]?.diagnostic}</p>
+     </Box>
+     
      <Box sx={{
         display:"flex",
         justifyContent:"end",

@@ -14,26 +14,29 @@ import axios from 'axios';
 
 
 
- function PatientFormUpdt({singleData,onUpdate}) {
-console.log(singleData.id)
-const onUpdate =onUpdate()
+ function PatientFormUpdt(singleData,onUpdate) {
   const BASE_URL = import.meta.env.VITE_API_URL;
 
   const { register, handleSubmit,formState:{errors} } = useForm();
    const [open, setOpen] = React.useState(true);
+
+   const handleClickOpen = () => {
+     setOpen(true);
+   };
 
    const handleClose = () => {
      setOpen(false);
      window.location.reload();
    };
   const [formData, setFormData] = useState({
-    nom: "",
-    nom_famille: "",
-    sexe: "",
-    specialisation:"",
-    fonction: "",
-    email: "",
-    telephone:"",
+                nom: "",
+                nom_famille: "",
+                sexe: "",
+                specialisation:"",
+                fonction: "",
+                email: "",
+                telephone:"",
+
   });
 
 
@@ -41,14 +44,12 @@ const onUpdate =onUpdate()
     if (singleData) {
       setFormData({
         nom: singleData.nom || "",
-        nom_famille: singleData.nom_famille || "",
-        sexe: singleData.sexe || "",
-        specialisation: singleData.specialisation || "",
-        fonction: singleData.fonction || "",
-        email: singleData.email || "",
-        telephone: singleData.telephone || "",
-
-
+        post_nom: singleData.nom_famille || "",
+        age: singleData.sexe || "",
+        sexe: singleData.specialisation || "",
+        telephone: singleData.fonction || "",
+        adresse: singleData.email || "",
+        adresse: singleData.telephone || ""
       });
     }
   }, [singleData]);
@@ -56,19 +57,19 @@ const onUpdate =onUpdate()
 
     const onSubmit=(data)=>{
     
-   if (singleData && singleData.id) {
+   if (singleData.singleData && singleData.singleData.id) {
      // API pour mettre à jour les données
-     axios.put(`${BASE_URL}/update_personel/${singleData.id}`, data)
+     axios.put(`${BASE_URL}/update_personel/${singleData.singleData.id}`, data)
        .then(({ data }) => {
          if (data.status == 500) {
            toast.error("Il y a une erreur");
          } else {
           
            toast.success("Mise à jour réussie");
+           
            if (singleData.onUpdate) {
             singleData.onUpdate();
           }
-
          }
        })
        .catch((err) => {
@@ -87,15 +88,13 @@ const onUpdate =onUpdate()
          aria-describedby="alert-dialog-description"
        >
          <DialogTitle id="alert-dialog-title" >
-           {`Modifier les informations de ${singleData.nom} `}
+           {`Modifier les informations de ${singleData.singleData.nom} `}
          </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
           <Box>
 
           <form className='medecin_fom' onSubmit={handleSubmit(onSubmit)}>
-
-
 
 
 <TextField
@@ -106,30 +105,31 @@ className='inpt_material'
  type="text"
  size="small"
  {...register("nom", { required: false })}
- defaultValue={formData.nom || singleData.nom}
+ defaultValue={formData.nom || singleData.singleData.nom}
  onChange={(e) => setFormData({ ...formData, nom: e.target.value })}/>
 
 
-
-
-
 <TextField
-id="filled-basic" 
-label="Nom de famille"
-variant="filled"
-size="small"
-{...register("nom_famille", { required: false })}
-defaultValue={formData.nom_famille || singleData.nom_famille}
-onChange={(e) => setFormData({ ...formData, nom_famille: e.target.value })}/>
+className='inpt_material'
+ id="filled-basic" 
+ label="Post nom" 
+ variant="filled" 
+ type="text"
+ size="small"
+ {...register("nom_famille", { required: false})}
+
+ defaultValue={formData.nom_famille || singleData.singleData.nom_famille}
+ onChange={(e) => setFormData({ ...formData, nom_famille: e.target.value })}/>
+
 
 <FormControl variant="filled"   >
-<InputLabel id="demo-simple-select-filled-label">Sexe</InputLabel>
+<InputLabel id="demo-simple-select-filled-label">Genre</InputLabel>
         <Select
            labelId="demo-simple-select-filled-label"
           id="demo-simple-select-standard"
           size="small"
-          {...register("sexe", { required: false})}
-          defaultValue={formData.sexe || singleData.sexe}
+          {...register("sexe", { required: false })}
+          defaultValue={formData.sexe || singleData.singleData.sexe}
           onChange={(e) => setFormData({ ...formData, sexe: e.target.value })}
         >
           <MenuItem value="">
@@ -141,57 +141,76 @@ onChange={(e) => setFormData({ ...formData, nom_famille: e.target.value })}/>
         </Select>
 </FormControl>
 
-<TextField
-id="filled-basic" 
-label="Fonction"
-variant="filled"
-size="small"
-{...register("fonction", { required: false})}
-defaultValue={formData.fonction || singleData.fonction}
-onChange={(e) => setFormData({ ...formData, fonction: e.target.value })}/>
+
 
 <TextField
 className='inpt_material'
  id="filled-basic" 
- label="specialisation" 
+ label="Specialisation" 
  variant="filled" 
- type="text"
+ type='text'
  size="small"
  {...register("specialisation", { required: false })}
- defaultValue={formData.specialisation || singleData.specialisation}
+ defaultValue={formData.specialisation || singleData.singleData.specialisation}
  onChange={(e) => setFormData({ ...formData, specialisation: e.target.value })}/>
 
 
-        
-<TextField
-className='inpt_material'
- id="filled-basic" 
- label="Telephone" 
- variant="filled" 
- size="small"
- type='number'
- {...register("telephone", { required: false})}
- defaultValue={formData.telephone || singleData.telephone}
- onChange={(e) => setFormData({ ...formData, telephone: e.target.value })}/>
 
 <TextField
 className='inpt_material'
  id="filled-basic" 
- label="Gmail" 
+ label="Fonction" 
  variant="filled" 
+ type='text'
  size="small"
+ {...register("fonction", { required: false })}
+
+ defaultValue={formData.fonction || singleData.singleData.fonction}
+ onChange={(e) => setFormData({ ...formData, fonction: e.target.value })}/>
+
+
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Email" 
+ variant="filled" 
  type='email'
- {...register("email", { required: false})}
+ size="small"
+ {...register("email", { required: false })}
 
- defaultValue={formData.email ||singleData.email}
+ defaultValue={formData.email || singleData.singleData.email}
  onChange={(e) => setFormData({ ...formData, email: e.target.value })}/>
 
-<DialogActions>
-          <Button variant="contained" color="error" onClick={handleClose}>Annuler</Button>
-          <Button  variant="contained" color="success" type='submit'>
+
+<TextField
+className='inpt_material'
+ id="filled-basic" 
+ label="Email" 
+ variant="filled" 
+ type='number'
+ size="small"
+ {...register("telephone", { required: false })}
+
+ defaultValue={formData.telephone || singleData.singleData.telephone}
+ onChange={(e) => setFormData({ ...formData, telephone: e.target.value })}/>
+
+
+
+
+
+
+
+
+
+
+      <DialogActions>
+          <Button variant="contained" color="error" onClick={handleClose}>Quiter</Button>
+          <Button  variant="contained" color="success" type='onsubmit'>
            Enregistrer
-       </Button>
-</DialogActions>
+          </Button>
+        </DialogActions>
+
 </form>
 
        </Box>

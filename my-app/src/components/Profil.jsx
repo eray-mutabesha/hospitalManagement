@@ -114,16 +114,17 @@ console.log(datas)
               <Dashboard />
               <Patient/>
               <Dossier/>
-             <nav id='personaliser'><Reception/></nav>
+             <Reception/>
              
-              <Parametre/>
+             <nav id='personaliser'><Parametre/></nav>
               </div>):datas.service == "Consultation"? (
                         <div className='menus'>
                           <nav id='deconection'> <Sedeconecter/> </nav>
                         <Dashboard />
-                        <nav id='personaliser'><Consultation/></nav>
-                        <RendezVous/>
-                        <Parametre/>
+                       <Consultation/>
+                       <RendezVous/>
+                        <nav id='personaliser'> <Parametre/></nav>
+                       
                        
                        </div>
               ) : datas.service == "Laboratoire"? (
@@ -195,7 +196,7 @@ console.log(datas)
            </div>
 
           <div style={{
-            marginTop:"150px",
+            marginTop:"270px",
             display:"flex",
             justifyContent:"center",
           }}>

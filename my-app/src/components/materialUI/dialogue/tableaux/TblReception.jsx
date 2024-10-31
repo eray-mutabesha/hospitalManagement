@@ -379,7 +379,8 @@ useEffect(()=>{
                rows={4}
                variant="standard"
                {...register("diagnostics", { required: "Veuillez entrer le point" })}
-               value={formData.diagnostics}
+              //  value={formData.diagnostics }
+               defaultValue={formData.diagnostics || data[0]?.diagnostic}
                onChange={(e) => setFormData({ ...formData, diagnostics: e.target.value })}/>
      
      <Box sx={{

@@ -56,6 +56,41 @@ const [datas,setdatas]= useState([])
 
   const BASE_URL = import.meta.env.VITE_API_URL;
 
+  const [patientsCount, setPatientsCount] = useState(null);
+
+  useEffect(() => {
+    fetch(`${BASE_URL}/count_colones`)
+      .then((response) => response.json())
+      .then((data) => setPatientsCount(data.totalPatients))
+      .catch((error) => console.error('Erreur de chargement:', error));
+  }, []);
+
+
+
+  const [hospitalisationCount, sethospitalisationCount] = useState(null);
+
+  useEffect(() => {
+    fetch(`${BASE_URL}/hospitalisations_rows`)
+      .then((response) => response.json())
+      .then((data) => sethospitalisationCount(data.totalhospitalisations))
+      .catch((error) => console.error('Erreur de chargement:', error));
+  }, []);
+
+
+console.log(hospitalisationCount)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
  // get dossier route
 const get_all_rdv = () => {
@@ -228,10 +263,15 @@ useEffect(()=>{
             <div className='statistic_flex'>
               <div>
                <nav>
-                <Typography variant='h4'>45</Typography>
+
+{patientsCount !== null ? (
+      <Typography variant='h4'>{patientsCount}</Typography>
+      ) : (
+        <p>Chargement...</p>
+      )}
                 </nav>
                <nav>
-                <Typography>Patients</Typography>
+                <Typography>Tout les Patients</Typography>
                </nav>
               </div>
               <div className='icone_stat'>
@@ -259,10 +299,15 @@ useEffect(()=>{
             <div className='statistic_flex'>
               <div>
                <nav>
-                <Typography variant='h4'>14</Typography>
+               {hospitalisationCount !== null ? (
+                  <Typography variant='h4'>{hospitalisationCount}</Typography>
+      ) : (
+        <p>Chargement...</p>
+      )}
+              
                 </nav>
                <nav>
-                <Typography>Operations</Typography>
+                <Typography>Patients internés</Typography>
                </nav>
               </div>
               <div className='icone_stat'>

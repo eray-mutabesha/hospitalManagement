@@ -214,7 +214,7 @@ useEffect(() => {
           
           
         }}>
-          <Typography variant='h5'>Tout les dossiers des patients</Typography>
+          <Typography variant='h5'>TOUT LES DOSSIERS</Typography>
 
 
 

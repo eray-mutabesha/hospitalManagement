@@ -231,7 +231,7 @@ function UpdateProfil({ singleData, onUpdate }) {
            </div>
          <form onSubmit={handleSubmit(onSubmit)}> 
           <div style={{
-            marginTop:"150px",
+            marginTop:"230px",
             display:"flex",
             justifyContent:"center",
           }}>
