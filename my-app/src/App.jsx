@@ -77,7 +77,15 @@ const [datas,setdatas]= useState([])
   }, []);
 
 
-console.log(hospitalisationCount)
+  const [medecinCount, setmedecinCount] = useState(null);
+
+  useEffect(() => {
+    fetch(`${BASE_URL}/medecins_rows_count`)
+      .then((response) => response.json())
+      .then((data) => setmedecinCount(data.totalmedecins))
+      .catch((error) => console.error('Erreur de chargement:', error));
+  }, []);
+
 
 
 
@@ -283,7 +291,11 @@ useEffect(()=>{
             <div className='statistic_flex'>
               <div>
                <nav>
-                <Typography variant='h4'>23</Typography>
+               {medecinCount !== null ? (
+      <Typography variant='h4'>{medecinCount}</Typography>
+      ) : (
+        <p>Chargement...</p>
+      )}
                 </nav>
                <nav>
                 <Typography>Nos docteurs</Typography>
