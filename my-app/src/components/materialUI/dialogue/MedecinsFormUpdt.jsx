@@ -94,16 +94,16 @@ import { Box ,TextField, Typography,InputLabel,Select,MenuItem,FormControl}  fro
 
     const onSubmit=(data)=>{
     
-   if (singleData.singleData && singleData.singleData.id) {
+   if (singleData && singleData.id) {
      // API pour mettre à jour les données
-     axios.put(`${BASE_URL}/update_medecins/${singleData.singleData.id}`, data)
+     axios.put(`${BASE_URL}/update_medecins/${singleData.id}`, data)
        .then(({ data }) => {
          if (data.status == 500) {
            toast.error("Il y a une erreur");
          } else {
           
            toast.success("Mise à jour réussie");
-           
+           window.location.reload();
            if (singleData.onUpdate) {
             singleData.onUpdate();
           }
@@ -125,7 +125,7 @@ import { Box ,TextField, Typography,InputLabel,Select,MenuItem,FormControl}  fro
          aria-describedby="alert-dialog-description"
        >
          <DialogTitle id="alert-dialog-title" >
-           {`Modifier les informations de ${singleData.singleData.nom} `}
+           {`Modifier les informations de ${singleData.nom} `}
          </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
@@ -141,7 +141,7 @@ className='inpt_material'
  type="text"
  size="small"
  {...register("nom", { required: false })}
- defaultValue={formData.nom || singleData.singleData.nom} 
+ defaultValue={formData.nom || singleData.nom} 
  onChange={(e) => setFormData({ ...formData, nom: e.target.value })}/>
 
 
@@ -153,7 +153,7 @@ className='inpt_material'
  type="date"
  size="small"
  {...register("date_arrive", { required: false })}
-   defaultValue={formData.nom || singleData.singleData.date_arrive} 
+   defaultValue={formData.date_arrive || singleData.date_arrive} 
   onChange={(e) => setFormData({ ...formData, date_arrive: e.target.value })}/>
 
         
@@ -165,7 +165,7 @@ className='inpt_material'
  size="small"
  type='text'
  {...register("specialisation", { required: false })}
- value={formData.specialisation || singleData.singleData.specialisation} 
+ value={formData.specialisation || singleData.specialisation} 
  onChange={(e) => setFormData({ ...formData, specialisation: e.target.value })}/>
 
 
@@ -176,7 +176,7 @@ className='inpt_material'
           id="demo-simple-select-standard"
           size="small"
           {...register("sexe", { required: false })}
-          value={formData.sexe || singleData.singleData.sexe}
+          value={formData.sexe || singleData.sexe}
           onChange={(e) => setFormData({ ...formData, sexe: e.target.value })}>
 
             
@@ -198,7 +198,7 @@ className='inpt_material'
  size="small"
  type='number'
  {...register("telephone", { required: false})}
- value={formData.telephone || singleData.singleData.telephone}
+ value={formData.telephone || singleData.telephone}
  onChange={(e) => setFormData({ ...formData, telephone: e.target.value })}/>
 
 <TextField
@@ -209,7 +209,7 @@ className='inpt_material'
  size="small"
  type='email'
  {...register("email", { required: false })}
- value={formData.email || singleData.singleData.email}
+ value={formData.email || singleData.email}
  onChange={(e) => setFormData({ ...formData, email: e.target.value })}/>
      
        <DialogActions>
